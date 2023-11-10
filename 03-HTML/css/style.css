@@ -1,0 +1,82 @@
+*, html, body {
+    font-family: helvetica, sans_serif;
+    font-weight: bold;
+    font-size: 1em;
+    text-decoration: none;
+    margin: 0;
+    padding: 0;
+    border: none;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+};
+body, main{
+    width: 100%;
+}
+main {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+form, form>div{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+form{
+    min-height: 50%;
+    padding: 50px 50px;
+    min-width: 400px;
+    width: 50%;
+    max-width: 500px;
+    box-shadow: 0 0 1em grey;
+    border-radius: 10px;
+    align-items: center;
+}
+legend {
+    font-size: 2.2rem;
+    text-align: center;
+    margin: 0 0 30px 0;
+}
+form>div{
+    width: 100%;
+    margin-bottom: 20px;
+}
+form > div:nth-child(4){
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+form > div:nth-child(4) > div{
+    width: calc(50% - 10px);
+}
+button[type=submit]{
+    text-align: center;
+    padding: 15px 30px;
+    max-width: 200px;
+    color: white;
+    background-color: #007bff;
+    margin: 10px;
+    border-radius: 5px;
+    border: 2px solid #007bff;
+}
+button[type=submit]:hover{
+    box-shadow: 0 0 0.8em lightgrey;
+    background-color: white;
+    color: #007bff;
+}
+input{
+    outline: none;
+    font-weight: normal;
+    width: 100%;
+    height: 45px;
+    border: 1px solid lightgrey;
+    margin-top: 10px;
+    padding: 10px 20px;
+    border-radius: 5px;
+}
+input:focus{
+    border: 3px solid #007bff
+}

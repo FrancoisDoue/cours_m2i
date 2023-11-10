@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="./css/style.css">
+    <title>Document</title>
+</head>
+<body>
+    <main>
+        <form action="" method="post">
+            <legend>Paiment par carte bancaire</legend>
+            <div>
+                <label for="card">Numéro de Carte</label>
+                <input type="text" name="card_id" id="card" placeholder="XXXX XXXX XXXX XXXX">
+            </div>
+            <div>
+                <label for="input_name">Nom du Titulaire</label>
+                <input type="text" name="name" id="input_name" placeholder="Nom Complet">
+            </div>
+            <div>
+                <div>
+                    <label for="expiration_date">Date d'expiration</label>
+                    <input type="text" name="expiration" id="expiration_date" placeholder="MM / AA">
+                </div>
+                <div>
+                    <label for="cvv">CVV</label>
+                    <input type="password" name="cvv" id="cvv" placeholder="***">
+                </div>
+            </div>
+            <button type="submit">Rend l'argent.</button>
+        </form>
+    </main>
+</body>
+</html>
