@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="../css/default_style.css">
     <title>Document</title>
 </head>
+
 <body>
     <header>
         <hgroup>
@@ -23,7 +25,7 @@
         </nav>
     </header>
     <main>
-        <form action="" method="post">
+        <form action="mailto:another.example@mail.com" method="post">
             <fieldset>
                 <legend>Qui êtes vous?</legend>
                 <div class="form-line">
@@ -40,9 +42,9 @@
                 </div>
                 <div class="form-line">
                     <label>Sexe : </label>
-                    <input type="radio" name="gender_m" id="gender_m">
+                    <input type="radio" name="gender_m" id="gender_m" value="m">
                     <label for="gender_m">Homme</label>
-                    <input type="radio" name="gender_f" id="gender_f">
+                    <input type="radio" name="gender_f" id="gender_f" value="f">
                     <label for="gender_f">femme</label>
                 </div>
             </fieldset>
@@ -50,7 +52,7 @@
                 <legend>Sujet de votre question</legend>
                 <div class="form_line">
                     <label for="is_urgent">Est-ce urgent?</label>
-                    <input type="checkbox" name="is_urgent" id="is_urgent" >
+                    <input type="checkbox" name="is_urgent" id="is_urgent">
                 </div>
                 <div class="form-line">
                     <label for="input_pb">Type de problème</label>
@@ -78,6 +80,7 @@
             <button type="submit">Envoyer ma question</button>
         </form>
     </main>
-    
+
 </body>
+
 </html>
