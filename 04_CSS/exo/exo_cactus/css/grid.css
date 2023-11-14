@@ -1,0 +1,7 @@
+main{
+    display: grid;
+    grid-template: 3fr 6fr 3fr / 3fr 6fr 3fr
+}
+.card{
+    grid-area: 2 / 2 / 3 / 3;
+}
