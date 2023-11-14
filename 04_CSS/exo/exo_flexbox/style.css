@@ -95,11 +95,11 @@
 
 #flex-container-7{
     flex-wrap: wrap;
-    box-sizing: border-box;
+    /* box-sizing: border-box; */
     
 }
 #flex-container-7 div{
-    width:  calc(100%/2 - 10px);
+    width: calc(50% - 10px);
 }
 #flex-container-7 #box5 {
     width: 100%;
