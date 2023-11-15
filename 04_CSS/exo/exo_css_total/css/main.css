@@ -78,3 +78,6 @@ article div {
 article p{
     padding: 5px;
 }
+main h2, main h3{
+    margin: 10px;
+}
