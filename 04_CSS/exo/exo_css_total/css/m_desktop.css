@@ -1,0 +1,48 @@
+body{
+    /* background-color: white; */
+}
+header{
+    height: 150px;
+    display: flex;
+}
+.lg-w-50{
+    width: 50%;
+}
+hgroup{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;   
+}
+h1{
+    align-self: flex-end;
+}
+ul {
+    display: flex;
+    justify-content: space-around;
+}
+section{
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+}
+article{
+    /* margin: 20px; */
+    margin: 10px 5px;
+    min-width: 320px;
+    max-width: 50%;
+    height: 400px;
+    border: 2px solid var(--bg-color-base);
+}
+article h4 {
+    height: 10%;
+    padding-top: 10px;
+    text-align: center;
+}
+article div {
+    height: 25%;
+    background-color: var(--bg-color-base);
+    margin-bottom: 10px;
+}
+article p{
+    padding: 5px;
+}

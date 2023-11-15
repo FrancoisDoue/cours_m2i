@@ -1,0 +1,80 @@
+@import "./m_mobile.css" screen and (max-width: 700px);
+@import "./m_desktop.css" screen and (min-width: 701px);
+
+:root{
+    --bg-color-base : #1E90FF;
+    --bg-color-sec: #FDA300;
+}
+body{
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+main{
+    flex-grow: 1;
+}
+footer{
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    background-color: var(--bg-color-base);
+}
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    list-style: none;
+}
+header{
+    background-color: var(--bg-color-base);
+    padding: 0 50px;
+    text-align: center;
+}
+header > div{
+    display: flex;
+    align-items: center;
+}
+#main-logo{
+    background-color: var(--bg-color-sec);
+    border-radius: 50%;
+    width: 100px;
+    /* margin-left: 50px; */
+}
+a{
+    display: inline-block;
+    background-color: var(--bg-color-sec);
+    opacity: 0.8;
+    padding: 10px 15px;
+    border-radius: 15px;
+    color: white;
+}
+section{
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+}
+article{
+    /* margin: 20px; */
+    margin: 10px 5px;
+    min-width: 320px;
+    max-width: 50%;
+    height: 400px;
+    border: 2px solid var(--bg-color-base);
+}
+article h4 {
+    height: 10%;
+    padding-top: 10px;
+    text-align: center;
+}
+article div {
+    height: 25%;
+    background-color: var(--bg-color-base);
+    margin-bottom: 10px;
+}
+article p{
+    padding: 5px;
+}

@@ -1,0 +1,12 @@
+#main-logo{
+    display: none;
+}
+header{
+    height: 250px;
+}
+ul, li, a{
+    width: 100%;
+}
+a {
+    margin: 2px;
+}
