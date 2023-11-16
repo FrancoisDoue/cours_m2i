@@ -7,9 +7,11 @@
 }
 body{
     min-height: 100vh;
+    box-sizing: content-box;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    font-family: Arial, Helvetica, sans-serif;
 }
 main{
     flex-grow: 1;
@@ -44,7 +46,7 @@ header > div{
     width: 100px;
     /* margin-left: 50px; */
 }
-a{
+a:not(a.to-index){
     display: inline-block;
     background-color: var(--bg-color-sec);
     opacity: 0.8;
@@ -57,27 +59,97 @@ section{
     flex-flow: row wrap;
     justify-content: space-around;
 }
-article{
+.card{
     /* margin: 20px; */
     margin: 10px 5px;
     min-width: 320px;
     max-width: 50%;
+    border-radius: 10px;
     height: 400px;
     border: 2px solid var(--bg-color-base);
 }
-article h4 {
+.card:hover{
+    box-shadow: 0 0 1em lightgrey;
+    border: 2px solid var(--bg-color-sec);
+    cursor: pointer;
+}
+.card:hover > div{
+    background-color: var(--bg-color-sec);
+}
+.card h4 {
     height: 10%;
     padding-top: 10px;
     text-align: center;
 }
-article div {
+.card div {
     height: 25%;
     background-color: var(--bg-color-base);
     margin-bottom: 10px;
 }
-article p{
+.card p{
     padding: 5px;
 }
 main h2, main h3{
     margin: 10px;
+}
+#product-container{
+    margin: 20px;
+    display: flex;
+}
+#main-product{
+    border-radius: 5px;
+    width: 100%;
+    min-height: 500px;
+    height: 100%;
+    background-color: var(--bg-color-base);
+    padding: 10px;
+    display: flex;
+
+}
+#main-product > div{
+    /* margin: 10px; */
+    min-height: max-content;
+}
+.photo-product{
+    height: 300px;
+    width: 300px;
+    object-fit: cover;
+    border-radius: 15px;
+    box-shadow: 0 0 1em grey;
+}
+#main-product div:first-child{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+}
+#main-product div:last-child{
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+.product-description{
+    margin: 0 auto;
+    width: 70%;
+}
+.product-description p {
+    margin: 8px;
+}
+.product-title{
+    font-size: 1.6rem;
+    text-align: center;
+}
+.btn-add-cart{
+    width: 70%;
+    text-align: center;
+    margin: 0 auto;
+    opacity: 1;
+}
+.btn-add-cart:hover{
+    color: var(--bg-color-sec);
+    font-weight: bold;
+    background-color: white;
+    outline: 2px solid var(--bg-color-sec);
+    box-shadow: 0 0 0.8em #1460ad;
 }
