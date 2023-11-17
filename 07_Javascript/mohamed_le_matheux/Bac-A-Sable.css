@@ -1,0 +1,29 @@
+body,
+.container {
+  height: 100vh;
+}
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+div {
+  font-size: 6rem;
+}
+button {
+  height: 50px;
+}
+.calcul,
+button {
+  width: 600px;
+}
+button {
+  cursor: pointer;
+}
+#result {
+  width: 10rem;
+  vertical-align: baseline;
+  height: 6rem;
+  font-size: 6rem;
+}
