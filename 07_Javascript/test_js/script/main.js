@@ -23,4 +23,18 @@
 // addElement("h1", "test", "body");
 // addElement("p", addElement("div", "", "body"), "div");
 // addElement("p", "test test test test ","div")
-console.log(+'0.1A')
+
+let randomNumber = Math.round(Math.random() * (100 - 1) + 1);
+let limit = 10;
+let response;
+do {
+    response = Number(prompt(`Entrez un nombre entre 1 et 100, il vous reste ${limit} essais`))
+    if(response > randomNumber) alert("Le nombre mystère est plus bas")
+    if(response < randomNumber) alert("Le nombre mystère est plus haut")
+    if(response === randomNumber) {
+        alert("Bien joué!")
+        break;
+    }
+    limit--
+} while (limit > 0);
+alert("merci d'avoir joué")
