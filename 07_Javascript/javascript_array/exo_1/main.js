@@ -19,17 +19,17 @@
 // addToArray(tab); //addToArray(tab, false) pour une saisie par l'utilisateur
 // showArray(tab);
 
-const randomIntInRange = (min, max) => Math.round(Math.random() * (max - min) - min);
+// const randomIntInRange = (min, max) => Math.round(Math.random() * (max - min) - min);
 
-let nbrUser = Number(prompt("Quelle sera la taille du tableau?"));
-let tab = [];
+// let nbrUser = Number(prompt("Quelle sera la taille du tableau?"));
+// let tab = [];
 
-for (let i = 0; i < nbrUser; i++) {
-    tab.push(randomIntInRange(1,50));
-}
+// for (let i = 0; i < nbrUser; i++) {
+//     tab.push(randomIntInRange(1,50));
+// }
 
-for (let element of tab) {
-    console.log(
-        `Le nombre ${element} est ${(element % 2 === 0)?"pair":"impair"}`
-    );
-}
+// for (let element of tab) {
+//     console.log(
+//         `Le nombre ${element} est ${(element % 2 === 0)?"pair":"impair"}`
+//     );
+// }
