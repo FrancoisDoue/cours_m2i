@@ -1,14 +1,14 @@
-const USER_NBR = Number(prompt("Saisir nombre :"));
-let msg = "", endLog = "", step = 1, loopNbr = USER_NBR;
+let userNbr = Number(prompt("Saisir nombre :"));
+let msg = "", endLog = "", step = 1, loopNbr = userNbr;
 
-for (let cnt = 0; cnt < USER_NBR / 2 + 1; loopNbr -= ++cnt) {
+for (let cnt = 0; cnt < (userNbr / 2) + 1 ; loopNbr -= ++cnt) {
     if (loopNbr > 0) {
         msg += (cnt !== 0) ? `${cnt} + ` : "";
     } else {
-        if (loopNbr === 0) endLog += `${USER_NBR} = ${msg + cnt}\n`;
-        cnt = ++step;
+        if (loopNbr === 0) endLog += `${userNbr} = ${msg + cnt}\n`;
+        cnt = step++;
         msg = "";
-        loopNbr = USER_NBR;
+        loopNbr = userNbr;
     }
 }
 console.log(endLog);
