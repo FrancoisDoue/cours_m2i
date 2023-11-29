@@ -1,0 +1,52 @@
+html, body {
+    margin: 0;
+}
+.modal {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100dvh;
+    width: 100dvw;   
+    background-color: rgba(0, 0, 0, .1);
+    backdrop-filter: blur(5px);
+
+    & .modal-content {
+        background-color: hsl(0, 0%, 98%);
+        height: min(80%, 400px);
+        width: min(80%, 500px);
+        padding: 10px;
+        box-sizing: border-box;
+
+        & .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+    }
+}
+#form-add-task{
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#form-add-task > div {
+    width: 100%;
+    min-height: 70px;
+    display: flex;
+    flex-direction: column;
+}
+#form-add-task > div:nth-child(2){
+    height: 200px;
+}
+#form-add-task > button {
+    width: 80%;
+}
+#detail-task {
+    resize: none;
+    height: 80%;
+}

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
+    <script type="module" src="./main.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="modal">
+        <div class="modal-content">
+            <hgroup class="modal-header">
+                <h2>Ajouter</h2>
+                <!-- <button >X</button> -->
+            </hgroup>
+            <form action="#" id="form-add-task">
+                <div>
+                    <label for="title-task">Libellé de la tâche</label>
+                    <input type="text" name="title" id="title-task">
+                </div>
+                <div>
+                    <label for="detail-task">Détail: </label>
+                    <textarea name="detail" id="detail-task"></textarea>
+                </div>
+                <button type="submit">Ajouter</button>
+            </form>
+        </div>
+    </div>
+    <main>
+        <h1>Title</h1>
+        <button id="add-task-btn">Ajouter une tâche</button>
+        <div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Libellé</th>
+                        <th>Description</th>
+                        <th>Ajouté le:</th>
+                        <th colspan="3">action</th>
+                    </tr>
+                </thead>
+                <tbody id="table-todo">
+
+                </tbody>
+            </table>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Libellé</th>
+                        <th>Fait le:</th>
+                        <th colspan="2">action</th>
+                    </tr>
+                </thead>
+                <tbody id="table-done">
+
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+</body>
+
+</html>

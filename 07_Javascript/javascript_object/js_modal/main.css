@@ -1,0 +1,33 @@
+html, body{
+    margin: 0;
+}
+
+.modal {
+    height: 100dvh;
+    width: 100dvw;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, .7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    & .modal-content{
+        background-color: hsl(0, 0%, 95%);
+        height: min(80%, 600px);
+        width: min(80%, 600px);
+        box-sizing: border-box;
+        padding: 2%;
+        border-radius: 2rem;
+
+        & .modal-header {
+            display: flex;
+            justify-content: space-between;
+            /* & h2{
+                display: block;
+            } */
+        }
+    }
+
+}
