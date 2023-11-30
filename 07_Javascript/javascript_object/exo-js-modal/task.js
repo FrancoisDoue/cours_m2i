@@ -2,7 +2,6 @@ export default class Task {
     #id;
     title;
     detail;
-    #isDone = false
     #createdAt;
     #updatedAt;
     static count = 0;
@@ -12,24 +11,31 @@ export default class Task {
         this.title = title;
         this.detail = detail;
         this.#createdAt = new Date()
-        this.#updatedAt = this.#createdAt;
-    }
-    #update(){
-        this.#updatedAt = new Date();
-    }
-    set isDone(bool){
-        this.#isDone = bool;
-        this.#update()
+        // this.#updatedAt = this.#createdAt;
     }
     get id(){
         return this.#id
     } 
-    get isDone() {
-        return this.#isDone;
+    #update(){
+        this.#updatedAt = new Date();
+    }
+    editContent = (title, detail) =>{
+        this.title = title;
+        this.detail = detail;
+        this.#update();
     }
     getArrayFromProperties = () => [
         this.title,
         this.detail,
-        this.#updatedAt.toLocaleDateString(),
+        this.#createdAt.toLocaleString(),
+        this.#updatedAt ? this.#updatedAt.toLocaleString() : '--'
     ]
+    // #isDone = false
+    // set isDone(bool){
+    //     this.#isDone = bool;
+    //     this.#update()
+    // }
+    // get isDone() {
+    //     return this.#isDone;
+    // }
 }

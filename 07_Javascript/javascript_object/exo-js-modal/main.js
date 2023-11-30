@@ -10,26 +10,26 @@ document.addEventListener('DOMContentLoaded', () => {
     let taskList = {};
 
     const btnMaker = (key, refObject) => {
-        const actionSelection = {
-            Supprimer : () => {
-                document.querySelector(`[data-todo${(refObject.isDone)? '-done': '-row'}="${refObject.id}"]`).remove()  
-            },
-            Editer : () => {
-                document.querySelector('[name="title"]').value = refObject.title;
-                document.querySelector('[name="detail"]').value = refObject.detail;
-                document.querySelector('form#form-add-task button').textContent = 'modifier'
-                mainForm.setAttribute('data-todo-edit',1);
-                console.log(mainForm.dataset.todoEdit)
-                formModal.style.display = 'flex';
-            },
-            // Fait : () => {
-            //     refObject.isDone = true;
-            //     console.log(refObject, refObject.isDone)
-            // },
-        }
         const btn = document.createElement('button');
         btn.textContent = key;
-        btn.addEventListener('click', actionSelection[key])
+        btn.addEventListener('click', () => {
+            switch (key) {
+                case "Delete", "Supprimer": 
+                    document.querySelector(`[data-todo-row="${refObject.id}"]`).remove()
+                    delete taskList[refObject.id];
+                    break;
+                case "edit", "Editer":
+                    document.querySelector('[name="title"]').value = refObject.title;
+                    document.querySelector('[name="detail"]').value = refObject.detail;
+                    document.querySelector('form#form-add-task button').textContent = 'modifier'
+                    // mainForm.setAttribute('data-todo-edit',refObject.id);
+                    mainForm.dataset.todoEdit = refObject.id
+                    console.log(mainForm.dataset.todoEdit);
+                    formModal.style.display = 'flex';
+                    break;
+                default: return console.log('useless btn');
+            }
+        })
         return(btn)
     }
 
@@ -41,26 +41,38 @@ document.addEventListener('DOMContentLoaded', () => {
 
     mainForm.addEventListener('submit', e => {
         e.preventDefault();
-        let construct = [], error = false;
-
+        let construct = [], error = false, currentTask, row;
         inputList.forEach(input => {
             if (input.name === 'title' && input.value === "") error = true;
             construct.push(input.value)
             input.value = '';
         });
         if(!error){
-            const newTask = new Task(...construct);
-            const row = tableToDo.insertRow();
-            newTask.getArrayFromProperties().map((el) => {
+            if (mainForm.dataset.todoEdit){
+                currentTask = taskList[mainForm.dataset.todoEdit];
+                row = document.querySelector(`[data-todo-row="${currentTask.id}"]`);
+                row.querySelectorAll('*').forEach(element => element.remove()); // Blyat!
+                currentTask.editContent(...construct);
+                mainForm.removeAttribute('data-todo-edit')
+                document.querySelector('form#form-add-task button').textContent = 'Ajouter';
+            }else{
+                currentTask = new Task(...construct);
+                row = tableToDo.insertRow();
+                // row.setAttribute("data-todo-row", currentTask.id);
+                row.dataset.todoRow = currentTask.id;
+                taskList[currentTask.id] = currentTask;
+            }
+            currentTask.getArrayFromProperties().map((el) => {
                 row.insertCell().textContent = (el.length > 50) ? el.substring(0,50)+' ...' : el;
             });
-            row.insertCell().appendChild(btnMaker("Supprimer", newTask))
-            row.insertCell().appendChild(btnMaker("Editer", newTask));
-            // row.insertCell().appendChild(btnMaker("Fait", newTask));
-            row.setAttribute("data-todo-row", newTask.id);
-            taskList[newTask.id] = newTask;
+            row.insertCell().appendChild(btnMaker("edit", currentTask));
+            row.insertCell().appendChild(btnMaker("Supprimer", currentTask));
             console.log(taskList)
         }
         formModal.style.display = 'none'; 
     });
 });
+            // Fait : () => {
+            //     refObject.isDone = true;
+            //     console.log(refObject, refObject.isDone)
+            // },
