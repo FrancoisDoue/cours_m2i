@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="module" src="./main.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <h2>Exo chronomètre</h2>
+    <hr>
+    <div style="display: flex; justify-content: space-around;">
+        <div>
+            <h3>Chronomètre</h3>
+            <div>
+                <input type="time" id="chrono" step="1">
+                <button id="register-btn">Register time</button>
+                <button id="chrono-start" disabled="false">Start</button>
+                <button id="chrono-stop" disabled="true">stop</button>
+                
+            </div>
+            <hr>
+            <h4>Temps enregistrés:</h4>
+            <ul id="registered-time">
+        
+            </ul>
+        </div>
+        <div>
+            <h3>Minuteur</h3>
+            <div>
+                <input type="time" id="timer" step="1" value="00:00:00">
+                <button id="timer-start" >Lancer le minuteur</button>
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>

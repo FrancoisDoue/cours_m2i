@@ -11,7 +11,6 @@ export default class Task {
         this.title = title;
         this.detail = detail;
         this.#createdAt = new Date()
-        // this.#updatedAt = this.#createdAt;
     }
     get id(){
         return this.#id
@@ -30,12 +29,4 @@ export default class Task {
         this.#createdAt.toLocaleString(),
         this.#updatedAt ? this.#updatedAt.toLocaleString() : '--'
     ]
-    // #isDone = false
-    // set isDone(bool){
-    //     this.#isDone = bool;
-    //     this.#update()
-    // }
-    // get isDone() {
-    //     return this.#isDone;
-    // }
 }

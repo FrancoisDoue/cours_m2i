@@ -22,7 +22,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     document.querySelector('[name="title"]').value = refObject.title;
                     document.querySelector('[name="detail"]').value = refObject.detail;
                     document.querySelector('form#form-add-task button').textContent = 'modifier'
-                    // mainForm.setAttribute('data-todo-edit',refObject.id);
                     mainForm.dataset.todoEdit = refObject.id
                     console.log(mainForm.dataset.todoEdit);
                     formModal.style.display = 'flex';
@@ -43,7 +42,8 @@ document.addEventListener('DOMContentLoaded', () => {
         e.preventDefault();
         let construct = [], error = false, currentTask, row;
         inputList.forEach(input => {
-            if (input.name === 'title' && input.value === "") error = true;
+            if (input.name === 'title' && input.value === "") 
+                error = true;
             construct.push(input.value)
             input.value = '';
         });
@@ -65,14 +65,10 @@ document.addEventListener('DOMContentLoaded', () => {
             currentTask.getArrayFromProperties().map((el) => {
                 row.insertCell().textContent = (el.length > 50) ? el.substring(0,50)+' ...' : el;
             });
-            row.insertCell().appendChild(btnMaker("edit", currentTask));
+            row.insertCell().appendChild(btnMaker("Editer", currentTask));
             row.insertCell().appendChild(btnMaker("Supprimer", currentTask));
             console.log(taskList)
         }
-        formModal.style.display = 'none'; 
+        formModal.style.display = 'none';
     });
 });
-            // Fait : () => {
-            //     refObject.isDone = true;
-            //     console.log(refObject, refObject.isDone)
-            // },
