@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
+    <script type="module" src="./main.js"></script>
+    <title>Document</title>
+</head>
+<body id="main-container">
+    <div class="sider">
+        <button id="previous-btn" class="paginator-btn"><<</button>
+    </div>
+    <main class="main-content">
+        <form action="#" class="simple-border" id="search-form">
+            <div>
+                <input type="text" name="search" id="search-input" placeholder="name / id ...">
+                <button type="submit" id="search-btn">Rechercher</button>
+            </div>
+        </form>
+
+        <div class="card simple-border">
+            <div>
+                <img src="" alt="image pokémon" id="poke-img">
+                <div>
+                    <p id="poke-name" class="simple-border">Name</p>
+                    <p id="poke-height" class="simple-border">Taille</p>
+                    <p id="poke-weight" class="simple-border">poids</p>
+                    <div id="poke-types" class="simple-border"></div>
+                </div>
+            </div>
+            <div id="abilities" class="content">
+
+            </div>
+
+        </div>
+
+    </main>
+    <div class="sider right">
+        <button id="next-btn" class="paginator-btn">>></button>
+    </div>
+</body>
+</html>
