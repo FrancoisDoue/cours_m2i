@@ -23,13 +23,13 @@ document.addEventListener('DOMContentLoaded', async () => {
         name.textContent = pokeObject?.name;
         height.textContent = pokeObject?.height + ' ft';
         weight.textContent = pokeObject?.weight + ' kg';
-        pokeObject?.types.map(e => {
+        pokeObject?.types.forEach(e => {
             const span = document.createElement('span');
             span.textContent = capitalize(e.type.name);
             span.dataset.pokeType = e.type.name;
             type.appendChild(span);
         })
-        pokeObject?.abilities.map(e =>{
+        pokeObject?.abilities.forEach(e =>{
             const p = document.createElement('p');
             p.textContent = capitalize(e.name);
             p.dataset.pokeAbility = e.name;
