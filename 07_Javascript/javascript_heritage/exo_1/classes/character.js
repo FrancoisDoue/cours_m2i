@@ -13,8 +13,13 @@ export default class Character {
     }
 
     attack(target) {
-        target.hp -= this.strength;
-        console.log(`${this.name} attack ${target.name}\n(${target.name} hp's = ${target.hp})`);
+        if(target.armor && target.armor > 0) {
+            target.hp -= Math.floor(this.strength/2);
+            target.armor -=  Math.floor(this.strength/2);
+            console.log(`${target.name}'s armor decreased to ${target.armor}`)
+        }else 
+            target.hp -= this.strength;
+        console.log(`${this.name} attack ${target.name}\n(${target.name}'s hp = ${target.hp})`);
     }
 
 }
