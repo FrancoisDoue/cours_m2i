@@ -11,9 +11,9 @@ export default class Mage extends Character{
     }
 
     attack(target){
-        super.attack(target);
         target.hp -= Math.floor(this.mana/2);
         this.mana -= 10;
+        super.attack(target);
     }
 
     heal(target){

@@ -7,6 +7,11 @@ export default class Warrior extends Character{
         this.armor = armor;
     }
 
+    get totalLife(){
+        return this.hp + this.armor;
+    }
+    
+
     attack(target) {
         target.hp -= this.armor;
         super.attack(target);

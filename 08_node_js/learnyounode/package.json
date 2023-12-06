@@ -1,0 +1,18 @@
+{
+  "name": "08_node_js",
+  "version": "1.0.0",
+  "description": "truc",
+  "main": "index.js",
+  "type": "commonjs",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "me",
+  "license": "ISC",
+  "devDependencies": {
+    "colors": "^1.4.0"
+  },
+  "dependencies": {
+    "fs": "^0.0.1-security"
+  }
+}

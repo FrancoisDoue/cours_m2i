@@ -12,6 +12,10 @@ export default class Character {
         this.strength = strenght;
     }
 
+    get totalLife() {
+        return this.hp 
+    }
+
     attack(target) {
         if(target.armor && target.armor > 0) {
             target.hp -= Math.floor(this.strength/2);
