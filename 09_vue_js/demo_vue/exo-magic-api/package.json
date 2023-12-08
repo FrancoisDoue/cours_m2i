@@ -1,5 +1,5 @@
 {
-  "name": "exo-vue-5",
+  "name": "exo-magic-api",
   "version": "0.0.0",
   "private": true,
   "type": "module",
@@ -9,7 +9,6 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "uuid": "^9.0.1",
     "vue": "^3.3.10"
   },
   "devDependencies": {

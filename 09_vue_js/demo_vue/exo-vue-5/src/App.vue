@@ -1,25 +1,25 @@
 <script setup>
 import { computed, reactive, ref } from 'vue';
+let task = ref('');
+let taskList = ref([]);
 
-
-  let task = ref('')
-  let taskList = ref([])
-  let actualList = taskList;
-
-  const pushAndClear = () => {
-    const newTask = reactive({
+const pushAndClear = () => {
+  if (task !== ''){
+    const thisTask = reactive({
         task: task,
         isDone: false,
-        deleteThis: () => taskList.value = taskList.value.filter(e => e !== newTask)
+        deleteThisTask: () => taskList.value = taskList.value.filter(e => e !== thisTask)
       })
-    taskList.value.push(newTask)
+    computed(taskList.value.push(thisTask))
     task = ''
   }
-  // const filterItems = (toggle) => {
-  //   actualList = taskList;
-  //   if(toggle === undefined) return actualList;
-  //   return actualList.value.filter(e => toggle ? e.isDone : !e.isDone)
-  // }
+}
+// // let isEnabledFilters = ref(false)
+// // let showList = ref(false)
+// const filter = ref((bool) => {
+//   isEnabledFilters = true
+//   showList = bool
+// })
 
 </script>
 
@@ -31,27 +31,34 @@ import { computed, reactive, ref } from 'vue';
 
   </form>
   <div>
-    <label > Filter :</label>
-    <!-- pas fonctionnel -->
-    <select name="" id="">
-      <option @click="actualList = taskList">All / reset</option>
-      <option @click="() => actualList = actualList.filter(e => e.isDone)" >Done tasks</option>
-      <option @click="() => actualList = actualList.filter(e => !e.isDone)">To do tasks</option>
+    <label for="sort-select"> Sorting :</label>
+    <select>
+      <option selected v-on:click.prevent></option>
+      <option @click="taskList.sort(e => !e.isDone)" >Sort by done tasks</option>
+      <option @click="taskList.sort(e => e.isDone)">sort by undone tasks</option>
     </select>
+
   </div>
   <div>
-    <ul v-for="element in actualList">
-      <li>
-        <span >{{ element.task }}</span>
+    <ul v-for="element in taskList">
+      <li :key="element.task">
+        <span :style="{color: element.isDone ? 'green': 'black'}">
+          {{ element.task }}
+        </span>
         <input type="checkbox" v-model="element.isDone">
-        <button @click="element.deleteThis(element.id)">Delete</button>
+        <button @click="element.deleteThisTask">Delete</button>
       </li>
     </ul>
-
   </div>
-
 </template>
 
 <style scoped>
 
 </style>
+<!-- <li :key="element.task" v-show="isEnabledFilters? (element.isDone == showList) : true"> -->
+    <!-- <label for="filter-select"> Filters : </label>
+    <select>
+      <option  @click="isEnabledFilters = false" selected>Disabled</option>
+      <option @click="() => filter(true)" >Filter by done tasks</option>
+      <option @click="() => filter(false)" >Filter by undone tasks</option>
+    </select> -->
