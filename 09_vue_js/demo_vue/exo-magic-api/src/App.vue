@@ -1,8 +1,6 @@
 <script setup>
 import {ref, reactive, watch, watchEffect, onMounted} from 'vue';
 
-
-
 const id = ref(1);
 const txt = ref("Ankh of Mishra");
 const data = ref({});
