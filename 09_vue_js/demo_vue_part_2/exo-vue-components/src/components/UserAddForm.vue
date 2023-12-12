@@ -5,7 +5,7 @@ import {v4 as uuid4} from 'uuid';
   let userName = ref('');
   let userMail = ref('');
   let msgAlert = ref('');
-  let isAlert = ref('false');
+  let isAlert = ref(false);
   let classesAlert = '';
   let alertTimeout;
 
