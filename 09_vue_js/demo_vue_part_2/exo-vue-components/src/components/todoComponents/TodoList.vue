@@ -10,10 +10,8 @@ const addTodoList = (obj) => {
 const deleteItem = (index) => {
     todos.value.splice(index, 1);
 }
-const editItem = (str, index) => {
-    
-    console.log(todos.value[index].todo = str)
-    // todos.value[index].todo = str;
+const editItem = (str, index) => {  
+    todos.value[index].todo = str
 }
 
 

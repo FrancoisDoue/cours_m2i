@@ -1,12 +1,17 @@
 <script setup>
+import UserList from './components/UserList.vue';
 
-import TodoList from './components/TodoList.vue';
+
+// import TodoList from './components/TodoList.vue';
 
 
 </script>
 
 <template>
-  <TodoList></TodoList>
+  <div class="d-flex flex-column align-items-center">
+    <UserList />
+  </div>
+  <!-- <TodoList> -->
 </template>
 
 <style scoped>
