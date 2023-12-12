@@ -1,8 +1,9 @@
 <script setup>
 import { ref } from 'vue';
+import {REG_MAIL} from '../utilities/constants.js'
 
 const props = defineProps({
-  user:  {type: Object, required: true}
+  user: {type: Object, required: true}
 })
 const emit = defineEmits(['edit-user','delete-user'])
 let userName = ref(props.user.username)
@@ -20,8 +21,8 @@ const editUser = () => {
 
 <template>
   <tr v-if="!isEdit">
-    <td>{{userName}}</td>
-    <td>{{userMail}}</td>
+    <td>{{props.user.username}}</td>
+    <td>{{props.user.usermail}}</td>
     <td>
       <button class="btn btn-warning px-4" @click="() => isEdit = true">Edit</button>
     </td>

@@ -19,7 +19,6 @@ const deleteUserFromList = (id) => {
 </script>
 
 <template>
-  <!-- <TodoList></TodoList> -->
   <UserAddForm @add-user="addUserToList"/>
   <table class="table w-50 text-center border">
     <thead>

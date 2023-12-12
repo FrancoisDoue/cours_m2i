@@ -37,7 +37,7 @@ import {v4 as uuid4} from 'uuid';
 </script>
 
 <template>
-  <form class="col-4 my-4 text-center">
+  <form @submit.prevent="userFormControl" class="col-4 my-4 text-center">
     <h2 class="">Users</h2>
     <div class="d-flex flex-column mt-4">
       <label for="form-username">Name</label>
@@ -48,7 +48,7 @@ import {v4 as uuid4} from 'uuid';
       <input type="email" id="form-useremail" v-model="userMail" @focus="resetUserFormControl" class="form-control">
     </div>
     <div class="d-flex justify-content-center mt-4">
-      <button type="submit" @click.prevent.click="userFormControl" class="btn btn-primary">
+      <button type="submit" class="btn btn-primary">
         Add user
       </button>
     </div>
