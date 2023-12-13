@@ -1,0 +1,12 @@
+{
+	"id": 3,
+	"name": "Tyrion",
+	"email": "tyrion@test.com",
+	"phone": "123412345",
+	"city": "Porto",
+	"state": "Sulo",
+	"country": "Portugal",
+	"organization": "Company 3",
+	"jobProfile": "Software Developer",
+	"additionalInfo": "Achète généralement beaucoup de produits."
+}
