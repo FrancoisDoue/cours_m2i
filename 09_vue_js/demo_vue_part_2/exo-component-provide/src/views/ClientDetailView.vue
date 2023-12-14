@@ -1,21 +1,20 @@
 <script setup>
 
-import { RouterLink, useRoute, useRouter } from 'vue-router';
-const getCustomer = (id) => {
-    const customer = import(`../datas/customer${id}.json`);
-    return customer
-}
+import axios from 'axios';
+import { onMounted, ref } from 'vue';
+import { RouterLink, useRoute } from 'vue-router';
+
 const route = useRoute()
-const router = useRouter()
+let customer = ref([]);
 
-const paramId = route.params.id
-let customer;
-try{
-    customer = await getCustomer(paramId)
-}catch(e) {
-    customer = false;
-}
-
+onMounted( async() => {
+    try{
+        const response = await axios.get(`/src/datas/customer${route.params.id}.json`)
+        customer.value = response.data;
+    }catch(e){
+        console.error(e);
+    }
+})
 </script>
 
 <template>

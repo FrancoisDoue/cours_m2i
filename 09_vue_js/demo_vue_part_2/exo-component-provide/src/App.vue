@@ -1,9 +1,18 @@
 <script setup>
 import { RouterView } from 'vue-router';
-import customerlistJson from './datas/customerlist.json';
-import { Suspense, provide } from 'vue';
+import { onMounted, provide, ref } from 'vue';
+import axios from 'axios'
 
-const customerlist = customerlistJson
+const customerlist = ref([]);
+
+onMounted( async() => {
+    try{
+        const response = await axios.get('/src/datas/customerlist.json')
+        customerlist.value = response.data;
+    }catch(e){
+        console.error(e);
+    }
+})
 
 provide('customerList', {
     customerlist,
@@ -15,12 +24,7 @@ provide('customerList', {
     <header class="container-fluid bg-dark">
         
     </header>
-     <!-- je vote pour un point sur l'async en vue.js -->
-    <Suspense>
-        <RouterView />
-    </Suspense>
-    
-
+    <RouterView />
 </template>
 
 <style scoped>

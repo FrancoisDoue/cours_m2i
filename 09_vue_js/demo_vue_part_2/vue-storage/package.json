@@ -1,5 +1,5 @@
 {
-  "name": "exo-component-provide",
+  "name": "vue-storage",
   "version": "0.0.0",
   "private": true,
   "type": "module",
@@ -9,8 +9,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "axios": "^1.6.2",
     "bootstrap": "^5.3.2",
+    "pinia": "^2.1.7",
     "vue": "^3.3.10",
     "vue-router": "^4.2.5"
   },

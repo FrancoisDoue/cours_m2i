@@ -3,7 +3,7 @@ import { inject } from 'vue';
 import { RouterLink } from 'vue-router';
 
 const { customerlist } = inject('customerList')
-console.log(customerlist);
+// console.log(customerlist.value)
 
 </script>
 
