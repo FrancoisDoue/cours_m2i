@@ -1,7 +1,7 @@
 <script setup>
-import { RouterLink, RouterView } from 'vue-router';
+import { RouterView } from 'vue-router';
 import customerlistJson from './datas/customerlist.json';
-import { provide } from 'vue';
+import { Suspense, provide } from 'vue';
 
 const customerlist = customerlistJson
 
@@ -15,7 +15,10 @@ provide('customerList', {
     <header class="container-fluid bg-dark">
         
     </header>
-    <RouterView />
+     <!-- je vote pour un point sur l'async en vue.js -->
+    <Suspense>
+        <RouterView />
+    </Suspense>
     
 
 </template>
