@@ -18,7 +18,7 @@ const createTodo = () => {
 <template>
     <header class="bg-dark bg-gradient bg-opacity-75 d-flex flex-column align-items-center py-4 shadow-sm">
         <h1 class="text-light mb-4">To Duh</h1>
-        <img src="../assets/logo-2-1-1.png" alt="" class="mt-3" style="position:absolute; height: 80px;">
+        <img src="../assets/logo-2-1-1.png" alt="" class="position-absolute mt-3" style="height: 80px;">
         <form @submit.prevent="createTodo()" class="w-25" style="z-index: 10;">
             <div class="d-flex ">
                 <input v-model="todoText" type="text" class="form-control me-2">
