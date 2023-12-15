@@ -19,10 +19,10 @@ const toggleFavourite = () => {
 <template>
     <div class="card w-25 my-2 shadow-sm">
         <div class="card-body d-flex justify-content-between align-items-center">
-            <p class="card-text text-bold fw-bolder">
+            <p class="card-text text-bold fw-bolder w-75">
                 {{ props.todo.todoText }}
             </p>
-            <div>
+            <div class="d-flex justify-content-center">
                 <button @click="thisTodo.removeTodo(props.todo.id)" class="btn btn-outline-secondary me-1">
                     <i class="bi bi-trash-fill"></i>
                 </button>
