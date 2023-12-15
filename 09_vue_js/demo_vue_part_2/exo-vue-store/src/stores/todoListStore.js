@@ -11,7 +11,7 @@ export const useTodoListStore = defineStore('todo', () => {
       id: v4(),
       "todoText": todo,
       isFavourite: false, 
-      isDone: false
+      // isDone: false // pour plus tard
   }))
 
   const removeTodo = (id) => todoList.value = todoList.value.filter(t => t.id !== id)
