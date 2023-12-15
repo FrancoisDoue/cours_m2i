@@ -33,5 +33,4 @@ const toggleFavourite = () => {
             </div>
         </div>
     </div>
-
 </template>
