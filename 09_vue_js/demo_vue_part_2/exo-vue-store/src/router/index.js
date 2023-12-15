@@ -4,8 +4,8 @@ import TodoView from '@/views/TodoView.vue'
 const router = createRouter({
   history: createWebHistory(),
   routes: [
-    {path: '/', redirect: '/todo'},
-    {path: '/todo', component: TodoView}
+    {path: '/', name: 'To Duh', redirect: '/todo'},
+    {path: '/todo', name: 'To Duh', component: TodoView}
   ]
 })
 

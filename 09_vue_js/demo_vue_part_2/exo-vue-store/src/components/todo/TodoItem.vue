@@ -17,7 +17,7 @@ const toggleFavourite = () => {
 </script>
 
 <template>
-    <div class="card w-25 my-2 shadow-sm">
+    <div class="card w-50 my-2 shadow-sm">
         <div class="card-body d-flex justify-content-between align-items-center">
             <p class="card-text text-bold fw-bolder w-75">
                 {{ props.todo.todoText }}
