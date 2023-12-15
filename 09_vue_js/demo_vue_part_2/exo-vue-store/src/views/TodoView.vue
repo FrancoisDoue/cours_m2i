@@ -16,10 +16,10 @@ const createTodo = () => {
 </script>
 
 <template>
-    <header class="bg-dark bg-gradient bg-opacity-10 d-flex flex-column align-items-center py-4 shadow-sm">
-        <img src="../assets/logo-2-1-1.png" alt="" style="position: absolute; z-index: -1; height: 80px;">
-        <h1 class="text-dark">To Duh</h1>
-        <form @submit.prevent="createTodo()" class="w-25">
+    <header class="bg-dark bg-gradient bg-opacity-75 d-flex flex-column align-items-center py-4 shadow-sm">
+        <h1 class="text-light mb-4">To Duh</h1>
+        <img src="../assets/logo-2-1-1.png" alt="" class="mt-3" style="position:absolute; height: 80px;">
+        <form @submit.prevent="createTodo()" class="w-25" style="z-index: 10;">
             <div class="d-flex ">
                 <input v-model="todoText" type="text" class="form-control me-2">
                 <button type="submit" class="btn btn-warning px-4">Add</button>
