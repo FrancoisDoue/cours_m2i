@@ -1,6 +1,6 @@
 -- ETAPE 1
 
--- DROP DATABASE IF EXISTS tabletoptreasures_database;
+DROP DATABASE IF EXISTS tabletoptreasures_database;
 CREATE DATABASE IF NOT EXISTS tabletoptreasures_database;
 
 USE tabletoptreasures_database;
@@ -25,6 +25,7 @@ CREATE TABLE jeux (
     description 	LONGTEXT,
     prix 			DECIMAL(4,2) NOT NULL,
     id_categorie 	INT NOT NULL,
+    CONSTRAINT fk_jeux_categorie
     FOREIGN KEY (id_categorie) REFERENCES categorie(id)
 );
 
@@ -38,10 +39,15 @@ CREATE TABLE commande (
 
 CREATE TABLE commande_jeux (
 	id_commande 	INT NOT NULL,
-    id_jeux 		INT NOT NULL,
-    FOREIGN KEY (id_commande) REFERENCES commande(id),
-    FOREIGN KEY (id_jeux) REFERENCES jeux(id)
+    id_jeux 		INT NOT NULL
 );
+
+ALTER TABLE commande_jeux
+ADD CONSTRAINT fk_commande_jeux
+FOREIGN KEY (id_commande) REFERENCES commande(id);
+ALTER TABLE commande_jeux
+ADD CONSTRAINT fk_jeux_commande
+FOREIGN KEY (id_jeux) REFERENCES jeux(id);
 
 -- ETAPE 2 - part 1
 
@@ -86,4 +92,16 @@ VALUE
 	('Small World', 'Jeu de civilisations fantastiques', 32, 1),
 	('7 Wonders Duel', 'Jeu de cartes pour 2 joueurs', 26, 2),
 	('Horreur à l''Outreterre', 'Jeu d''aventure horrifique', 38, 3);
+
+INSERT INTO commande (id_client, adresse_de_livraison)
+VALUE
+	(1, (SELECT adresse_de_livraison FROM clients WHERE id = 1)),
+    (4, (SELECT adresse_de_livraison FROM clients WHERE id = 4)),
+    (7, (SELECT adresse_de_livraison FROM clients WHERE id = 7)),
+    (1, (SELECT adresse_de_livraison FROM clients WHERE id = 1)),
+    (1, (SELECT adresse_de_livraison FROM clients WHERE id = 1));
+    
+INSERT INTO commande_jeux(id_commande, id_jeux)
+VALUE (1, 3), (1, 9), (2, 10), (3, 1), (3, 6), (3, 3), (4, 4), (4, 2), (5,10);
+
 
