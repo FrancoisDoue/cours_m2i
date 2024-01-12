@@ -11,7 +11,7 @@ GROUP BY nom
 HAVING COUNT(DISTINCT commande_id) > 1;
 
 --  3   Obtenir la liste de tous les produits qui sont présent sur plusieurs commandes et y ajouter une colonne qui liste les identifiants des commandes associées.
-SELECT cl.*, cm.* 
+SELECT cl.*, GROUP_CONCAT(' ', cm.id) AS id_commandes
 FROM commande_ligne AS cl
 INNER JOIN commande AS cm 	ON cm.id = cl.commande_id
 GROUP BY cl.nom 
@@ -29,22 +29,25 @@ INNER JOIN client AS c ON c.id = cm.client_id
 GROUP BY cm.id;
 
 --  6   (difficulté très haute) Enregistrer le montant total de chaque commande dans le champ intitulé “cache_prix_total”
-UPDATE commande AS CM, commande_ligne AS CL
-SET CM.cache_prix_total = CL.prix_total
-WHERE CL.commande_id = CM.id;
+UPDATE commande
+SET cache_prix_total = (
+	SELECT SUM(prix_total) 
+	FROM commande_ligne
+	WHERE commande.id = commande_id
+);
 -- SELECT * FROM commande;
 
 --  7   Obtenir le montant global de toutes les commandes, pour chaque mois
-SELECT MONTH(date_achat) AS mois, SUM(cache_prix_total) AS total 
+SELECT MONTH(date_achat) AS mois, ROUND(SUM(cache_prix_total)) AS total_arr
 FROM commande
 GROUP BY mois;
 
 --  8   Obtenir la liste des 10 clients qui ont effectué le plus grand montant de commandes, et obtenir ce montant total pour chaque client.
-SELECT c.*, SUM(cm.cache_prix_total) as total_achat
+SELECT c.*, ROUND(SUM(cm.cache_prix_total)) as total_achat_arr
 FROM client AS c
 INNER JOIN commande AS cm ON cm.client_id = c.id
 GROUP BY c.id
-ORDER BY total_achat DESC
+ORDER BY total_achat_arr DESC
 LIMIT 10;
 
 --  9   Obtenir le montant total des commandes pour chaque date
@@ -85,6 +88,9 @@ VALUE ('pas d\'argent'),
 	('A de l\'argent'),
     ('Est riche'),
     ('Est peut-être Jeff Bezos');
+    
+SELECT * FROM commande
+INNER JOIN commande_category ON commande_category.id = commande.category;
 
 -- 15   Supprimer toutes les commandes (et les lignes des commandes) inférieur au 1er février 2019. Cela doit être effectué en 2 requêtes maximum
 START TRANSACTION;
@@ -93,3 +99,10 @@ WHERE commande_ligne.commande_id IN ((SELECT id FROM commande WHERE date_achat <
 DELETE FROM commande
 WHERE date_achat < DATE('2019-02-01');
 COMMIT;
+
+DELETE CM, CL
+FROM `commande` CM
+INNER JOIN `commande_ligne` CL ON CM.id = CL.commande_id
+WHERE CM.date_achat < DATE('2019-02-01');
+
+SELECT * FROM commande_ligne;
