@@ -6,7 +6,7 @@
 -- Generation Time: Oct 20, 2019 at 10:17 AM
 -- Server version: 5.7.19
 -- PHP Version: 5.6.31
-
+DROP DATABASE IF EXISTS exo_2_sql_sh;
 CREATE DATABASE exo_2_sql_sh;
 USE exo_2_sql_sh;
 
