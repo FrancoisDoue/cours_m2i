@@ -51,7 +51,7 @@ ORDER BY total_achat_arr DESC
 LIMIT 10;
 
 --  9   Obtenir le montant total des commandes pour chaque date
-SELECT date_achat, COUNT(id) AS nbr_commandes
+SELECT date_achat, round(SUM(cache_prix_total)) AS nbr_commandes
 FROM commande
 GROUP BY date_achat;
 
