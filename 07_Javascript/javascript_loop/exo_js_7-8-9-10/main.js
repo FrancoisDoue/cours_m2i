@@ -117,25 +117,25 @@
 
 // ------------------------------------------------------------------------
 
-let nbrUser = Number(prompt("Saisissez un nombre entier"));
-let tempNbr = 0
-let msg = ""
-let cpt = 1
+// let nbrUser = Number(prompt("Saisissez un nombre entier"));
+// let tempNbr = 0
+// let msg = ""
+// let cpt = 1
 
-for(let i = 1; i < nbrUser; i++){
-    if (nbrUser === tempNbr){
-        console.log(msg)
-    }
+// for(let i = 1; i < nbrUser; i++){
+//     if (nbrUser === tempNbr){
+//         console.log(msg)
+//     }
 
-    msg +=  i + " + "
-    if(tempNbr >= nbrUser){
-        tempNbr = 0
-        i = ++cpt
-        // console.log(i)
-        msg =  i + " + ";
-    }
-    tempNbr += i;
+//     msg +=  i + " + "
+//     if(tempNbr >= nbrUser){
+//         tempNbr = 0
+//         i = ++cpt
+//         // console.log(i)
+//         msg =  i + " + ";
+//     }
+//     tempNbr += i;
 
-    // console.log(msg)
-    // console.log(tempNbr)
-}
+//     // console.log(msg)
+//     // console.log(tempNbr)
+// }

@@ -2,8 +2,6 @@ import express from "express"
 import { PORT } from "./constantes/constantes.js"
 import product from "./datas/product.js"
 
-console.log('hello world!')
-
 const app = express()
 
 app.listen(PORT, () => {
