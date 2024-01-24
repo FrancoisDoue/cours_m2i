@@ -1,6 +1,6 @@
 import products from "../../datas/products.js"
 
-export const getAllProducts = ((req, res) => {
+export const getAllProducts = ((_req, res) => {
     return res.json(products.map(p => {
         return {id: p.id, name: p.name}
     }))
@@ -28,5 +28,4 @@ export const updateProduct = ((req, res) => {
     const productToUpdate = products.find(p => p.id == req.params.id)
     console.log(productToUpdate)
     if (!productToUpdate) return res.status(404).json({message: 'product not found'})
-
 })

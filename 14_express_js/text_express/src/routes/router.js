@@ -4,7 +4,7 @@ import { createProduct, getAllProducts, getProduct, updateProduct } from "../con
 
 const router = express.Router()
 
-router.get('/', (req, res) => {
+router.get('/', (_req, res) => {
     return res.json({
         message: 'API OK',
         status: 200
@@ -15,5 +15,7 @@ router.get(PRODUCTS_URL, getAllProducts)
 router.get(PRODUCTS_URL+'/:id', getProduct)
 router.post(PRODUCTS_URL, createProduct)
 router.put(PRODUCTS_URL+'/:id', updateProduct)
+
+router.get('*', (_req, res) => res.json({message: "Nothing to do here"}))
 
 export default router;
