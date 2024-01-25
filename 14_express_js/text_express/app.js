@@ -1,12 +1,11 @@
 import express from "express"
 import { PORT } from "./config/env.js"
-// import product from "./datas/products.js"
 import router from "./src/routes/router.js"
-import { logger } from "./src/middlewares/devUtilities.js"
+import { logger } from "./middlewares/devUtilities.js"
 
 const app = express()
-app.use(express.json())
 
+app.use(express.json())
 app.use(logger)
 app.use(router)
 
