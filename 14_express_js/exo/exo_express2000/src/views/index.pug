@@ -1,0 +1,14 @@
+doctype HTML 
+html(lang="fr")
+    head 
+        title #{title}
+    body 
+        h1#main-title #{mainTitle}
+        if img
+            div 
+                img(src= img.src, alt= img.alt)
+        if ulList 
+            ul 
+                each item in ulList
+                    li 
+                        a(href= item) #{item}

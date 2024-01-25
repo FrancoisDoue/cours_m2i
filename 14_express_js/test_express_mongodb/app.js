@@ -3,17 +3,13 @@ import express from 'express';
 import router from './src/routes/index.js';
 import mongoose, { Schema } from 'mongoose';
 
+const PORT = process.env.PORT
 
 
 const mongo = async() => await mongoose.connect(process.env.MONGO_URI)
 mongo().catch(err => console.log(err))
 
-const PORT = process.env.PORT
 const app = express()
-// mongoose
-//     .connect(process.env.MONGO_URI)
-//     .then(result => app.listen(5000, () => `MongoDB ready`))
-//     .catch(err => console.log(err))
 
 app.use(express.json())
 app.use('/', router)
