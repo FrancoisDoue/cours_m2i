@@ -51,7 +51,7 @@ ORDER BY total_achat_arr DESC
 LIMIT 10;
 
 --  9   Obtenir le montant total des commandes pour chaque date
-SELECT date_achat, round(SUM(cache_prix_total)) AS nbr_commandes
+SELECT date_achat, COUNT(id) AS nbr_commandes
 FROM commande
 GROUP BY date_achat;
 
@@ -105,4 +105,3 @@ FROM `commande` CM
 INNER JOIN `commande_ligne` CL ON CM.id = CL.commande_id
 WHERE CM.date_achat < DATE('2019-02-01');
 
-SELECT * FROM commande_ligne;
