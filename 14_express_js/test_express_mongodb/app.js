@@ -1,13 +1,21 @@
 import 'dotenv/config'
 import express from 'express';
 import router from './src/routes/index.js';
-import mongoose, { Schema } from 'mongoose';
+import mongoose from 'mongoose';
 
 const PORT = process.env.PORT
 
+mongoose.connect(process.env.MONGO_URI)
+const db = mongoose.connection
 
-const mongo = async() => await mongoose.connect(process.env.MONGO_URI)
-mongo().catch(err => console.log(err))
+db.on('error', console.error.bind(console, 'Erreur de connexion à MongoDB :'));
+db.once('open', () => {
+  console.log('Connecté à MongoDB');
+});
+
+
+// const mongo = async() => await mongoose.connect(process.env.MONGO_URI)
+// mongo().catch(err => console.log(err))
 
 const app = express()
 
