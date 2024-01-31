@@ -4,8 +4,12 @@ export default {
     getMovies: (query, cb) => {
         Movie.find(query).then(cb)
     },
-    getOneMovie: (slugMovie, cb) => {
-        Movie.findOne({slug: slugMovie}).then(cb)
+    getOneMovie: (slugMovie) => {
+        try {
+            return Movie.findOne({slug: slugMovie})
+        } catch (e) {
+            return e
+        }
     },
 
     postMovie: (values) => {

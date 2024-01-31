@@ -10,11 +10,14 @@ export default {
         })
     },
     getMovieByTitle: (req, res) => {
-        console.log(req.params.title)
-        movieModel.getOneMovie(req.params.title, (datas) => {
-            if (!datas) return res.status(404).json({message: 'Movie not found'})
-            return res.json(datas)
-        })
+        movieModel.getOneMovie(req.params.title)
+        .then(
+            datas => {
+                if (!datas) return res.status(404).json({message: 'Movie not found'})
+                return res.status(200).json(datas)
+            }
+        )
+        .catch(err => res.status(400).json(err))
     },
 
     addNewMovie : (req, res) => {
