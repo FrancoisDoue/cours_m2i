@@ -1,8 +1,7 @@
 import 'dotenv/config'
-import db from './config/db.js';
+import _db from './config/db.js';
 import express from 'express';
 import router from './src/routes/index.js';
-import mongoose from 'mongoose';
 import { logger } from './middlewares/devUtilities.js';
 
 const PORT = process.env.PORT
