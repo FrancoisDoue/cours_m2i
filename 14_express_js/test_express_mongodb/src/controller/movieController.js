@@ -10,16 +10,18 @@ export default {
         })
     },
     getMovieByTitle: (req, res) => {
-        console.log(req.params)
-        console.log(req.params.title.replace(' ', '_').toLowerCase())
-        res.json({msg: 'test'})
+        console.log(req.params.title)
+        movieModel.getOneMovie(req.params.title, (datas) => {
+            if (!datas) return res.status(404).json({message: 'Movie not found'})
+            return res.json(datas)
+        })
     },
 
     addNewMovie : (req, res) => {
-        movieModel.postMovie(req.body, (response) => {
-            // if (err) return res.status(500).json({message: 'error'})
-            return res.status(201).json({message: 'movie successfully added', 'response': response})
-        })
-        // return res.json({message: 'On Movie controller'})
-    }
+        return movieModel.postMovie(req.body)
+        .then(
+            datas => res.status(201).json({message: 'movie successfully added', 'response': datas})
+        )
+        .catch(err => res.status(400).json(err))
+}
 }
