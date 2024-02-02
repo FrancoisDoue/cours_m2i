@@ -5,7 +5,7 @@ const movieSchema = new Schema({
     description: {type: String},
     director: {type: String, required: true},
     releaseDate: {type: Date},
-    slug: {type: String, default: function(){return this.title.toLowerCase().replace(' ', '_')}}
+    slug: {type: String, default: function(){return this.title.toLowerCase().replaceAll(' ', '_')}}
 })
 
 export default model('Movie', movieSchema)
