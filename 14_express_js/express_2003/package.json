@@ -1,19 +1,19 @@
 {
-  "name": "test_express_mongodb",
+  "name": "express_2003",
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon app.js",
-    "fixtures" : "node ./fixtures/fixtures.js"
+    "start": "nodemon app.js"
   },
-  "author": "",
+  "author": "François Doué",
   "license": "ISC",
   "dependencies": {
-    "dotenv": "^16.4.0",
+    "bcrypt": "^5.1.1",
+    "dotenv": "^16.4.1",
     "express": "^4.18.2",
-    "mongoose": "^8.1.0"
+    "mongoose": "^8.1.1"
   }
 }
