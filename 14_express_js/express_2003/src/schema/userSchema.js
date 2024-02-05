@@ -22,8 +22,8 @@ const userSchema = new Schema({
         getManyUsers(cb) {
             return this.forceCB(this.find({}, { userPassword: false }), cb)
         },
-        getUserByUsername(username, cb) {
-            return this.forceCB(this.findOne({'username': username}, {userPassword: false}), cb)
+        getUserByMail(email, cb) {
+            return this.forceCB(this.findOne({'userEmail': email}), cb)
         }
     }
 })

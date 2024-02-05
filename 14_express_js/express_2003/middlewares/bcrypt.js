@@ -12,6 +12,6 @@ export const hashPassword = (req, res, next) => {
     })
 }
 
-// export const comparePassword = (req, res, next) => {
-
-// }
+export const comparePassword = (req, res, next) => {
+    console.log('On middleware comparePassword')
+}

@@ -9,16 +9,21 @@ export default {
         })
     },
     getUser: (req, res) => {
-        console.log(req.params.username)
+        console.log(req.body?.userEmail)
 
         res.json({ message: 'getUser controller OK' })
 
     },
-    addUser: (req, res) => {
+    register: (req, res) => {
         userSchema.addUser(req.body, (err, datas) => {
             if (err) return res.status(500).json(err)
             return res.status(201).json(datas)
         })
     },
+    login: (req, res) => {
+        console.log(req.body?.userEmail)
+        console.log('On user controller')
+        res.status(200).json({ message: 'getUser controller OK' })
+    }
 
 }
