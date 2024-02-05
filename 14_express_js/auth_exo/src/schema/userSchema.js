@@ -19,17 +19,8 @@ const userSchema = new Schema({
         addUser(body, cb) {
             return this.useCB(this.create(body), cb)
         },
-        getManyUsers(cb) {
-            return this.useCB(this.find({}, { userPassword: false }), cb)
-        },
         getUserByMail(email, cb) {
             return this.useCB(this.findOne({'userEmail': email}), cb)
-        },
-        updateUser(body, id, cb) {
-            return this.useCB(this.findByIdAndUpdate(id, body), cb)
-        },
-        deleteUser(id, cb) {
-            return this.useCB(this.findByIdAndDelete(id), cb)
         }
     }
 })
