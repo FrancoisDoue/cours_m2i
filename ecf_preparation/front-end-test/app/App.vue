@@ -1,14 +1,21 @@
 <script setup>
 import { RouterView } from 'vue-router'
+import HeaderComponent from './src/components/HeaderComponent.vue';
 
 </script>
 
 <template>
-  <h1 class="underline">test</h1>
-  <RouterView/>
+  <div id="main-content">
+    <HeaderComponent />
+    <RouterView/>
+
+  </div>
 
 </template>
 
 <style scoped>
+#main-content{
+  @apply h-full w-full
+}
 
 </style>
