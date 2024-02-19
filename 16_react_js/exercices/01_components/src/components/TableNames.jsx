@@ -21,7 +21,7 @@ const TableNames = () => {
                         <td>{line.fname}</td>
                         <td>{line.age}</td>
                     </tr>
-                    )}
+                )}
             </tbody>
         </table>
     );
