@@ -2,9 +2,6 @@ import React from 'react';
 
 const TableLine = (props) => {
     const { rowValue } = props
-    console.log(rowValue)
-
-    // for
 
     return (
         <tr>

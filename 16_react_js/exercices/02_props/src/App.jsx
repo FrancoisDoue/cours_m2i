@@ -8,9 +8,9 @@ function App() {
   const [rows, setRows] = useState([])
 
   const addARow = () => {
-    const index = rows.length ?? 1
-    setRows(rows => [...rows, { index: index, val1: 'valeur '+index, val2: 'valeur '+index}])
-  } 
+    const index = rows.length+1
+    setRows([...rows, { index: index, val1: 'valeur '+index, val2: 'valeur '+index}])
+  }
 
   return (
     <>
