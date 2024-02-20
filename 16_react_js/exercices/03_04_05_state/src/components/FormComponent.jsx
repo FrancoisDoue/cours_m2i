@@ -18,7 +18,7 @@ const FormComponent = () => {
 
             </div>
             <p>
-                Bonjour <b>{firstname + ' ' + lastname}</b>, bienvenue sur l'application
+                Bonjour <b>{`${firstname} ${(lastname).toUpperCase()}`}</b>, bienvenue sur l'application
             </p>
         </div>
     );
