@@ -1,0 +1,28 @@
+.card{
+    border-radius: 5px;
+    border: 2px solid hsl(0, 0%, 90%);
+    margin: 0.5em;
+}
+.card-header{
+    display: flex;
+    justify-content: space-between;
+    padding: .8em;
+    padding-left: 2em;
+    padding-right: 5em;
+}
+h4{
+    margin: 0;
+    padding: 0;
+}
+.card-body{
+    padding: 0.5em;
+    text-align: center;
+}
+.card-btn{
+    display: flex;
+    justify-content: space-between;
+    padding: .5em;
+}
+hr{
+    margin: 0;
+}

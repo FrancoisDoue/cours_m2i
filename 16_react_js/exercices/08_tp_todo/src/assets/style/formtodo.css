@@ -1,0 +1,30 @@
+.sideForm {
+    width: calc((100% / 5) * 2);
+}
+form{
+    padding: 2em;
+    border: 2px solid rgba(255, 255, 255, 0.87);
+    border-radius: 4px;
+}
+form > div{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+input, textarea{
+    resize: none;
+    outline: none;
+    border: none;
+    padding: 0.6em;
+    background-color: hsl(0, 0%, 89%);
+    color: #242424;
+    font-weight: 600;
+    margin: 0.2em;
+    border-radius: 5px;
+}
+textarea{
+    height: 100px;
+}
+form > div > button{
+    margin-top: 5em;
+}
