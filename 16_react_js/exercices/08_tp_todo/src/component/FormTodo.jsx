@@ -34,7 +34,7 @@ const FormTodo = ({emitSubmit}) => {
             <form onSubmit={handleSubmit}>
                 <div>
                     <label htmlFor="title">Title :</label>
-                    <input type="text" name="title" id="title" ref={formRef.title} />
+                    <input type="text" name="title" id="title" ref={formRef.title} required />
                 </div>
                 <div>
                     <label htmlFor="description">Description :</label>
