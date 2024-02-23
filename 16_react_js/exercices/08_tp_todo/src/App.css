@@ -1,0 +1,71 @@
+#root {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  padding-top: 1em;
+  /* text-align: center; */
+}
+h1, h2, h3{
+  text-align: center;
+}
+main{
+  display: flex;
+}
+
+.todo-list {
+  width: calc((100%/5)*3);
+}
+
+button{
+  padding: .5em;
+  padding-left: 1em;
+  padding-right: 1em;
+  border-radius: 50px;
+  border: none;
+}
+button:hover{
+  font-weight: 600;
+}
+
+button[type=submit]{
+  outline: 2px solid rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+}
+button[type=submit]:hover{
+  background-color: rgba(255, 255, 255, 0.87);
+  color: #242424;
+}
+button.delete{
+  outline: 2px solid hsl(0, 100%, 38%);
+  
+  
+  background-color: #242424;
+}
+button.delete:hover{
+  outline: 2px solid rgba(255, 255, 255, 0.87);
+  
+  background-color: hsl(0, 100%, 38%);
+}
+button.warning{
+  outline: 2px solid hsl(34, 73%, 65%);
+  
+  background-color: #242424;
+}
+button.warning:hover{
+  outline: 2px solid rgba(255, 255, 255, 0.87);
+  color: #242424;
+  
+  background-color: hsl(34, 73%, 65%);
+}
+button.success{
+  outline: 2px solid hsl(96, 49%, 46%);
+  
+  background-color: #242424;
+}
+button.success:hover{
+  outline: 2px solid rgba(255, 255, 255, 0.87);
+  
+  background-color: hsl(96, 49%, 46%);
+}
+/* button */
+

@@ -6,8 +6,8 @@ const userSchema = new Schema({
     userPassword: { type: String, required: true}
 }, {
     statics: {
-        // bon bah s'il faut une rustine pour pouvoir utiliser le pouvoir du callback...
-        async forceCB(method, cb) {
+        // bon bah s'il faut une rustine pour utiliser le pouvoir du callback...
+        async useCB(method, cb) {
             let error, datas
             try {
                 datas = await method
@@ -17,13 +17,19 @@ const userSchema = new Schema({
             return cb(error, datas)
         },
         addUser(body, cb) {
-            return this.forceCB(this.create(body), cb)
+            return this.useCB(this.create(body), cb)
         },
         getManyUsers(cb) {
-            return this.forceCB(this.find({}, { userPassword: false }), cb)
+            return this.useCB(this.find({}, { userPassword: false }), cb)
         },
-        getUserByUsername(username, cb) {
-            return this.forceCB(this.findOne({'username': username}, {userPassword: false}), cb)
+        getUserByMail(email, cb) {
+            return this.useCB(this.findOne({'userEmail': email}), cb)
+        },
+        updateUser(body, id, cb) {
+            return this.useCB(this.findByIdAndUpdate(id, body), cb)
+        },
+        deleteUser(id, cb) {
+            return this.useCB(this.findByIdAndDelete(id), cb)
         }
     }
 })

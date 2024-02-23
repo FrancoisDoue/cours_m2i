@@ -1,12 +1,17 @@
 import { Router } from "express";
 import userController from "../controllers/userController.js";
-import { hashPassword } from "../../middlewares/bcrypt.js";
+import { comparePassword, hashPassword } from "../../middlewares/bcrypt.js";
+import { beforeLogin } from "../../middlewares/userControl.js";
 
 const router = Router()
 
 router.get('/', userController.getManyUsers)
-router.get('/:username', userController.getUser)
 
-router.post('/', hashPassword, userController.addUser)
+router.post('/register', hashPassword, userController.register)
+router.post('/login', [beforeLogin, comparePassword], userController.login)
+
+router.put('/update/:id', hashPassword, userController.update)
+
+router.delete('/delete/:id', userController.delete)
 
 export default router;
