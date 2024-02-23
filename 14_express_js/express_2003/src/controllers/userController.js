@@ -11,6 +11,7 @@ export default {
     getUser: (req, res) => {
         console.log(req.params.username)
 
+
         res.json({ message: 'getUser controller OK' })
 
     },
