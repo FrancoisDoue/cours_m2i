@@ -12,21 +12,27 @@ const ModalCart = ({btnCloseAction}) => {
     return createPortal(
         <div className={`${classes.modal} d-flex justify-content-center align-items-center`}>
             <div 
-                className='bg-light rounded text-center d-flex flex-column justify-content-between' 
+                className='bg-light rounded text-center d-flex flex-column justify-content-between shadow-sm' 
                 style={{width: '40%', maxHeight: '80%', minHeight: '200px'}}
             >
                 <div className='pt-2'>
                     <h3>Votre panier</h3>
                     <hr />
                 </div>
-                <div className='m-4'>
-                    {cart.map((e, i) => <ModalListItem product={e} key={i} />)}
-                </div>
-                <div className='mx-4'>
-                    <h4>Total: 
-                        {Math.round(cart.reduce((total, e) => (total + Number(e.price) * e.qte), 0) * 100) / 100}
-                    </h4>
-                </div>
+                {!!cart.length ?
+                    <>
+                    <div className='m-4'>
+                        {cart.map((e, i) => <ModalListItem product={e} key={i} />)}
+                    </div>
+                    <div className='mx-4'>
+                        <h4>Total: 
+                            {Math.round(cart.reduce((total, e) => (total + Number(e.price) * e.qte), 0) * 100) / 100} €
+                        </h4>
+                    </div>
+                    </> 
+                    :
+                    <div className='mx-4'> <h4>Il n'y a pas d'article dans votre panier</h4></div>
+                }
                 <div className='pb-2'>
                     <hr />
                     <button 

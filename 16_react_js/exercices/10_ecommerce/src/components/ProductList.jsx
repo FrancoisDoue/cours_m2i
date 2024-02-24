@@ -7,8 +7,8 @@ const ProductList = () => {
     const { productList, addToCart } = useContext(ProductContext)
     
     return (
-        <main className='container'>
-            <div className='flex'>
+        <main className='container pt-4'>
+            <div className='d-flex flex-wrap'>
                 {!!productList.length && 
                     productList.map((e, i) => <ProductCard key={i} product={e} action={addToCart}/>)
                 }
