@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react'
+import { useState } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap-icons/font/bootstrap-icons.min.css'
 import dataProducts from './datas/dataProducts'
@@ -8,14 +8,26 @@ import ProductContext from './context/ProductContext'
 import Header from './components/Header'
 import ModalCart from './components/Modal/ModalCart'
 
+
 function App() {
-  const [productList, setProductList] = useState(dataProducts)
+  const [productList, _setProductList] = useState(dataProducts)
   const [cart, setCart] = useState([])
   const [showModal, setShowModal] = useState(false)
 
-  const addToCart = (product) => setCart([...cart, product])
+  const addToCart = (product) => {
+    const productFinded = cart.find((e) => e.name == product.name)
+    if (!!productFinded) {
+      productFinded.qte += 1
+      setCart([...cart])
+    } else setCart([...cart, {...product, qte: 1}])
+  }
   const removeItemFromCart = (item) => {
-    setCart(prevCart => prevCart.filter(e => e != item))
+    const productFinded = cart.find((e) => e == item)
+    if (productFinded.qte > 1){
+      productFinded.qte --
+      setCart([...cart])
+    } 
+    else setCart(prevCart => prevCart.filter(e => e != item))
   }
 
   console.log(cart)
