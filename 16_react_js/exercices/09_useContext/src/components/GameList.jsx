@@ -6,12 +6,13 @@ const GameList = () => {
     console.log(gameList)
 
     return (
-        <table>
+        <table style={{width: '100%'}}>
             <thead>
                 <tr>
                     <th>#</th>
-                    <th>Jeu  </th>
-                    <th>Editeur  </th>
+                    <th>Jeu </th>
+                    <th>Editeur </th>
+                    <th>Action</th>
                 </tr>
             </thead>
             {!!gameList.length && 
@@ -21,6 +22,7 @@ const GameList = () => {
                             <td>{e.id}</td>
                             <td>{e.gameName}</td>
                             <td>{e.gameEditor}</td>
+                            <td><button onClick={() => console.log(e)}>Log it!</button></td>
                         </tr>
                     ))}
                 

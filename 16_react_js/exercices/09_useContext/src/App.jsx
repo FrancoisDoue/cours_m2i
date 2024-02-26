@@ -16,7 +16,6 @@ function App() {
         <FormGame/>
         <hr />
         <GameList/>
-
       </GameContext.Provider>
     </>
   )

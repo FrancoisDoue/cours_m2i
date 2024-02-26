@@ -14,38 +14,28 @@ function App() {
   const [cart, setCart] = useState([])
   const [showModal, setShowModal] = useState(false)
 
-  const addOrRemove = (product, bool = true) => {
+  const addToCart = (product) => {
     const productFinded = cart.find((e) => e.name == product.name)
     if (!!productFinded) {
-      if (!bool) {
-        if (productFinded.qte > 1){
-          productFinded.qte --
-        } else {
-          return setCart(prevCart => prevCart.filter(e => e != product))
-        }
-      } else {
-        productFinded.qte ++
-      }
-      return setCart([...cart])
-    } else {
-      return setCart([...cart, {...product, qte: 1}])
-    } 
+      productFinded.qte += 1
+      setCart([...cart])
+    } else setCart([...cart, {...product, qte: 1}])
   }
 
-  const removeItemFromCart = (product) => addOrRemove(product, false)
+  const removeItemFromCart = (item) => {
+    const productFinded = cart.find((e) => e == item)
+    if (productFinded.qte > 1){
+      productFinded.qte --
+      setCart([...cart])
+    } else setCart((prevCart) => prevCart.filter(e => e != item))
+  }
 
-  const addToCart = (product) => addOrRemove(product)
-
-  console.log(cart)
+  // console.log(cart)
+  
   return (
     <ProductContext.Provider value={{productList, cart, addToCart, removeItemFromCart }}>
 
-      {(showModal) && 
-        <ModalCart 
-          btnCloseAction={() => setShowModal(false)}
-        />
-      }
-
+      {showModal && <ModalCart btnCloseAction={() => setShowModal(false)} />}
       <Header cartBtnAction={() => setShowModal(true)} />
       <ProductList />
 
