@@ -8,7 +8,8 @@ const router = createBrowserRouter([
     {path: '/', errorElement: <ErrorComonent />, children: [
         {path: '/', element: <App />, children: [
             {path: '/contacts', element: <ContactView />},
-            {path: '/contacts/edit', element: <ContactEditView />}
+            {path: '/contacts/edit', element: <ContactEditView />},
+            {path: '/contacts/edit/:idContact', element: <ContactEditView />}
         ]}
     ]}
 ])

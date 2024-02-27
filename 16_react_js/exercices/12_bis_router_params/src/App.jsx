@@ -8,6 +8,8 @@ function App() {
 
   const [contactList, setContactList] = useState([])
 
+  console.log(contactList)
+
   return (
     <>
       <nav>
