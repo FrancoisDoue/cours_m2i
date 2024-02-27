@@ -5,13 +5,10 @@ import { useNavigate } from 'react-router-dom';
 const AddForm = ({id}) => {
     
     const navigateTo = useNavigate()
-    const { contactList, setContactList ,counter, setCounter} = useContext(ContactContext)
-    const [contact, setContact] = useState({})
+    const { contactList, setContactList } = useContext(ContactContext)
+    const contact = (!!id) ? contactList.find(c => c.id = id): {}
+    console.log(contact == {} && !!id)
 
-    console.log(!!id)
-    // let contact = {}
-
-    if (!!contact) setContact(contactList.find(c => c.id = id))
 
     const fname = useRef()
     const lname = useRef()
@@ -21,37 +18,52 @@ const AddForm = ({id}) => {
     const handleSubmit = (e) => {
         e.preventDefault()
         if (!!id) {
-            console.log(tel.current.value)
-            setContact({
-                id: contact.id,
-                firstname: fname.current.value,
-                lastname:lname.current.value,
-                email: email.current.value,
-                tel: tel.current.value,
-            })
-
+            // console.log(tel.current.value)
+            // setContact({...contact,
+            //     // id: contact.id,
+            //     firstname: fname.current.value,
+            //     lastname:lname.current.value,
+            //     email: email.current.value,
+            //     tel: tel.current.value,
+            // })
+            // console.log(contact)
+            // useEffect(
+                setContactList(prevList => {
+                    // console.log(contact)
+                    let i = prevList.findIndex(c => c.id == id)
+                    console.log(i)
+                    // findedContact = {...contact}
+                    // console.log(findedContact)
+                    prevList[i] = {...contact,
+                        // id: contact.id,
+                        firstname: fname.current.value,
+                        lastname:lname.current.value,
+                        email: email.current.value,
+                        tel: tel.current.value,
+                    }
+                    console.log(contact)
+                    // console.log(prevList)
+                    return [...prevList]
+                }
+            )
+            // , [contact])
             
-            setContactList(prevList => {
-                console.log(contact)
-                const i = prevList.findIndex(c => c.id = id)
-                prevList[i] = contact
-                console.log(prevList)
-                return [...prevList]
-            })
+            
             
         } else {
             // const contactId =  counter
             setContactList([...contactList, {
-                id: counter,
+                // id: counter,
+                id: Date.now(),
                 firstname: fname.current.value,
                 lastname:lname.current.value,
                 email: email.current.value,
                 tel: tel.current.value,
             }])
-            setCounter(counter + 1)
+            // setCounter(counter + 1)
         }
 
-        navigateTo('/contact')
+        // navigateTo('/contact')
     }
 
     return (
