@@ -1,10 +1,10 @@
-import React from 'react';
-import { useRef } from 'react';
+import React, { useRef } from 'react';
+import classes from '../assets/form.module.css'
 
 const FormTodo = ({actions, editTask}) => {
 
     const title = useRef()
-    const description = useRef()
+    const description = useRef()    
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -26,36 +26,33 @@ const FormTodo = ({actions, editTask}) => {
         description.current.value = ''
         if(!!editTask) actions.setEditTask(null)
     }
-    console.log(editTask)
-
     return (
-        <div>
+        <div className={classes.formContainer}>
             <h2>{!!editTask ? 'Modifier' :'Ajouter une tâche'}</h2>
             <form onSubmit={handleSubmit}>
                 <div>
                     <label htmlFor="title">Titre</label>
                     <input 
                         type="text" 
-                        name="title" 
+                        defaultValue={editTask?.title || ''}
+                        // name="title" 
                         id="title" 
                         ref={title}
-                        defaultValue={!!editTask ? editTask.title : ''}
                     />
                 </div>
                 <div>
                     <label htmlFor="description">Description</label>
                     <input 
                         type="text" 
-                        name="description" 
+                        defaultValue={editTask?.description || ''}
+                        // name="description" 
                         id="description" 
                         ref={description}
-                        defaultValue={!!editTask ? editTask.description : ''}
                     />
                 </div>
-                <button onClick={resetForm}>Annuler</button>
-                <button type='submit'>{!!editTask?'modifier':'Ajouter'}</button>
-
+                <button className={classes.btn} type='submit'>{editTask?'modifier':'Ajouter'}</button>
             </form>
+            <button className={classes.btn} onClick={resetForm}>Annuler</button>
         </div>
     );
 }

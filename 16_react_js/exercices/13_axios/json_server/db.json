@@ -3,18 +3,12 @@
     {
       "id": "0",
       "title": "First task",
-      "description": "first task of this DB",
-      "isDone": false
+      "description": "first task of this DB"
     },
     {
-      "title": "test",
-      "description": "test bis",
-      "id": "efe7"
-    },
-    {
-      "title": "Ecrire une vraie tâche",
-      "description": "test",
-      "id": "f2af"
+      "id": "2428",
+      "title": "Ajouter une tâche",
+      "description": "Une description"
     }
   ]
 }

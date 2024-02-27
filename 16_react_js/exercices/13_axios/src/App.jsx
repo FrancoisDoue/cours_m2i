@@ -2,8 +2,8 @@
 import reactLogo from './assets/react.svg'
 import { useState, useEffect } from 'react'
 import axios from 'axios'
-import FormTodo from '../components/FormTodo'
-import TaskList from '../components/TaskList'
+import FormTodo from './components/FormTodo'
+import TaskList from './components/TaskList'
 
 const api = axios.create({baseURL: 'http://localhost:3000/todo'})
 
@@ -32,13 +32,13 @@ function App() {
       .then(rerender)
       .catch(err => console.error(err.data))
   }
+  
   const editTodo = (id, value) => {
     api.put('/'+id, value)
       .then(rerender)
       .catch(err => console.log(err))
   }
 
-  console.log(editTask)
   return (
     <>
       <header>
