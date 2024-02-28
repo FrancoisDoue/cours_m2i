@@ -8,7 +8,7 @@ const BookListDisplay = () => {
 
     return (
         <main className='container'>
-            <h2 className='text-center mb-4'>Tuez-moi</h2>
+            <h2 className='text-center mb-4'>Chat.</h2>
             <ul className='list-group'>
             {!!bookList.length && bookList.map(book => 
                 <li key={book.key} className='list-group-item'>

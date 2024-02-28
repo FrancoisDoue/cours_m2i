@@ -14,12 +14,9 @@ const BookDetail = () => {
     }, [])
     useEffect(() => {
         if (!!book?.authors) {
-            console.log('there is author')
-            // let authors;
             axios.all(book?.authors.map(a => axios.get(`https://openlibrary.org${a.author.key}.json`)))
                 .then((res) => setAuthors(res.map((r) => r.data)))
                 .catch(e => console.log(e))
-            // book.authors = authors
         }
     }, [book])
 
@@ -38,16 +35,19 @@ const BookDetail = () => {
                 {!!book.covers && 
                     <img src={`https://covers.openlibrary.org/b/id/${book?.covers[0]}-L.jpg`} alt={'b'} />
                 }
-
                 </div>
                 <div className='col-7'>
                     <h2>{book?.title}</h2>
                     <h4>Par 
-                        {!!authors && 
-                            authors.map(a => (<i key={a.key}> {a?.name} </i>)) 
-                        }
+                    {!!authors && 
+                        authors.map(a => (<i key={a.key}> {a?.name} </i>)) 
+                    }
                     </h4>
-                    <p>{!!book?.description && book?.description.value}</p>
+                    <p maxlenght='200'>
+                    {!!book?.description && 
+                        !!book?.description.value ? book?.description.value: book.description
+                    }
+                    </p>
                 </div>
 
             </div>
@@ -55,7 +55,6 @@ const BookDetail = () => {
             :
             <h2>Chargement . . .</h2>
             }
-            {/* book detail of olid: {olid} */}
         </main>
     );
 }
