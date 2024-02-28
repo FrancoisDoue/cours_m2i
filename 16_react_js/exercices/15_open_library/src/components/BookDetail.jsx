@@ -21,7 +21,6 @@ const BookDetail = () => {
     }, [book])
 
     console.log(book)
-    console.log(authors)
     return (
         <main className='container'>
             {!!book ?
@@ -43,11 +42,12 @@ const BookDetail = () => {
                         authors.map(a => (<i key={a.key}> {a?.name} </i>)) 
                     }
                     </h4>
-                    <p maxlenght='200'>
-                    {!!book?.description && 
-                        !!book?.description.value ? book?.description.value: book.description
+                    {!!book?.first_publish_date && <p> Publié en {book?.first_publish_date}</p>
                     }
-                    </p>
+
+                    {!!book?.description && 
+                    <p>Description : {!!book?.description.value || book?.description}</p>
+                    }
                 </div>
 
             </div>

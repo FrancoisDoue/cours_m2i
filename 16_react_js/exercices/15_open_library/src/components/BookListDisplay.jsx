@@ -4,7 +4,6 @@ import { Link, useOutletContext } from 'react-router-dom';
 const BookListDisplay = () => {
 
     const {bookList} = useOutletContext()
-    console.log(bookList)
 
     return (
         <main className='container'>
