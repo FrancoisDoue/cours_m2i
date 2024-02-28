@@ -12,7 +12,7 @@ function App() {
   }
 
   const searchCountry = (value) => {
-    if (value.length > 2) return getCountryByPartialName(value)
+    if (!!value.length) return getCountryByPartialName(value)
     return showAllCountries()
   }
 
