@@ -10,7 +10,7 @@ const HeaderComponent = ({searchAction}) => {
 
 
     return (
-        <header className='p-3 bg-dark text-white'>
+        <header className='p-3 bg-dark text-light'>
             <div className='container d-flex justify-content-between align-items-center'>
                 <h1>Exercice 14 <span><img src={reactLogo} alt="logo-bootstrap" /></span> RESTCOUNTRIES</h1>
                 <div>

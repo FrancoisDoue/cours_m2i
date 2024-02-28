@@ -1,6 +1,7 @@
 import axios from 'axios'
 
 const api = axios.create({baseURL: 'https://restcountries.com/v3.1'})
+
 api.interceptors.response.use(
     (res => {
         return res.data.map((r, i) => {
