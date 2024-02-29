@@ -1,8 +1,16 @@
 {
   "todos": [
     {
-      "id": 0,
+      "id": "0",
       "title": "First task"
+    },
+    {
+      "title": "Tâche éditée",
+      "id": "c5c1"
+    },
+    {
+      "id": "6a10",
+      "title": "blah"
     }
   ]
 }

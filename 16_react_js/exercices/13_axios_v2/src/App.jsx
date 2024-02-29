@@ -25,6 +25,17 @@ function App() {
       .catch(err => console.error(err.config))
   }
 
+  const editTodo = (id, values) => {
+    api.put(id, values)
+      .then(rerender)
+      .catch(err => console.error(err.config))
+  }
+  const deleteTodo = (id) => {
+    api.delete(id)
+      .then(rerender)
+      .catch(err => console.error(err))
+  }
+
 
   console.log(todos)
   return (
@@ -33,7 +44,7 @@ function App() {
         <h1>Exercice 13 (bis) <span><img src={reactLogo} alt="logo" /></span>crud Axios</h1>
       </header>
       <main>
-        <Outlet context={{todos, setTodos, addTodo}}/>
+        <Outlet context={{todos, setTodos, addTodo, editTodo, deleteTodo}}/>
       </main>
     </>
   )
