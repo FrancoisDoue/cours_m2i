@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios'
+import Markdown from 'react-markdown'
 
 const BookDetail = () => {
     const {olid} = useParams()
@@ -30,7 +31,7 @@ const BookDetail = () => {
             </div>
             <hr />
             <div className='row'>
-                <div className='col-5'>
+                <div className='col-5 d-flex justify-content-center'>
                 {!!book.covers && 
                     <img src={`https://covers.openlibrary.org/b/id/${book?.covers[0]}-L.jpg`} alt={'b'} />
                 }
@@ -46,7 +47,7 @@ const BookDetail = () => {
                     }
 
                     {!!book?.description && 
-                    <p>Description : {!!book?.description.value || book?.description}</p>
+                    <Markdown>{`#### *Description* :  \n---  \n${book?.description.value || book?.description}`}</Markdown>
                     }
                 </div>
 
