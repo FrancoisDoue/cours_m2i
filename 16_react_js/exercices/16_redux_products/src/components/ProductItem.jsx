@@ -16,8 +16,10 @@ const ProductItem = ({product}) => {
             name: nameRef.current.value,
             price: priceRef.current.value,
         }
-        dispatch(modifyProduct(modifiedProduct))
-        setIsEdit(false)
+        if (modifiedProduct.name || modifiedProduct.value) {
+            dispatch(modifyProduct(modifiedProduct))
+            setIsEdit(false)
+        }
     }
 
     if (!isEdit){
@@ -25,19 +27,23 @@ const ProductItem = ({product}) => {
             <tr>
                 <td>{product.name}</td>
                 <td>{product.price} €</td>
-                <td> 
-                    <button 
-                        onClick={() => setIsEdit(true)}
-                        className='btn btn-outline-success mx-2'
-                    >
-                        Modifier le produit
-                    </button>
-                    <button 
-                        onClick={() => dispatch(deleteProduct(product.id))}
-                        className='btn btn-outline-danger mx-2'
-                    >
-                        Supprimer
-                    </button>
+                <td className='row'>
+                    <div className='col-6 border-end'>
+                        <button 
+                            onClick={() => setIsEdit(true)}
+                            className='btn btn-outline-success w-100'
+                        >
+                            Modifier le produit
+                        </button>
+                    </div>
+                    <div className='col-6'>
+                        <button 
+                            onClick={() => dispatch(deleteProduct(product.id))}
+                            className='btn btn-outline-danger w-100'
+                        >
+                            Supprimer
+                        </button>
+                    </div>
                 </td>
             </tr>
         );
@@ -50,19 +56,23 @@ const ProductItem = ({product}) => {
                 <td>
                     <input className='form-control' type="number" step={.1} defaultValue={product.price} ref={priceRef} />
                 </td>
-                <td>
-                    <button 
-                        onClick={handleModify}
-                        className='btn btn-outline-warning mx-2'
-                    >
-                        Modifier
-                    </button>
-                    <button
-                        onClick={() => setIsEdit(false)} 
-                        className='btn btn-outline-danger mx-2'
-                    >
-                        Annuler
-                    </button>
+                <td className='row'>
+                    <div className='col-6 border-end'>
+                        <button 
+                            onClick={handleModify}
+                            className='btn btn-warning w-100'
+                        >
+                            Modifier
+                        </button>
+                    </div>
+                    <div className='col-6'>
+                        <button
+                            onClick={() => setIsEdit(false)} 
+                            className='btn btn-danger w-100'
+                        >
+                            Annuler
+                        </button>
+                    </div>
                 </td>
             </tr>
         )

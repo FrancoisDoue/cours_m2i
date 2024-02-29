@@ -20,7 +20,6 @@ const productsSlice = createSlice({
         modifyProduct: (state, action) => {
             const modifiedProduct = action.payload
             const i = state.productList.findIndex(e => e.id == modifiedProduct.id)
-            // console.log(i)
             state.productList[i] = modifiedProduct
         }
     }
