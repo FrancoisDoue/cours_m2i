@@ -3,15 +3,19 @@ import { createSlice } from "@reduxjs/toolkit";
 const todosSlice = createSlice({
     name: 'todos',
     initialState: {
-        todoList: []
+        todoList: [],
+        isError: false
     },
-    reducers:{
-        getTodos: (state, action) => {
-            console.log('on todos/getTodos')
+    reducers: {
+        setTodos: (state, action) => {
+            state.todoList = action.payload
+        },
+        setError: (state) => {
+            state.isError = true
         }
     }
 })
 
-export const {getTodos} = todosSlice.actions
+export const {setTodos} = todosSlice.actions
 
 export default todosSlice.reducer
