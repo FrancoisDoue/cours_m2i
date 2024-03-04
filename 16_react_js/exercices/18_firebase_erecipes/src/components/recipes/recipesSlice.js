@@ -5,7 +5,7 @@ const recipesSlice = createSlice({
     name: 'recipes',
     initialState: {
         recipes: [],
-        ingredients: ingredients
+        ingredients: ingredients,
     },
     reducers: {
         setRecipes: (state, action) => {
