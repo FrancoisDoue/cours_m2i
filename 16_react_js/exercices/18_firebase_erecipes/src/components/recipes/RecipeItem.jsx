@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import RecipeModal from './RecipeModal';
+import { useSelector } from 'react-redux';
 
 const RecipeItem = ({recipe}) => {
 
-    console.log(recipe)
     const [editModal, setEditModal] = useState(false)
+    const isLogged = useSelector(state => !!state.auth.user)
 
     return (
         <>
@@ -37,6 +38,7 @@ const RecipeItem = ({recipe}) => {
                     </div>      
                 </div>
             </div>
+            {isLogged && 
             <div className='card-footer d-flex justify-content-end border-light'>
                 <button 
                     className='btn btn-warning text-light mx-1 text-dark'
@@ -44,6 +46,7 @@ const RecipeItem = ({recipe}) => {
                 >Editer</button>
                 <button className='btn btn-danger text-light mx-1'>Supprimer</button>
             </div>
+            }
         </div>
         {editModal && <RecipeModal editRecipe={recipe} closeAction={setEditModal}/>}
         

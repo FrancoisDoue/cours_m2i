@@ -18,7 +18,7 @@ const RecipeList = () => {
             .then(res => {
                 const resMap = []
                 for(const key in res.data) {
-                    resMap.push(res.data[key])
+                    resMap.push({...res.data[key], key: key})
                 }
                 dispatch(setRecipes(resMap))
             })
