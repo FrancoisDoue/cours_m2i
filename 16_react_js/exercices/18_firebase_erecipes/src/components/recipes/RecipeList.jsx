@@ -44,7 +44,7 @@ const RecipeList = () => {
             </div>
             <div className='card-content p-4 d-flex flex-wrap justify-content-center'>
                 {!!recipes.length && recipes.map(r => 
-                    <RecipeItem key={r.id} recipe={r} />
+                    <RecipeItem key={r.key} recipe={r} />
                 )}
                 
             </div>

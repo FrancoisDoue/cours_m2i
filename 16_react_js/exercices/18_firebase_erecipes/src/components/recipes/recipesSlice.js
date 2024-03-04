@@ -16,12 +16,14 @@ const recipesSlice = createSlice({
         },
         replaceRecipe: (state, action) => {
             const i = state.recipes.findIndex(element => element.id === action.payload.id)
-            console.log(i)
             state.recipes[i] = action.payload
+        },
+        removeRecipe: (state, action) => {
+            state.recipes = state.recipes.filter(recipe => recipe.id != action.payload.id)
         }
     }
 })
 
-export const { setRecipes, addRecipe, replaceRecipe } = recipesSlice.actions
+export const { setRecipes, addRecipe, replaceRecipe, removeRecipe } = recipesSlice.actions
 
 export default recipesSlice.reducer

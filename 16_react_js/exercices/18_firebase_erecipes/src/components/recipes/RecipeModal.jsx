@@ -11,7 +11,7 @@ const RecipeModal = ({ editRecipe, closeAction}) => {
     console.log(editRecipe)
 
     const ingredientList = useSelector(state => state.recipes.ingredients)
-    const {idToken} = useSelector(state => state.auth.user)
+    const idToken = useSelector(state => state.auth.user?.idToken) || null
     const dispatch = useDispatch()
 
     const titleRef = useRef()
@@ -28,22 +28,20 @@ const RecipeModal = ({ editRecipe, closeAction}) => {
     const handleSubmit = (e) => {
         e.preventDefault()
         const newRecipe = {
-            id: Date.now(),
+            id: editRecipe?.id || Date.now(),
             title: titleRef.current.value,
             instruction: instructionRef.current.value,
             prepTime: +preptimeRef.current.value,
             cookTime: +cooktimeRef.current.value,
             ingredients: ingredients
         }
-
         if(!editRecipe) sendNewRecipe(newRecipe)
         else updateRecipe(newRecipe)
     }
 
     const sendNewRecipe = (recipe) => {
         axios.post(`${BASE_DB_URL}recipes.json?auth=${idToken}`, recipe)
-            .then(res => {
-                console.log(res)
+            .then(() => {
                 dispatch(addRecipe(recipe))
                 closeAction(false)
             })
@@ -51,9 +49,8 @@ const RecipeModal = ({ editRecipe, closeAction}) => {
     }
     const updateRecipe = (recipe) => {
         console.log(editRecipe.key)
-        axios.put(`${BASE_DB_URL}recipes/${editRecipe.key}.json?auth${idToken}`, recipe)
-            .then(res => {
-                console.log(res)
+        axios.put(`${BASE_DB_URL}recipes/${editRecipe.key}.json?auth=${idToken}`, recipe)
+            .then(() => {
                 dispatch(replaceRecipe(recipe))
                 closeAction(false)
             })
@@ -100,7 +97,6 @@ const RecipeModal = ({ editRecipe, closeAction}) => {
                                     </div>
                                 ))}
                                 </div>
-
                             </div>
                             <div className='col-6'>
                                 <label htmlFor="recipe-preptime" className='p-2'>Temps de préparation</label>
@@ -117,10 +113,7 @@ const RecipeModal = ({ editRecipe, closeAction}) => {
                                         ref={cooktimeRef}
                                     />
                                 </div>
-
-
                             </div>
-
                         </div>
                         <div className='p-3 text-center'>
                             <button className='btn btn-outline-light w-50'>
