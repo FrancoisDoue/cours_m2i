@@ -1,23 +1,19 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import RecipeModal from './RecipeModal';
 import { useDispatch, useSelector } from 'react-redux';
 import { BASE_DB_URL } from '../../firebaseConfig';
 import { removeRecipe } from './recipesSlice';
 import axios from 'axios';
+import RecipeContext from '../../context/RecipeContext';
+import AuthContext from '../../context/AuthContext';
 
 const RecipeItem = ({recipe}) => {
 
     const [editModal, setEditModal] = useState(false)
-    const idToken = useSelector(state => state.auth.user?.idToken) || null
-    const isLogged = useSelector(state => !!state.auth.user)
+    const {deleteRecipe} = useContext(RecipeContext)
+    const {isLogged} = useContext(AuthContext)
     
     const dispatch = useDispatch()
-
-    const handleDelete = () => {
-        axios.delete(`${BASE_DB_URL}recipes/${recipe.key}.json?auth=${idToken}`)
-            .then(() => dispatch(removeRecipe(recipe)))
-            .catch(err => console.log(err))
-    }
 
     return (
         <>
@@ -58,7 +54,7 @@ const RecipeItem = ({recipe}) => {
                 >Editer</button>
                 <button 
                     className='btn btn-danger text-light mx-1'
-                    onClick={handleDelete}
+                    onClick={() => deleteRecipe(recipe)}
                 >Supprimer</button>
             </div>
             }

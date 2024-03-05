@@ -1,29 +1,14 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useContext, useEffect, useState } from 'react';
 import RecipeModal from './RecipeModal';
-import axios from 'axios';
-import { BASE_DB_URL } from '../../firebaseConfig';
-import { setRecipes } from './recipesSlice';
 import RecipeItem from './RecipeItem';
+import RecipeContext from '../../context/RecipeContext';
+import AuthContext from '../../context/AuthContext';
 
 const RecipeList = () => {
 
-    const recipes = useSelector(state => state.recipes.recipes)
-    const isLogged = useSelector(state => !!state.auth.user )
-    const dispatch = useDispatch()
+    const { recipesList } = useContext(RecipeContext)
+    const { isLogged } = useContext(AuthContext)
     const [recipeModal, setRecipeModal] = useState(false)
-
-    useEffect(() => {
-        axios.get(`${BASE_DB_URL}recipes.json`)
-            .then(res => {
-                const resMap = []
-                for(const key in res.data) {
-                    resMap.push({...res.data[key], key: key})
-                }
-                dispatch(setRecipes(resMap))
-            })
-            .catch(err => console.log(err))
-    }, [])
 
     return (
         <>
@@ -41,7 +26,7 @@ const RecipeList = () => {
                 }
             </div>
             <div className='card-content p-4 d-flex flex-wrap justify-content-center'>
-                {!!recipes.length && recipes.map(r => 
+                {!!recipesList.length && recipesList.map(r => 
                     <RecipeItem key={r.key} recipe={r} />
                 )}
                 

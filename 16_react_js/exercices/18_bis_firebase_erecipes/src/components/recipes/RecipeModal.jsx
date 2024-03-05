@@ -1,18 +1,16 @@
-import React, { useRef, useState } from 'react';
+import React, { useContext, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import {modal, modalContent} from '../auth/Modal.module.css'
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios'
 import { BASE_DB_URL } from '../../firebaseConfig';
 import { addRecipe, replaceRecipe } from './recipesSlice';
+import RecipeContext from '../../context/RecipeContext';
 
 const RecipeModal = ({ editRecipe, closeAction}) => {
 
-    console.log(editRecipe)
-
     const ingredientList = useSelector(state => state.recipes.ingredients)
-    const idToken = useSelector(state => state.auth.user?.idToken) || null
-    const dispatch = useDispatch()
+    const {updateRecipe, addNewRecipe} = useContext(RecipeContext)
 
     const titleRef = useRef()
     const instructionRef = useRef()
@@ -35,26 +33,9 @@ const RecipeModal = ({ editRecipe, closeAction}) => {
             cookTime: +cooktimeRef.current.value,
             ingredients: ingredients
         }
-        if(!editRecipe) sendNewRecipe(newRecipe)
-        else updateRecipe(newRecipe)
-    }
-
-    const sendNewRecipe = (recipe) => {
-        axios.post(`${BASE_DB_URL}recipes.json?auth=${idToken}`, recipe)
-            .then(() => {
-                dispatch(addRecipe(recipe))
-                closeAction(false)
-            })
-            .catch(err => console.log(err))
-    }
-    const updateRecipe = (recipe) => {
-        console.log(editRecipe.key)
-        axios.put(`${BASE_DB_URL}recipes/${editRecipe.key}.json?auth=${idToken}`, recipe)
-            .then(() => {
-                dispatch(replaceRecipe(recipe))
-                closeAction(false)
-            })
-            .catch(err => console.log(err))
+        if(!editRecipe) addNewRecipe(newRecipe)
+        else updateRecipe(newRecipe, editRecipe)
+        closeAction(false)
     }
 
     return createPortal(

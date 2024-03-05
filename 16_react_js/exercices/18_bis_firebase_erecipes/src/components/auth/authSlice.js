@@ -8,6 +8,7 @@ const authSlice = createSlice({
     },
     reducers: {
         setUser : (state, action) => {
+            action.payload.expiresIn = (+action.payload.expiresIn * 1000)+Date.now()
             localStorage.setItem('userInfos', JSON.stringify(action.payload))
             state.user = action.payload
         },
@@ -22,7 +23,10 @@ const authSlice = createSlice({
     }
 })
 
-export const selectIsLogged = (state) => !!state.auth.user
+
+
+export const selectIsLogged = (state) => (!!state.auth.user && state.auth.user?.expiresIn > Date.now())
+
 
 export const selectToken = (state) => {
     if (!state.auth.user) return ''
