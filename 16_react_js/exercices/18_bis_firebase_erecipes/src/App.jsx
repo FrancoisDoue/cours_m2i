@@ -18,6 +18,7 @@ function App() {
 
   useEffect(() => {
     console.log('useEffect on app.jsx')
+    
   }, [])
 
   return (
