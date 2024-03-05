@@ -1,10 +1,7 @@
 import React, { useContext, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import {modal, modalContent} from '../auth/Modal.module.css'
-import { useDispatch, useSelector } from 'react-redux';
-import axios from 'axios'
-import { BASE_DB_URL } from '../../firebaseConfig';
-import { addRecipe, replaceRecipe } from './recipesSlice';
+import { useSelector } from 'react-redux';
 import RecipeContext from '../../context/RecipeContext';
 
 const RecipeModal = ({ editRecipe, closeAction}) => {

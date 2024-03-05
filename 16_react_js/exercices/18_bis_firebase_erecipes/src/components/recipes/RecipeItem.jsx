@@ -1,9 +1,5 @@
 import React, { useContext, useState } from 'react';
 import RecipeModal from './RecipeModal';
-import { useDispatch, useSelector } from 'react-redux';
-import { BASE_DB_URL } from '../../firebaseConfig';
-import { removeRecipe } from './recipesSlice';
-import axios from 'axios';
 import RecipeContext from '../../context/RecipeContext';
 import AuthContext from '../../context/AuthContext';
 
@@ -13,8 +9,6 @@ const RecipeItem = ({recipe}) => {
     const {deleteRecipe} = useContext(RecipeContext)
     const {isLogged} = useContext(AuthContext)
     
-    const dispatch = useDispatch()
-
     return (
         <>
         <div className='card bg-dark border-light text-light mb-4 col-8'>
