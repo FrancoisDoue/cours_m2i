@@ -3,20 +3,12 @@ import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { setTodos } from '../components/todosSlice';
 import api from '../services/apiService';
+import { useOutletContext } from 'react-router-dom';
 
 const TodosViews = () => {
-    const todoList = useSelector(state => state.todos.todoList)
-    const dispatch = useDispatch()
+    const {todos} = useOutletContext()
 
-    useEffect(() => {
-        if(!todoList.length) {
-            api.get('/todos')
-                .then((res) => res.data && dispatch(setTodos(res.data)))
-                .catch(err => console.log(err))
-        }
-    }, [])
-    
-    console.log(todoList)
+    console.log(todos)
     
     return (
         <div className='d-flex'>

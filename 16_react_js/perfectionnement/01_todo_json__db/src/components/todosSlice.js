@@ -4,18 +4,21 @@ const todosSlice = createSlice({
     name: 'todos',
     initialState: {
         todoList: [],
-        isError: false
+        isError: false,
+        error: {},
     },
     reducers: {
         setTodos: (state, action) => {
             state.todoList = action.payload
         },
-        setError: (state) => {
+        setError: (state, action) => {
             state.isError = true
+            // console.log(action.payload)
+            // state.error ={... action.payload.error}
         }
     }
 })
 
-export const {setTodos} = todosSlice.actions
+export const {setTodos, setError} = todosSlice.actions
 
 export default todosSlice.reducer
