@@ -3,22 +3,16 @@ import axios from 'axios'
 
 export const sendCredentials = createAsyncThunk(
     'auth/sendCredentials',
-    async (request) => {
-        console.log(request.body)
-        return axios.post(request.url, request.body)
-            .then(res => res)
-            .catch(err => {
-                console.log(err.response)
-                return Promise.reject(err.response)
-            })
-    }
+    async (request, {rejectWithValue}) => axios.post(request.url, request.body)
+        .then(res => res.data)
+        .catch(e => rejectWithValue(e.response?.data?.error))
 )
 
 const authSlice = createSlice({
     name: 'auth',
     initialState: {
         formMode: true,
-        user: null,
+        user: JSON.parse(localStorage.getItem('userInfos'))|| null,
         isLoading: false,
         error: null
     },
@@ -26,20 +20,34 @@ const authSlice = createSlice({
         setFormMode : (state) => {
             state.formMode = !state.formMode
         },
-        setUser : (state, action) => {
-            console.log(action.payload)
+        logout: (state) => {
+            state.user = null
+            localStorage.removeItem('userInfos')
         }
     },
     extraReducers: (builder) => {
         builder.addCase(sendCredentials.fulfilled, (state, action) => {
-            console.log('on fulfilled', action.payload)
+            state.error = null
+            state.isLoading = false
+            console.log('loggin success')
+            action.payload.expiresIn = +action.payload.expiresIn * 1000 + Date.now()
+            localStorage.setItem('userInfos', JSON.stringify(action.payload))
+            state.user = action.payload
         })
-        builder.addCase(sendCredentials.rejected, (state, action) => {
-            console.log('on rejected', action.payload)
+        builder.addCase(sendCredentials.rejected, (state, action) => { 
+            console.log('rejected')
+            state.isLoading = false
+            state.error = action.payload 
+        })
+        builder.addCase(sendCredentials.pending, (state) => { 
+            console.log('is pending')
+            state.isLoading = true
         })
     }
 })
 
-export const { setFormMode } = authSlice.actions
+export const selectIsLogged = (state) => (!!state.auth.user && state.auth.user?.expiresIn > Date.now())
+
+export const { setFormMode, logout } = authSlice.actions
 
 export default authSlice.reducer
