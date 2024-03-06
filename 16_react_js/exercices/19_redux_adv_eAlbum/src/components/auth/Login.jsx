@@ -18,12 +18,12 @@ const Login = () => {
     const handleSubmit = (e) => {
         e.preventDefault()
         const credentials = {
-            mail: emailRef.current.value,
+            email: emailRef.current.value,
             password: passwordRef.current.value,
             returnSecureToken: true
         }
         console.log(credentials)
-        dispatch(sendCredentials(URL, credentials))
+        dispatch(sendCredentials({url: URL, credentials: credentials}))
     }
 
     return (

@@ -3,13 +3,14 @@ import axios from 'axios'
 
 export const sendCredentials = createAsyncThunk(
     'auth/sendCredentials',
-    async (url, credentials) => {
-        try {
-            const response = await axios.post(url, credentials)
-            return response
-        } catch (error) {
-            return error
-        }
+    async (request) => {
+        console.log(request.body)
+        return axios.post(request.url, request.body)
+            .then(res => res)
+            .catch(err => {
+                console.log(err.response)
+                return Promise.reject(err.response)
+            })
     }
 )
 
