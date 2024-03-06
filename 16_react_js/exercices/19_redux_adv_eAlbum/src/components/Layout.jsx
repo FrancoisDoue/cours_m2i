@@ -1,13 +1,17 @@
 import reactLogo from '../assets/react.svg'
-import React, { useState } from 'react';
-// import Modal from './auth/Modal';
-// import { useDispatch, useSelector } from 'react-redux';
-// import { removeUser } from './auth/authSlice';
+import React from 'react';
+import { Outlet, useNavigate, useLocation } from 'react-router-dom'
 
-const Layout = ({children}) => {
-    // const [openModal, setOpenModal] = useState(false)
-    // const dispatch = useDispatch()
-    // const isLogged = useSelector(state => !!state.auth.user )
+const Layout = () => {
+
+    const navigate = useNavigate()
+    const { pathname } = useLocation()
+
+    const navBtnProvider = {
+        href: (pathname == '/') ? '/login' : '/',
+        content: (pathname == '/') ? 'Sign in / Sign up' : 'Home'
+    }
+
 
     return (
         <>
@@ -23,29 +27,19 @@ const Layout = ({children}) => {
                         </h1>
                     </div>
                     <nav className='d-flex justify-content-end col-6 p-2'>
-                        {/* {!isLogged ? 
-                            <button 
-                                onClick={() => setOpenModal(true)}
-                                className='btn btn-outline-light'
-                            >Sign In / Sign Up</button>
-                            :
-                            <button
-                                onClick={() => dispatch(removeUser())}
-                                className='btn btn-outline-danger text-white'
-                            >
-                                Déconnexion
-                            </button>
-                        } */}
+                        <button 
+                            onClick={() => navigate(navBtnProvider.href)}
+                            className='btn btn-outline-light'
+                        >{navBtnProvider.content}</button>
                     </nav>
                 </div>
             </header>
             <main className='flex-fill'>
                 <div className='container'>
-                    {children}
+                    <Outlet />
                 </div>
             </main>
         </div>
-        {/* {openModal && <Modal modalAction={setOpenModal} />} */}
         </>
     );
 }
