@@ -16,21 +16,25 @@ const Login = () => {
 
     const emailRef = useRef()
     const passwordRef = useRef()
+    const stayConnectedRef = useRef()
     const handleSubmit = (e) => {
         e.preventDefault()
         const request = {
             url: URL,
+            isLoginContext: formMode,
+            stayLogged: stayConnectedRef.current?.checked || false,
             body: {
                 email: emailRef.current.value,
                 password: passwordRef.current.value,
-                returnSecureToken: true
+                returnSecureToken: formMode
             }
         }
+        console.log(request)
         dispatch(sendCredentials(request))
+        !formMode && dispatch(setFormMode())
     }
 
     useEffect(() => {
-        console.log(isLogged)
         isLogged && navigate('/')
     }, [isLogged])
 
@@ -54,6 +58,14 @@ const Login = () => {
                             <input type="password" className='form-control rounded-pill bg-dark text-light' id='connect-password' name='connect-password' ref={passwordRef}/>
                         </div>
                     </div>
+                    {formMode &&
+                    <div className='p-3 d-flex justify-content-center'>
+                        <div className='form-check'>
+                            <input className='form-check-input' type="checkbox" name="connect-stay-connect" id="connect-stay-connect" ref={stayConnectedRef}/>
+                            <label htmlFor="connect-stay-connect" className='form-check-label'> Rester connecté</label>
+                        </div>
+                    </div>
+                    }
                     <div className='p-3 text-center '>
                         <button className='btn btn-outline-light w-50'>{formMode ? 'Connexion' : 'Inscription'}</button>
                     </div>

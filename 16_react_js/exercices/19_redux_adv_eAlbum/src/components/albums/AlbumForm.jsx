@@ -1,12 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react';
-import {useDispatch, useSelector} from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { addAlbum, getAlbums, editAlbum } from './albumSlice';
-import {useNavigate, useParams} from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 
 const AlbumForm = () => {
     const {id} = useParams()
 
-    console.log(id)
     const dispatch = useDispatch()
 
     const navigate = useNavigate()
@@ -39,7 +38,7 @@ const AlbumForm = () => {
                 price: priceRef.current.value
             }
         }
-        if(!!id) {
+        if(!!id && !!selectedAlbum) {
             request.id = id
             dispatch(editAlbum(request))
         }else {
@@ -50,8 +49,8 @@ const AlbumForm = () => {
 
     useEffect(() => {
         if (!albumList.length) dispatch(getAlbums())
-        if (!!id) setSelectedAlbum(albumList.find(a => a.id === id))
-    }, [albumList])
+        if (!!id && !!albumList.length) setSelectedAlbum(albumList.find(a => a.id === id) || null)
+    }, [albumList, selectedAlbum])
 
     return (
         <>

@@ -41,10 +41,6 @@ const albumSlice = createSlice({
         isLoading: false
     },
     reducers: {
-        selectAlbum : (state, action) => {
-            state.selectedAlbum = state.albumList.find(a => a.id == action.payload) 
-        },
-        clearSelectedAlbum : (state) => {state.selectedAlbum = null}
 
     },
     extraReducers: (builder) => {
@@ -65,6 +61,6 @@ const albumSlice = createSlice({
     }
 })
 
-export const { selectAlbum, clearSelectedAlbum } = albumSlice.actions
+export const { } = albumSlice.actions
 
 export default albumSlice.reducer
