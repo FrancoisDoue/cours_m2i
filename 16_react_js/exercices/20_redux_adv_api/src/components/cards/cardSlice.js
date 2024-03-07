@@ -5,6 +5,7 @@ const cardSlice = createSlice({
     name: 'card',
     initialState: {
         cardList: [],
+        currentPage: null,
         currentCard: null,
         isLoading: false,
         error: null
@@ -12,9 +13,16 @@ const cardSlice = createSlice({
     reducers: {},
     extraReducers: (builder) => {
         builder.addCase(fetchCards.fulfilled, (state, action) => {
+            console.log('on extra reducer success')
+            const {inStore, result} = action.payload
+            if (!inStore) {
+                state.cardList.push(result)
+                state.currentPage = result.cards
+            }else{
+                console.log('already in store!')
+                state.currentPage = result
+            }
             state.isLoading = false
-            state.cardList = action.payload
-            console.log(action.payload)
         })
         builder.addCase(fetchCards.pending, (state) => {
             state.isLoading = true

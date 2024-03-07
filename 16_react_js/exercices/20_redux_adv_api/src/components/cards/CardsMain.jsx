@@ -6,7 +6,7 @@ import { useState } from 'react';
 
 const CardsMain = () => {
     const dispatch = useDispatch()
-    const {cardList, isLoading, error} = useSelector(state => state.card)
+    const {currentPage, isLoading, error} = useSelector(state => state.card)
     const [paginate, setPaginate] = useState(1)
     const pageRef = useRef()
 
@@ -17,9 +17,10 @@ const CardsMain = () => {
     useEffect(() => {
         console.log('on CardsMain')
         pageRef.current.value = paginate
-        dispatch(fetchCards({page: paginate})) 
-    }, [paginate])
-    console.log(paginate)
+        !isLoading && dispatch(fetchCards({page: paginate}))
+        currentPage
+    }, [paginate > 1])
+    console.log(currentPage)
 
     return (
         <>
@@ -31,7 +32,11 @@ const CardsMain = () => {
                 onClick={() => setPaginate(prev => !!(prev-1) ? prev - 1 : prev)}
             ><i className='bi bi-arrow-left'></i></button>
             {/* <p className='m-0 form-control bg-dark border-light text-light text-center'>{paginate}</p> */}
-            <input type="number" name="" id="" onKeyDown={handleLoadCards} ref={pageRef} defaultValue={pageRef?.current?.value}
+            <input type="number" name="" id="" 
+                onKeyDown={handleLoadCards} 
+                ref={pageRef} 
+                defaultValue={pageRef?.current?.value}
+                style={{MozAppearance: 'textfield', WebkitAppearance: 'none'}}
                 className='m-0 form-control bg-dark border-light text-light text-center'
             />
             <button 
@@ -46,8 +51,8 @@ const CardsMain = () => {
         <div>
             {error && <h5>Do something with error ...</h5> }
             {isLoading && <h4>Chargement . . .</h4> }
-            {!isLoading && !!cardList.length && 
-                cardList?.map(e => <img src={e.imageUrl} alt={e.name} key={e.id} />) 
+            {!isLoading && !!currentPage?.length && 
+                currentPage?.map(e => <img src={e.imageUrl} alt={e.name} key={e.id} />) 
             }
         </div>
         </>
