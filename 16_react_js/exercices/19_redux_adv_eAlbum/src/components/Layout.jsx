@@ -16,7 +16,6 @@ const Layout = ({children}) => {
         content: (pathname == '/') ? 'Connexion / Inscription' : 'Accueil'
     }
 
-
     return (
         <>
         <div 

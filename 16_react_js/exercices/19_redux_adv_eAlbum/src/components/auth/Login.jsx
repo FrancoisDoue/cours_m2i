@@ -1,12 +1,14 @@
 import React, { useEffect, useRef } from 'react';
 import {useDispatch, useSelector} from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { selectIsLogged, sendCredentials, setFormMode } from './authSlice';
+import { /*refreshAuthToken,*/ selectIsLogged, /*selectUserStayLogged,*/ sendCredentials, setFormMode } from './authSlice';
 import { SIGN_IN_URL, SIGN_UP_URL } from '../../firebaseConfig';
 
 const Login = () => {
 
+    // const user = useSelector(state => state.auth.user)
     const isLogged = useSelector(selectIsLogged)
+    // const userStayLogged = useSelector(selectUserStayLogged)
 
     const formMode = useSelector(state => state.auth.formMode)
     const dispatch = useDispatch()
@@ -22,7 +24,7 @@ const Login = () => {
         const request = {
             url: URL,
             isLoginContext: formMode,
-            stayLogged: stayConnectedRef.current?.checked || false,
+            // stayLogged: stayConnectedRef.current?.checked || false,
             body: {
                 email: emailRef.current.value,
                 password: passwordRef.current.value,
@@ -34,9 +36,16 @@ const Login = () => {
         !formMode && dispatch(setFormMode())
     }
 
+    // useEffect(() => {
+    //     userStayLogged && dispatch(refreshAuthToken())
+    // }, [userStayLogged])
+
     useEffect(() => {
+        // isLogged && navigate(-2)
         isLogged && navigate('/')
     }, [isLogged])
+
+    // if (userStayLogged) return <></>
 
     return (
     <div className='d-flex justify-content-center'>
@@ -58,14 +67,14 @@ const Login = () => {
                             <input type="password" className='form-control rounded-pill bg-dark text-light' id='connect-password' name='connect-password' ref={passwordRef}/>
                         </div>
                     </div>
-                    {formMode &&
+                    {/* {formMode &&
                     <div className='p-3 d-flex justify-content-center'>
                         <div className='form-check'>
                             <input className='form-check-input' type="checkbox" name="connect-stay-connect" id="connect-stay-connect" ref={stayConnectedRef}/>
                             <label htmlFor="connect-stay-connect" className='form-check-label'> Rester connecté</label>
                         </div>
                     </div>
-                    }
+                    } */}
                     <div className='p-3 text-center '>
                         <button className='btn btn-outline-light w-50'>{formMode ? 'Connexion' : 'Inscription'}</button>
                     </div>
