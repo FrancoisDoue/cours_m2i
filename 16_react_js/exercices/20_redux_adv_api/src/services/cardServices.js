@@ -12,15 +12,14 @@ export const fetchCards = createAsyncThunk(
         }),
     {
         // Si la condition est validée, fetchCards ne sera pas exécutée
-        // ici, si une page est dans le store, elle sera traitée dans les extraReducers et la requête ne sera pas envoyée
+        // ici, si une page est dans le store, elle sera traitée dans en .rejected dans les extraReducers et la requête ne sera pas envoyée
         condition: (request, {getState}) => {
             const {card} = getState()
             const storeResult = card.cardList.find(c => c.page == request.page)
-            if(!!storeResult) {
+            if (!!storeResult) {
                 request.findedInStore = storeResult
-                return false
             }
-            return true
+            return !storeResult
         },
         dispatchConditionRejection: true
     }

@@ -33,6 +33,7 @@ const cardSlice = createSlice({
             if (action.payload?.status) {
                 state.error = action.payload
             } else {
+                // Une page a été trouvée dans le store avant que l'api ne soit interrogée
                 state.currentPage = action.meta.arg.findedInStore
             }
             state.isLoading = false
@@ -40,6 +41,6 @@ const cardSlice = createSlice({
     }
 })
 
-export const {  } = cardSlice.actions
+export const { clearCardList } = cardSlice.actions
 
 export default cardSlice.reducer

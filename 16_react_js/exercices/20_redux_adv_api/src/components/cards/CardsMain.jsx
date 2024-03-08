@@ -8,6 +8,7 @@ import { useParams } from 'react-router-dom';
 import LoadingComponent from '../shared/LoadingComponent';
 import Paginator from '../filterTools/Paginator'
 import SearchTool from '../filterTools/SearchTool';
+import { clearCardList } from './cardSlice';
 
 const CardsMain = () => {
     const dispatch = useDispatch()
@@ -20,18 +21,17 @@ const CardsMain = () => {
     }
 
     useEffect(fetchCardList, [page])
-    useEffect(() => {
-        console.log(maxInPage)
-    }, [maxInPage])
 
-    // console.log('on page : ',paginate,'\n result => \n', currentPage)
+    useEffect(() => {
+        dispatch(clearCardList())
+        fetchCardList()
+    }, [maxInPage])
 
     return (
         <>
             <CardListFilter>
                 <SearchTool />
                 <Paginator page={page} loading={isLoading} maxInPage={setMaxInpage}/>
-
             </CardListFilter>
             
             {isLoading ? 
