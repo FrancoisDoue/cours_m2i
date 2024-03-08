@@ -6,19 +6,20 @@ const api = axios.create({
     // timeout: 5000,
 })
 
-// api.interceptors.request.use(
-//     (resolve) => console.log(resolve),
-//     (reject) => console.error(reject)
-// )
+api.interceptors.request.use(
+    (config) => {
+    //    console.log('config', config)
+       return config 
+    },
+    (error) => Promise.reject(error)
+)
 api.interceptors.response.use(
     (result) => {
-        console.log(result.data)
-        return result.data
+        // console.log(result)
+        return {...result.data, headers: {...result.headers}}
     },
-    (error) => {
-        console.log(error)
-        return error
-    }
+    (error) => Promise.reject(error.response)
+    
 )
 
 export default api

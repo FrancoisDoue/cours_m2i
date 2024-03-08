@@ -6,6 +6,7 @@ import CardsMain from './components/cards/CardsMain'
 const router = createBrowserRouter([
     {path: '/', element: <HomeView />, children: [
         {path: '/', element: <CardsMain /> },
+        {path: '/cards/:page', element: <CardsMain /> },
     ]}
 ])
 
