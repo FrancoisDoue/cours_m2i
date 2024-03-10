@@ -6,7 +6,7 @@ export const fetchCards = createAsyncThunk(
     "card/fetchCards", async (request, {rejectWithValue}) => api.get(CARDS_URI, {
             params: { contains: 'imageUrl', ...request }
         })
-        .then((res) => ( { page: request.page || 1, cards: res.cards, headers: {...res.headers} } ))
+        .then((res) => ( { page: request.page, cards: res.cards, headers: {...res.headers} } ))
         .catch((err) => {
             throw rejectWithValue(err)
         }),

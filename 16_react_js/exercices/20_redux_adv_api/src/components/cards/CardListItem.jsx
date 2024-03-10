@@ -5,13 +5,13 @@ const CardListItem = ({card}) => {
 
     // console.log(frenchMap(card))
 
-    // try to find card name's in french
-    const name = (card?.foreignNames?.find(n => n.language == 'French'))?.name || card.name
+    // try to find card's name in french
+    const {name, imageUrl} = (card?.foreignNames?.find(n => n.language == 'French')) || card
     // console.log(card)
     return (
         <div className='card bg-dark border-light m-2 shadow-sm text-light' style={{maxWidth: '250px'}}>
             <div className='card-header border-light p-0 text-center'>
-                <img src={card.imageUrl} alt={card.name} width={248} className='rounded-4'/>
+                <img src={imageUrl} alt={name} width={248} className='rounded-4'/>
 
             </div>
             <div className='card-content text-center'>

@@ -5,7 +5,7 @@ const SearchTool = () => {
     
 
     return (
-        <div className='input-group w-25'>
+        <div className='input-group d-flex justify-content-center'>
             <input 
                 type="text"
                 placeholder='Recherche par nom . . .'
