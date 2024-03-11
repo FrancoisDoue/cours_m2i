@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
-const CardListFilter = ({ page, loading, actions , currentMax}) => {
+const Paginator = ({ page, loading, actions , currentMax}) => {
 
     const navigate = useNavigate()
     const pageRef = useRef()
@@ -78,4 +78,4 @@ const CardListFilter = ({ page, loading, actions , currentMax}) => {
     );
 };
 
-export default CardListFilter;
+export default Paginator;

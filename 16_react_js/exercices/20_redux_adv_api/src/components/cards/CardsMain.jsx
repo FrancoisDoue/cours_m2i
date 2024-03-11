@@ -3,12 +3,11 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchCards } from '../../services/cardServices';
 import CardListItem from './CardListItem';
-import CardListFilter from '../filterTools/CardListFilter';
 import { useParams } from 'react-router-dom';
 import LoadingComponent from '../shared/LoadingComponent';
 import Paginator from '../filterTools/Paginator'
-import SearchTool from '../filterTools/SearchTool';
 import { clearCardList } from './cardSlice';
+import FilterSider from '../filterTools/FilterSider';
 
 const CardsMain = () => {
     const dispatch = useDispatch()
@@ -46,10 +45,7 @@ const CardsMain = () => {
                     </>
                 }
                 </div>
-                <div className='col-3 d-flex flex-column align-items-center card bg-dark border-light p-2'>
-                    <SearchTool />
-
-                </div>
+                <FilterSider />
             </div>
             {!isLoading && <Paginator page={page} loading={isLoading} actions={{handleCardsPerPage}} currentMax={maxInPage}/>}
             

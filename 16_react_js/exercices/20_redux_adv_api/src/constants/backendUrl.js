@@ -1,2 +1,6 @@
 export const BASE_URL = 'https://api.magicthegathering.io/v1'
 export const CARDS_URI = '/cards'
+export const TYPES_URI = '/types'
+export const SUBTYPES_URI = '/subtypes'
+export const SUPERTYPE_URI = '/supertypes'
+export const FORMATS_URI = '/formats'
