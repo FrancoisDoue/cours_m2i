@@ -23,7 +23,7 @@ const Calculator = () => {
   }
   const handleResult = () => {
     if(!!callBack[0] && typeof callBack[0] === 'function'){
-      const tempValues = [memory, value]
+      const tempValues = [+memory, +value]
       const tempOperation = callBack[0]
       handleClear()
       setValue( `${tempOperation(...tempValues)}` )
