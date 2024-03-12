@@ -1,12 +1,12 @@
-import { View, Text, Pressable, StyleSheet } from 'react-native'
+import {Text, Pressable, StyleSheet } from 'react-native'
 import colors from '../../styles/base/colors'
 import React from 'react'
 
-const CalculatorButton = ({type, children, action, value = null}) => {
+const CalculatorButton = ({children, style, action, value = null}) => {
     const localStyle = StyleSheet.create({
         bgButton: {
-            backgroundColor: (type === "operation") ? colors.bgColorDark: colors.bgLight,
-            borderRadius: (type === "operation") ? 10: 45,
+            backgroundColor: (style === "operation") ? colors.bgColorDark: colors.bgLight,
+            borderRadius: (style === "operation") ? 10: 45,
             width: 85,
             height: 85,
             alignItems: 'center',
@@ -15,12 +15,13 @@ const CalculatorButton = ({type, children, action, value = null}) => {
             
         },
         textColor: {
-            color: (type === "operation") ? colors.textColorLight : colors.textColorDark,
+            color: (style === "operation") ? colors.textColorLight : colors.textColorDark,
             fontWeight: '600',
             fontSize: 25
         },
         pressedEffect: {
-            backgroundColor: 'red'
+            backgroundColor: (style === "operation") ? colors.bgLight : colors.bgColorDark,
+            color: (style === "operation") ? colors.textColorDark : colors.textColorLight
         }
     })
 
@@ -29,8 +30,7 @@ const CalculatorButton = ({type, children, action, value = null}) => {
         style={
             ({pressed}) => [localStyle.bgButton, (pressed) && localStyle.pressedEffect]
         } 
-        onPress={() => !!value ? action(value) : action()}
-        // onPress={() => console.log(value)}
+        onPress={() => action(value)}
     >
         <Text style={localStyle.textColor}>{children}</Text>
     </Pressable>

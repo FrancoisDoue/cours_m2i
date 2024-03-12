@@ -39,6 +39,10 @@ export default StyleSheet.create({
         justifyContent: 'space-around',
         alignItems: 'stretch'
     },
+    endAroundContent:{
+        alignItems: 'flex-end',
+        justifyContent: 'space-around'
+    },
 
     roundedSM: {
         borderRadius: 5
