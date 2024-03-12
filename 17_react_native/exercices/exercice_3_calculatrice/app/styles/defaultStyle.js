@@ -20,8 +20,14 @@ export default StyleSheet.create({
     textLight: {
         color: colors.textColorLight
     },
+    mainTitle: {
+        fontSize: 50
+    },
     title: {
         fontSize: 40
+    },
+    subTitle: {
+        fontSize: 30
     },
     centerContent: {
         justifyContent: 'center',

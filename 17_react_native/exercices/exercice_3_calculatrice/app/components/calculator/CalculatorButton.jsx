@@ -2,7 +2,7 @@ import { View, Text, Pressable, StyleSheet } from 'react-native'
 import colors from '../../styles/base/colors'
 import React from 'react'
 
-const CalculatorButton = ({value = null, type, children}) => {
+const CalculatorButton = ({type, children, action, value = null}) => {
     const localStyle = StyleSheet.create({
         bgButton: {
             backgroundColor: (type === "operation") ? colors.bgColorDark: colors.bgLight,
@@ -18,11 +18,20 @@ const CalculatorButton = ({value = null, type, children}) => {
             color: (type === "operation") ? colors.textColorLight : colors.textColorDark,
             fontWeight: '600',
             fontSize: 25
+        },
+        pressedEffect: {
+            backgroundColor: 'red'
         }
     })
 
   return (
-    <Pressable style={localStyle.bgButton}>
+    <Pressable 
+        style={
+            ({pressed}) => [localStyle.bgButton, (pressed) && localStyle.pressedEffect]
+        } 
+        onPress={() => !!value ? action(value) : action()}
+        // onPress={() => console.log(value)}
+    >
         <Text style={localStyle.textColor}>{children}</Text>
     </Pressable>
   )
