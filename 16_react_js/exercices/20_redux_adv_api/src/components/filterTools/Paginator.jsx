@@ -24,7 +24,6 @@ const Paginator = ({ page, loading, actions , currentMax}) => {
         else navigate(`/cards/${(page < 2) ? page : +page - 1}`)
     }
     useEffect(() => {
-        console.log(page >= maxPage)
         pageRef.current.value = page
     }, [page])
 

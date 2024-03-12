@@ -1,4 +1,4 @@
-import { SafeAreaView, StyleSheet, Text, View, Button, FlatList } from 'react-native'
+import { SafeAreaView, StyleSheet, Text, Button, FlatList, View } from 'react-native'
 import React, { useState } from 'react'
 import ModalExercice02 from './ModalExercice02'
 
@@ -10,8 +10,12 @@ const Exercice02 = () => {
 
 
   const closeModal = () =>  setOpenModal(false)
-  const addArticle = () => {
-    console.log('addArticle')
+  const addArticle = (value) => {
+    console.log('on addArticle')
+    setArticleList([...articleList, {
+      id: Date.now(),
+      text: value
+    }])
   }
 
   return (
@@ -21,7 +25,10 @@ const Exercice02 = () => {
         data={articleList}
         keyExtractor={(_item, index) => index}
         renderItem={({item}) => 
-          <Text > {item?.text}, id: {item?.id} </Text>
+        <View style={styles.itemListView}>
+          <Text > {item?.text} </Text>
+
+        </View>
         }
       />
       <Button title={'Ajouter un article'} onPress={() => setOpenModal(true)} />
@@ -48,4 +55,8 @@ const styles = StyleSheet.create({
   titleSecondary: {
     fontSize: 30
   },
+  itemListView : {
+    width: 200,
+    padding: 20
+  }
 })
