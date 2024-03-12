@@ -26,7 +26,7 @@ const Calculator = () => {
       const tempValues = [memory, value]
       const tempOperation = callBack[0]
       handleClear()
-      setValue( tempOperation(...tempValues) )
+      setValue( `${tempOperation(...tempValues}`) )
     } else return
   }
 
