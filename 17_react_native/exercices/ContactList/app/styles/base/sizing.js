@@ -26,7 +26,23 @@ export default StyleSheet.create({
     paddingMD: {
         padding: 20
     },
+    paddingBottomSM: {
+        paddingBottom: 10
+    },
     paddingBottomMD: {
         paddingBottom: 20
-    }
+    },
+    marginBottomSM: {
+        marginBottom: 10
+    },
+    marginBottomMD: {
+        marginBottom: 20
+    },
+    marginHorizontalSM: {
+        marginHorizontal: 10
+    },
+    marginHorizontalMD: {
+        marginHorizontal: 20
+    },
+
 })

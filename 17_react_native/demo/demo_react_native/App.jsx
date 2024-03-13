@@ -1,52 +1,27 @@
-import React from 'react';
-import {View, Image, StyleSheet, Text, SafeAreaView} from 'react-native';
-import FirstComponent from './FirstComponent'
+import { View, Text } from 'react-native'
+import React from 'react'
+import { NavigationContainer } from '@react-navigation/native'
+import { createNativeStackNavigator } from '@react-navigation/native-stack'
+import Home from './screens/Home'
+import SecondPage from './screens/SecondPage'
+import ThirdPage from './screens/ThirdPage'
 
+// npm i @react-navigation/native
+// npm i react-native-screens react-native-safe-area-context
+// npm i @react-navigation/native-stack
 
+const Stack = createNativeStackNavigator()
 
 const App = () => {
-    return (
-        <SafeAreaView style={styles.container}>
-            <Text style={[styles.chartreuse, styles.titleBig]} >Hello world!</Text>
-            <Text style={styles.cyan}>Aled.</Text>
-            <Image 
-                style={styles.img}
-                source={{uri: 'https://i.ytimg.com/vi/x7Li_heZiiw/maxresdefault.jpg'}}
-            />
-            <FirstComponent />
-        </SafeAreaView>
-    );
+  return (
+    <NavigationContainer >
+      <Stack.Navigator initialRouteName='Home' >
+        <Stack.Screen name='Home' component={Home} options={{headerShown : true}} />
+        <Stack.Screen name='Page 2' component={SecondPage} options={{title: "Superbe page 2"}}/>
+        <Stack.Screen name='Page 3' component={ThirdPage} options={{title: "Page 3 correcte"}}/>
+      </Stack.Navigator>
+    </NavigationContainer>
+  )
 }
 
-// mauvaise pratique
-const container = {
-    backgroundColor: 'chartreuse',
-    flex: 1,
-
-}
-
-// bonne pratique ('fin meilleure, quoi.)
-const styles = StyleSheet.create({
-    container: {
-        backgroundColor: 'darkred',
-        flex: 1,
-        padding: 20
-    },
-    chartreuse: {
-        color: 'chartreuse',
-    },
-    cyan: {
-        color: 'cyan'
-    },
-    titleBig: {
-        fontSize: 70,
-    },
-    img: {
-        width: 400,
-        height: 250,
-        alignItems: 'center'
-        // flex: 'align-item-center'
-    }
-})
-
-export default App;
+export default App

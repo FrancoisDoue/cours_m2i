@@ -1,5 +1,5 @@
 import { View, Text } from 'react-native'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import styles from '../../styles/defaultStyle'
 import CalculatorButton from './CalculatorButton'
 
@@ -31,7 +31,7 @@ const Calculator = () => {
       handleClear()
       setHistory((prev) => prev + tempOperation.symbol + value )
       setValue( `${tempOperation.operation(...tempValues)}` )
-    } else return
+    }
   }
 
   const handleClear = () => {
@@ -42,6 +42,7 @@ const Calculator = () => {
 
   const backAction = () => setValue((prev) => prev.substring(0, prev.length -1))
   
+  
   const addition = {
     symbol: '+',
     operation: (a, b) => (+a) + (+b)
@@ -50,7 +51,7 @@ const Calculator = () => {
     symbol: '\u2212',
     operation: (a, b) => (+a) - (+b)
   } 
-  const division ={
+  const division = {
     symbol: '\u00f7',
     operation: (a, b) =>  (+a) / (+b)
   } 

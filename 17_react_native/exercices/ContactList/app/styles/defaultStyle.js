@@ -49,11 +49,15 @@ export default StyleSheet.create({
     selfStart: {
         alignSelf: 'flex-start'
     },
-
     roundedSM: {
         borderRadius: 5
     },
-
+    roundedMD: {
+        borderRadius: 15
+    },
+    roundedLG: {
+        borderRadius: 40
+    },
     textEnd: {
         textAlign: 'right'
     }
