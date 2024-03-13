@@ -12,7 +12,7 @@ const Calculator = () => {
 
   const handleSetValue = (value) => setValue((prev) => prev + value)
 
-  // pov: après le café du matin
+  // pov: après le café
   const handleOperation = (operatingObj) => {
     if(!!callBack?.operation){
       setHistory((prev) => prev + callBack.symbol + value )
