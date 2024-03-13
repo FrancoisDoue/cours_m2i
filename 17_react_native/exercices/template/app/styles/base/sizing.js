@@ -14,7 +14,7 @@ export default StyleSheet.create({
         flex: 1/2
     },
     hLarge: {
-        flex: 4/6
+        flex: 5/6
     },
     hXLarge: {
         flex: 11/12
@@ -25,8 +25,5 @@ export default StyleSheet.create({
     },
     paddingMD: {
         padding: 20
-    },
-    paddingBottomMD: {
-        paddingBottom: 20
     }
 })

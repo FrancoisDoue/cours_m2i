@@ -2,11 +2,11 @@ import {Text, Pressable, StyleSheet } from 'react-native'
 import colors from '../../styles/base/colors'
 import React from 'react'
 
-const CalculatorButton = ({children, style, action, value = null}) => {
+const CalculatorButton = ({children, square, action, value = null}) => {
     const localStyle = StyleSheet.create({
         bgButton: {
-            backgroundColor: (style === "operation") ? colors.bgColorDark: colors.bgLight,
-            borderRadius: (style === "operation") ? 10: 45,
+            backgroundColor: (square) ? colors.bgColorDark: colors.bgLight,
+            borderRadius: (square) ? 10: 45,
             width: 85,
             height: 85,
             alignItems: 'center',
@@ -15,13 +15,13 @@ const CalculatorButton = ({children, style, action, value = null}) => {
             
         },
         textColor: {
-            color: (style === "operation") ? colors.textColorLight : colors.textColorDark,
+            color: (square) ? colors.textColorLight : colors.textColorDark,
             fontWeight: '600',
             fontSize: 25
         },
         pressedEffect: {
-            backgroundColor: (style === "operation") ? colors.bgLight : colors.bgColorDark,
-            color: (style === "operation") ? colors.textColorDark : colors.textColorLight
+            backgroundColor: (square) ? colors.bgLight : colors.bgColorDark,
+            color: (square) ? colors.textColorDark : colors.textColorLight
         }
     })
 

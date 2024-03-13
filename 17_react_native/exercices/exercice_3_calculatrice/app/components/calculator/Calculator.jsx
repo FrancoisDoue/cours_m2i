@@ -1,5 +1,5 @@
 import { View, Text } from 'react-native'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from '../../styles/defaultStyle'
 import CalculatorButton from './CalculatorButton'
 
@@ -7,85 +7,105 @@ const Calculator = () => {
 
   const [value, setValue] = useState('')
   const [memory, setMemory] = useState('')
-  const [callBack, setCallBack] = useState([])
+  const [history, setHistory] = useState('')
+  const [callBack, setCallBack] = useState({})
 
   const handleSetValue = (value) => setValue((prev) => prev + value)
 
-  // pov: à sec de café
-  const handleOperation = (cb) => {
-    if(!!callBack[0] && typeof callBack[0] === 'function'){
-      setMemory(`${callBack[0](memory, value)}`)
+  // pov: après le café du matin
+  const handleOperation = (operatingObj) => {
+    if(!!callBack?.operation){
+      setHistory((prev) => prev + callBack.symbol + value )
+      setMemory(`${callBack.operation(memory, value)}`)
     } else {
+      setHistory(`${+value}`)
       setMemory(`${+value}`)
     }
     setValue('')
-    setCallBack([cb])
+    setCallBack(operatingObj)
   }
   const handleResult = () => {
-    if(!!callBack[0] && typeof callBack[0] === 'function'){
+    if(!!callBack?.operation){
       const tempValues = [+memory, +value]
-      const tempOperation = callBack[0]
+      const tempOperation = callBack
       handleClear()
-      setValue( `${tempOperation(...tempValues)}` )
+      setHistory((prev) => prev + tempOperation.symbol + value )
+      setValue( `${tempOperation.operation(...tempValues)}` )
     } else return
   }
 
   const handleClear = () => {
     setMemory('')
     setValue('')
-    setCallBack([])
+    setCallBack({})
   }
 
   const backAction = () => setValue((prev) => prev.substring(0, prev.length -1))
   
-  const addition = (a, b) => (+a) + (+b)
-
-  const substraction = (a, b) => (+a) - (+b)
-
-  const division = (a, b) =>  (+a) / (+b)
-
-  const multiplication = (a, b) => (+a) * (+b)
-
-  const modulo = (a, b) => (+a) % (+b)
-
-  const exponentiation = (a, b) => (+a) ** (+b)
+  const addition = {
+    symbol: '+',
+    operation: (a, b) => (+a) + (+b)
+  }
+  const substraction = {
+    symbol: '\u2212',
+    operation: (a, b) => (+a) - (+b)
+  } 
+  const division ={
+    symbol: '\u00f7',
+    operation: (a, b) =>  (+a) / (+b)
+  } 
+  const multiplication = {
+    symbol: '\u00D7',
+    operation: (a, b) => (+a) * (+b)
+  }
+  const modulo = {
+    symbol: '%',
+    operation: (a, b) => (+a) % (+b)
+  }
+  const exponentiation = {
+    symbol: '\u207F',
+    operation: (a, b) => (+a) ** (+b)
+  }
     
   return (
     <View style={[styles.hFull, styles.bgDarkPrimary, styles.roundedSM]}>
-      <View style={[styles.hSmall, styles.paddingMD, styles.endAroundContent]}>
-        <Text style={[styles.textLight, styles.subTitle]}> {+memory || 0} </Text>
+      <View style={[styles.hSmall, styles.paddingBottomMD, styles.endAroundContent]}>
+          <Text style={[styles.textLightSubtle, styles.selfStart, styles.paddingMD, styles.subTitle]}> {history} </Text>
+          <Text style={[styles.textLight, styles.subTitle, styles.textEnd]}> {+memory || ''} </Text>
+
+        <Text style={[styles.textLight, styles.mainTitle]}> {callBack?.symbol || ''} </Text>
         <Text style={[styles.textLight, styles.mainTitle]}> {+value || 0} </Text>
         
       </View>
       <View style={[styles.hLarge, styles.wrapContent]}>
 
-        <CalculatorButton action={handleClear} style={'operation'}>AC</CalculatorButton>
-        <CalculatorButton action={handleOperation} value={exponentiation} style={'operation'}>^</CalculatorButton>
-        <CalculatorButton action={handleOperation} value={modulo} style={'operation'}>%</CalculatorButton>
-        <CalculatorButton action={handleOperation} value={division} style={'operation'}>/</CalculatorButton>
+        <CalculatorButton action={handleClear} square>AC</CalculatorButton>
+        <CalculatorButton action={handleOperation} value={exponentiation} square>x{exponentiation.symbol}</CalculatorButton>
+        <CalculatorButton action={handleOperation} value={modulo} square>{modulo.symbol}</CalculatorButton>
+        <CalculatorButton action={handleOperation} value={division} square>{division.symbol}</CalculatorButton>
 
-        <CalculatorButton action={handleSetValue} value={'7'} style={'number'}>7</CalculatorButton>
-        <CalculatorButton action={handleSetValue} value={'8'} style={'number'}>8</CalculatorButton>
-        <CalculatorButton action={handleSetValue} value={'9'} style={'number'}>9</CalculatorButton>
+        <CalculatorButton action={handleSetValue} value={'7'}>7</CalculatorButton>
+        <CalculatorButton action={handleSetValue} value={'8'}>8</CalculatorButton>
+        <CalculatorButton action={handleSetValue} value={'9'}>9</CalculatorButton>
 
-        <CalculatorButton action={handleOperation} value={multiplication} style={'operation'}>x</CalculatorButton>
+        <CalculatorButton action={handleOperation} value={multiplication} square>{multiplication.symbol}</CalculatorButton>
 
-        <CalculatorButton action={handleSetValue} value={'4'} style={'number'}>4</CalculatorButton>
-        <CalculatorButton action={handleSetValue} value={'5'} style={'number'}>5</CalculatorButton>
-        <CalculatorButton action={handleSetValue} value={'6'} style={'number'}>6</CalculatorButton>
+        <CalculatorButton action={handleSetValue} value={'4'}>4</CalculatorButton>
+        <CalculatorButton action={handleSetValue} value={'5'}>5</CalculatorButton>
+        <CalculatorButton action={handleSetValue} value={'6'}>6</CalculatorButton>
 
-        <CalculatorButton action={handleOperation} value={substraction} style={'operation'}>-</CalculatorButton>
+        <CalculatorButton action={handleOperation} value={substraction} square>{substraction.symbol}</CalculatorButton>
 
-        <CalculatorButton action={handleSetValue} value={'1'} style={'number'}>1</CalculatorButton>
-        <CalculatorButton action={handleSetValue} value={'2'} style={'number'}>2</CalculatorButton>
-        <CalculatorButton action={handleSetValue} value={'3'} style={'number'}>3</CalculatorButton>
+        <CalculatorButton action={handleSetValue} value={'1'}>1</CalculatorButton>
+        <CalculatorButton action={handleSetValue} value={'2'}>2</CalculatorButton>
+        <CalculatorButton action={handleSetValue} value={'3'}>3</CalculatorButton>
 
-        <CalculatorButton action={handleOperation} value={addition} style={'operation'}>+</CalculatorButton>
+        <CalculatorButton action={handleOperation} value={addition} square>{addition.symbol}</CalculatorButton>
 
-        <CalculatorButton action={handleSetValue} value={'.'} style={'number'}>.</CalculatorButton>
-        <CalculatorButton action={handleSetValue} value={'0'} style={'number'}>0</CalculatorButton>
-        <CalculatorButton action={backAction} style={'number'}>Del</CalculatorButton>
-        <CalculatorButton action={handleResult} style={'operation'}>=</CalculatorButton>
+        <CalculatorButton action={handleSetValue} value={'.'}>.</CalculatorButton>
+        <CalculatorButton action={handleSetValue} value={'0'}>0</CalculatorButton>
+        <CalculatorButton action={backAction}>Del</CalculatorButton>
+        <CalculatorButton action={handleResult} square>=</CalculatorButton>
 
       </View>
     </View>

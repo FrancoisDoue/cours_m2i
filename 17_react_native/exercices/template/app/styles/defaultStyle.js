@@ -20,41 +20,11 @@ export default StyleSheet.create({
     textLight: {
         color: colors.textColorLight
     },
-    textLightSubtle: {
-        color: colors.textColorLightSubtle
-    },
-    mainTitle: {
-        fontSize: 50
-    },
     title: {
         fontSize: 40
-    },
-    subTitle: {
-        fontSize: 30
     },
     centerContent: {
         justifyContent: 'center',
         alignItems: 'center'
     },
-    wrapContent: {
-        flexDirection: 'row',
-        flexWrap: 'wrap',
-        justifyContent: 'space-around',
-        alignItems: 'stretch'
-    },
-    endAroundContent:{
-        alignItems: 'flex-end',
-        justifyContent: 'space-around'
-    },
-    selfStart: {
-        alignSelf: 'flex-start'
-    },
-
-    roundedSM: {
-        borderRadius: 5
-    },
-
-    textEnd: {
-        textAlign: 'right'
-    }
 })
