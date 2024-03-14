@@ -14,7 +14,7 @@ const App = () => {
     return (
         <NavigationContainer>
             <Stack.Navigator initialRouteName='ContactList' >
-                <Stack.Screen name='ContactList' component={ContactListScreen} options={{title: 'Vos contacts'}} />
+                <Stack.Screen name='ContactList' component={ContactListScreen} options={{title: 'Vos contacts', headerShown: false}} />
                 <Stack.Screen name='ContactDetail' component={DetailContactScreen} />
             </Stack.Navigator>
         </NavigationContainer>

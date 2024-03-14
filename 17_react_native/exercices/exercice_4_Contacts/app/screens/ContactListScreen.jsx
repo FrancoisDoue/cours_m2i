@@ -10,8 +10,9 @@ const ContactListScreen = ({navigation}) => {
     // const [contactList, setContactList] = useState(contacts)
 
     return (
-        <View style={defaultStyle.main}> 
-            <FlatList 
+        <View style={[defaultStyle.main]}> 
+            <FlatList
+                style={{marginTop: 70}}
                 data={contacts}
                 keyExtractor={(contact, i) => contact.id}
                 renderItem={ ({item}) => 

@@ -28,5 +28,8 @@ export default StyleSheet.create({
     },
     paddingBottomMD: {
         paddingBottom: 20
+    },
+    sMarginMd:{
+        marginLeft:20
     }
 })

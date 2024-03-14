@@ -6,7 +6,7 @@ export default StyleSheet.create({
     ...sizing,
     main: {
         ...sizing.hFull,
-        backgroundColor: colors.bgColorDefault
+        backgroundColor: colors.bgColorDark
     },
     bgDarkPrimary:{
         backgroundColor: colors.bgColorDarkAccent,
