@@ -7,9 +7,9 @@ import CategoryCube from '../components/CategoryCube'
 const HomeScreen = ({navigation}) => {
     // console.log(CATEGORIES, MEALS)
 
-    const handleNavigation = (id) => {
-        console.log(id);
-        navigation.navigate('MealsList', id)
+    const handleNavigation = (item) => {
+        console.log(item);
+        navigation.navigate('MealsList', item)
     }
 
     return (
