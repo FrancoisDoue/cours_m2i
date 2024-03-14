@@ -1,4 +1,6 @@
 import { StyleSheet } from "react-native"
+import { toPixelRatio } from "../styleConfig"
+
 
 export default StyleSheet.create({
     hFull: {
@@ -21,12 +23,12 @@ export default StyleSheet.create({
     },
     
     paddingSM: {
-        padding: 10
+        padding: toPixelRatio(10)
     },
     paddingMD: {
-        padding: 20
+        padding: toPixelRatio(20)
     },
     paddingBottomMD: {
-        paddingBottom: 20
+        paddingBottom: toPixelRatio(20)
     }
 })

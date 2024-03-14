@@ -1,6 +1,7 @@
 import { StyleSheet } from "react-native"
 import colors from "./base/colors"
 import sizing from "./base/sizing"
+import { toPixelRatio } from "./styleConfig"
 
 export default StyleSheet.create({
     ...sizing,
@@ -21,13 +22,13 @@ export default StyleSheet.create({
         color: colors.textColorLight
     },
     mainTitle: {
-        fontSize: 50
+        fontSize: toPixelRatio(50)
     },
     title: {
-        fontSize: 40
+        fontSize: toPixelRatio(40)
     },
     subTitle: {
-        fontSize: 30
+        fontSize: toPixelRatio(30)
     },
     centerContent: {
         justifyContent: 'center',
