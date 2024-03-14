@@ -10,7 +10,6 @@ import DetailContactScreen from './screens/DetailContactScreen';
 const App = () => {
 
     const Stack = createNativeStackNavigator()
-
     return (
         <NavigationContainer>
             <Stack.Navigator initialRouteName='ContactList' >

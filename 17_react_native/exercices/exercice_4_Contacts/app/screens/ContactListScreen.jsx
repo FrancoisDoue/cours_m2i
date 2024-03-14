@@ -1,5 +1,5 @@
-import { View, FlatList, Text } from 'react-native'
-import React, { useState } from 'react'
+import { View, FlatList } from 'react-native'
+import React from 'react'
 import contacts from '../tempDatas/contactList.js'
 import ContactItem from '../components/contacts/ContactItem.jsx'
 import defaultStyle from '../styles/defaultStyle.js'
@@ -7,7 +7,6 @@ import defaultStyle from '../styles/defaultStyle.js'
 console.log(contacts)
 
 const ContactListScreen = ({navigation}) => {
-    // const [contactList, setContactList] = useState(contacts)
 
     return (
         <View style={[defaultStyle.main]}> 

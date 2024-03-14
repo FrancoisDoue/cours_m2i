@@ -1,10 +1,10 @@
 export default {
-    bgColorDark: '#3B194D',
-    bgColorDarkAccent: '#100317',
+    bgColorDark: '#174482',
+    bgColorDarkAccent: '#082145',
     bgLight: '#EAD9F2',
-    textColorDark: '#100317',
-    textColorLight: '#EAD9F2',
-    textColorLightSubtle: '#BA9CC9'
+    textColorDark: '#0A2C5C',
+    textColorLight: '#E9F1FC',
+    textColorLightSubtle: '#A6C6F2'
     // primary: '#ffffff',
     // primarySubtle: '#ffffff',
     // secondary: '#ffffff',
