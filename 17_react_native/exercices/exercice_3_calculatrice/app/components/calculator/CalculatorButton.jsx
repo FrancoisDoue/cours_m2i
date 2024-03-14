@@ -1,23 +1,24 @@
 import {Text, Pressable, StyleSheet } from 'react-native'
 import colors from '../../styles/base/colors'
 import React from 'react'
+import { toPixelRatio } from '../../styles/styleConfig'
 
 const CalculatorButton = ({children, square, action, value = null}) => {
     const localStyle = StyleSheet.create({
         bgButton: {
             backgroundColor: (square) ? colors.bgColorDark: colors.bgLight,
-            borderRadius: (square) ? 10: 45,
-            width: 85,
-            height: 85,
+            borderRadius: toPixelRatio((square) ? 10: 45),
+            width: toPixelRatio(85),
+            height: toPixelRatio(85),
             alignItems: 'center',
             justifyContent: 'center',
-            margin: 8
+            margin: toPixelRatio(8)
             
         },
         textColor: {
             color: (square) ? colors.textColorLight : colors.textColorDark,
             fontWeight: '600',
-            fontSize: 25
+            fontSize: toPixelRatio(25)
         },
         pressedEffect: {
             backgroundColor: (square) ? colors.bgLight : colors.bgColorDark,
