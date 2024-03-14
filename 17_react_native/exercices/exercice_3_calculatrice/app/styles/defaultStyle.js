@@ -20,9 +20,6 @@ export default StyleSheet.create({
     textLight: {
         color: colors.textColorLight
     },
-    textLightSubtle: {
-        color: colors.textColorLightSubtle
-    },
     mainTitle: {
         fontSize: 50
     },
@@ -46,15 +43,8 @@ export default StyleSheet.create({
         alignItems: 'flex-end',
         justifyContent: 'space-around'
     },
-    selfStart: {
-        alignSelf: 'flex-start'
-    },
 
     roundedSM: {
         borderRadius: 5
     },
-
-    textEnd: {
-        textAlign: 'right'
-    }
 })
