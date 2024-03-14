@@ -8,7 +8,7 @@ const DetailContactScreen = ({ navigation, route }) => {
     const { contact } = route.params
 
     useLayoutEffect(() => {
-        navigation.setOptions({ title: contact.firstname || contact.lastname })
+        navigation.setOptions({ title: contact.firstname || contact.lastname})
     })
 
     const handleCallPress = () => {
@@ -33,7 +33,7 @@ const DetailContactScreen = ({ navigation, route }) => {
             }
             <Text style={[defaultStyle.subTitle, defaultStyle.textLightSubtle]}>
                 Téléphone: <Text style={[defaultStyle.title, defaultStyle.textLight]}>
-                    {contact?.phone}
+                    {contact.phone}
                 </Text>
             </Text>
             <Pressable 
