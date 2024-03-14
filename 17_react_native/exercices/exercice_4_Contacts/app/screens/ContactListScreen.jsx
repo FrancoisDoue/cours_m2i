@@ -1,10 +1,8 @@
 import { View, FlatList } from 'react-native'
 import React from 'react'
-import contacts from '../tempDatas/contactList.js'
+import {contacts} from '../tempDatas/contactList.json'
 import ContactItem from '../components/contacts/ContactItem.jsx'
 import defaultStyle from '../styles/defaultStyle.js'
-
-console.log(contacts)
 
 const ContactListScreen = ({navigation}) => {
 

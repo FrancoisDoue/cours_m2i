@@ -37,8 +37,8 @@ const DetailContactScreen = ({ navigation, route }) => {
                 </Text>
             </Text>
             <Pressable 
-            onPress={handleCallPress}
-            style={({pressed}) => [styles.callButton(pressed)]}
+                onPress={handleCallPress}
+                style={(e) => [styles.callButton(e)]}
             >
                 <Text style={[defaultStyle.textLight, defaultStyle.subTitle]}>
                     Appeler
@@ -48,11 +48,14 @@ const DetailContactScreen = ({ navigation, route }) => {
     )
 }
 const styles = StyleSheet.create({
-    callButton: (pressed) => ({
+    callButton: ({pressed}) => ({
         backgroundColor: pressed? colors.bgColorDark: colors.bgColorDarkAccent,
         marginTop: 30,
         paddingVertical: 10,
-        paddingHorizontal: 60
+        paddingHorizontal: 60,
+        borderWidth: 2,
+        borderColor: (pressed) ? colors.bgLight: colors.bgColorDarkAccent,
+        ...defaultStyle.roundedSM,
     })
 })
 

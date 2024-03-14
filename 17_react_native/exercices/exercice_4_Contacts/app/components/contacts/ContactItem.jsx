@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
     button: (pressed) => ({
         height: 50,
         margin: 5,
-        backgroundColor: (pressed) ? colors.bgLight: colors.bgColorDarkAccent,
+        backgroundColor: (pressed) ? colors.bgLight : colors.bgColorDarkAccent,
         ...defaultStyle.roundedSM,
     })
 }) 
