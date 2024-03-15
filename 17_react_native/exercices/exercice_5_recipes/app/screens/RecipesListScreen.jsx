@@ -1,4 +1,4 @@
-import { FlatList, StyleSheet, Text, View } from 'react-native'
+import { FlatList, StyleSheet, View } from 'react-native'
 import React, { useContext, useLayoutEffect, useState } from 'react'
 import globalStyle from '../styles/globalStyle'
 import CardRecipe from '../components/CardRecipe'

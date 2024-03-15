@@ -1,4 +1,4 @@
-import { Pressable, StyleSheet, Text, View } from 'react-native'
+import { Pressable, StyleSheet, Text } from 'react-native'
 import React from 'react'
 import globalStyle from '../styles/globalStyle'
 
@@ -14,7 +14,7 @@ const LovelyButton = ({onPress, isLoved}) => {
       borderColor: 'white',
       backgroundColor: 'white',
       ...globalStyle.radiusSm,
-      // je vais refacto ça, c'est pas très illisible.
+      // faut refaire ce bloc, ce n'est pas très illisible.
       ...(!isLoved) ? {
         ...(pressed) && {
           elevation: 2,
