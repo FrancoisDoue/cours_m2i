@@ -1,4 +1,4 @@
-import { FlatList, StyleSheet, View } from 'react-native'
+import { FlatList, View } from 'react-native'
 import React, { useContext, useLayoutEffect, useState } from 'react'
 import globalStyle from '../styles/globalStyle'
 import CardRecipe from '../components/CardRecipe'
@@ -39,9 +39,3 @@ const RecipesListScreen = ({navigation, route}) => {
 }
 
 export default RecipesListScreen
-
-const styles = StyleSheet.create({
-  recipeListMain: {
-    justifyContent: 'center',
-  }
-})

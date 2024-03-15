@@ -1,4 +1,4 @@
-import { FlatList, StyleSheet, View } from 'react-native'
+import { FlatList, View } from 'react-native'
 import React, { useContext, useLayoutEffect } from 'react'
 import globalStyle from '../styles/globalStyle'
 import CategoryCube from '../components/CategoryCube'
@@ -42,7 +42,3 @@ const HomeScreen = ({navigation}) => {
 }
 
 export default HomeScreen
-
-const styles = StyleSheet.create({
-
-})
