@@ -1,10 +1,32 @@
 import { Image, ScrollView, StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import React, { useContext, useLayoutEffect } from 'react'
 import globalStyle from '../styles/globalStyle'
 import Article from '../components/Article'
+import LovelyButton from '../components/LovelyButton'
+import RecipeContext from '../context/RecipeContext'
 
-const RecipeScreen = ({ route }) => {
+const RecipeScreen = ({ navigation, route }) => {
+
     const recipe = route.params
+    const {favorites, setFavorites} = useContext(RecipeContext)
+
+    const isInFavorites = (id) => !!favorites.find(fav => fav.id == id)
+
+    const toggleAddToFavorites = () => {
+        if (!isInFavorites(recipe.id)) setFavorites([...favorites, recipe])
+        else setFavorites([...favorites.filter(fav => fav.id != recipe.id)])
+    }
+
+    useLayoutEffect(() => {
+        navigation.setOptions({
+            headerRight: () => (
+                <LovelyButton 
+                    onPress={toggleAddToFavorites}
+                    isLoved={isInFavorites(recipe.id)}
+                />
+            )
+        })
+    }, [favorites])
 
     return (
         <View style={[globalStyle.main]}>
@@ -28,7 +50,7 @@ const RecipeScreen = ({ route }) => {
                     <Article title={'Ingredients'} list={recipe.ingredients} />
                     <Article title={'Steps'} list={recipe.steps} />
                 </View>
-                </ScrollView>
+            </ScrollView>
         </View>
     )
 }

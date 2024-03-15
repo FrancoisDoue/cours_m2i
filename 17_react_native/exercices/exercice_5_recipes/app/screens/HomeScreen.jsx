@@ -1,14 +1,25 @@
 import { FlatList, StyleSheet, Text, View } from 'react-native'
-import React from 'react'
-import { CATEGORIES, MEALS } from '../../datas/data/data'
+import React, { useContext, useLayoutEffect } from 'react'
 import globalStyle from '../styles/globalStyle'
 import CategoryCube from '../components/CategoryCube'
+import RecipeContext from '../context/RecipeContext'
+import FavButton from '../components/FavButton'
 
 const HomeScreen = ({navigation}) => {
-    // console.log(CATEGORIES, MEALS)
 
-    const handleNavigation = (item) => {
-        console.log(item);
+    const {CATEGORIES, favorites} = useContext(RecipeContext)
+
+    useLayoutEffect(() => {
+        if (!!favorites.length) {
+            navigation.setOptions({
+                headerRight: () => (
+                    <FavButton onPress={() => navigation.navigate('MealsList', {favContext: true})}/>
+                )
+            })
+        } 
+    }, [favorites])
+
+    const handleMealListNavigation = (item) => {
         navigation.navigate('MealsList', item)
     }
 
@@ -22,7 +33,7 @@ const HomeScreen = ({navigation}) => {
                 renderItem={({ item }) =>
                     <CategoryCube
                         category={item}
-                        onPress={() => handleNavigation(item)}
+                        onPress={() => handleMealListNavigation(item)}
                     />
                 }
             />

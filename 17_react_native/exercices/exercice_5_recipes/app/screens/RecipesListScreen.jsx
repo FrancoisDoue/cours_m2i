@@ -1,26 +1,30 @@
 import { FlatList, StyleSheet, Text, View } from 'react-native'
-import React, { useLayoutEffect, useState } from 'react'
+import React, { useContext, useLayoutEffect, useState } from 'react'
 import globalStyle from '../styles/globalStyle'
-import { MEALS } from '../../datas/data/data'
 import CardRecipe from '../components/CardRecipe'
+import RecipeContext from '../context/RecipeContext'
 
 const RecipesListScreen = ({navigation, route}) => {
-  const {id} = route.params
+  const {id, favContext} = route.params
+  const {MEALS, favorites} = useContext(RecipeContext)
   const [recipeList, setRecipeList] = useState(MEALS)
 
   useLayoutEffect(() => {
-    const recipes = recipeList.filter(recipe => {
-      return !!recipe.categoryIds.find(cat => cat == id)
-    })
-    setRecipeList(recipes)
-    console.log(recipes)
-  }, [])
+    if(!favContext && id){
+      const recipes = recipeList.filter(recipe => {
+        return !!recipe.categoryIds.find(cat => cat == id)
+      })
+      setRecipeList(recipes)
+    } else {
+      setRecipeList(favorites)
+      navigation.setOptions({title: 'My Loved Recipes'})
+    }
+  }, [favorites])
 
   const handleRecipeNavigation = (recipe) => {
     navigation.navigate('Meal', recipe)
   }
 
-  console.log(route.params)
   return (
     <View style={[globalStyle.main]}>
       <FlatList

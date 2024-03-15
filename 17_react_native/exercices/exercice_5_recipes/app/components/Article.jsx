@@ -10,26 +10,16 @@ const Article = ({title, list}) => {
             <Text style={styles.articleTitle}>{title}</Text>
         </View>
         <View style={styles.instructionList}>
-            {/* Active le scroll (mais c'est pas bien) */}
-            {list.map((instruction, index) => (
-                <View key={index} style={styles.instructionItem}>
-                    <Text style={styles.instructionText}>
-                        {instruction}
-                    </Text>
-                </View>
-            ))}
-
-            {/* N'active pas le scroll (et c'est triste)
-                
-                <FlatList
+            <FlatList
                 data={list}
                 keyExtractor={(_item, index) => index}
+                scrollEnabled={false} // désactive le scroll, permet l'affichage dans une ScrollView
                 renderItem={({item}) => 
                     <View style={styles.instructionItem}>
-                        <Text  style={styles.instructionText}>{item}</Text>
+                        <Text style={styles.instructionText}>{item}</Text>
                     </View>
                 }
-            /> */}
+            />
         </View>
     </View>
   )

@@ -7,7 +7,7 @@ const CategoryCube = ({category, onPress}) => {
         cube: ({pressed}) => ({
             width: 177,
             height: 177,
-            backgroundColor: (pressed) ? colors.bgColor :category.color,
+            backgroundColor: (pressed) ? colors.bgColor : category.color,
             borderWidth: 3,
             borderColor: category.color,
             margin: 15,
