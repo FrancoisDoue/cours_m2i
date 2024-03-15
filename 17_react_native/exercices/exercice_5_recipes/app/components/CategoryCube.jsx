@@ -11,6 +11,8 @@ const CategoryCube = ({category, onPress}) => {
             borderWidth: 3,
             borderColor: category.color,
             margin: 15,
+            elevation: (pressed) ? 2 : 10,
+            transform:  [{rotate: (pressed) ? '5deg': '0deg'}],
             ...globalStyle.radiusSm,
             ...globalStyle.itemsCenter
         }),
@@ -18,7 +20,7 @@ const CategoryCube = ({category, onPress}) => {
     
   return (
     <Pressable style={styles.cube} onPress={onPress}>
-      <Text style={globalStyle.textEmphasis}>{category.title}</Text>
+      <Text style={globalStyle.textEmphasis1}>{category.title}</Text>
     </Pressable>
   )
 }
