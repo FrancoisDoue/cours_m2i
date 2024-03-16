@@ -14,13 +14,14 @@ const App = () => {
   const [favorites, setFavorites] = useState([])
 
   return (
+    // Utilisation du contexte pour les favorites
     <RecipeContext.Provider value={{CATEGORIES, MEALS, favorites, setFavorites}}>
       <NavigationContainer>
-          <Stack.Navigator initialRouteName='home'>
-              <Stack.Screen name={'home'} component={HomeScreen} options={{title: 'All Categories'}} />
-              <Stack.Screen name={'MealsList'} component={RecipesListScreen} options={{title: 'Meals Overview'}} />
-              <Stack.Screen name={'Meal'} component={RecipeScreen} options={{title: 'About the Meal'}} />
-          </Stack.Navigator>
+        <Stack.Navigator initialRouteName='home'>
+          <Stack.Screen name={'home'} component={HomeScreen} options={{title: 'All Categories'}} />
+          <Stack.Screen name={'MealsList'} component={RecipesListScreen} options={{title: 'Meals Overview'}} />
+          <Stack.Screen name={'Meal'} component={RecipeScreen} options={{title: 'About the Meal'}} />
+        </Stack.Navigator>
       </NavigationContainer>
     </RecipeContext.Provider>
   )

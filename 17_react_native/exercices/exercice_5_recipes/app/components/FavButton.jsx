@@ -24,13 +24,13 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         ...globalStyle.radiusSm,
         ...pressed && {
-            transform: [{rotate: '-5deg'}],
-            borderColor: '#f4428c',
-            elevation: 2,
+          transform: [{rotate: '-5deg'}],
+          borderColor: '#f4428c',
+          elevation: 2,
         }
     }),
     lovelyText: {
-        color: '#f4428c',
-        fontWeight: '500'
+      color: '#f4428c',
+      fontWeight: '500'
     }
 })

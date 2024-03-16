@@ -7,22 +7,24 @@ import RecipeContext from '../context/RecipeContext'
 
 const RecipeScreen = ({ navigation, route }) => {
 
+    // récupération de la recette dans les params
     const recipe = route.params
     const {favorites, setFavorites} = useContext(RecipeContext)
 
-    const isInFavorites = (id) => !!favorites.find(fav => fav.id == id)
+    const isInFavorites = !!favorites.find(fav => fav.id == recipe.id)
 
     const toggleAddToFavorites = () => {
-        if (!isInFavorites(recipe.id)) setFavorites([...favorites, recipe])
+        if (!isInFavorites) setFavorites([...favorites, recipe])
         else setFavorites([...favorites.filter(fav => fav.id != recipe.id)])
     }
 
     useLayoutEffect(() => {
         navigation.setOptions({
+            // ajout d'un toggle dans le header pour set en favorites les recettes
             headerRight: () => (
                 <LovelyButton 
                     onPress={toggleAddToFavorites}
-                    isLoved={isInFavorites(recipe.id)}
+                    isLoved={isInFavorites}
                 />
             )
         })

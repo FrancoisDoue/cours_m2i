@@ -7,32 +7,20 @@ const LovelyButton = ({onPress, isLoved}) => {
   const styles = StyleSheet.create({
     lovelyButton: ({pressed}) => ({
       padding: 8,
-      elevation: 6,
+      elevation: (pressed) ? ((isLoved) ? 1 : 2) : 6,
       width: 70,
       alignItems: 'center',
       borderWidth: 2,
-      borderColor: 'white',
+      borderColor: (isLoved) ? '#ffc7ff' : ((pressed) ? '#f4428c' : 'white' ),
       backgroundColor: 'white',
+      transform: [{ rotate: (isLoved) ? '-5deg' : ((pressed) ? '-5deg' : '0deg') }],
       ...globalStyle.radiusSm,
-      // faut refaire ce bloc, ce n'est pas très illisible.
-      ...(!isLoved) ? {
-        ...(pressed) && {
-          elevation: 2,
-          borderColor: '#f4428c',
-          transform: [{rotate: '-5deg'}]
-        }
-      } : {
-        elevation: 1,
-        borderColor: '#ffc7ff',
-        transform: [{rotate: '-5deg'}]
-      }
     }),
     lovelyText: {
         color: isLoved ? '#ffc7ff':'#f4428c',
         fontWeight: '500'
     }
   })
-
 
   return (
     <Pressable style={styles.lovelyButton} onPress={onPress}>

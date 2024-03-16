@@ -10,16 +10,21 @@ const HomeScreen = ({navigation}) => {
     const {CATEGORIES, favorites} = useContext(RecipeContext)
 
     useLayoutEffect(() => {
+        // s'il y a des recettes en favoris, affiche le bouton des favoris dans le header
         if (!!favorites.length) {
             navigation.setOptions({
                 headerRight: () => (
+                    // FavButton renvoit vers le screen 'MealsList', comme pour n'importe quelle category pressed
+                    // donc envoi d'un paramètre 'favContext' pour l'affichage des favoris
                     <FavButton onPress={() => navigation.navigate('MealsList', {favContext: true})}/>
                 )
-            })
-        } 
+            })  
+        } else navigation.setOptions({headerRight: null}) 
+        // une fois le header set, il reste en l'état, donc je force la suppression du bouton
     }, [favorites])
 
     const handleMealListNavigation = (item) => {
+        // vers le screen 'MealsList', avec pour paramètre une catégorie
         navigation.navigate('MealsList', item)
     }
 
