@@ -14,11 +14,7 @@ const LovelyButton = ({onPress, isLoved}) => {
       backgroundColor: 'white',
       transform: [{ rotate: (isLoved) ? '-5deg' : ((pressed) ? '-5deg' : '0deg') }],
       borderRadius: isLoved? 50 : 10
-    }),
-    lovelyText: {
-        color: isLoved ? '#ffc7ff':'#f4428c',
-        fontWeight: '500'
-    }
+    })
   })
 
   return (
