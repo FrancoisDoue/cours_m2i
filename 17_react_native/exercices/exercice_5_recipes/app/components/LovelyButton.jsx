@@ -1,20 +1,19 @@
-import { Pressable, StyleSheet, Text } from 'react-native'
+import { Pressable, StyleSheet } from 'react-native'
 import React from 'react'
-import globalStyle from '../styles/globalStyle'
+import Icon from 'react-native-vector-icons/FontAwesome'
 
 const LovelyButton = ({onPress, isLoved}) => {
 
   const styles = StyleSheet.create({
     lovelyButton: ({pressed}) => ({
-      padding: 8,
+      padding: 9,
       elevation: (pressed) ? ((isLoved) ? 1 : 2) : 6,
-      width: 70,
       alignItems: 'center',
       borderWidth: 2,
       borderColor: (isLoved) ? '#ffc7ff' : ((pressed) ? '#f4428c' : 'white' ),
       backgroundColor: 'white',
       transform: [{ rotate: (isLoved) ? '-5deg' : ((pressed) ? '-5deg' : '0deg') }],
-      ...globalStyle.radiusSm,
+      borderRadius: isLoved? 50 : 10
     }),
     lovelyText: {
         color: isLoved ? '#ffc7ff':'#f4428c',
@@ -24,7 +23,11 @@ const LovelyButton = ({onPress, isLoved}) => {
 
   return (
     <Pressable style={styles.lovelyButton} onPress={onPress}>
-      <Text style={styles.lovelyText}>{isLoved ? 'Loved' : 'Love it!'}</Text>
+      <Icon 
+        name={isLoved ? 'heart' :'heart-o'} 
+        size={21}
+        color={isLoved ? '#ffc7ff' : '#f4428c'} 
+      />
     </Pressable>
   )
 }

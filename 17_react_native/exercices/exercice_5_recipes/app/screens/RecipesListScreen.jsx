@@ -1,26 +1,23 @@
 import { FlatList, View } from 'react-native'
-import React, { useContext, useEffect, useLayoutEffect, useState } from 'react'
+import React, { useLayoutEffect } from 'react'
 import globalStyle from '../styles/globalStyle'
 import CardRecipe from '../components/CardRecipe'
-import RecipeContext from '../context/RecipeContext'
+import { useDispatch, useSelector } from 'react-redux'
+import { setRecipeByCategorie } from '../slices/recipeSlice'
 
 const RecipesListScreen = ({navigation, route}) => {
   
   const {id, favContext} = route.params
-  const {MEALS, favorites} = useContext(RecipeContext)
-  const [recipeList, setRecipeList] = useState(MEALS)
+
+  const dispatch = useDispatch()
+  const {recipeByCategorie, favorites} = useSelector(({recipe}) => recipe)
 
   useLayoutEffect(() => {
     // s'il n'y a pas de favContext et qu'un id de catégorie est présent dans les params, 
     // filtre les recettes correspondantes à la catégorie
-    if(!favContext && id){
-      const recipes = recipeList.filter((recipe) => !!recipe.categoryIds.find(cat => cat == id))
-      setRecipeList(recipes)
-    } else {
+    if (!favContext && id) dispatch(setRecipeByCategorie(id))
+    else navigation.setOptions({title: 'My Loved Recipes'})
       // sinon, on affiche les favoris et on change de titre
-      setRecipeList(favorites)
-      navigation.setOptions({title: 'My Loved Recipes'})
-    }
   }, [favorites])
 
   const handleRecipeNavigation = (recipe) => {
@@ -30,7 +27,7 @@ const RecipesListScreen = ({navigation, route}) => {
   return (
     <View style={[globalStyle.main]}>
       <FlatList
-        data={recipeList}
+        data={(id) ? recipeByCategorie : favorites} 
         keyExtractor={item => item.id}
         renderItem={({item}) => 
           <CardRecipe recipe={item} onPress={() => handleRecipeNavigation(item)}/>

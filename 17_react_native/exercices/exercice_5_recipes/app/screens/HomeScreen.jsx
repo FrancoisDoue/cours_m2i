@@ -1,13 +1,14 @@
 import { FlatList, View } from 'react-native'
-import React, { useContext, useLayoutEffect } from 'react'
+import React, { useLayoutEffect } from 'react'
 import globalStyle from '../styles/globalStyle'
 import CategoryCube from '../components/CategoryCube'
-import RecipeContext from '../context/RecipeContext'
 import FavButton from '../components/FavButton'
+import { useSelector } from 'react-redux'
 
 const HomeScreen = ({navigation}) => {
+    const favorites = useSelector(({recipe}) => recipe.favorites)
 
-    const {CATEGORIES, favorites} = useContext(RecipeContext)
+    const {categories} = useSelector(({recipe}) => recipe)
 
     useLayoutEffect(() => {
         // s'il y a des recettes en favoris, affiche le bouton des favoris dans le header
@@ -31,7 +32,7 @@ const HomeScreen = ({navigation}) => {
     return (
         <View style={[globalStyle.main]}>
             <FlatList
-                data={CATEGORIES}
+                data={categories}
                 numColumns={2}
                 columnWrapperStyle={{ justifyContent: 'center' }}
                 keyExtractor={item => item.id}

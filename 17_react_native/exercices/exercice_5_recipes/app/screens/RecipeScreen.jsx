@@ -1,21 +1,21 @@
 import { Image, ScrollView, StyleSheet, Text, View } from 'react-native'
-import React, { useContext, useLayoutEffect } from 'react'
+import React, { useLayoutEffect } from 'react'
 import globalStyle from '../styles/globalStyle'
 import Article from '../components/Article'
 import LovelyButton from '../components/LovelyButton'
-import RecipeContext from '../context/RecipeContext'
+import { useDispatch, useSelector } from 'react-redux'
+import { addToFavorites, removeFromFavorites, selectIsInFavorites } from '../slices/recipeSlice'
 
-const RecipeScreen = ({ navigation, route }) => {
-
+const RecipeScreen = ({ navigation, route }) => {    
     // récupération de la recette dans les params
     const recipe = route.params
-    const {favorites, setFavorites} = useContext(RecipeContext)
-
-    const isInFavorites = !!favorites.find(fav => fav.id == recipe.id)
+    const dispatch = useDispatch()
+    const favorites = useSelector(({recipe}) => recipe.favorites )
+    const isInFavorites = () => !!favorites.find(fav => fav.id == recipe.id)
 
     const toggleAddToFavorites = () => {
-        if (!isInFavorites) setFavorites([...favorites, recipe])
-        else setFavorites([...favorites.filter(fav => fav.id != recipe.id)])
+        if (!isInFavorites()) dispatch(addToFavorites(recipe))
+        else dispatch(removeFromFavorites(recipe.id))
     }
 
     useLayoutEffect(() => {
@@ -24,7 +24,7 @@ const RecipeScreen = ({ navigation, route }) => {
             headerRight: () => (
                 <LovelyButton 
                     onPress={toggleAddToFavorites}
-                    isLoved={isInFavorites}
+                    isLoved={isInFavorites()}
                 />
             )
         })
