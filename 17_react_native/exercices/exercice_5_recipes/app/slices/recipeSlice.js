@@ -20,7 +20,7 @@ const recipeSlice = createSlice({
         },
         setRecipeByCategorie: (state, action) => {
             state.recipeByCategorie = state.recipes.filter(
-                (r) => !!r.categoryIds.find(cat => cat == action.payload)
+                (r) => !!r.categoryIds.includes(action.payload)
             )
         }
     }

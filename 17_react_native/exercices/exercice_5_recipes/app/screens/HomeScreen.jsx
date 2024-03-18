@@ -6,9 +6,8 @@ import FavButton from '../components/FavButton'
 import { useSelector } from 'react-redux'
 
 const HomeScreen = ({navigation}) => {
-    const favorites = useSelector(({recipe}) => recipe.favorites)
 
-    const {categories} = useSelector(({recipe}) => recipe)
+    const {categories, favorites} = useSelector(({recipe}) => recipe)
 
     useLayoutEffect(() => {
         // s'il y a des recettes en favoris, affiche le bouton des favoris dans le header
