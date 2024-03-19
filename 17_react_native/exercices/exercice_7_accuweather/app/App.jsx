@@ -24,19 +24,19 @@ const App = () => {
     const updateLocation = () => {
         setLocationInfo(null)
 
-        // Geolocation.requestAuthorization()
-        // Geolocation.getCurrentPosition(
-        //     (res) => {
-        //         setError(false)
-        //         const {latitude, longitude} = res.coords
-        //         getLocationInfo(latitude, longitude)
-        //     },
-        //     (error) => {
-        //         console.error(error)
-        //         setError(true)
-        //     },
-        //     {enableHighAccuracy: false, timeout: 20000, maximumAge: 60000}
-        // )
+        Geolocation.requestAuthorization()
+        Geolocation.getCurrentPosition(
+            (res) => {
+                setError(false)
+                const {latitude, longitude} = res.coords
+                getLocationInfo(latitude, longitude)
+            },
+            (error) => {
+                console.error(error)
+                setError(true)
+            },
+            {enableHighAccuracy: false, timeout: 20000, maximumAge: 60000}
+        )
     }
 
     useEffect(() => { updateLocation() }, [])
@@ -44,25 +44,25 @@ const App = () => {
     return (
         <View style={styles.main}>
             {!error ?
-                // (!!locationInfo ? 
+                (!!locationInfo ? 
                     <View style={styles.activityContainer}>
                         <View style={styles.resultBox}>
                             <Text >Vous êtes: </Text>
                             <Text style={styles.label}>
-                                Ville : <Text>{locationInfo?.LocalizedName || 'Quekqupart'}</Text>
+                                Ville : <Text>{locationInfo?.LocalizedName}</Text>
                             </Text>
                             <Text style={styles.label}>
-                                Pays : <Text>{locationInfo?.Country.LocalizedName || 'Fronce'}</Text>
+                                Pays : <Text>{locationInfo?.Country.LocalizedName}</Text>
                             </Text>
                             <Button title='update location' onPress={updateLocation} />
 
                         </View>
                     </View>
-                    // :
-                    // <View style={styles.activityContainer}>
-                    //     <ActivityIndicator size={100} color={'#CCEEFF'}/>
-                    // </View>
-                // )
+                    :
+                    <View style={styles.activityContainer}>
+                        <ActivityIndicator size={100} color={'#CCEEFF'}/>
+                    </View>
+                )
                 :
                 <Text>Error</Text>
             }
