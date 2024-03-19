@@ -1,5 +1,5 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React, { useLayoutEffect, useState } from 'react'
+import { Linking, Pressable, StyleSheet, Text, View } from 'react-native'
+import React, { useEffect, useLayoutEffect, useState } from 'react'
 import users from '../services/api.backend'
 
 const ContactScreen = ({navigation, route}) => {
@@ -15,7 +15,16 @@ const ContactScreen = ({navigation, route}) => {
         navigation.setOptions({title: contact?.username || contact?.name})
     }, [contact])
 
-    console.log(contact)
+    useEffect(() => {
+        if (contact?.phone) {
+            setContact({
+                ...contact, 
+                phone: contact.phone.replaceAll(/[\.\-\(\)]/g, '').split(' ')[0]
+            })
+        }
+    }, [contact?.phone])
+
+    const handleCall = () => Linking.openURL(`tel:${contact.phone}`)
 
     return (
         <View>
@@ -27,7 +36,9 @@ const ContactScreen = ({navigation, route}) => {
                 <Text>{contact?.address?.city}</Text>
                 <Text>{contact?.address?.zipcode}</Text>
             </View>
-            <Text>{contact?.phone.replaceAll(/[-.]/gi, '')}</Text>
+            <Pressable onPress={handleCall}>
+                <Text>{contact.phone}</Text>
+            </Pressable>
         </View>
     )
 }

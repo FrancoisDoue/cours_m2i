@@ -3,6 +3,9 @@ import React, { useEffect, useState } from 'react'
 import Geolocation from '@react-native-community/geolocation'
 
 // npm install @react-native-community/geolocation --save
+// add
+// <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+// in ..\android\app\src\main\AndroidManifest.xml
 
 const App = () => {
 
@@ -20,7 +23,6 @@ const App = () => {
             {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000}
         )
     }, [])
-
 
     return (
         <View>
