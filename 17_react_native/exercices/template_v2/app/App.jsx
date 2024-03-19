@@ -20,14 +20,14 @@ const App = () => {
   return (
     <NavigationContainer>
       <Tab.Navigator screenOptions={{
-        headerShown: false,
-        // tabBarStyle: {
-        //   height: 60
-        // }
-      }}>
+          headerShown: false,
+          tabBarStyle: { height: 80, paddingBottom: 11 },
+          tabBarLabelStyle: {color: 'cyan', fontSize: 18},
+        }}
+      >
         <Tab.Screen name='home_navigation' component={HomeStack} options={{
           tabBarLabel: 'Home', 
-          tabBarIcon: ({color, size}) => <Icon name='home' color={color} size={size} />
+          tabBarIcon: ({color}) => <Icon name='home' color={color} size={40} />
         }}/>
       </Tab.Navigator>
     </NavigationContainer>
