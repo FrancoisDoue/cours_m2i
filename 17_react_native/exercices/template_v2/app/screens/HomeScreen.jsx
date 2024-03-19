@@ -1,23 +1,21 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
-import Gradient from '../components/Gradient'
+import GradientView from '../components/GradientView'
 
 const HomeScreen = () => {
   return (
-    
-      <Gradient>
+      <GradientView style={styles.test}>
         <Text style={styles.colorLight}>HomeScreen</Text>
-      </Gradient>
+      </GradientView>
   )
 }
 
 export default HomeScreen
 
 const styles = StyleSheet.create({
-  main: {
-    width: '100%',
-    height: '100%',
-    position: 'absolute'
+  test: {
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   colorLight: {
     color: 'white'
