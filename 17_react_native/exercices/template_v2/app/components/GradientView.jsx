@@ -7,7 +7,7 @@ const GradientView = ({style, children}) => {
   return (
     <View style={styles.main}>
       <View styles={styles.gradientBg}>
-        <RadialGradient x='20%' y='20%' rx='100%' ry='50%' colorList={gradientColors.main} />
+        <RadialGradient x='-25%' y='-25%' rx='170%' ry='130%' colorList={gradientColors.main} />
       </View>
       <View style={[styles.gradientBg, style]}>
         {children}
@@ -23,6 +23,7 @@ const styles = StyleSheet.create({
     position: 'relative'
   },
   gradientBg: {
+    top: 0,
     position: 'absolute',
     width: '100%',
     height: '100%',

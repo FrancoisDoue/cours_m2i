@@ -5,7 +5,7 @@ import Icon from 'react-native-vector-icons/Foundation'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import HomeScreen from './screens/HomeScreen'
 import { colors } from './styles/globalStyle'
-import { StyleSheet } from 'react-native'
+import { StatusBar, StyleSheet } from 'react-native'
 
 const Tab = createBottomTabNavigator()
 const Stack = createNativeStackNavigator()
@@ -14,10 +14,7 @@ const HomeStack = () => {
   return (
     <Stack.Navigator
       initialRouteName='home'
-      screenOptions={{
-        headerStyle: {backgroundColor: colors.bgPrimary, color: colors.colorSecondary},
-        headerTitleStyle: {color: colors.colorPrimary}
-      }}
+      screenOptions={stackScreenOptions}
     >
       <Stack.Screen name='home' component={HomeScreen} />
     </Stack.Navigator>
@@ -25,18 +22,30 @@ const HomeStack = () => {
 }
 
 const App = () => {
+
   return (
+    <>
+    <StatusBar backgroundColor={colors.bgPrimary} />
     <NavigationContainer>
       <Tab.Navigator 
         initialRouteName='home_navigation'
-        screenOptions={tabScreenOptions}
+        screenOptions={{
+          headerShown: false,
+          tabBarStyle: navStyles.tabBarStyle,
+          tabBarLabelStyle: navStyles.tabBarLabelStyle,
+          tabBarInactiveTintColor: colors.colorSecondary,
+          tabBarActiveTintColor: colors.colorPrimary,
+        }}
       >
+
         <Tab.Screen name='home_navigation' component={HomeStack} options={{
-          tabBarLabel: 'Home', 
-          tabBarIcon: ({color}) => <Icon name='home' color={color} size={40} />
+          tabBarLabel: 'Home',
+          tabBarIcon: ({focused, color}) => <Icon name='home' color={color} size={focused? 40 : 30} />
         }}/>
+
       </Tab.Navigator>
     </NavigationContainer>
+    </>
   )
 }
 
@@ -44,22 +53,18 @@ export default App
 
 const navStyles = StyleSheet.create({
   tabBarStyle: {
-    height: 80, 
+    height: 90, 
     paddingBottom: 9, 
     backgroundColor: colors.bgPrimary, 
     borderTopColor: colors.bgSecondary
   },
   tabBarLabelStyle: {
-    color: colors.colorSecondary, 
     fontSize: 20,
   }
 })
 
-
-const tabScreenOptions = {
-  headerShown: false,
-  tabBarStyle: navStyles.tabBarStyle,
-  tabBarLabelStyle: navStyles.tabBarLabelStyle,
-  tabBarInactiveTintColor: colors.colorSecondary,
-  tabBarActiveTintColor: colors.colorPrimary,
+const stackScreenOptions = {
+  headerTransparent: true,
+  headerStyle: {backgroundColor: colors.bgPrimary},
+  headerTintColor: colors.colorPrimary
 }
