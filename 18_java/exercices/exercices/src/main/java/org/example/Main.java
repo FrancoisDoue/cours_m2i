@@ -8,9 +8,9 @@ public class Main {
     static Scanner input = new Scanner(System.in);
 
     public static void main(String[] args) {
-        temperatureConverter();
+//        temperatureConverter();
 //        candies();
-//        timerMessage();
+        timerMessage();
     }
     // exercice 1
     public static void temperatureConverter(){
@@ -32,10 +32,12 @@ public class Main {
     public static void timerMessage() {
         System.out.println("Tappez votre message : ");
         String firstMessage = input.nextLine();
-        LocalDateTime timeFirstMessage = LocalDateTime.now();
+        long time = System.currentTimeMillis();
         System.out.println(firstMessage);
         System.out.println("Tappez votre second message : ");
-        input.nextLine();
-        System.out.println("Temps écoulé depuis votre dernier message: " + Duration.between(timeFirstMessage, LocalDateTime.now()).getSeconds() + " sec");
+        String secondMessage = input.nextLine();
+        double elapsedTime = (System.currentTimeMillis() - time) / 1000.0;
+        System.out.println(secondMessage);
+        System.out.println("Temps écoulé depuis votre dernier message: " + elapsedTime + " sec");
     }
 }
