@@ -1,6 +1,5 @@
 package org.example;
 
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class BatailleNavale {
@@ -48,7 +47,7 @@ public class BatailleNavale {
 
         do{
             // DISPLAY
-            String[] boxColors= {" \u001B[34m■ \u001B[0m", " \u001B[34m■ \u001B[0m", " \u001B[30m■ \u001B[0m", " \u001B[31m■ \u001B[0m"};
+            String[] boxColors= {" \u001B[34m■ \u001B[0m", " \u001B[34m■ \u001B[0m", " \u001B[0m■\u001B[0m ", " \u001B[31m■ \u001B[0m"};
             int x, y;
             int cnt = 0;
             Scanner input = new Scanner(System.in);
@@ -77,7 +76,7 @@ public class BatailleNavale {
             for (x = 0; x < vPositions.length; x++) {
                 if(vPositions[x].charAt(0) == charArray[0]) break;
             }
-            y = charArray[1] - '0'; // char in int cast
+            y = charArray[1] - '0'; // char on int cast
             x = (x < vPositions.length) ? x : vPositions.length - 1;
             y = (y < vPositions.length) ? y : vPositions.length - 1;
             if( ocean[0][x][y] == 1 ){
@@ -103,7 +102,7 @@ public class BatailleNavale {
                 enemyPoints ++;
             } else {
                 if (ocean[1][x][y] == 3) {
-                    System.out.println("L'adversaire de s'acharne...");
+                    System.out.println("L'adversaire s'acharne...");
                 }else {
                     System.out.println("L'adversaire a raté!");
                     ocean[1][x][y] = 2;

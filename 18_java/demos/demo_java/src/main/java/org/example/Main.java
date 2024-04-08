@@ -75,5 +75,10 @@ public class Main {
 //                System.out.println("Invalid");
 //                break;
 //        }
+//        char[] temp = new char[3];
+//        for (char charElement : temp) {
+//            System.out.println(charElement);
+//        }
+
     }
 }
