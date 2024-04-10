@@ -1,4 +1,4 @@
-package org.poo_exercices;
+package org.poo_exercices.bases;
 
 public class Joueur {
     private String nom;
