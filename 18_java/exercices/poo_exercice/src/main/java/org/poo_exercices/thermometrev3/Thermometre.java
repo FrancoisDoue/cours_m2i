@@ -9,8 +9,8 @@ public class Thermometre {
     private Unit unit;
 
     public Thermometre(double temperature, Unit unit) {
-        this.temperature = temperature;
         this.unit = unit;
+        setTemperature(temperature);
     }
     public Thermometre() {
         this(.0, Unit.KELVIN);
@@ -21,6 +21,16 @@ public class Thermometre {
     }
     public void setTemperature(double temperature) {
         this.temperature = temperature;
+        if (this.unit != Unit.KELVIN) {
+            Unit tempUnit = this.unit;
+            this.switchToUnit(Unit.KELVIN);
+            if (this.temperature < 0){
+                this.temperature = 0;
+            }
+            this.switchToUnit(tempUnit);
+            return;
+        }
+        if (this.temperature < 0) this.temperature = 0;
     }
 
     public Unit getUnit() {

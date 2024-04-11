@@ -6,6 +6,7 @@ public class Main {
         System.out.println("thermometre = " + thermometre);
         thermometre.switchToUnit(Thermometre.Unit.CELSIUS);
         thermometre.setTemperature(0);
+        thermometre.setTemperature(-500);
         System.out.println("thermometre = " + thermometre);
         thermometre.switchToUnit(Thermometre.Unit.FAHRENHEIT);
         System.out.println("thermometre = " + thermometre);
@@ -14,5 +15,7 @@ public class Main {
 
         Thermometre tCelsius = new Thermometre(21.5, Thermometre.Unit.CELSIUS);
         System.out.println("tCelsius = " + tCelsius);
+        Thermometre tryBelowAbsoluteZero = new Thermometre(-1000.5, Thermometre.Unit.CELSIUS);
+        System.out.println("tryBelowAbsoluteZero = " + tryBelowAbsoluteZero);
     }
 }
