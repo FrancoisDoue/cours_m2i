@@ -26,7 +26,8 @@ public class IHM {
         Scanner sc = new Scanner(System.in);
         do {
             String input = sc.nextLine();
-            if (input.matches("^(-?)(0|([1-9][0-9]*))(\\.[0-9]+)?$")) // #PasMaRegex
+            // pas ma regex, mais je l'ai modifié
+            if (input.matches("^(-?)(0|([1-9][0-9]*))(\\.[0-9]{0,2}+)?$"))
                 return Double.parseDouble(input);
             System.out.println("Saisie invalide");
         } while (true);
