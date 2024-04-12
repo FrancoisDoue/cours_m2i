@@ -34,14 +34,14 @@ public abstract class CompteBancaire {
         double tempSolde = this.solde + solde;
         if (tempSolde < 0)
             return false;
-        this.solde = tempSolde;
+        this.solde = (double) Math.round(tempSolde * 100) /100;
         return true;
     }
 
     public boolean addOperation(Operation operation) {
         double amount = switch (operation.getType()) {
-            case DEPOT -> operation.getMontant();
-            case RETRAIT -> -operation.getMontant();
+            case DEPOT, INTERET -> operation.getMontant();
+            case RETRAIT, FRAIS -> -operation.getMontant();
         };
         boolean operationSuccess = setSolde(amount);
         operation.setStatus(operationSuccess);

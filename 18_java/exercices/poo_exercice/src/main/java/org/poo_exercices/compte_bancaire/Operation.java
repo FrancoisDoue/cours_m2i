@@ -3,7 +3,7 @@ package org.poo_exercices.compte_bancaire;
 public class Operation {
 
     public enum Type {
-        DEPOT, RETRAIT
+        DEPOT, RETRAIT, INTERET, FRAIS
     }
 
     private static int nbOperation = 0;
@@ -37,6 +37,10 @@ public class Operation {
                     " [ Dépot " + id + ", montant : + " + montant + " ]\u001B[0m";
             case RETRAIT ->
                     " [ Retrait " + id + ", montant : - " + montant + " ]\u001B[0m";
+            case INTERET ->
+                    " [ Interêt " + id + ", taux : +" + (montant*100) + "% ]\u001B[0m";
+            case FRAIS ->
+                    " [ Frais " + id + ", taux : -" + (montant*100) + "% ]\u001B[0m";
         };
         return (status ? "\u001B[32mApprouvé :" : "\u001B[31mRejeté :") + description;
     }

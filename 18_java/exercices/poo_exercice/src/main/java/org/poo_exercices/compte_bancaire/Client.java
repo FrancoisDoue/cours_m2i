@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public final class Client {
-    // TODO : tout.
     private final int id;
     private String nom;
     private String prenom;
