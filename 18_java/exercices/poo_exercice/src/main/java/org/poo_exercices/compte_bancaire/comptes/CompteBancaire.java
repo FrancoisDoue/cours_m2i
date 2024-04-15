@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class CompteBancaire {
-
     protected final int id;
     protected double solde = 0;
     protected Client client;
@@ -52,7 +51,6 @@ public abstract class CompteBancaire {
     public List<Operation> getOperations() {
         return operations;
     }
-
 
     public String toString() {
         return "id. " + id + " -> Solde disponible: " + solde + " €";
