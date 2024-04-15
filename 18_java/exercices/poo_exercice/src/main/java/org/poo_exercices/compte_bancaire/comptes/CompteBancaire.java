@@ -11,7 +11,7 @@ public abstract class CompteBancaire {
     protected double solde = 0;
     protected Client client;
 
-    protected List<Operation> operations = new ArrayList<Operation>();
+    protected List<Operation> operations = new ArrayList<>();
 
     private static int nbCompteBancaire = 0;
 
