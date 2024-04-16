@@ -5,6 +5,7 @@ import org.poo_exercices.compte_bancaire.comptes.CompteCourant;
 import org.poo_exercices.compte_bancaire.comptes.CompteEpargne;
 import org.poo_exercices.compte_bancaire.comptes.ComptePayant;
 
+import java.text.DecimalFormat;
 import java.util.List;
 import java.util.Scanner;
 
@@ -27,7 +28,7 @@ public class IHM {
         do {
             String input = sc.nextLine();
             // pas ma regex, mais je l'ai modifié
-            if (input.matches("^(-?)(0|([1-9][0-9]*))(\\.[0-9]{0,2}+)?$"))
+            if (input.matches("^(0|([1-9][0-9]*))(\\.[0-9]{0,2}+)?$"))
                 return Double.parseDouble(input);
             System.out.println("Saisie invalide");
         } while (true);
@@ -115,6 +116,7 @@ public class IHM {
     public static void gererCompteBancaire(CompteBancaire compte) {
         int choix;
         double montant;
+        DecimalFormat df = new DecimalFormat("#.##");
         do {
             System.out.printf("""
                     === Compte %s | solde: %s € ===
@@ -122,7 +124,7 @@ public class IHM {
                     2. Faire un retrait
                     3. Consulter les opérations
                     0. Retour au menu précédent
-                    """, compte.getId(), compte.getSolde());
+                    """, compte.getId(), df.format(compte.getSolde()));
 
             switch (choix = saisie(3)) {
                 case 1:
@@ -130,7 +132,7 @@ public class IHM {
                     montant = saisieMontant();
                     Operation operationDepot = new Operation(Operation.Type.DEPOT, montant);
                     compte.addOperation(operationDepot);
-                    System.out.println("Dépot réussi, nouveau solde : " + compte.getSolde() + " €");
+                    System.out.println("Dépot réussi, nouveau solde : " + df.format(compte.getSolde()) + " €");
                     break;
 
                 case 2:
@@ -138,7 +140,7 @@ public class IHM {
                     montant = saisieMontant();
                     Operation operationRetrait = new Operation(Operation.Type.RETRAIT, montant);
                     if (compte.addOperation(operationRetrait)) {
-                        System.out.println("Retrait effectué, nouveau solde : " + compte.getSolde());
+                        System.out.println("Retrait effectué, nouveau solde : " + df.format(compte.getSolde()) + "€");
                     } else {
                         System.out.println("\u001B[31mRetrait impossible: fonds insuffisants\u001B[0m");
                     }
