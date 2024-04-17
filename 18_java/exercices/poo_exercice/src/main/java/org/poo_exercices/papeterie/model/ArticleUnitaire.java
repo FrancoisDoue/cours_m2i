@@ -1,6 +1,6 @@
 package org.poo_exercices.papeterie.model;
 
-public abstract class ArticleUnitaire extends Article implements IArticle {
+public abstract class ArticleUnitaire extends Article {
     protected String nom;
     protected double prixUnitaire;
 

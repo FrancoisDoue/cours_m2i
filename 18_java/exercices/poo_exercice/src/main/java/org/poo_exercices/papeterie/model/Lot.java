@@ -2,7 +2,7 @@ package org.poo_exercices.papeterie.model;
 
 import java.text.DecimalFormat;
 
-public class Lot extends Article implements IArticle{
+public class Lot extends Article {
     private ArticleUnitaire articleUnitaire;
     private int qte;
     private double reduction;

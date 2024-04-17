@@ -21,4 +21,6 @@ public abstract class Article {
     public String toString() {
         return "ref. " + ref;
     }
+
+    public abstract double getPrix();
 }
