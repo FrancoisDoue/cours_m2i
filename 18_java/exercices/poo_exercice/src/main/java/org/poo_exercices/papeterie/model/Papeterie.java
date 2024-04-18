@@ -10,23 +10,23 @@ public class Papeterie {
         ArticleUnitaire[] tempArticles = {
                 new Ramette(20, "Ramette 30.gr", 30),
                 new Ramette(35, "Ramette 45.gr", 45),
-                new Ramette(18, "Ramette 45.gr", 20),
+                new Ramette(18, "Ramette 20.gr", 20),
                 new Stylo(2, "Stylo rouge", "Rouge"),
                 new Stylo(2.5, "Stylo bleu", "Bleu"),
                 new Stylo(1.8, "Stylo noir", "noir"),
                 new Stylo(2, "Stylo vert", "vert"),
         };
         Lot[] tempLot = {
-                new Lot(tempArticles[0], 5, .10),
-                new Lot(tempArticles[0], 10, .20),
-                new Lot(tempArticles[1], 5, .10),
-                new Lot(tempArticles[1], 10, .20),
-                new Lot(tempArticles[2], 5, .10),
-                new Lot(tempArticles[2], 10, .20),
-                new Lot(tempArticles[3], 5, .20),
-                new Lot(tempArticles[4], 5, .20),
-                new Lot(tempArticles[5], 5, .20),
-                new Lot(tempArticles[6], 5, .20),
+                new Lot(tempArticles[0].getRef(), 5, .10),
+                new Lot(tempArticles[0].getRef(), 10, .20),
+                new Lot(tempArticles[1].getRef(), 5, .10),
+                new Lot(tempArticles[1].getRef(), 10, .20),
+                new Lot(tempArticles[2].getRef(), 5, .10),
+                new Lot(tempArticles[2].getRef(), 10, .20),
+                new Lot(tempArticles[3].getRef(), 5, .20),
+                new Lot(tempArticles[4].getRef(), 5, .20),
+                new Lot(tempArticles[5].getRef(), 5, .20),
+                new Lot(tempArticles[6].getRef(), 5, .20),
         };
         for (ArticleUnitaire article : tempArticles) {
             articles.put(article.getRef(), article);

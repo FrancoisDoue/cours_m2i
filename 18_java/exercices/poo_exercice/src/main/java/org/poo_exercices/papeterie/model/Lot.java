@@ -3,32 +3,32 @@ package org.poo_exercices.papeterie.model;
 import java.text.DecimalFormat;
 
 public class Lot extends Article {
-    private ArticleUnitaire articleUnitaire;
+    private String articleRef;
     private int qte;
     private double reduction;
-    private double total;
 
-    public Lot(ArticleUnitaire articleUnitaire, int qte, double reduction) {
+    public Lot(String articleRef, int qte, double reduction) {
         super();
-        this.articleUnitaire = articleUnitaire;
+        this.articleRef = articleRef;
         this.qte = qte;
         this.reduction = reduction;
     }
 
-    public ArticleUnitaire getArticleUnitaire() {
-        return articleUnitaire;
+    public ArticleUnitaire getArticle() {
+        return (ArticleUnitaire) Papeterie.getPapeterie().getArticleByRef(articleRef);
     }
 
     @Override
     public double getPrix() {
-        return qte * articleUnitaire.getPrixUnitaire() * (1-reduction);
+        return qte * getArticle().getPrixUnitaire() * (1-reduction);
     }
 
     @Override
     public String toString() {
         DecimalFormat df = new DecimalFormat("#.##");
-        return qte + " - " + articleUnitaire + " - total: "
-                + df.format(getPrix()) + "€";
+        return "Lot de " + qte + " - "
+                + getArticle().getNom()
+                + " - prix: " + df.format(getPrix()) + "€";
     }
 
 

@@ -13,7 +13,7 @@ public class Main {
             System.out.println(i+1 + ". " + papeterie.getArticleByRef((String) refs[i]));
         }
         
-        Facture facture = new Facture();
+        Facture facture = new Facture("Georges Abitbol");
         System.out.println(
                 "Ajouter un article si moins de 10 = "
                 + facture.addLigne(papeterie.getArticleByRef("stylo_7"))
@@ -29,7 +29,7 @@ public class Main {
         facture.addLigne(papeterie.getArticleByRef((String) refs[6]));
         System.out.println(
                 "ajouter un article si plus de 10 = "
-                + (facture.addLigne(papeterie.getArticleByRef((String) refs[6])))
+                + facture.addLigne(papeterie.getArticleByRef((String) refs[6]))
         );
         System.out.println("facture = " + facture);
     }

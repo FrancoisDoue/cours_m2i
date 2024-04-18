@@ -10,14 +10,6 @@ public class Ramette extends ArticleUnitaire {
         this.grammage = grammage;
     }
 
-    public int getGrammage() {
-        return grammage;
-    }
-
-    public void setGrammage(int grammage) {
-        this.grammage = grammage;
-    }
-
     @Override
     public String toString() {
         return super.toString() + "grammage : " + grammage + "g";
