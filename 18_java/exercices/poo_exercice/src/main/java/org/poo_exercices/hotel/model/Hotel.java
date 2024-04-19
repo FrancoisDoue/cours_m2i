@@ -28,16 +28,50 @@ public class Hotel {
     }
 
     public void addClient(Client client) {
-        if (! clientList.contains(client))
-            clientList.add(client);
+        clientList.add(client);
+    }
+
+    public Client getClientById(int id) throws Exception{
+        Client client = clientList.stream()
+                .filter(c -> c.getId() == id)
+                .findFirst().orElse(null);
+        if (client == null) throw new Exception("Ce client n'existe pas");
+        return client;
+    }
+
+    public Client getClientByTelephone(String telephone) throws Exception {
+        Client client = clientList.stream()
+                .filter(c -> c.getTelephone().equals(telephone))
+                .findFirst().orElse(null);
+        if (client == null) throw new Exception("Ce client n'existe pas");
+        return client;
     }
 
     public void createReservation(Client client, Chambre chambre) {
 
     }
 
+    public List<Reservation> getReservationsByClientId(int id) throws Exception {
+        Client client = getClientById(id);
+        return getReservationsByClient(client);
+    }
+    public List<Reservation> getReservationsByClientTelephone(String telephone) throws Exception {
+        Client client = getClientByTelephone(telephone);
+        return getReservationsByClient(client);
+    }
+
+    private List<Reservation> getReservationsByClient(Client client) {
+        return reservationList.stream()
+                .filter(r -> r.getClient().equals(client))
+                .toList();
+    }
+
     public String getNom() {
         return nom;
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
     }
 
     public List<Chambre> getChambreList() {

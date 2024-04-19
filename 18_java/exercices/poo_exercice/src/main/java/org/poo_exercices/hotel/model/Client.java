@@ -44,4 +44,13 @@ public class Client {
         this.telephone = telephone;
     }
 
+    @Override
+    public String toString() {
+        return "Client{" +
+                "id=" + id +
+                ", nom='" + nom + '\'' +
+                ", prenom='" + prenom + '\'' +
+                ", telephone='" + telephone + '\'' +
+                '}';
+    }
 }
