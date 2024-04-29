@@ -12,26 +12,18 @@ public class Restaurant {
     private Dish dish;
 
     public Restaurant(CuisineFactory cuisineFactory) {
+        setFactory(cuisineFactory);
+    }
+
+    public void setFactory(CuisineFactory cuisineFactory) {
         ingredient = cuisineFactory.createIngredient();
         cookingUstensil = cuisineFactory.createUstensil();
         dish = cuisineFactory.createDish();
     }
 
-    public void setFactory(CuisineFactory factory) {
-        ingredient = factory.createIngredient();
-        cookingUstensil = factory.createUstensil();
-        dish = factory.createDish();
-    }
-
-    public Ingredient getIngredient() {
-        return ingredient;
-    }
-
-    public CookingUstensil getCookingUstensil() {
-        return cookingUstensil;
-    }
-
-    public Dish getDish() {
-        return dish;
+    public void make() {
+        ingredient.prepare();
+        cookingUstensil.use();
+        dish.serve();
     }
 }

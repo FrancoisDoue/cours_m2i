@@ -8,14 +8,9 @@ public class Main {
     public static void main(String[] args) {
 
         Restaurant restaurant = new Restaurant(new MexicanFactory());
-
-        restaurant.getCookingUstensil().use();
-        restaurant.getIngredient().prepare();
-        restaurant.getDish().serve();
-
+        restaurant.make();
         restaurant.setFactory(new ItalianFactory());
-        restaurant.getCookingUstensil().use();
-        restaurant.getIngredient().prepare();
-        restaurant.getDish().serve();
+        restaurant.make();
+
     }
 }
