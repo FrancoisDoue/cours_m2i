@@ -6,9 +6,9 @@ import org.design_patterns.exercices.exo_02_factory.mexican.MexicanFactory;
 public class Main {
 
     public static void main(String[] args) {
-        Restaurant restaurant = new Restaurant();
 
-        restaurant.setFactory(new MexicanFactory());
+        Restaurant restaurant = new Restaurant(new MexicanFactory());
+
         restaurant.getCookingUstensil().use();
         restaurant.getIngredient().prepare();
         restaurant.getDish().serve();

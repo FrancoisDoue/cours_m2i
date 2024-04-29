@@ -11,6 +11,12 @@ public class Restaurant {
     private CookingUstensil cookingUstensil;
     private Dish dish;
 
+    public Restaurant(CuisineFactory cuisineFactory) {
+        ingredient = cuisineFactory.createIngredient();
+        cookingUstensil = cuisineFactory.createUstensil();
+        dish = cuisineFactory.createDish();
+    }
+
     public void setFactory(CuisineFactory factory) {
         ingredient = factory.createIngredient();
         cookingUstensil = factory.createUstensil();
