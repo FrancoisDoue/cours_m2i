@@ -5,8 +5,8 @@ import lombok.Data;
 import java.util.ArrayList;
 
 @Data
-public class Product implements ProductSubject {
-    private ArrayList<ProductObserver> observers;
+public class Product implements Subject<Product> {
+    private ArrayList<Observer> observers;
     private String productName;
     private int stockLevel;
 
@@ -17,23 +17,23 @@ public class Product implements ProductSubject {
     }
 
     @Override
-    public void registerObserver(ProductObserver o) {
+    public void registerObserver(Observer<Product> o) {
         observers.add(o);
     }
 
     @Override
-    public void removeObserver(ProductObserver o) {
+    public void removeObserver(Observer<Product> o) {
         observers.remove(o);
     }
 
     @Override
-    public void notifyObservers() {
-        observers.forEach(o -> o.update(this));
+    public void notifyObservers(Product p) {
+        observers.forEach(o -> o.update(p));
     }
 
     public void setStockLevel(int stockLevel) {
         this.stockLevel = stockLevel;
-        notifyObservers();
+        notifyObservers(this);
     }
 
     @Override

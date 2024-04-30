@@ -1,7 +1,7 @@
 package org.design_patterns.exercices.exo_03_observers;
 
-public interface ProductObserver {
-    default void update(Product p) {
+public interface Observer<T> {
+    default void update(T p) {
         System.out.println("from "+ getClass().getSimpleName() + " - for => " + p);
     }
 }
