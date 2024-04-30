@@ -2,8 +2,6 @@ package org.design_patterns.exercices.tp_01.entity;
 
 public class Castle extends Building {
 
-    private String style;
-    private String name;
 
     private Castle(CastleBuilder builder) {
         this.level = builder.level;
@@ -16,6 +14,8 @@ public class Castle extends Building {
 
         private String style;
         private String name;
+        private int level;
+        private int size;
 
         public CastleBuilder style(String style) {
             this.style = style;
@@ -26,12 +26,11 @@ public class Castle extends Building {
             return this;
         }
 
-        @Override
         public CastleBuilder level(int level) {
             this.level = level;
             return this;
         }
-        @Override
+
         public CastleBuilder size(int size) {
             this.size = size;
             return this;
