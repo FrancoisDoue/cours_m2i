@@ -23,9 +23,7 @@ public class IHM {
                     """);
             switch (userInput = input(1)) {
                 case 1 -> {
-
                     System.out.println("Nom de l'investisseur");
-
                 }
                 case 2 -> {}
                 default -> System.out.println("Au revoir");

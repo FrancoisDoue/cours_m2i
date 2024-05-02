@@ -1,9 +1,12 @@
 package org.design_patterns.exercices.tp_03.entity.impl;
 
+import lombok.Getter;
+
 import java.util.ArrayList;
 import java.util.Random;
 
-public class StockExchange extends Thread implements Runnable {
+@Getter
+public class StockExchange extends Thread {
     private ArrayList<Share> shares = new ArrayList<>();
     private ArrayList<Trader> traders = new ArrayList<>();
 
@@ -24,25 +27,14 @@ public class StockExchange extends Thread implements Runnable {
         }
     }
 
-    public void updateStockExchange() {
-        shares.forEach(Share::updateValue);
-    }
-
-    public ArrayList<Share> getShares() {
-        return shares;
-    }
-
-    public ArrayList<Trader> getTraders() {
-        return traders;
-    }
     public void run() throws RuntimeException {
         while (true) {
+            shares.forEach(Share::updateValue);
             try {
                 sleep(5_000);
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
-            updateStockExchange();
         }
     }
 

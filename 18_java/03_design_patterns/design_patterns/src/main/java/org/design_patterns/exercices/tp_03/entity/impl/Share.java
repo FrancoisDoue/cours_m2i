@@ -1,14 +1,17 @@
 package org.design_patterns.exercices.tp_03.entity.impl;
 
+import lombok.Getter;
 import org.design_patterns.exercices.tp_03.entity.Observer;
 import org.design_patterns.exercices.tp_03.entity.Subject;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Random;
 
+@Getter
 public class Share implements Subject<Share> {
     private final ArrayList<Observer<Share>> observers;
-    String name;
+    private final String name;
     double initialValue;
 
     private static final Random rdm = new Random();
@@ -36,14 +39,15 @@ public class Share implements Subject<Share> {
 
     @Override
     public void notifyObservers() {
-        observers.forEach(o -> o.update(this));
+        observers.forEach(o -> o.updateToString(this));
     }
 
     @Override
     public String toString() {
+        DecimalFormat df = new DecimalFormat("#.##");
         return "Share{" +
                 "name='" + name + '\'' +
-                ", initialValue=" + initialValue +
+                ", value=" + df.format(initialValue) + " $" +
                 '}';
     }
 }
