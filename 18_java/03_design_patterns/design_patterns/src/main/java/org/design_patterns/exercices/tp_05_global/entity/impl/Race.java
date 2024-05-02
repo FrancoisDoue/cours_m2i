@@ -9,7 +9,7 @@ import java.util.Comparator;
 
 @Getter
 public class Race extends Thread implements Observer<Car> {
-    private ArrayList<Car> carList;
+    private final ArrayList<Car> carList;
     private static Race INSTANCE;
 
     private Race() {
@@ -25,21 +25,25 @@ public class Race extends Thread implements Observer<Car> {
         carList.add(car);
     }
 
-
     @Override
-    public void run() {
+    public void run() throws RuntimeException {
+
         while (true) {
-            System.out.println(" _____________ ");
+            System.out.println(" - - - - - - - - -");
             carList.forEach(Car::move);
             carList.sort(Comparator.comparing(Car::getDistance).reversed());
             carList.forEach(c -> c.setPosition(carList.indexOf(c)+1));
 
             try {
-                sleep(3000);
+                boolean isEnd = carList.stream().anyMatch(c -> c.getDistance() >= 200);
+                if(isEnd) {
+                    System.out.println("Fin de la course \n victoire de "+ carList.get(0));
+                    break;
+                }
+                sleep(1000);
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
-
         }
     }
 

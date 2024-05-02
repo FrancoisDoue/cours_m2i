@@ -40,7 +40,7 @@ public abstract class Car implements Subject<Car> {
 
     @Override
     public void removeObserver(Observer<Car> observer) {
-        observer = null;
+        this.observer = null;
     }
 
     @Override
@@ -50,9 +50,9 @@ public abstract class Car implements Subject<Car> {
 
     @Override
     public String toString() {
-        return getClass().getSimpleName()+"_"+ id + " {" +
-                "POSITION = " + position +
-                ", distance=" + distance +
-                '}';
+        return "#" + position + " - " +
+                getClass().getSimpleName() +" "+ id +
+                " (distance: " + distance +
+                "m) " ;
     }
 }
