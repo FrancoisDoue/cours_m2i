@@ -11,7 +11,7 @@ public class UserInterface {
     private final static Scanner sc = new Scanner(System.in);
     private static int input(int limit) {
         do {
-            String input = sc.nextLine();
+            String input = ""+ sc.nextInt();
             if (input.matches("[0-" + limit + "]"))
                 return Integer.parseInt(input);
             System.out.println("Saisie invalide");
@@ -55,7 +55,6 @@ public class UserInterface {
                 } while (choice != 0);
                 choice = -1;
             }
-
         } while (choice != 0);
     }
 }
