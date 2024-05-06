@@ -7,7 +7,7 @@ public class Main {
     public static void main(String[] args) {
         FlyWeightFactory factory = new FlyWeightFactory();
         Vehicle voiture = new Vehicle(5, factory.getFlyweight("voiture", "Peugeot", "partner", "blanc"));
-        Vehicle utilitaire = new Vehicle(2, factory.getFlyweight("voiture", "Peugeot", "partner", "blanc"));
+        Vehicle utilitaire = new Vehicle(2, factory.getFlyweight("voiture", "Peugeot", "partner", "bleu"));
         Vehicle velo1 = new Vehicle(1, factory.getFlyweight("vélo","vélo", "", "bleu"));
         Vehicle velo2 = new Vehicle(1, factory.getFlyweight("vélo","vélo", "", "rouge"));
         Vehicle velo3 = new Vehicle(1, factory.getFlyweight("vélo","vélo", "", "bleu"));
