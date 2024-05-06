@@ -9,7 +9,7 @@ import org.design_patterns.exercices.tp_me_at_the_zoo.utils.Subject;
 import java.util.ArrayList;
 import java.util.List;
 
-@Builder
+//@Builder
 @Data
 public abstract class Animal implements Subject<Animal> {
     protected String name;
