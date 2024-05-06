@@ -37,7 +37,7 @@ public class Race extends Thread implements Observer<Car> {
             try {
                 boolean isEnd = carList.stream().anyMatch(c -> c.getDistance() >= 200);
                 if(isEnd) {
-                    System.out.println("Fin de la course \n victoire de "+ carList.get(0));
+                    System.out.println("Fin de la course \nVictoire de "+ carList.get(0));
                     break;
                 }
                 sleep(1000);
