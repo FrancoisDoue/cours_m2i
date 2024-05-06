@@ -8,9 +8,9 @@ public class Main {
         FlyWeightFactory factory = new FlyWeightFactory();
         Vehicle voiture = new Vehicle(5, factory.getFlyweight("voiture", "Peugeot", "partner", "blanc"));
         Vehicle utilitaire = new Vehicle(2, factory.getFlyweight("voiture", "Peugeot", "partner", "blanc"));
-        Vehicle velo1 = new Vehicle(1, factory.getFlyweight("vélo","vélo", "avec_des_roues", "bleu"));
-        Vehicle velo2 = new Vehicle(1, factory.getFlyweight("vélo","vélo", "avec_des_roues", "rouge"));
-        Vehicle velo3 = new Vehicle(1, factory.getFlyweight("vélo","vélo", "avec_des_roues", "bleu"));
+        Vehicle velo1 = new Vehicle(1, factory.getFlyweight("vélo","vélo", "", "bleu"));
+        Vehicle velo2 = new Vehicle(1, factory.getFlyweight("vélo","vélo", "", "rouge"));
+        Vehicle velo3 = new Vehicle(1, factory.getFlyweight("vélo","vélo", "", "bleu"));
 
 
         System.out.println(voiture.display());
