@@ -6,24 +6,20 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PlanteDAO {
+public class PlanteDAO extends BaseDAO {
 
-    private Connection connection;
-    private PreparedStatement preparedStatement;
-    private String request;
-    private ResultSet resultSet;
     private List<Plante> plantes;
 
     public PlanteDAO(Connection connection) {
-        this.connection = connection;
-
+        super(connection);
     }
+
 
     public Plante createPlante(String name, int age, String color) throws SQLException {
         request = """
                 INSERT INTO plante (name, age, color)
                 VALUES (?, ?, ?)""";
-        preparedStatement = connection.prepareStatement(request, Statement.RETURN_GENERATED_KEYS);
+        preparedStatement = _connection.prepareStatement(request, Statement.RETURN_GENERATED_KEYS);
 
         preparedStatement.setString(1, name);
         preparedStatement.setInt(2, age);
@@ -44,7 +40,46 @@ public class PlanteDAO {
     public List<Plante> getAllPlantes() throws SQLException {
         List<Plante> plantes = new ArrayList<>();
         request = "SELECT * FROM plante";
-        preparedStatement = connection.prepareStatement(request);
+        preparedStatement = _connection.prepareStatement(request);
+        resultSet = preparedStatement.executeQuery();
+        while (resultSet.next()) {
+            plantes.add(Plante.builder()
+                    .id_plante(resultSet.getInt("id"))
+                    .name(resultSet.getString("name"))
+                    .age(resultSet.getInt("age"))
+                    .color(resultSet.getString("color"))
+                    .build()
+            );
+        }
+        return plantes;
+    }
+
+
+    @Override
+    public Object save(Object object) throws SQLException {
+        return null;
+    }
+
+    @Override
+    public Object update(Object object) throws SQLException {
+        return null;
+    }
+
+    @Override
+    public boolean delete(Object object) throws SQLException {
+        return false;
+    }
+
+    @Override
+    public Object get(int id) throws SQLException {
+        return null;
+    }
+
+    @Override
+    public List getAll() throws SQLException {
+        List<Plante> plantes = new ArrayList<>();
+        request = "SELECT * FROM plante";
+        preparedStatement = _connection.prepareStatement(request);
         resultSet = preparedStatement.executeQuery();
         while (resultSet.next()) {
             plantes.add(Plante.builder()

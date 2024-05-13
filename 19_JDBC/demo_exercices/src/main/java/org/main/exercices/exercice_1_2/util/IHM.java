@@ -1,20 +1,17 @@
-package org.main.exercices.util;
+package org.main.exercices.exercice_1_2.util;
 
-import org.main.exercices.DAO.FilmDAO;
-import org.main.exercices.Entity.Film;
+import org.main.exercices.exercice_1_2.DAO.FilmDAO;
+import org.main.exercices.exercice_1_2.Entity.Film;
 
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.time.LocalDate;
-import java.util.Comparator;
-import java.util.HashSet;
 import java.util.Scanner;
-import java.util.function.Predicate;
 
 public class IHM {
 
-    private Connection connection;
-    private FilmDAO filmDAO;
+    private final Connection connection;
+    private final FilmDAO filmDAO;
     private final Scanner scanner = new Scanner(System.in);
 
     public IHM() {
@@ -42,19 +39,29 @@ public class IHM {
                 case 2 -> addFilm();
                 case 3 -> updateFilm();
                 case 4 -> deleteFilm();
-                default -> { return; }
+                default -> {
+                    try {
+                        connection.close();
+                        return;
+                    } catch (SQLException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
             }
         }
     }
 
     public void updateFilm () {
+        Film film;
         showFilms();
         System.out.println("Sélectionnez l'id du film à modifier");
         int id = scanner.nextInt();
         scanner.nextLine();
-        Film film = filmDAO.getFilms().stream()
-                .filter(f -> f.getIdFilm() == id)
-                .findFirst().orElse(null);
+        try {
+            film = filmDAO.getById(id);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
         if (film == null) {
             System.out.println("Ce film n'existe pas");
             return;
@@ -66,7 +73,7 @@ public class IHM {
         System.out.println("Réalisateur : \"" + film.getDirector() + "\"");
         String director = scanner.nextLine();
         if (!director.isEmpty())
-            film.setDirector(title);
+            film.setDirector(director);
         try {
             if (filmDAO.updateFilm(film)) {
                 System.out.println("Film modifié");

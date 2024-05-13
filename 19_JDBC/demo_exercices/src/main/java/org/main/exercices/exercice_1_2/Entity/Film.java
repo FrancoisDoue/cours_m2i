@@ -1,4 +1,4 @@
-package org.main.exercices.Entity;
+package org.main.exercices.exercice_1_2.Entity;
 
 import lombok.Builder;
 import lombok.Data;

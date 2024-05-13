@@ -1,6 +1,6 @@
-package org.main.exercices;
+package org.main.exercices.exercice_1_2;
 
-import org.main.exercices.util.IHM;
+import org.main.exercices.exercice_1_2.util.IHM;
 
 public class Main {
     public static void main(String[] args) {

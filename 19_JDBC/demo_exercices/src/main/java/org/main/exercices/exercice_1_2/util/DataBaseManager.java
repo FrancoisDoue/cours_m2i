@@ -1,4 +1,4 @@
-package org.main.exercices.util;
+package org.main.exercices.exercice_1_2.util;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
