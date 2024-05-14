@@ -16,44 +16,56 @@ public class FilmDAO extends BaseDAO<Film> {
 
     @Override
     public Film create(Film film) throws SQLException {
-        request = """
-                INSERT INTO films(title, director, release_date, genre)
-                VALUES (?, ?, ?, ?)
-                """;
-        preparedStatement = connection.prepareStatement(request, Statement.RETURN_GENERATED_KEYS);
-        preparedStatement.setString(1, film.getTitle());
-        preparedStatement.setString(2, film.getDirector());
-        preparedStatement.setDate(3, Date.valueOf(film.getReleaseDate()));
-        preparedStatement.setString(4, film.getGenre());
-        if (preparedStatement.executeUpdate() != 1)
-            connection.rollback();
-
-        resultSet = preparedStatement.getGeneratedKeys();
-
-        if (resultSet.next()) {
-            film.setIdFilm(resultSet.getInt(1));
+        try {
+            request = """
+                    INSERT INTO films(title, director, release_date, genre)
+                    VALUES (?, ?, ?, ?)
+                    """;
+            preparedStatement = connection.prepareStatement(request, Statement.RETURN_GENERATED_KEYS);
+            preparedStatement.setString(1, film.getTitle());
+            preparedStatement.setString(2, film.getDirector());
+            preparedStatement.setDate(3, Date.valueOf(film.getReleaseDate()));
+            preparedStatement.setString(4, film.getGenre());
+            preparedStatement.executeUpdate();
+            resultSet = preparedStatement.getGeneratedKeys();
+            if (resultSet.next()) {
+                film.setIdFilm(resultSet.getInt(1));
+            }
+            connection.commit();
             return film;
+        } catch (SQLException e) {
+            connection.rollback();
+            return null;
+        }finally {
+            close();
         }
-        return null;
     }
 
     @Override
     public boolean update(Film film) throws SQLException {
-        request = """
+        try {
+            request = """
                 UPDATE films 
                 SET title=?, director=?, release_date=?, genre=?
                 WHERE id=?""";
-        preparedStatement = connection.prepareStatement(request);
-        preparedStatement.setString(1, film.getTitle());
-        preparedStatement.setString(2, film.getDirector());
-        preparedStatement.setDate(3, Date.valueOf(film.getReleaseDate()));
-        preparedStatement.setString(4, film.getGenre());
-        preparedStatement.setInt(5, film.getIdFilm());
-        if ( preparedStatement.executeUpdate() != 1 ) {
+            preparedStatement = connection.prepareStatement(request);
+            preparedStatement.setString(1, film.getTitle());
+            preparedStatement.setString(2, film.getDirector());
+            preparedStatement.setDate(3, Date.valueOf(film.getReleaseDate()));
+            preparedStatement.setString(4, film.getGenre());
+            preparedStatement.setInt(5, film.getIdFilm());
+            if ( preparedStatement.executeUpdate() == 1 ) {
+                connection.commit();
+                return true;
+            }
+            throw new SQLException();
+        } catch (SQLException e) {
             connection.rollback();
             return false;
+        } finally {
+            close();
         }
-        return true;
+
     }
 
     @Override
@@ -63,7 +75,7 @@ public class FilmDAO extends BaseDAO<Film> {
                 WHERE id=?""";
         preparedStatement = connection.prepareStatement(request);
         preparedStatement.setInt(1, id);
-        if (preparedStatement.executeUpdate() != 1 ) {
+        if ( preparedStatement.executeUpdate() != 1 ) {
             connection.rollback();
             return false;
         }
