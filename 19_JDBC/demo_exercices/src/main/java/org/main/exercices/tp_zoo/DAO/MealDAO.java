@@ -1,11 +1,17 @@
 package org.main.exercices.tp_zoo.DAO;
 
+import org.main.exercices.tp_zoo.entity.Animal;
 import org.main.exercices.tp_zoo.entity.Meal;
 import org.main.exercices.tp_zoo.utils.DataBaseManager;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.DateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 public class MealDAO extends AbstractDAO<Meal>{
@@ -54,6 +60,24 @@ public class MealDAO extends AbstractDAO<Meal>{
     @Override
     public Meal get(int id) throws SQLException {
         return null;
+    }
+
+    public List<Meal> getAllByAnimal(Animal animal) throws SQLException {
+        List<Meal> meals = new ArrayList<>();
+        connection = DataBaseManager.getConnection();
+        statement = connection.prepareStatement("SELECT * FROM MEAL WHERE idAnimal = ?");
+        statement.setInt(1, animal.getIdAnimal());
+        resultSet = statement.executeQuery();
+        while (resultSet.next()) {
+            meals.add( Meal.builder()
+                    .idMeal(resultSet.getInt("id"))
+                    .description(resultSet.getString("description"))
+                    .gaveAt(resultSet.getDate("gaveAt"))
+                    .animal(animal)
+                    .build()
+            );
+        }
+        return meals;
     }
 
     @Override

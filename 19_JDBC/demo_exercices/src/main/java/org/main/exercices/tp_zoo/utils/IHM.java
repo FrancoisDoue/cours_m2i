@@ -7,22 +7,21 @@ import org.main.exercices.tp_zoo.entity.Meal;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
 public class IHM {
     private static IHM INSTANCE;
-    private final Connection connection;
-    private AnimalDAO animalDAO;
-    private MealDAO mealDAO;
+    private final AnimalDAO animalDAO;
+    private final MealDAO mealDAO;
     private static final Scanner sc = new Scanner(System.in);
 
     private IHM() {
         try {
-            connection = DataBaseManager.getConnection();
-            animalDAO = new AnimalDAO(connection);
-            mealDAO = new MealDAO(connection);
+            mealDAO = new MealDAO( DataBaseManager.getConnection() );
+            animalDAO = new AnimalDAO( DataBaseManager.getConnection(), mealDAO );
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -47,6 +46,7 @@ public class IHM {
                     """);
             try {
                 int choice = sc.nextInt();
+                sc.nextLine();
                 switch (choice) {
                     default -> { return; }
                     case 1 -> showAnimalList();
