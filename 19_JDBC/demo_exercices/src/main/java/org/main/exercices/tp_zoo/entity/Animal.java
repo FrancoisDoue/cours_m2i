@@ -25,13 +25,13 @@ public class Animal {
         } else {
             meals.forEach(meal -> mealsString.append("\n\t").append(meal.toString()));
         }
-        return "Animal{" +
+        return "Animal - - " +
                 "idAnimal=" + idAnimal +
                 ", age=" + age +
                 ", name='" + name + '\'' +
                 ", specie='" + specie + '\'' +
                 ", description='" + description + '\'' +
                 ", location='" + location + '\'' + mealsString +
-                "}\n";
+                '\n';
     }
 }
