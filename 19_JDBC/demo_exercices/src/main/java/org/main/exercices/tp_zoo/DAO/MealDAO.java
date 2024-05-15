@@ -7,6 +7,8 @@ import org.main.exercices.tp_zoo.utils.DataBaseManager;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -68,7 +70,7 @@ public class MealDAO extends AbstractDAO<Meal>{
             meals.add( Meal.builder()
                     .idMeal(resultSet.getInt("id"))
                     .description(resultSet.getString("description"))
-                    .gaveAt(resultSet.getTimestamp("gaveAt"))
+                    .gaveAt(resultSet.getTimestamp("gaveAt").toLocalDateTime())
                     .animal(animal)
                     .build()
             );

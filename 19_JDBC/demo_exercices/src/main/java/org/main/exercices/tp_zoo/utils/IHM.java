@@ -5,9 +5,7 @@ import org.main.exercices.tp_zoo.DAO.MealDAO;
 import org.main.exercices.tp_zoo.entity.Animal;
 import org.main.exercices.tp_zoo.entity.Meal;
 
-import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
@@ -31,7 +29,6 @@ public class IHM {
         if (INSTANCE == null) INSTANCE = new IHM();
         return INSTANCE;
     }
-
 
     public void start() {
         while (true) {
@@ -103,6 +100,7 @@ public class IHM {
                 .build()
         );
     }
+
     private void showAnimalList(List<Animal> animals, String notFoundMessage) {
         if (animals.isEmpty()) {
             System.out.println(notFoundMessage);

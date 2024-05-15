@@ -3,14 +3,14 @@ package org.main.exercices.tp_zoo.entity;
 import lombok.Builder;
 import lombok.Data;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Data
 @Builder
 public class Meal {
     private int idMeal;
     private String description;
-    private Date gaveAt;
+    private LocalDateTime gaveAt;
     private Animal animal;
 
     @Override
