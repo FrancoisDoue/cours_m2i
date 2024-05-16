@@ -5,7 +5,12 @@
     <file url="file://$PROJECT_DIR$/src/main/java/org/main/demo/demo_2/DAO/PlanteDAO.java" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/src/main/java/org/main/demo/demo_redone/DAO/PlantDAO.java" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/src/main/java/org/main/exercices/exercice_1_2/DAO/FilmDAO.java" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/src/main/java/org/main/exercices/tp_zoo/DAO/AnimalAnimalKeeperDAO.java" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/src/main/java/org/main/exercices/tp_zoo/DAO/AnimalDAO.java" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/src/main/java/org/main/exercices/tp_zoo/DAO/AnimalKeeperDAO.java" dialect="MySQL" />
     <file url="file://$PROJECT_DIR$/src/main/java/org/main/exercices/tp_zoo/DAO/MealDAO.java" dialect="GenericSQL" />
+  </component>
+  <component name="SqlResolveMappings">
+    <file url="file://$PROJECT_DIR$/src/main/java/org/main/exercices/tp_zoo/DAO/AnimalKeeperDAO.java" scope="{&quot;node&quot;:{  &quot;@negative&quot;:&quot;1&quot;,  &quot;group&quot;:{   &quot;@kind&quot;:&quot;root&quot;,   &quot;node&quot;:{    &quot;name&quot;:{     &quot;@qname&quot;:&quot;5df08055-f200-4f0e-b517-2a8d18a70e54&quot;    },    &quot;group&quot;:{     &quot;@kind&quot;:&quot;schema&quot;,     &quot;node&quot;:{      &quot;name&quot;:{       &quot;@qname&quot;:&quot;java_tp_zoo&quot;      }     }    }   }  } }}" />
   </component>
 </project>

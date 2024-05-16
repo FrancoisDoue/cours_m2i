@@ -16,6 +16,7 @@ public class Animal {
     private String description;
     private String location;
     private List<Meal> meals;
+    private List<AnimalKeeper> animalKeepers;
 
     @Override
     public String toString() {

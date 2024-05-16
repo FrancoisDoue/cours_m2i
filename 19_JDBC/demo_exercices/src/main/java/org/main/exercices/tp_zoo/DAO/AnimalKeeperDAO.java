@@ -1,6 +1,5 @@
 package org.main.exercices.tp_zoo.DAO;
 
-import org.main.exercices.tp_zoo.entity.Animal;
 import org.main.exercices.tp_zoo.entity.AnimalKeeper;
 import org.main.exercices.tp_zoo.utils.DataBaseManager;
 
@@ -10,10 +9,20 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
 
-public class AnimalKeeperDAO extends AbstractManyToManyDAO<AnimalKeeper, Animal> {
+public class AnimalKeeperDAO extends AbstractDAO<AnimalKeeper> {
+
+    private final AnimalAnimalKeeperDAO animalAnimalKeeperDAO;
 
     protected AnimalKeeperDAO(Connection connection) {
         super(connection);
+        this.animalAnimalKeeperDAO = new AnimalAnimalKeeperDAO(connection);
+    }
+
+    public AnimalKeeper setAnimalsList(AnimalKeeper animalKeeper) throws SQLException {
+        animalKeeper.setAnimals(
+                animalAnimalKeeperDAO.getAnimalByKeeper(animalKeeper.getId())
+        );
+        return animalKeeper;
     }
 
     @Override
@@ -54,40 +63,23 @@ public class AnimalKeeperDAO extends AbstractManyToManyDAO<AnimalKeeper, Animal>
 
     @Override
     public AnimalKeeper get(int id) throws SQLException {
+        connection = DataBaseManager.getConnection();
         statement = connection.prepareStatement("SELECT * FROM animal_keeper WHERE id = ?");
         statement.setInt(1, id);
         ResultSet resultSet = statement.executeQuery();
         if (resultSet.next()) {
-            return AnimalKeeper.builder()
+            AnimalKeeper keeper = AnimalKeeper.builder()
                     .id(resultSet.getInt("id"))
                     .name(resultSet.getString("name"))
                     .build();
+            this.setAnimalsList(keeper);
+            return keeper;
         }
         return null;
     }
 
     @Override
     public List<AnimalKeeper> getAll() throws SQLException {
-        return List.of();
-    }
-
-    @Override
-    protected Animal add(Animal animal) throws SQLException {
-        return null;
-    }
-
-    @Override
-    protected boolean remove(int id) throws SQLException {
-        return false;
-    }
-
-    @Override
-    protected Animal select(int id) throws SQLException {
-        return null;
-    }
-
-    @Override
-    protected List<Animal> selectAll() throws SQLException {
         return List.of();
     }
 
