@@ -104,7 +104,6 @@ public class IngredientRecipeDAO extends AbstractDAO<IngredientRecipe> {
                             .build()
             );
         }
-        System.out.println(ingredients);
         close();
         return ingredients;
     }

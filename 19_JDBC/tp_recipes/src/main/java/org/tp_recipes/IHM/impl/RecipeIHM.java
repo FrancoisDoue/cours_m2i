@@ -19,7 +19,6 @@ public class RecipeIHM extends AbstractIHM {
     private static RecipeIHM INSTANCE;
     private final RecipeDAO recipeDAO;
     private final IngredientDAO ingredientDAO;
-//    private final Scanner sc;
 
     private RecipeIHM() throws SQLException {
         recipeDAO = new RecipeDAO();
@@ -98,7 +97,7 @@ public class RecipeIHM extends AbstractIHM {
                 while (true) {
                     System.out.println("Etape n°"+i + " : ");
                     steps.add(Step.builder().description(stringInputNotEmpty()).build());
-                    System.out.println("Ajouter une autre étape ?");
+                    System.out.println("Ajouter une autre étape ? [y]|[n]");
                     if(stringInput().equalsIgnoreCase("n")) break;
                     i++;
                 }

@@ -60,6 +60,7 @@ public class RecipeDAO extends AbstractDAO<Recipe> {
                 element.getSteps().forEach(step -> step.setIdRecipe(element.getId()));
                 stepDAO.saveMultiple(element.getSteps());
             }
+
             return element;
         } catch (SQLException e) {
             connection.rollback();
