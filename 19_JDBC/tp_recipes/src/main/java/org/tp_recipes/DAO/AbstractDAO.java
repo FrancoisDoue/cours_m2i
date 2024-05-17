@@ -30,6 +30,6 @@ public abstract class AbstractDAO<T> {
     protected void close() throws SQLException {
         if (!connection.isClosed()) connection.close();
         if (!statement.isClosed()) statement.close();
-        if (!resultSet.isClosed()) resultSet.close();
+        if (!(resultSet == null || resultSet.isClosed())) resultSet.close();
     }
 }

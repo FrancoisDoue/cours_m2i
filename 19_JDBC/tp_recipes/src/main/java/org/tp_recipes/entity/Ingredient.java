@@ -9,6 +9,7 @@ import lombok.Data;
 public class Ingredient {
     private int id;
     private String name;
+    private int quantity;
 
     @Override
     public String toString() {

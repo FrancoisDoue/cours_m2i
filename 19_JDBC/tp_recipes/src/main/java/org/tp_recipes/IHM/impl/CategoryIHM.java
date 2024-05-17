@@ -1,21 +1,19 @@
-package org.tp_recipes.IHM;
+package org.tp_recipes.IHM.impl;
 
 import lombok.Getter;
 import org.tp_recipes.DAO.impl.CategoryDAO;
+import org.tp_recipes.IHM.AbstractIHM;
 import org.tp_recipes.entity.Category;
 
 import java.sql.SQLException;
-import java.util.Scanner;
 
-public class CategoryIHM {
+@Getter
+public class CategoryIHM extends AbstractIHM {
     private static CategoryIHM INSTANCE;
-    @Getter
     private final CategoryDAO categoryDAO;
-    private final Scanner sc;
 
     private CategoryIHM() throws SQLException {
         categoryDAO = new CategoryDAO();
-        sc = new Scanner(System.in);
     }
 
     public static synchronized CategoryIHM getInstance() throws SQLException {
@@ -31,9 +29,7 @@ public class CategoryIHM {
                     2. Ajouter une catégorie
                     """
             );
-            int entry = sc.nextInt();
-            sc.nextLine();
-            switch (entry) {
+            switch (this.intInput(2)) {
                 case 1 -> showCategories();
                 case 2 -> addCategory();
                 default -> {
@@ -58,12 +54,11 @@ public class CategoryIHM {
                     - - - Ajouter une catégorie - - -
                     Intitulé de la catégorie :"""
             );
-            String categorieName = sc.nextLine();
             Category i = categoryDAO.save(
-                    Category.builder().title(categorieName).build()
+                    Category.builder().title(stringInputNotEmpty()).build()
             );
             System.out.println("Ingrédient ajouté => " + i);
             System.out.println("Ajouter un autre ingrédient? [y] | [n]");
-        } while (sc.nextLine().equalsIgnoreCase("y"));
+        } while (stringInputNotEmpty().equalsIgnoreCase("y"));
     }
 }

@@ -1,19 +1,19 @@
-package org.tp_recipes.IHM;
+package org.tp_recipes.IHM.impl;
 
 import org.tp_recipes.DAO.impl.IngredientDAO;
+import org.tp_recipes.IHM.AbstractIHM;
 import org.tp_recipes.entity.Ingredient;
 
 import java.sql.SQLException;
 import java.util.Scanner;
 
-public class IngredientIHM {
+public class IngredientIHM extends AbstractIHM {
+
     private static IngredientIHM INSTANCE;
     private final IngredientDAO ingredientDAO;
-    private final Scanner sc;
 
     private IngredientIHM() throws SQLException {
         ingredientDAO = new IngredientDAO();
-        sc = new Scanner(System.in);
     }
 
     public static synchronized IngredientIHM getInstance() throws SQLException {
@@ -29,9 +29,7 @@ public class IngredientIHM {
                     2. Ajouter un ingredient
                     """
             );
-            int entry = sc.nextInt();
-            sc.nextLine();
-            switch (entry) {
+            switch (intInput(2)) {
                 case 1 -> showIngredients();
                 case 2 -> addIngredient();
                 default -> {
@@ -53,13 +51,13 @@ public class IngredientIHM {
                     - - - Ajouter un ingredient - - -
                     Nom de l'ingrédient :"""
             );
-            String ingredientName = sc.nextLine();
+            String ingredientName = stringInputNotEmpty();
             Ingredient i = ingredientDAO.save(
                     Ingredient.builder().name(ingredientName).build()
             );
             System.out.println("Ingrédient ajouté => " + i);
             System.out.println("Ajouter un autre ingrédient? [y] | [n]");
-        } while (sc.nextLine().equalsIgnoreCase("y"));
+        } while (stringInputNotEmpty().equalsIgnoreCase("y"));
     }
 
 }

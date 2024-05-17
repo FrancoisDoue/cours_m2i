@@ -1,7 +1,9 @@
 package org.tp_recipes.DAO.impl;
 
 import org.tp_recipes.DAO.AbstractDAO;
+import org.tp_recipes.entity.IngredientRecipe;
 import org.tp_recipes.entity.Recipe;
+import org.tp_recipes.entity.Step;
 
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -11,9 +13,13 @@ import java.util.List;
 public class RecipeDAO extends AbstractDAO<Recipe> {
 
     private final CategoryDAO categoryDAO;
+    private final IngredientRecipeDAO ingredientDAO;
+    private final StepDAO stepDAO;
 
     public RecipeDAO() throws SQLException {
         categoryDAO = new CategoryDAO();
+        ingredientDAO = new IngredientRecipeDAO();
+        stepDAO = new StepDAO();
     }
 
     @Override
@@ -39,6 +45,21 @@ public class RecipeDAO extends AbstractDAO<Recipe> {
                 element.setId(resultSet.getInt(1));
             }
             connection.commit();
+            if (element.getIngredients() != null) {
+                List<IngredientRecipe> ingredients = new ArrayList<>();
+                element.getIngredients().forEach(ingredient ->
+                    ingredients.add(IngredientRecipe.builder()
+                            .idRecipe(element.getId())
+                            .idIngredient(ingredient.getId())
+                            .quantity(ingredient.getQuantity())
+                            .build())
+                );
+                ingredientDAO.saveMultiple(ingredients);
+            }
+            if (element.getSteps() != null) {
+                element.getSteps().forEach(step -> step.setIdRecipe(element.getId()));
+                stepDAO.saveMultiple(element.getSteps());
+            }
             return element;
         } catch (SQLException e) {
             connection.rollback();
@@ -77,6 +98,12 @@ public class RecipeDAO extends AbstractDAO<Recipe> {
                     .preparationTime(resultSet.getInt("preparation_time"))
                     .cookingTime(resultSet.getInt("cooking_time"))
                     .difficulty(resultSet.getInt("difficulty"))
+                    .ingredients(
+                            ingredientDAO.getAllIngredientByIdRecipe(
+                                    resultSet.getInt("id")
+                            )
+                    )
+                    .steps(stepDAO.getAllByIdRecipe(resultSet.getInt("id")))
                     .build();
         }
         close();
@@ -98,6 +125,12 @@ public class RecipeDAO extends AbstractDAO<Recipe> {
                             .cookingTime(resultSet.getInt("cooking_time"))
                             .difficulty(resultSet.getInt("difficulty"))
                             .category(categoryDAO.get(resultSet.getInt("id_category")))
+                            .ingredients(
+                                    ingredientDAO.getAllIngredientByIdRecipe(
+                                            resultSet.getInt("id")
+                                    )
+                            )
+                            .steps(stepDAO.getAllByIdRecipe(resultSet.getInt("id")))
                             .build()
             );
         }
