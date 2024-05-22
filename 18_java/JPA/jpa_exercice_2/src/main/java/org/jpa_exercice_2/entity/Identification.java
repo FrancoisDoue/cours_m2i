@@ -20,6 +20,6 @@ public class Identification {
 
     private String ip;
 
-    @OneToOne(mappedBy = "identification", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "identification", fetch = FetchType.EAGER)
     private Computer computer;
 }

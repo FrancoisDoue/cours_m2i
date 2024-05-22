@@ -5,8 +5,8 @@
 
     <persistence-unit name="jpa_exercice_2">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
-        <class>org.jpa_exercice_2.entity.Computer</class>
         <class>org.jpa_exercice_2.entity.Identification</class>
+        <class>org.jpa_exercice_2.entity.Computer</class>
 
         <properties>
             <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>

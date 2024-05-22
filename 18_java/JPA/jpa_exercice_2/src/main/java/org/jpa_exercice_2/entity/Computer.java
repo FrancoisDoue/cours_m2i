@@ -18,6 +18,6 @@ public class Computer {
     private String name;
     private String description;
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "identification_id", unique = true)
+    @JoinColumn(name = "identification_id")
     private Identification identification;
 }

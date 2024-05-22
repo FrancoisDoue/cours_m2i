@@ -19,9 +19,11 @@ public class IHM {
             Scanner sc = new Scanner(System.in);
             System.out.println("""
                     1. Créer un ordinateur
-                    2. Assigner une adresse IP
-                    3. Afficher tous les ordinateurs
-                    4. Afficher les IP enregistrées
+                    2. Modifier un ordinateur existant
+                    3. Supprimer un ordinateur
+                    4. Assigner une adresse IP
+                    5. Afficher tous les ordinateurs
+                    6. Afficher les IP enregistrées
                     [0] Quitter
                     """);
             int choice = sc.nextInt();
@@ -31,9 +33,11 @@ public class IHM {
                     return;
                 }
                 case 1 -> createComputerMenu();
-                case 2 -> setIpMenu();
-                case 3 -> showComputers();
-                case 4 -> showIdentifications();
+                case 2 -> updateComputerMenu();
+                case 3 -> deleteComputerMenu();
+                case 4 -> setIpMenu();
+                case 5 -> showComputers();
+                case 6 -> showIdentifications();
                 default -> System.out.println("Saisie invalide");
             }
         }
@@ -64,8 +68,41 @@ public class IHM {
         System.out.println(getComputer(computer.getId()));
     }
 
+    private void updateComputerMenu() {
+        Scanner sc = new Scanner(System.in);
+        showComputers();
+        System.out.println("Choisir un ordinateur (id)");
+        Computer computer = getComputer(sc.nextInt());
+        sc.nextLine();
+        System.out.println("Saisir le modèle : ");
+        computer.setName(sc.nextLine());
+        System.out.println("Saisir une description (optionnel) :");
+        String description = sc.nextLine();
+        if (!description.equals("")) {
+            computer.setDescription(description);
+        }
+        System.out.println(updateComputer(computer));
+    }
+
+    private void deleteComputerMenu() {
+        Scanner sc = new Scanner(System.in);
+        showComputers();
+        System.out.println("Choisir un ordinateur (id)");
+        int id = sc.nextInt();
+        Computer computer = getComputer(id);
+        if (em.contains(computer)) {
+            removeComputer(computer);
+            if (getComputer(id) == null)
+                System.out.println("Ordinateur supprimé avec succès");
+        }
+    }
+
     private Computer createComputer(String name) {
         Computer computer = Computer.builder().name(name).build();
+        return updateComputer(computer);
+    }
+
+    private Computer updateComputer(Computer computer) {
         em.getTransaction().begin();
         em.persist(computer);
         em.getTransaction().commit();
@@ -91,9 +128,10 @@ public class IHM {
     }
 
     private void setIpToComputer(Computer computer, String ip) {
-        Identification identification = Identification.builder().ip(ip).computer(computer).build();
+        Identification identification = Identification.builder().ip(ip).build();
+        computer.setIdentification(identification);
         em.getTransaction().begin();
-        em.persist(identification);
+        em.persist(computer);
         em.getTransaction().commit();
     }
 
