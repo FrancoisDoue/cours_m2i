@@ -35,7 +35,12 @@ public class Computer {
     @JoinColumn(name = "os_id")
     private OS os;
 
-    @ManyToMany(mappedBy = "computer")
+    // ! mappedBy refer to property, not the class!
+    @ManyToMany(mappedBy = "computers")
     private List<Device> devices;
+
+    private void add(Device device) {
+        devices.add(device);
+    }
 
 }

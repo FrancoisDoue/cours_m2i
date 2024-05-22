@@ -24,4 +24,8 @@ public class Device {
             inverseJoinColumns = @JoinColumn(name = "computer_id")
     )
     private List<Computer> computers;
+
+    public void add(Computer computer) {
+        computers.add(computer);
+    }
 }
