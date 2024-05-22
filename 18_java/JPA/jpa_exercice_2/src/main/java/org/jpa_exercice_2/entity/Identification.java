@@ -14,9 +14,12 @@ import javax.persistence.*;
 @Data
 @Builder
 public class Identification {
+
     @Id @GeneratedValue @Column(name = "identification_id")
     private int id;
+
     private String ip;
-    @OneToOne(mappedBy = "identification")
+
+    @OneToOne(mappedBy = "identification", cascade = CascadeType.ALL)
     private Computer computer;
 }

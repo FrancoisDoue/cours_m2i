@@ -20,8 +20,8 @@ public class IHM {
             System.out.println("""
                     1. Créer un ordinateur
                     2. Assigner une adresse IP
-                    3. Afficher un ordinateur
-                    4. Afficher tous les ordinateurs
+                    3. Afficher tous les ordinateurs
+                    4. Afficher les IP enregistrées
                     [0] Quitter
                     """);
             int choice = sc.nextInt();
@@ -30,18 +30,38 @@ public class IHM {
                 case 0 -> {
                     return;
                 }
-                case 1 -> {
-                    System.out.println("Modèle de l'ordinateur : ");
-                    System.out.println(createComputer(sc.nextLine()));
-                }
-                case 2 -> {
-
-                }
-                case 3 -> {}
-                case 4 -> {}
+                case 1 -> createComputerMenu();
+                case 2 -> setIpMenu();
+                case 3 -> showComputers();
+                case 4 -> showIdentifications();
                 default -> System.out.println("Saisie invalide");
             }
         }
+    }
+
+    private void createComputerMenu() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Modèle de l'ordinateur : ");
+        System.out.println(createComputer(sc.nextLine()));
+    }
+
+    private void showComputers() {
+        getComputers().forEach(System.out::println);
+    }
+
+    private void showIdentifications() {
+        getIdentifications().forEach(System.out::println);
+    }
+
+    private void setIpMenu() {
+        Scanner sc = new Scanner(System.in);
+        showComputers();
+        System.out.println("Sélectionnez un ordinateur (id)");
+        Computer computer = getComputer(sc.nextInt());
+        sc.nextLine();
+        System.out.println("Saisir l'ip : ");
+        setIpToComputer(computer, sc.nextLine());
+        System.out.println(getComputer(computer.getId()));
     }
 
     private Computer createComputer(String name) {
@@ -60,6 +80,10 @@ public class IHM {
         return em.createQuery("select c from Computer c", Computer.class).getResultList();
     }
 
+    private List<Identification> getIdentifications() {
+        return em.createQuery("select i from Identification i", Identification.class).getResultList();
+    }
+
     private void removeComputer(Computer computer) {
         em.getTransaction().begin();
         em.remove(computer);
@@ -67,11 +91,9 @@ public class IHM {
     }
 
     private void setIpToComputer(Computer computer, String ip) {
-        computer.setIdentification(
-                Identification.builder().ip(ip).build()
-        );
+        Identification identification = Identification.builder().ip(ip).computer(computer).build();
         em.getTransaction().begin();
-        em.persist(computer);
+        em.persist(identification);
         em.getTransaction().commit();
     }
 

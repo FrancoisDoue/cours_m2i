@@ -17,7 +17,7 @@ public class Computer {
     private int id;
     private String name;
     private String description;
-    @OneToOne
-    @JoinColumn(name = "identification_id")
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "identification_id", unique = true)
     private Identification identification;
 }
