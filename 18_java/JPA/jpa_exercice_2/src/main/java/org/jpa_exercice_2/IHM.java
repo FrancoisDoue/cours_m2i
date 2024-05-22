@@ -2,6 +2,8 @@ package org.jpa_exercice_2;
 
 import org.jpa_exercice_2.entity.Computer;
 import org.jpa_exercice_2.entity.Identification;
+import org.jpa_exercice_2.entity.OS;
+import org.jpa_exercice_2.entity.Processor;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -24,6 +26,10 @@ public class IHM {
                     4. Assigner une adresse IP
                     5. Afficher tous les ordinateurs
                     6. Afficher les IP enregistrées
+                    7. Ajouter un Processeur
+                    8. Afficher les processeurs
+                    9. Ajouter un OS
+                    10. Afficher les OS
                     [0] Quitter
                     """);
             int choice = sc.nextInt();
@@ -38,6 +44,10 @@ public class IHM {
                 case 4 -> setIpMenu();
                 case 5 -> showComputers();
                 case 6 -> showIdentifications();
+                case 7 -> createProcessorMenu();
+                case 8 -> getProcessors().forEach(p -> System.out.println(p.toFullString()));
+                case 9 -> createOSmenu();
+                case 10 -> getOSs().forEach(System.out::println);
                 default -> System.out.println("Saisie invalide");
             }
         }
@@ -46,7 +56,24 @@ public class IHM {
     private void createComputerMenu() {
         Scanner sc = new Scanner(System.in);
         System.out.println("Modèle de l'ordinateur : ");
-        System.out.println(createComputer(sc.nextLine()));
+        String computerName = sc.nextLine();
+        getOSs().forEach(System.out::println);
+        System.out.println("Choisissez un processeur");
+        OS os = getOS(sc.nextInt());
+        sc.nextLine();
+        System.out.println(os);
+        getProcessors().forEach(System.out::println);
+        System.out.println("Choisissez un os");
+        Processor processor = getProcessor(sc.nextInt());
+        sc.nextLine();
+        System.out.println(processor);
+        System.out.println(createComputer(
+                Computer.builder()
+                        .name(computerName)
+                        .os(os)
+                        .processor(processor)
+                        .build()
+        ));
     }
 
     private void showComputers() {
@@ -54,7 +81,7 @@ public class IHM {
     }
 
     private void showIdentifications() {
-        getIdentifications().forEach(System.out::println);
+        getIdentifications().forEach(e -> System.out.println(e.toFullString()));
     }
 
     private void setIpMenu() {
@@ -78,10 +105,10 @@ public class IHM {
         computer.setName(sc.nextLine());
         System.out.println("Saisir une description (optionnel) :");
         String description = sc.nextLine();
-        if (!description.equals("")) {
+        if (!description.isEmpty()) {
             computer.setDescription(description);
         }
-        System.out.println(updateComputer(computer));
+        System.out.println(createComputer(computer));
     }
 
     private void deleteComputerMenu() {
@@ -97,12 +124,51 @@ public class IHM {
         }
     }
 
-    private Computer createComputer(String name) {
-        Computer computer = Computer.builder().name(name).build();
-        return updateComputer(computer);
+    private List<OS> getOSs() {
+        return em.createQuery("select os from OS os", OS.class).getResultList();
     }
 
-    private Computer updateComputer(Computer computer) {
+    private OS getOS(int id) {
+        return em.find(OS.class, id);
+    }
+
+    private List<Processor> getProcessors() {
+        return em.createQuery("select p from Processor p", Processor.class).getResultList();
+    }
+
+    private Processor getProcessor(int id) {
+        return em.find(Processor.class, id);
+    }
+
+    private void createOSmenu() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Référence du système d'exploitation :");
+        OS os = OS.builder().name(sc.nextLine()).build();
+        em.getTransaction().begin();
+        em.persist(os);
+        em.getTransaction().commit();
+        System.out.println(os);
+    }
+
+    private void createProcessorMenu() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Référence du processeur : ");
+        String processorName = sc.nextLine();
+        System.out.println("Nombre de coeurs : ");
+        int cores = sc.nextInt();
+        sc.nextLine();
+        System.out.println("Vitesse (en GHz) : ");
+        double speed = Double.parseDouble(sc.nextLine());
+        Processor processor = Processor.builder().name(processorName).core(cores).speed(speed).build();
+        em.getTransaction().begin();
+        em.persist(processor);
+        em.getTransaction().commit();
+        System.out.println(processor);
+    }
+
+
+
+    private Computer createComputer(Computer computer) {
         em.getTransaction().begin();
         em.persist(computer);
         em.getTransaction().commit();
@@ -118,7 +184,7 @@ public class IHM {
     }
 
     private List<Identification> getIdentifications() {
-        return em.createQuery("select i from Identification i", Identification.class).getResultList();
+        return em.createQuery("select c.identification from Computer c", Identification.class).getResultList();
     }
 
     private void removeComputer(Computer computer) {
@@ -128,10 +194,10 @@ public class IHM {
     }
 
     private void setIpToComputer(Computer computer, String ip) {
-        Identification identification = Identification.builder().ip(ip).build();
+        Identification identification = Identification.builder().ip(ip).computer(computer).build();
         computer.setIdentification(identification);
         em.getTransaction().begin();
-        em.persist(computer);
+        em.merge(computer);
         em.getTransaction().commit();
     }
 

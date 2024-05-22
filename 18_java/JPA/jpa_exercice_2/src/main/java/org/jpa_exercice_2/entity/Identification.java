@@ -13,13 +13,27 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Data
 @Builder
+//@Embeddable
 public class Identification {
 
-    @Id @GeneratedValue @Column(name = "identification_id")
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column(name = "identification_id")
     private int id;
 
     private String ip;
 
-    @OneToOne(mappedBy = "identification", fetch = FetchType.EAGER)
+    @OneToOne(mappedBy = "identification", fetch = FetchType.LAZY)
     private Computer computer;
+
+    @Override
+    public String toString() {
+        return "Identification{" +
+                "id=" + id +
+                ", ip='" + ip + '\'' +
+                '}';
+    }
+
+    public String toFullString() {
+        return "[ " + this.toString() + ", computer=" + this.computer + " ]";
+    }
+
 }
