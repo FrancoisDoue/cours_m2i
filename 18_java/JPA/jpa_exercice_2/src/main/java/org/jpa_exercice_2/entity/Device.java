@@ -23,7 +23,7 @@ public class Device {
             joinColumns = @JoinColumn(name = "device_id"),
             inverseJoinColumns = @JoinColumn(name = "computer_id")
     )
-    private List<Computer> computers;
+    private List<Computer> computers = List.of();
 
     public void add(Computer computer) {
         computers.add(computer);
