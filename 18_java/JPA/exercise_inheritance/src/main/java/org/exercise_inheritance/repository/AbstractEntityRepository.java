@@ -12,10 +12,6 @@ public abstract class AbstractEntityRepository<T> {
         em = DatabaseManager.getInstance().getEm();
     }
 
-    public abstract T getById(int id);
-
-    public abstract List<T> getAll();
-
     public T save(T entity){
         em.getTransaction().begin();
         em.persist(entity);
@@ -34,6 +30,6 @@ public abstract class AbstractEntityRepository<T> {
         em.getTransaction().begin();
         em.remove(em.merge(entity));
         em.getTransaction().commit();
-        return em.contains(entity);
+        return !em.contains(entity);
     }
 }
