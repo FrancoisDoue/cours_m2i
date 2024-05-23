@@ -1,7 +1,6 @@
-package org.jpa_exercice_2.ihm;
+package org.jpa_exercice_2.repository;
 
 import org.jpa_exercice_2.entity.Computer;
-import org.jpa_exercice_2.repository.AbstractEntityRepository;
 
 import java.util.List;
 

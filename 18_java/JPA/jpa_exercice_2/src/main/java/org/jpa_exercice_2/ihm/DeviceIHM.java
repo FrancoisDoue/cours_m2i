@@ -2,6 +2,7 @@ package org.jpa_exercice_2.ihm;
 
 import org.jpa_exercice_2.entity.Computer;
 import org.jpa_exercice_2.entity.Device;
+import org.jpa_exercice_2.repository.ComputerRepository;
 import org.jpa_exercice_2.repository.DeviceRepository;
 
 import java.util.List;
@@ -104,19 +105,15 @@ public class DeviceIHM {
             System.out.println("Il n'y a aucun ordinateur enregistré\nRetour au menu précédent");
             return;
         }
-        System.out.println(" - - - Ajouter un ordinateur - - -");
+        System.out.println(" - - - Associer un ordinateur - - -");
+        showDevices();
         System.out.println("Sélectionnez le périphérique (id) :");
         Device device = deviceRepository.getById(scanner.nextInt());
         scanner.nextLine();
         if (device != null) {
             while (true) {
                 System.out.println(device);
-                System.out.println("Sélectionnez l'ordinateur");
-                Computer computer = computerRepository.getById(scanner.nextInt());
-                if (computer == null) {
-                    System.out.println("Aucun ordinateur trouvé");
-                    continue;
-                }
+                Computer computer = ComputerIHM.getInstance().selectComputer();
                 device.add(computer);
                 System.out.println("Ajouter un autre ordinateur ? [y/n]");
                 if (scanner.nextLine().equalsIgnoreCase("n")) break;
