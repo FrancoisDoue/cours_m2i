@@ -13,7 +13,7 @@ public class DatabaseManager {
     private final EntityManager em;
 
     private DatabaseManager() {
-        emf = Persistence.createEntityManagerFactory("tp_billeterie");
+        emf = Persistence.createEntityManagerFactory("tp_billetterie");
         em = emf.createEntityManager();
     }
 

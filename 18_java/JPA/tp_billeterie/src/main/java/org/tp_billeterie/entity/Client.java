@@ -17,7 +17,7 @@ public class Client {
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.DETACH)
     @JoinColumn(name = "adress_id")
-    private Adress adress;
+    private Address address;
 
     private int age;
     private String phoneNumber;
@@ -28,7 +28,7 @@ public class Client {
                 "id=" + id +
                 ", firstname='" + firstname + '\'' +
                 ", lastname='" + lastname + '\'' +
-                ", adress=" + adress +
+                ", address=" + address +
                 ", age=" + age +
                 ", phoneNumber='" + phoneNumber + '\'' +
                 '}';
