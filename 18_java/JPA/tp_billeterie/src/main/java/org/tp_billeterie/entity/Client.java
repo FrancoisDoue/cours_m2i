@@ -10,16 +10,20 @@ import javax.persistence.*;
 @Builder @AllArgsConstructor @NoArgsConstructor @Data
 @Entity
 public class Client {
+
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
     private String firstname;
+
     private String lastname;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.DETACH)
-    @JoinColumn(name = "adress_id")
+    @JoinColumn(name = "address_id")
     private Address address;
 
     private int age;
+
     private String phoneNumber;
 
     @Override

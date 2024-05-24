@@ -13,8 +13,11 @@ import javax.persistence.*;
 @NoArgsConstructor @AllArgsConstructor
 @Entity @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class Address {
+
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String adress;
+
+    private String address;
+
     private String city;
 }

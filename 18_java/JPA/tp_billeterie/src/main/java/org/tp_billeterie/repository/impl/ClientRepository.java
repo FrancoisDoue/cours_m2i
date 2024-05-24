@@ -8,11 +8,11 @@ import java.util.List;
 public class ClientRepository extends AbstractRepository<Client> {
     @Override
     public Client getById(int id) {
-        return null;
+        return em.find(Client.class, id);
     }
 
     @Override
     public List<Client> getAll() {
-        return List.of();
+        return em.createQuery("select c from Client c", Client.class).getResultList();
     }
 }

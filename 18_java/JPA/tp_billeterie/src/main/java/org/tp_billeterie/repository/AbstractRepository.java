@@ -6,7 +6,7 @@ import javax.persistence.EntityManager;
 import java.util.List;
 
 public abstract class AbstractRepository<T> {
-    private final EntityManager em;
+    protected final EntityManager em;
     public AbstractRepository() {
         em = DatabaseManager.getInstance().getEm();
     }

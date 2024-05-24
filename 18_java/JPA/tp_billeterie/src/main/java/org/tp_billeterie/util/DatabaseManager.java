@@ -1,10 +1,12 @@
 package org.tp_billeterie.util;
 
 import lombok.Getter;
+import org.hibernate.collection.internal.PersistentMap;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import java.util.Map;
 
 @Getter
 public class DatabaseManager {

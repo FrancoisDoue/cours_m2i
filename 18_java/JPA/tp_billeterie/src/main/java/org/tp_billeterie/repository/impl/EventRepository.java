@@ -8,11 +8,11 @@ import java.util.List;
 public class EventRepository extends AbstractRepository<Event> {
     @Override
     public Event getById(int id) {
-        return null;
+        return em.find(Event.class, id);
     }
 
     @Override
     public List<Event> getAll() {
-        return List.of();
+        return em.createQuery("select e from Event e", Event.class).getResultList();
     }
 }
