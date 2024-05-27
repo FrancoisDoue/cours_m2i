@@ -1,8 +1,7 @@
-package org.tp_billeterie.repository;
+package org.tp_billetterie.repository;
 
-import org.tp_billeterie.util.DatabaseManager;
+import org.tp_billetterie.util.DatabaseManager;
 
-import javax.persistence.Entity;
 import javax.persistence.EntityManager;
 import java.util.List;
 

@@ -1,6 +1,6 @@
-package org.tp_billeterie.util;
+package org.tp_billetterie.util;
 
-import org.tp_billeterie.entity.*;
+import org.tp_billetterie.entity.*;
 
 import java.time.LocalDate;
 import java.time.LocalTime;

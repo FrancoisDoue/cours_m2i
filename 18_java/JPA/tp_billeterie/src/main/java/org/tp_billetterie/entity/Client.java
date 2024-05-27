@@ -1,4 +1,4 @@
-package org.tp_billeterie.entity;
+package org.tp_billetterie.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -21,7 +21,7 @@ public class Client {
     @Column(nullable = false)
     private String lastname;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.DETACH)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.DETACH})
     @JoinColumn(name = "address_id")
     private Address address;
 
@@ -29,7 +29,7 @@ public class Client {
 
     private String phoneNumber;
 
-    @OneToMany(mappedBy = "client", cascade = CascadeType.DETACH)
+    @OneToMany(mappedBy = "client")
     private List<Ticket> tickets;
 
     @Override

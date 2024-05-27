@@ -1,14 +1,12 @@
-package org.tp_billeterie.ihm;
+package org.tp_billetterie.ihm;
 
-import org.tp_billeterie.entity.Client;
-import org.tp_billeterie.entity.Event;
-import org.tp_billeterie.entity.Ticket;
-import org.tp_billeterie.repository.impl.ClientRepository;
-import org.tp_billeterie.repository.impl.EventRepository;
-import org.tp_billeterie.repository.impl.TicketRepository;
-import org.tp_billeterie.util.DatabaseManager;
+import org.tp_billetterie.entity.Client;
+import org.tp_billetterie.entity.Event;
+import org.tp_billetterie.entity.Ticket;
+import org.tp_billetterie.repository.impl.ClientRepository;
+import org.tp_billetterie.repository.impl.EventRepository;
+import org.tp_billetterie.repository.impl.TicketRepository;
 
-import java.util.Comparator;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;

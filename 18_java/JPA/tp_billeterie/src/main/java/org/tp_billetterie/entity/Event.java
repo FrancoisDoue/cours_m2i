@@ -1,4 +1,4 @@
-package org.tp_billeterie.entity;
+package org.tp_billetterie.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -6,10 +6,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.Date;
 import java.util.List;
 
 @Data @Builder @NoArgsConstructor @AllArgsConstructor
@@ -34,7 +32,8 @@ public class Event {
     @JoinColumn(name = "location_id")
     private Location location;
 
-    @OneToMany(mappedBy = "event", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+//    @OneToMany(mappedBy = "event", fetch = FetchType.LAZY, cascade = {CascadeType.DETACH, CascadeType.REFRESH})
+    @OneToMany(mappedBy = "event", fetch = FetchType.LAZY)
     private List<Ticket> tickets;
 
     @Override

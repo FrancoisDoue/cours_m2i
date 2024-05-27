@@ -1,8 +1,8 @@
-package org.tp_billeterie.ihm;
+package org.tp_billetterie.ihm;
 
-import org.tp_billeterie.entity.Address;
-import org.tp_billeterie.entity.Location;
-import org.tp_billeterie.repository.impl.AddressRepository;
+import org.tp_billetterie.entity.Address;
+import org.tp_billetterie.entity.Location;
+import org.tp_billetterie.repository.impl.AddressRepository;
 
 import java.util.Scanner;
 

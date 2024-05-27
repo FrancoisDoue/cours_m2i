@@ -1,7 +1,7 @@
-package org.tp_billeterie.repository.impl;
+package org.tp_billetterie.repository.impl;
 
-import org.tp_billeterie.entity.Event;
-import org.tp_billeterie.repository.AbstractRepository;
+import org.tp_billetterie.entity.Event;
+import org.tp_billetterie.repository.AbstractRepository;
 
 import java.util.List;
 

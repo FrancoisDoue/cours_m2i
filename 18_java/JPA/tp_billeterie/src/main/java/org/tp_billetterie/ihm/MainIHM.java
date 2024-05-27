@@ -1,4 +1,4 @@
-package org.tp_billeterie.ihm;
+package org.tp_billetterie.ihm;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;

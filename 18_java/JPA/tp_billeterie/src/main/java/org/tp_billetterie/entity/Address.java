@@ -1,4 +1,4 @@
-package org.tp_billeterie.entity;
+package org.tp_billetterie.entity;
 
 
 import lombok.AllArgsConstructor;

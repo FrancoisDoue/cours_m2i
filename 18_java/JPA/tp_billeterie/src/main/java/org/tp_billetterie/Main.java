@@ -1,9 +1,9 @@
-package org.tp_billeterie;
+package org.tp_billetterie;
 
 
-import org.tp_billeterie.ihm.MainIHM;
-import org.tp_billeterie.util.DataFixtures;
-import org.tp_billeterie.util.DatabaseManager;
+import org.tp_billetterie.ihm.MainIHM;
+import org.tp_billetterie.util.DataFixtures;
+import org.tp_billetterie.util.DatabaseManager;
 
 public class Main {
     public static void main(String[] args) {
@@ -11,5 +11,6 @@ public class Main {
 //        DataFixtures df = new DataFixtures();
 //        df.run();
         new MainIHM().start();
+        DatabaseManager.close();
     }
 }
