@@ -2,6 +2,7 @@ package org.tp_billeterie;
 
 
 import org.tp_billeterie.ihm.MainIHM;
+import org.tp_billeterie.util.DataFixtures;
 import org.tp_billeterie.util.DatabaseManager;
 
 public class Main {

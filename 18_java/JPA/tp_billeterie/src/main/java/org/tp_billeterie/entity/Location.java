@@ -14,4 +14,14 @@ import javax.persistence.Entity;
 @Entity
 public class Location extends Address {
     private int capacity;
+
+    @Override
+    public String toString() {
+        return "Location{" +
+                "id=" + id +
+                ", address='" + address + '\'' +
+                ", city='" + city + '\'' +
+                ", capacity=" + capacity +
+                '}';
+    }
 }

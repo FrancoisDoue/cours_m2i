@@ -11,13 +11,13 @@ public class MainIHM {
             Scanner sc = new Scanner(System.in);
             System.out.println("""
                     1. Gestion des clients
-                    2. Organiser un évènement
+                    2. Gestion des évènements
                     [0] Quitter
                     """);
             try {
                 switch (sc.nextInt()) {
                     case 1 -> new ClientIHM().start();
-                    case 2 -> {}
+                    case 2 -> new EventIHM().start();
                     case 0 -> {
                         return;
                     }

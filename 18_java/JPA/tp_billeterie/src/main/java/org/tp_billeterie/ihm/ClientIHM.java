@@ -22,7 +22,7 @@ public class ClientIHM {
             System.out.println("""
                     1. Afficher les clients
                     2. Ajouter un nouveau client
-                    3. Modifier un client [non implémenté]
+                    3. Modifier un client
                     4. Supprimer un client (L'Agent 47 approuve)
                     5. Inscrire un client à un évènement
                     [0] Quitter
@@ -31,7 +31,7 @@ public class ClientIHM {
                 switch (sc.nextInt()) {
                     case 1 -> cRepository.getAll().forEach(System.out::println);
                     case 2 -> createClientMenu();
-                    case 3 -> {}
+                    case 3 -> updateClient();
                     case 4 -> deleteClient();
                     case 5 -> registerClientToEvent();
                     case 0 -> {
@@ -48,15 +48,40 @@ public class ClientIHM {
     public void createClientMenu() {
         Scanner sc = new Scanner(System.in);
         System.out.println(" - - - Ajouter un client - - -");
-        Client client = new Client();
+        createClient(new Client());
+//        Client client = new Client();
+//        System.out.println("Nom du client : ");
+//        client.setLastname(sc.nextLine());
+//        System.out.println("Prénom du client : ");
+//        client.setFirstname(sc.nextLine());
+//        System.out.println("Numéro de téléphone: ");
+//        client.setPhoneNumber(sc.nextLine());
+//        client.setAddress(new AddressIHM().createAddress());
+//        cRepository.save(client);
+    }
+
+    public void createClient(Client client){
+        Scanner sc = new Scanner(System.in);
         System.out.println("Nom du client : ");
         client.setLastname(sc.nextLine());
         System.out.println("Prénom du client : ");
         client.setFirstname(sc.nextLine());
         System.out.println("Numéro de téléphone: ");
         client.setPhoneNumber(sc.nextLine());
-        client.setAddress(new AddressIHM().createAddress());
+        if (client.getAddress() != null) {
+            client.setAddress(new AddressIHM().updateAddress(client.getAddress()));
+        } else {
+            client.setAddress(new AddressIHM().createAddress());
+        }
         cRepository.save(client);
+    }
+
+    public void updateClient() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println(" - - - Modifier les informations d'un client");
+        Client client = selectClient();
+        System.out.println(client);
+        createClient(client);
     }
 
     public Client selectClient() {
