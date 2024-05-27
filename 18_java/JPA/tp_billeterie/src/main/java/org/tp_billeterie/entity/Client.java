@@ -29,7 +29,7 @@ public class Client {
 
     private String phoneNumber;
 
-    @OneToMany(mappedBy = "client")
+    @OneToMany(mappedBy = "client", cascade = CascadeType.DETACH)
     private List<Ticket> tickets;
 
     @Override
