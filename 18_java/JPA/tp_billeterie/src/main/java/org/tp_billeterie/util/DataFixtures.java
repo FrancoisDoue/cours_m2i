@@ -38,9 +38,7 @@ public final class DataFixtures {
             int maxCapacity = location.getCapacity() - rand.nextInt(location.getCapacity());
             Event event = Event.builder()
                     .name("Event " + i)
-                    .eventDate(
-                            LocalDate.of(2024, 6, rand.nextInt(1, 31))
-                    )
+                    .eventDate(LocalDate.of(2024, 6, rand.nextInt(1, 31)))
                     .eventTime(LocalTime.of(20, 0))
                     .location(location)
                     .maxCapacity(maxCapacity)

@@ -2,6 +2,7 @@ package org.tp_billeterie.repository;
 
 import org.tp_billeterie.util.DatabaseManager;
 
+import javax.persistence.Entity;
 import javax.persistence.EntityManager;
 import java.util.List;
 

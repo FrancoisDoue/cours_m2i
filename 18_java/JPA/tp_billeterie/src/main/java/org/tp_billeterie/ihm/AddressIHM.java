@@ -34,6 +34,20 @@ public class AddressIHM {
         return address;
     }
 
+    public Location createLocation() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("- - - Nouvelle salle - - -");
+        Location location = new Location();
+        System.out.println("Adresse : ");
+        location.setAddress(sc.nextLine());
+        System.out.println("Ville :");
+        location.setCity(sc.nextLine());
+        System.out.println("Capacité de la salle");
+        location.setCapacity(sc.nextInt());
+        aRepository.save(location);
+        return location;
+    }
+
     public String showLocations() {
         StringBuilder locationString = new StringBuilder();
         aRepository.getAllLocations().forEach(l -> locationString.append(l).append('\n'));
@@ -42,7 +56,6 @@ public class AddressIHM {
 
     public Location selectLocation() {
         Scanner sc = new Scanner(System.in);
-        showLocations();
         System.out.println("Sélectionnez une adresse : ");
         return aRepository.getLocationById(sc.nextInt());
     }

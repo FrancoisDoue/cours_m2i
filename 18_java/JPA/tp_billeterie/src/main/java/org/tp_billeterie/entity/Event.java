@@ -6,8 +6,10 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Date;
 import java.util.List;
 
 @Data @Builder @NoArgsConstructor @AllArgsConstructor
@@ -16,12 +18,13 @@ public class Event {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @Column(nullable = false)
     private String name;
 
-    @Column(name = "event_date")
+    @Column(name = "event_date", nullable = false)
     private LocalDate eventDate;
 
-    @Column(name = "event_time")
+    @Column(name = "event_time", nullable = false)
     private LocalTime eventTime;
 
     @Column(name = "max_capacity")
@@ -31,7 +34,7 @@ public class Event {
     @JoinColumn(name = "location_id")
     private Location location;
 
-    @OneToMany(mappedBy = "event")
+    @OneToMany(mappedBy = "event", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     private List<Ticket> tickets;
 
     @Override
