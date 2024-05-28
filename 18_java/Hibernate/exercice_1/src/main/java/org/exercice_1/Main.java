@@ -5,6 +5,7 @@ import org.exercice_1.repository.ProductRepository;
 import org.exercice_1.util.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
+import org.hibernate.type.DoubleType;
 import org.hibernate.type.IntegerType;
 import org.hibernate.type.LocalDateType;
 
@@ -31,7 +32,7 @@ public class Main {
                         .buyingDate(LocalDate.of(2024,2,15))
                         .price(120).stock(5).build(),
                 Product.builder()
-                        .brand("marque4")
+                        .brand("marque3")
                         .buyingDate(LocalDate.of(2024,2,28))
                         .price(110).stock(50).build(),
                 Product.builder()
@@ -74,29 +75,47 @@ public class Main {
 
         Scanner sc = new Scanner(System.in);
 
-        System.out.println("Entrez deux dates: (format: jj-mm-aaaa) ");
-        DateTimeFormatter df = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-        LocalDate date1 = LocalDate.parse(sc.nextLine(), df);
-        LocalDate date2 = LocalDate.parse(sc.nextLine(), df);
-        System.out.println("Résultat entre : " + date1 + " et " + date2);
+//        System.out.println("Entrez deux dates: (format: jj-mm-aaaa) ");
+//        DateTimeFormatter df = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+//        LocalDate date1 = LocalDate.parse(sc.nextLine(), df);
+//        LocalDate date2 = LocalDate.parse(sc.nextLine(), df);
+//        System.out.println("Résultat entre : " + date1 + " et " + date2);
+//
+//        Query<Product> productsBetweenInputDate = session.createQuery("from Product where buyingDate between :dateStart and :dateEnd", Product.class);
+//        productsBetweenInputDate.setParameter("dateStart", date1, LocalDateType.INSTANCE);
+//        productsBetweenInputDate.setParameter("dateEnd", date2, LocalDateType.INSTANCE);
+//        productsBetweenInputDate.getResultList().forEach(System.out::println);
+//
+//        System.out.println("\n2 - retourner les numéros et reference des articles dont le stock est inférieur à une valeur lue au clavier.");
+//        System.out.println("Entrez la valeur du stock :");
+//
+//        Query lowStockProductsQuery = session.createQuery("select id, reference from Product where stock < ?1");
+//        lowStockProductsQuery.setParameter(1, sc.nextInt(), IntegerType.INSTANCE);
+//        List lowStockProducts = lowStockProductsQuery.getResultList();
+//
+//        for (Object product : lowStockProducts) {
+//            Object[] p = (Object[]) product;
+//            System.out.println("id : " + p[0] + " | reference " + p[1]);
+//        }
+//        sc.nextLine();
 
-        Query<Product> productsBetweenInputDate = session.createQuery("from Product where buyingDate between :dateStart and :dateEnd", Product.class);
-        productsBetweenInputDate.setParameter("dateStart", date1, LocalDateType.INSTANCE);
-        productsBetweenInputDate.setParameter("dateEnd", date2, LocalDateType.INSTANCE);
-        productsBetweenInputDate.getResultList().forEach(System.out::println);
+        System.out.println("###############################################################");
+        System.out.println("Exercice 4");
+        System.out.println("\n1 - Afficher la valeur du stock des produits d'une marque choisie.");
 
-        System.out.println("\n2 - retourner les numéros et reference des articles dont le stock est inférieur à une valeur lue au clavier.");
-        System.out.println("Entrez la valeur du stock :");
+        List<Double> totalValueByBrand = session.createQuery("select (stock*price) from Product where brand = 'marque3'", Double.class).getResultList();
+        totalValueByBrand.forEach(t -> System.out.println(" -> " + t));
 
-        Query lowStockProductsQuery = session.createQuery("select id, reference from Product where stock < ?1");
-        lowStockProductsQuery.setParameter(1, sc.nextInt(), IntegerType.INSTANCE);
-        List lowStockProducts = lowStockProductsQuery.getResultList();
+        System.out.println("\n2 - Calculer le prix moyen des produits.");
+        Double avgPrice = session.createQuery("select avg(price) from Product ", Double.class).getSingleResult();
+        System.out.println("Prix moyen des produits du  catalogue : " + avgPrice);
 
-        for (Object product : lowStockProducts) {
-            Object[] p = (Object[]) product;
-            System.out.println("id : " + p[0] + " | reference " + p[1]);
-        }
-        sc.nextLine();
+        System.out.println("\n3 - Récupérer la liste des produits d'une marque choisie.");
+        List<Product> productsByBrand = session.createQuery("from Product where brand = 'marque3'", Product.class).getResultList();
+        productsByBrand.forEach(System.out::println);
+
+        System.out.println("\n4 - Supprimer les produits d'une marque choisie de la table produit.");
+
 
         session.close();
         HibernateUtil.close();
