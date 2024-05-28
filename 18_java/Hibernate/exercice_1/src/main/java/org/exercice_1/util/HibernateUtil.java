@@ -12,7 +12,6 @@ public final class HibernateUtil {
 
     private HibernateUtil() {}
 
-
     public static synchronized SessionFactory getFactory() {
         if (factory == null) {
             StandardServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().configure().build();
@@ -21,5 +20,10 @@ public final class HibernateUtil {
         return factory;
     }
 
+    public static void close() {
+        if (factory == null) return;
+        factory.close();
+        factory = null;
+    }
 
 }
