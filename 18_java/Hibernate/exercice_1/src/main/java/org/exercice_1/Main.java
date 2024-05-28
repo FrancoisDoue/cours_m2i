@@ -57,16 +57,15 @@ public class Main {
         System.out.println("\n1 - Afficher la totalité des produits");
         productRepository.getAll().forEach(System.out::println);
 
-        Session session = HibernateUtil.getFactory().openSession();
         System.out.println("\n2 - Afficher la liste des produits dont le prix est supérieur à 100 euros");
-        List<Product> productHigherThan100 = session.createQuery("from Product where price > 100.", Product.class).list();
-        productHigherThan100.forEach(System.out::println);
+
+        productRepository.getByPriceHigherThan(100).forEach(System.out::println);
 
         System.out.println("\n3 - Afficher la liste des produits achetés entre deux dates. (ici entre le 1/03 et 1/06)");
-        Query<Product> productBetweenDatesQuery = session.createQuery("from Product where buyingDate between :dateStart and :dateEnd", Product.class);
-        productBetweenDatesQuery.setParameter("dateStart", LocalDate.of(2024, 3,1));
-        productBetweenDatesQuery.setParameter("dateEnd", LocalDate.of(2024, 6,1));
-        productBetweenDatesQuery.getResultList().forEach(System.out::println);
+        productRepository.getByDateBetween(
+                LocalDate.of(2024, 3,1),
+                LocalDate.of(2024, 6,1)
+        ).forEach(System.out::println);
 
 
         System.out.println("###############################################################");
@@ -75,30 +74,16 @@ public class Main {
 
         Scanner sc = new Scanner(System.in);
 
-//        System.out.println("Entrez deux dates: (format: jj-mm-aaaa) ");
-//        DateTimeFormatter df = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-//        LocalDate date1 = LocalDate.parse(sc.nextLine(), df);
-//        LocalDate date2 = LocalDate.parse(sc.nextLine(), df);
-//        System.out.println("Résultat entre : " + date1 + " et " + date2);
-//
-//        Query<Product> productsBetweenInputDate = session.createQuery("from Product where buyingDate between :dateStart and :dateEnd", Product.class);
-//        productsBetweenInputDate.setParameter("dateStart", date1, LocalDateType.INSTANCE);
-//        productsBetweenInputDate.setParameter("dateEnd", date2, LocalDateType.INSTANCE);
-//        productsBetweenInputDate.getResultList().forEach(System.out::println);
-//
-//        System.out.println("\n2 - retourner les numéros et reference des articles dont le stock est inférieur à une valeur lue au clavier.");
-//        System.out.println("Entrez la valeur du stock :");
-//
-//        Query lowStockProductsQuery = session.createQuery("select id, reference from Product where stock < ?1");
-//        lowStockProductsQuery.setParameter(1, sc.nextInt(), IntegerType.INSTANCE);
-//        List lowStockProducts = lowStockProductsQuery.getResultList();
-//
-//        for (Object product : lowStockProducts) {
-//            Object[] p = (Object[]) product;
-//            System.out.println("id : " + p[0] + " | reference " + p[1]);
-//        }
-//        sc.nextLine();
+        System.out.println("\n2 - retourner les numéros et reference des articles dont le stock est inférieur à une valeur lue au clavier.");
+        System.out.println("Entrez la valeur du stock :");
+        List lowStockProducts = productRepository.getByStockLowerThan(sc.nextInt());
+        sc.nextLine();
+        for (Object product : lowStockProducts) {
+            Object[] p = (Object[]) product;
+            System.out.println("id : " + p[0] + " | reference " + p[1]);
+        }
 
+        Session session = HibernateUtil.getFactory().openSession();
         System.out.println("###############################################################");
         System.out.println("Exercice 4");
         System.out.println("\n1 - Afficher la valeur du stock des produits d'une marque choisie.");
@@ -113,11 +98,12 @@ public class Main {
         System.out.println("\n3 - Récupérer la liste des produits d'une marque choisie.");
         List<Product> productsByBrand = session.createQuery("from Product where brand = 'marque3'", Product.class).getResultList();
         productsByBrand.forEach(System.out::println);
-
-        System.out.println("\n4 - Supprimer les produits d'une marque choisie de la table produit.");
-
-
         session.close();
+
+        // pas possible pour le moment?
+//        System.out.println("\n4 - Supprimer les produits d'une marque choisie de la table produit.");
+//        System.out.println("Nombre de ligne affectée par la suppression de 'marque3' : " + productRepository.deleteByBrand("marque3"));
+
         HibernateUtil.close();
 
     }
