@@ -6,6 +6,7 @@ import org.exercice_1.entity.Product;
 import org.exercice_1.repository.ProductRepository;
 
 import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.List;
 
 public class Exercice_5 {
@@ -33,8 +34,6 @@ public class Exercice_5 {
                         .buyingDate(LocalDate.of(2024,5,29))
                         .price(50).stock(2).build()
         );
-        System.out.println("Exercice 1");
-
         productRepository.saveMultiple(products);
 
 
@@ -44,7 +43,6 @@ public class Exercice_5 {
         productRepository.addImage(2, Image.builder().url("/une/super/url.jpg ").build());
 
 
-//        Product product1 = productRepository.get(1);
         productRepository.addComment(1, Comment.builder().note(5).content("Super produit").build());
         productRepository.addComment(1, Comment.builder().note(2).content("bof").build());
         productRepository.addComment(2, Comment.builder().note(5).content("Super produit").build());
@@ -55,10 +53,13 @@ public class Exercice_5 {
         productRepository.addComment(3, Comment.builder().note(4).content("Presque parfait").build());
         productRepository.addComment(3, Comment.builder().note(3).content("Ok!").build());
 
+        System.out.println("\n Afficher les produits ave une note de 4 ou plus. \n");
+//        productRepository.getAllWithAvgNotation(4).forEach(System.out::println);
+        Product product1 = productRepository.get(1);
+        product1.getImages().forEach(System.out::println);
 
-        System.out.println(productRepository.get(1));
-
-        productRepository.getAllWithAvgNotation(4).forEach(System.out::println);
+//        System.out.println('\n');
+//        productRepository.getAll().forEach(System.out::println);
 
 //        productRepository.addComment(3, Comment.builder().content("Excellent produit").note(5).build());
 

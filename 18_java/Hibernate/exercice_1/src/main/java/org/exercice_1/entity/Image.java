@@ -6,7 +6,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Data @Builder @NoArgsConstructor @AllArgsConstructor
@@ -15,7 +14,15 @@ public class Image {
     private int id;
     private String url;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_id")
     private Product product;
+
+    @Override
+    public String toString() {
+        return "Image{" +
+                "id=" + id +
+                ", url='" + url + '\'' +
+                '}';
+    }
 }
