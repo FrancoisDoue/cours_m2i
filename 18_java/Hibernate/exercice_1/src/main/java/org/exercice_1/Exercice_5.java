@@ -8,7 +8,7 @@ import org.exercice_1.repository.ProductRepository;
 import java.time.LocalDate;
 import java.util.List;
 
-public class Main {
+public class Exercice_5 {
     public static void main(String[] args) {
         ProductRepository productRepository = new ProductRepository();
         List<Product> products = List.of(

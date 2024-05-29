@@ -10,7 +10,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Scanner;
 
-public class Exercice_1_2_3_4_5 {
+public class Exercice_1_2_3_4 {
     public static void main(String[] args) {
 
         ProductRepository productRepository = new ProductRepository();
