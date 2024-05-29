@@ -3,6 +3,7 @@ package org.exercice_1;
 import org.exercice_1.entity.Comment;
 import org.exercice_1.entity.Image;
 import org.exercice_1.entity.Product;
+import org.exercice_1.repository.ImageRepository;
 import org.exercice_1.repository.ProductRepository;
 
 import java.time.LocalDate;
@@ -12,6 +13,7 @@ import java.util.List;
 public class Exercice_5 {
     public static void main(String[] args) {
         ProductRepository productRepository = new ProductRepository();
+        ImageRepository imageRepository = new ImageRepository();
         List<Product> products = List.of(
                 Product.builder()
                         .brand("marque1").reference("model1")
@@ -56,7 +58,9 @@ public class Exercice_5 {
         System.out.println("\n Afficher les produits ave une note de 4 ou plus. \n");
 //        productRepository.getAllWithAvgNotation(4).forEach(System.out::println);
         Product product1 = productRepository.get(1);
-        product1.getImages().forEach(System.out::println);
+        System.out.println("product1 = " + product1);
+//        product1.getImages().forEach(System.out::println);
+        imageRepository.getAllFromProduct(product1).forEach(System.out::println);
 
 //        System.out.println('\n');
 //        productRepository.getAll().forEach(System.out::println);

@@ -37,9 +37,9 @@ public abstract class BaseRepository<T> {
         session.getTransaction().begin();
         session.delete(entity);
         session.getTransaction().commit();
-        boolean isContained = !session.contains(entity);
+        boolean isContained = session.contains(entity);
         session.close();
-        return isContained;
+        return !isContained;
     }
 
     public T update(T entity) {

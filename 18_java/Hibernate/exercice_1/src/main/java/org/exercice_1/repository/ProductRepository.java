@@ -1,6 +1,5 @@
 package org.exercice_1.repository;
 
-import lombok.Data;
 import org.exercice_1.entity.Comment;
 import org.exercice_1.entity.Image;
 import org.exercice_1.entity.Product;
@@ -28,7 +27,7 @@ public class ProductRepository extends BaseRepository<Product> {
         return products;
     }
 
-    public List<Product> getAllWithAvgNotation(double notation) {
+    public List<Product> getAllByAvgNotation(double notation) {
         session = factory.openSession();
         List<Product> products = session.createQuery("""
                 select p from Product p
@@ -46,7 +45,7 @@ public class ProductRepository extends BaseRepository<Product> {
         image.setProduct(product);
         session = factory.openSession();
         session.beginTransaction();
-        session.save(product);
+        session.save(image);
         session.getTransaction().commit();
         session.close();
     }
