@@ -5,5 +5,7 @@
 <hibernate-configuration>
     <session-factory>
         <mapping class="org.exercice_1.entity.Product" />
+        <mapping class="org.exercice_1.entity.Comment" />
+        <mapping class="org.exercice_1.entity.Image" />
     </session-factory>
 </hibernate-configuration>
