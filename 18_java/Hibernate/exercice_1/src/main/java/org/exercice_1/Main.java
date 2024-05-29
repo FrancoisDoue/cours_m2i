@@ -101,8 +101,8 @@ public class Main {
         session.close();
 
         // pas possible pour le moment?
-//        System.out.println("\n4 - Supprimer les produits d'une marque choisie de la table produit.");
-//        System.out.println("Nombre de ligne affectée par la suppression de 'marque3' : " + productRepository.deleteByBrand("marque3"));
+        System.out.println("\n4 - Supprimer les produits d'une marque choisie de la table produit.");
+        System.out.println("Nombre de ligne affectée par la suppression de 'marque3' : " + productRepository.deleteByBrand("marque3"));
 
         HibernateUtil.close();
 

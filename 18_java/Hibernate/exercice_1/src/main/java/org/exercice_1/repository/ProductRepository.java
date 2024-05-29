@@ -6,6 +6,8 @@ import org.hibernate.type.DoubleType;
 import org.hibernate.type.IntegerType;
 import org.hibernate.type.LocalDateType;
 
+import javax.persistence.FlushModeType;
+import javax.persistence.LockModeType;
 import javax.persistence.Query;
 import java.time.LocalDate;
 import java.util.List;
@@ -58,6 +60,7 @@ public class ProductRepository extends BaseRepository<Product> {
 
     public int deleteByBrand(String brand) {
         session = factory.openSession();
+        session.beginTransaction();
         int result = session.createQuery("delete from Product where brand = :brand")
                 .setParameter("brand", brand)
                 .executeUpdate();
