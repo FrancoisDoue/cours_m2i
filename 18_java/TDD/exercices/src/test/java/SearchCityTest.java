@@ -35,4 +35,11 @@ public class SearchCityTest {
         List<String> result = searchCity.search("ape");
         Assert.assertTrue(result.contains("Budapest"));
     }
+
+    @Test public void shouldReturnAll_WhenStarCharacter() {
+        searchCity = new SearchCity();
+        List<String> result = searchCity.search("*");
+        List<String> expected = searchCity.getCities();
+        Assert.assertEquals(expected, result);
+    }
 }
