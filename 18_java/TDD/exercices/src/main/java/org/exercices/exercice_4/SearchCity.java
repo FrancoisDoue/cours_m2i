@@ -1,7 +1,5 @@
 package org.exercices.exercice_4;
 
-import jdk.jshell.spi.ExecutionControl;
-
 import java.util.List;
 
 public class SearchCity {
@@ -25,8 +23,9 @@ public class SearchCity {
             "Istanbul"
     );
 
-    public List<String> search(String city) throws ExecutionControl.NotImplementedException {
-        throw new ExecutionControl.NotImplementedException("Not yet implemented");
+    public List<String> search(String city) {
+        if (city.length() < 2) throw new NotFoundException("Not found city");
+        return cities;
     }
 
     public List<String> getCities() {
