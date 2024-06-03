@@ -25,7 +25,7 @@ public class SearchCity {
 
     public List<String> search(String city) {
         if (city.length() < 2) throw new NotFoundException("Not found city");
-        return cities;
+        return cities.stream().filter(c -> c.startsWith(city)).toList();
     }
 
     public List<String> getCities() {
