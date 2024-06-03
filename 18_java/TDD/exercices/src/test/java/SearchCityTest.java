@@ -10,20 +10,29 @@ public class SearchCityTest {
 
     private SearchCity searchCity;
 
-    @Test public void shouldThrowNotFoundException_WhenLessOfTwoChar() throws ExecutionControl.NotImplementedException {
+    @Test
+    public void shouldThrowNotFoundException_WhenLessOfTwoChar() throws ExecutionControl.NotImplementedException {
         searchCity = new SearchCity();
         Assert.assertThrows(NotFoundException.class, () -> searchCity.search("T"));
     }
 
-    @Test public void shouldHaveTwoCitiesForVa_WhenMoreOfTwoChar() {
+    @Test
+    public void shouldHaveTwoCitiesForVa_WhenMoreOfTwoChar() {
         searchCity = new SearchCity();
         List<String> result = searchCity.search("Va");
         Assert.assertEquals(List.of("Valence", "Vancouver"), result);
     }
 
-    @Test public void shouldBeNotCaseSensitive_WhenMoreOfTwoChar() {
+    @Test
+    public void shouldBeNotCaseSensitive_WhenMoreOfTwoChar() {
         searchCity = new SearchCity();
         List<String> result = searchCity.search("paris");
         Assert.assertEquals(List.of("Paris"), result);
+    }
+
+    @Test public void shouldAllowPartialSearch_WhenMoreOfTwoChar() {
+        searchCity = new SearchCity();
+        List<String> result = searchCity.search("ape");
+        Assert.assertTrue(result.contains("Budapest"));
     }
 }
