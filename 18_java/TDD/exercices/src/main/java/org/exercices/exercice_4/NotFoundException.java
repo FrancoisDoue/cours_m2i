@@ -1,4 +1,4 @@
-package org.exercices.exercice4;
+package org.exercices.exercice_4;
 
 public class NotFoundException extends RuntimeException {
 }
