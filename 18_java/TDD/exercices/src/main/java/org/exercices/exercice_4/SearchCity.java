@@ -24,6 +24,7 @@ public class SearchCity {
     );
 
     public List<String> search(String city) {
+        if (city.equals("*")) return cities;
         if (city.length() < 2) throw new NotFoundException("Not found city");
         return cities.stream().filter(c -> c.toLowerCase().contains(city.toLowerCase())).toList();
     }
