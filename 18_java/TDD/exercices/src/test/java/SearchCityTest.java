@@ -18,6 +18,12 @@ public class SearchCityTest {
     @Test public void shouldHaveTwoCitiesForVa_WhenMoreOfTwoChar() {
         searchCity = new SearchCity();
         List<String> result = searchCity.search("Va");
-        Assert.assertEquals(result, List.of("Valence", "Vancouver"));
+        Assert.assertEquals(List.of("Valence", "Vancouver"), result);
+    }
+
+    @Test public void shouldBeNotCaseSensitive_WhenMoreOfTwoChar() {
+        searchCity = new SearchCity();
+        List<String> result = searchCity.search("paris");
+        Assert.assertEquals(List.of("Paris"), result);
     }
 }
