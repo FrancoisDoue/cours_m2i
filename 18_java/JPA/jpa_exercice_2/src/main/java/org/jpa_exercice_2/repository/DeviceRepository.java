@@ -16,30 +16,6 @@ public class DeviceRepository extends AbstractEntityRepository<Device> {
         return em.createQuery("select d from Device d", Device.class).getResultList();
     }
 
-    @Override
-    public Device save(Device device) {
-        em.getTransaction().begin();
-        em.persist(device);
-        em.getTransaction().commit();
-        return device;
-    }
-
-    @Override
-    public Device update(Device device) {
-        em.getTransaction().begin();
-        em.merge(device);
-        em.getTransaction().commit();
-        return device;
-    }
-
-    @Override
-    public boolean delete(Device device) {
-        em.getTransaction().begin();
-        em.remove(device);
-        em.getTransaction().commit();
-        return !em.contains(device);
-    }
-
     public Device addComputerToDevice(Device device, Computer computer) {
         device.add(computer);
         return update(device);

@@ -25,8 +25,8 @@ public class RechercheVille {
 }
 ```
 
-shouldThrowNotFoundException_WhenLessOfTwoChar
-shouldHaveTwoCitiesForVa_WhenMoreOfTwoChar
-shouldBeNotCaseSensitive_WhenMoreOfTwoChar
-shouldAllowPartialSearch_WhenMoreOfTwoChar
-shouldReturnAll_WhenStarCharacter
+shouldThrowNotFoundException_WhenLessOfTwoChar  
+shouldHaveTwoCitiesForVa_WhenMoreOfTwoChar  
+shouldBeNotCaseSensitive_WhenMoreOfTwoChar  
+shouldAllowPartialSearch_WhenMoreOfTwoChar  
+shouldReturnAll_WhenStarCharacter  

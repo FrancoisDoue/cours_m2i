@@ -115,10 +115,12 @@ public class DeviceIHM {
                 System.out.println(device);
                 Computer computer = ComputerIHM.getInstance().selectComputer();
                 device.add(computer);
+                computer.add(device);
+                computerRepository.update(computer);
+                deviceRepository.update(device);
                 System.out.println("Ajouter un autre ordinateur ? [y/n]");
                 if (scanner.nextLine().equalsIgnoreCase("n")) break;
             }
-            deviceRepository.save(device);
         } else System.out.println("Ce périphérique n'existe pas");
     }
 }

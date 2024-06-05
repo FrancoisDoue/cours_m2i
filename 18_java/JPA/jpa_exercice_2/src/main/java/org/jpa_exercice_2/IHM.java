@@ -11,6 +11,7 @@ import javax.persistence.Persistence;
 import java.util.List;
 import java.util.Scanner;
 
+// Ne sera plus utilisé
 public class IHM {
 
     private EntityManagerFactory emf = Persistence.createEntityManagerFactory("jpa_exercice_2");

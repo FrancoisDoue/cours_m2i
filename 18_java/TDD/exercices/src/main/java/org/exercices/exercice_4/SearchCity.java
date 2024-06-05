@@ -4,24 +4,11 @@ import java.util.List;
 
 public class SearchCity {
 
-    private final List<String> cities = List.of(
-            "Paris",
-            "Budapest",
-            "Skopje",
-            "Rotterdam",
-            "Valence",
-            "Vancouver",
-            "Amsterdam",
-            "Vienne",
-            "Sydney",
-            "New York",
-            "Londres",
-            "Bangkok",
-            "Hong Kong",
-            "Dubaï",
-            "Rome",
-            "Istanbul"
-    );
+    private final List<String> cities;
+
+    public SearchCity(List<String> cities) {
+        this.cities = cities;
+    }
 
     public List<String> search(String city) {
         if (city.equals("*")) return cities;
@@ -29,7 +16,4 @@ public class SearchCity {
         return cities.stream().filter(c -> c.toLowerCase().contains(city.toLowerCase())).toList();
     }
 
-    public List<String> getCities() {
-        return cities;
-    }
 }

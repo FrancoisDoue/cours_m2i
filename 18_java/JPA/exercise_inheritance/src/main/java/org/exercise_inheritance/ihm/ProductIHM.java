@@ -142,6 +142,8 @@ public class ProductIHM {
         long id = scanner.nextLong();
         if (repository.delete(repository.getById(id))) {
             System.out.println("Produit supprimé");
+        } else {
+            System.out.println("Impossible de supprimer ce produit");
         }
     }
 
