@@ -9,23 +9,34 @@ public class Frame {
     private IGenerator generator;
     private List<Roll> rolls;
 
-    public Frame(int score, boolean lastFrame, IGenerator generator) {
-        this.score = score;
+    public Frame(boolean lastFrame, IGenerator generator) {
         this.lastFrame = lastFrame;
         this.generator = generator;
         rolls = new ArrayList<>();
     }
 
     public boolean makeRoll() {
-        boolean isSpare = false;
-        Roll strike = rolls.stream().filter(r -> r.getPins() == 10).findFirst().orElse(null);
-        if (rolls.size() == 2) {
-            isSpare = rolls.get(0).getPins() + rolls.get(1).getPins() == 10;
+        score = 0;
+        List<Roll> strikes = rolls.stream().filter(r -> r.getPins() == 10).toList();
+        if (!lastFrame) {
+            if (rolls.size() > 1 || !strikes.isEmpty())
+                return false;
+        } else {
+            boolean haveSpare = false;
+            int last = 0;
+            for (Roll roll : rolls) {
+                last += roll.getPins();
+                haveSpare = last == 10;
+                if (haveSpare) last = 0;
+            }
+            if (rolls.size() > 3) {
+                if (!haveSpare && strikes.isEmpty())
+                    return false;
+            }
         }
-        if (!lastFrame && (strike != null || rolls.size() >= 2)) return false;
-        if (lastFrame && rolls.size() > 1 && strike == null) return false;
-        rolls.add(new Roll(generator.randomPin(10)));
-        score = rolls.stream().map(Roll::getPins).reduce(0, Integer::sum);
+        Roll roll = new Roll(generator.randomPin(10));
+        rolls.add(roll);
+        rolls.forEach(r -> score += r.getPins());
         return true;
     }
 
