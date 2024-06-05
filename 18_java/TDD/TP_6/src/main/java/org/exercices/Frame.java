@@ -17,10 +17,15 @@ public class Frame {
     }
 
     public boolean makeRoll() {
-//        if (rolls.size() > 1) return false;
-        int temp = generator.randomPin(10);
-        rolls.add(new Roll(temp));
-        score += temp;
+        boolean isSpare = false;
+        Roll strike = rolls.stream().filter(r -> r.getPins() == 10).findFirst().orElse(null);
+        if (rolls.size() == 2) {
+            isSpare = rolls.get(0).getPins() + rolls.get(1).getPins() == 10;
+        }
+        if (!lastFrame && (strike != null || rolls.size() >= 2)) return false;
+        if (lastFrame && rolls.size() > 1 && strike == null) return false;
+        rolls.add(new Roll(generator.randomPin(10)));
+        score = rolls.stream().map(Roll::getPins).reduce(0, Integer::sum);
         return true;
     }
 
