@@ -46,4 +46,13 @@ public class Account {
         isLogged = logged;
     }
 
+    @Override
+    public String toString() {
+        return super.toString() +
+                " {mail='" + mail + '\'' +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", isLogged=" + isLogged +
+                '}';
+    }
 }
