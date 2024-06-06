@@ -1,6 +1,5 @@
 package org.exercice.service;
 
-import jdk.jshell.spi.ExecutionControl;
 import org.exercice.entity.Account;
 import org.exercice.exception.ExistingUserException;
 import org.exercice.exception.InvalidCredentialsException;
@@ -13,7 +12,7 @@ public class AccountService {
     List<Account> accounts = new ArrayList<>();
 
     public void register(Account account) {
-        boolean isExist = accounts.stream().map(Account::getMail).anyMatch(t -> t.equals(account.getMail()));
+        boolean isExist = getAccountByMail(account.getMail()) != null;
         if (isExist) throw new ExistingUserException("User already exists");
         accounts.add(account);
     }
