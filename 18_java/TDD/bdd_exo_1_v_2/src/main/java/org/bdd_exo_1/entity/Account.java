@@ -5,11 +5,15 @@ public class Account {
     private String email;
     private String username;
     private String password;
+    boolean isLogged;
+
+    public Account() {}
 
     public Account(String email, String username, String password) {
         this.email = email;
         this.username = username;
         this.password = password;
+        this.isLogged = false;
     }
 
     public int getId() {
@@ -38,5 +42,13 @@ public class Account {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public boolean isLogged() {
+        return isLogged;
+    }
+
+    public void setLogged(boolean logged) {
+        isLogged = logged;
     }
 }

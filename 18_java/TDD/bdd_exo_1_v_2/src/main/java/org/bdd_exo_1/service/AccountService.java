@@ -1,6 +1,8 @@
 package org.bdd_exo_1.service;
 
 import org.bdd_exo_1.entity.Account;
+import org.bdd_exo_1.exception.AccountAlreadyExistsException;
+import org.bdd_exo_1.exception.InvalidCredentialsException;
 import org.bdd_exo_1.repository.impl.AccountRepository;
 
 public class AccountService {
@@ -10,18 +12,22 @@ public class AccountService {
     }
 
     public void register(Account account) {
-        throw new UnsupportedOperationException("Not supported yet.");
+//        throw new UnsupportedOperationException("Not supported yet.");
+        boolean isExists = getAccount(account.getEmail()) != null;
+        if (isExists) throw new AccountAlreadyExistsException("Account already exists");
+        aRepository.create(account);
     }
 
     public Account login(String email, String password) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        Account account = getAccount(email);
+        if (account == null || !password.equals(account.getPassword()))
+            throw new InvalidCredentialsException("Invalid credentials");
+        account.setLogged(true);
+        return account;
     }
 
     public Account getAccount(String email) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return aRepository.getAll().stream().filter(a -> a.getEmail().equals(email)).findFirst().orElse(null);
     }
 
-//    public boolean logout(Account account) {
-//        throw new UnsupportedOperationException("Not supported yet.");
-//    }
 }
