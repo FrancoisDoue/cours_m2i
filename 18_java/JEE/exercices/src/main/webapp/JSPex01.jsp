@@ -1,3 +1,4 @@
+<%--@elvariable id="message" type="jakarta"--%>
 <%--
   Created by IntelliJ IDEA.
   User: Administrateur
