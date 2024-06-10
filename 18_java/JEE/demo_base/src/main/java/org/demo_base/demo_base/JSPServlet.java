@@ -15,8 +15,7 @@ public class JSPServlet extends HttpServlet {
     private String lastname;
 
     @Override
-    public void init() throws ServletException {
-        super.init();
+    public void init() {
         firstname = "Georges";
         lastname = "Abitbol";
     }

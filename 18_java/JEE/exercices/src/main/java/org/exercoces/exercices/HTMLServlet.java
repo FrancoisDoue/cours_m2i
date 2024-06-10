@@ -15,7 +15,12 @@ public class HTMLServlet extends HttpServlet {
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
         out.println("<html>");
-        out.println("<head><title>Html servlet</title></head>");
+        out.println(
+                "<head>" +
+                        "<link href=\""+ request.getContextPath() +"/css/exercice1.css\" rel=\"stylesheet\" type=\"text/css\" >" +
+                "<title>Html servlet</title>" +
+                "</head>"
+        );
         out.println("<body>");
         out.println("<h1>Ceci est une page HTML</h1>");
         out.println("<h3>Avec une sublime mise en page</h3>");

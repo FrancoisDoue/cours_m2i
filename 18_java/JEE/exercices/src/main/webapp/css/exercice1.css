@@ -1,9 +1,9 @@
 html, body, * {
     background-color: #171717;
-    font-family: Arial, "SansSerif";
+    font-family: Arial, "SansSerif", serif;
     text-align: center;
 }
-h1 {
+h1, h2, h3 {
     color: chartreuse;
 }
 a {
