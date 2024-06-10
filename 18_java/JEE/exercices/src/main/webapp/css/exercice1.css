@@ -1,0 +1,15 @@
+html, body, * {
+    background-color: #171717;
+    font-family: Arial, "SansSerif";
+    text-align: center;
+}
+h1 {
+    color: chartreuse;
+}
+a {
+    color: #ececec;
+}
+a:hover {
+    font-weight: bold;
+    text-decoration: none;
+}

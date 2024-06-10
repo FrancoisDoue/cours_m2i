@@ -8,6 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
+    <link href="./css/exercice1.css" rel="stylesheet" type="text/css" >
     <title>JSP page</title>
 </head>
 <body>

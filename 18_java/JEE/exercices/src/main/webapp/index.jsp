@@ -2,6 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <link href="./css/exercice1.css" rel="stylesheet" type="text/css" >
     <title>Exercice 1</title>
 </head>
 <body>
