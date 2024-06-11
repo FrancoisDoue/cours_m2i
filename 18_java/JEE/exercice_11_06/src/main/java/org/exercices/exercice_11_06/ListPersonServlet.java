@@ -22,7 +22,7 @@ public class ListPersonServlet extends HttpServlet {
         super.init();
         persons = new ArrayList<>(List.of(
                 new Person("François", "Doué", 30),
-                new Person("Florian", "Delafosse", 31),
+                new Person("Florian", "Delafosse", 30),
                 new Person("Alexandre", "Messuve", 27)
         ));
     }

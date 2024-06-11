@@ -1,4 +1,3 @@
-<%--@elvariable id="message" type="jakarta"--%>
 <%--
   Created by IntelliJ IDEA.
   User: Administrateur
@@ -6,10 +5,10 @@
   Time: 13:56
   To change this template use File | Settings | File Templates.
 --%>
+<jsp:useBean id="message" type="java.lang.String" scope="request" />
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-<%--    <link href="./css/exercice1.css" rel="stylesheet" type="text/css" >--%>
     <%@include file="WEB-INF/bootstrap_link.html"%>
     <title>JSP page</title>
 </head>
@@ -20,6 +19,11 @@
             <h5>Et avec bootstrap</h5>
             <h6 class="small">(Et un p'tit gradient)</h6>
         </div>
+<%--        <div>--%>
+<%--            <% for (int i = 0; i < 10; i++) { %>--%>
+<%--                <p><%= i %></p>--%>
+<%--            <% } %>--%>
+<%--        </div>--%>
     </header>
 </body>
 </html>

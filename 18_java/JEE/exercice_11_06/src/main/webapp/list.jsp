@@ -15,7 +15,7 @@
     <title>list</title>
 </head>
 <body class="container-fluid m-0 p-0">
-    <header class="header bg-primary bg-gradient text-light p-4">
+    <header class="header bg-primary text-light p-4">
         <div class="container">
             <h2>Liste d'utilisateurs</h2>
         </div>
@@ -35,7 +35,6 @@
                     <td><%=p.getFirstname() %></td>
                     <td><%=p.getLastname() %></td>
                     <td><%=p.getAge() %></td>
-
                 </tr>
             <%} %>
             </tbody>

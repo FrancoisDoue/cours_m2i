@@ -10,8 +10,6 @@ import org.exercices.entity.Cat;
 import org.exercices.service.CatService;
 
 import java.io.IOException;
-import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet(name = "cat-list", value = "/cat-list")

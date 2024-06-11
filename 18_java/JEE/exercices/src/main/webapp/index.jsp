@@ -22,7 +22,7 @@
 <a href="bootstrap-1"> Une page avec bootstrap </a>
 </div>
 <div>
-<a href="bootstrap-2"> Une autre page avec bootstrap </a>
+<a href="bootstrap-2?test=blah"> Une autre page avec bootstrap </a>
 </div>
 
 </body>
