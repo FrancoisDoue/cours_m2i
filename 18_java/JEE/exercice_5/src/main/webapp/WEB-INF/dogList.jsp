@@ -31,7 +31,8 @@
                     <th>Nom</th>
                     <th>Race</th>
                     <th>Date de naissance</th>
-                    <th>Action</th>
+                    <th>Age</th>
+                    <th>Actions</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -40,11 +41,22 @@
                         <td><%= dog.getName() %></td>
                         <td><%= dog.getBreed() %></td>
                         <td><%= dog.getBirthDate().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) %></td>
+                        <td><%= dog.getAge() %> ans</td>
+
                         <td>
                             <a href="${pageContext.request.contextPath}/dogs/details/<%= dog.getId() %>"
-                                class="btn btn-outline-primary px-4">
+                                class="btn btn-outline-primary px-4 m">
                                 <i class="bi bi-eye"></i>
                                 Détail
+                            </a>
+                            <a href="${pageContext.request.contextPath}/dogs/update/<%= dog.getId() %>"
+                               class="btn btn-outline-warning px-4 m">
+                                <i class="bi bi-pencil-square"></i>
+                                Modifier
+                            </a>
+                            <a href="${pageContext.request.contextPath}/dogs/<%= dog.getId() %>?mode=remove"
+                               class="btn btn-outline-danger px-4 m">
+                                Supprimer
                             </a>
                         </td>
                     </tr>

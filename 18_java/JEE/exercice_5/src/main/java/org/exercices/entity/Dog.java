@@ -54,4 +54,8 @@ public class Dog {
     public void setBirthDate(LocalDate birthDate) {
         this.birthDate = birthDate;
     }
+
+    public int getAge() {
+        return LocalDate.now().getYear() - birthDate.getYear();
+    }
 }
