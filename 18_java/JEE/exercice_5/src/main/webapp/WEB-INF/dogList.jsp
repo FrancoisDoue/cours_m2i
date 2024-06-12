@@ -41,7 +41,11 @@
                         <td><%= dog.getBreed() %></td>
                         <td><%= dog.getBirthDate().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) %></td>
                         <td>
-                            <a href="#">Détail</a>
+                            <a href="${pageContext.request.contextPath}/dogs/details/<%= dog.getId() %>"
+                                class="btn btn-outline-primary px-4">
+                                <i class="bi bi-eye"></i>
+                                Détail
+                            </a>
                         </td>
                     </tr>
                 <%} %>

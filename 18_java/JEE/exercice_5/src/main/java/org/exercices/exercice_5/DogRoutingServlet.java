@@ -12,7 +12,7 @@ import org.exercices.util.HibernateUtil;
 import java.io.IOException;
 import java.time.LocalDate;
 
-@WebServlet(name = "dog_routing_servlet", value = {"/dogs", "/dogs/*", "/dogs/*/*"})
+@WebServlet(name = "dog_routing_servlet", value = {"/dogs", "/dogs/*"})
 public class DogRoutingServlet extends HttpServlet {
 
     private DogRepository dogRepository;
@@ -28,10 +28,15 @@ public class DogRoutingServlet extends HttpServlet {
         System.out.println(pathInfo);
         if (pathInfo.equals("/add")) {
             request.setAttribute("isReadonly", false);
+            request.setAttribute("currentDog", new Dog());
             request.getRequestDispatcher("/WEB-INF/dogForm.jsp").forward(request, response);
             return;
         }
         if (pathInfo.startsWith("/details")) {
+            int dogId = Integer.parseInt(pathInfo.split("/")[2]);
+            request.setAttribute("isReadonly", true);
+            request.setAttribute("currentDog", dogRepository.find(dogId));
+            request.getRequestDispatcher("/WEB-INF/dogForm.jsp").forward(request, response);
             return;
         }
         request.setAttribute("dogList", dogRepository.findAll());

@@ -1,6 +1,7 @@
+<%@ page import="java.time.format.DateTimeFormatter" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<jsp:useBean id="currentDog" scope="request" type="org.exercices.entity.Dog"/>
 <jsp:useBean id="isReadonly" scope="request" type="java.lang.Boolean" />
-<%--<jsp:useBean id="currentDog" scope="request" type="org.exercices.entity.Dog"/>--%>
 <html>
 <head>
     <%@include file="bootstrap_import.html"%>
@@ -9,7 +10,7 @@
 <body class="container-fluid text-light m-0 p-0">
     <header class="header bg-dark text-light p-4">
         <div class="container">
-            <h3>Ajouter un doggo</h3>
+            <h3><%= isReadonly ? currentDog.getName() : "Ajouter un doggo"%></h3>
         </div>
     </header>
 
@@ -18,15 +19,22 @@
             <form method="post" action="${pageContext.request.contextPath}/dogs">
                 <label class="text-center" for="name">Nom</label>
                 <div class="input-group mb-3">
-                    <input class="form-control" type="text" name="name" id="name" required <%=isReadonly ? "readonly" : "" %>/>
+                    <input class="form-control" type="text" name="name" id="name"
+                           value="<%= isReadonly ? currentDog.getName() : ""%>"
+                           required <%=isReadonly ? "readonly" : "" %>/>
                 </div>
                 <label class="text-center" for="breed">Race</label>
                 <div class="input-group mb-3">
-                    <input class="form-control" type="text" name="breed" id="breed" required <%=isReadonly ? "readonly" : "" %>/>
+                    <input class="form-control" type="text" name="breed" id="breed"
+                           value="<%= isReadonly ? currentDog.getBreed() : ""%>"
+                           required <%=isReadonly ? "readonly" : "" %>/>
                 </div>
                 <label class="text-center" for="birthday">Date de naissance </label>
                 <div class="input-group mb-3">
-                    <input class="form-control" type="date" name="birthday" id="birthday" required <%=isReadonly ? "readonly" : "" %>/>
+                    <input class="form-control" type="date" name="birthday" id="birthday"
+                           value="<%= isReadonly ?
+                           currentDog.getBirthDate().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) : ""%>"
+                           required <%=isReadonly ? "readonly" : "" %>/>
                 </div>
                 <div class="container border border-light p-2 rounded rounded-sm d-flex justify-content-end">
                     <% if (!isReadonly) { %>
