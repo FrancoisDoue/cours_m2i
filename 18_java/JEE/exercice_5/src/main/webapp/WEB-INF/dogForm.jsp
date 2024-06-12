@@ -2,9 +2,11 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:useBean id="currentDog" scope="request" type="org.exercices.entity.Dog"/>
 <jsp:useBean id="isReadonly" scope="request" type="java.lang.Boolean" />
+
 <html>
 <head>
-    <%@include file="bootstrap_import.html"%>
+<%--    <%@include file="bootstrap_import.html"%>--%>
+    <jsp:include page="bootstrap_import.html" />
     <title>Title</title>
 </head>
 <body class="container-fluid text-light m-0 p-0">
@@ -31,7 +33,7 @@
                 </div>
                 <label class="text-center" for="birthday">Date de naissance </label>
                 <div class="input-group mb-3">
-                    <input class="form-control" type="date" name="birthday" id="birthday"
+                    <input class="form-control" type="<%= isReadonly ? "text" : "date"%>" name="birthday" id="birthday"
                            value="<%= isReadonly ?
                            currentDog.getBirthDate().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) : ""%>"
                            required <%=isReadonly ? "readonly" : "" %>/>
