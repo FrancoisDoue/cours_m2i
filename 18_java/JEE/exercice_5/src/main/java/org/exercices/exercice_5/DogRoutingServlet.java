@@ -33,10 +33,14 @@ public class DogRoutingServlet extends HttpServlet {
             return;
         }
         if (pathInfo.startsWith("/details")) {
-            int dogId = Integer.parseInt(pathInfo.split("/")[2]);
-            request.setAttribute("isReadonly", true);
-            request.setAttribute("currentDog", dogRepository.find(dogId));
-            request.getRequestDispatcher("/WEB-INF/dogForm.jsp").forward(request, response);
+            try {
+                int dogId = Integer.parseInt(pathInfo.split("/")[2]);
+                request.setAttribute("isReadonly", true);
+                request.setAttribute("currentDog", dogRepository.find(dogId));
+                request.getRequestDispatcher("/WEB-INF/dogForm.jsp").forward(request, response);
+            } catch ( NumberFormatException e) {
+                response.sendRedirect(getServletContext().getContextPath() + "/dogs");
+            }
             return;
         }
         request.setAttribute("dogList", dogRepository.findAll());
