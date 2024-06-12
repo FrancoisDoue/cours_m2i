@@ -1,4 +1,4 @@
-package org.exercices.exercice_5;
+package org.exercices.controller;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -25,7 +25,6 @@ public class DogRoutingServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String pathInfo = (request.getPathInfo() == null || request.getPathInfo().isEmpty()) ? "" : request.getPathInfo();
-        System.out.println(pathInfo);
         if (pathInfo.equals("/add")) {
             request.setAttribute("isReadonly", false);
             request.setAttribute("currentDog", new Dog());
