@@ -6,6 +6,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import org.exercices.service.ProductService;
 import org.exercices.util.HibernateUtil;
 
@@ -23,13 +24,13 @@ public class ProductsServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-//        HttpSession session = req.getSession();
-//        System.out.println(session.getAttribute("isLogged"));
-//        boolean loggedIn = session.getAttribute("isLogged") != null && (boolean) session.getAttribute("isLogged");
-//        if (!loggedIn) {
-//            res.sendRedirect(req.getContextPath() + "/user/login");
-//            return;
-//        }
+        HttpSession session = req.getSession();
+        System.out.println(session.getAttribute("isLogged"));
+        boolean loggedIn = session.getAttribute("isLogged") != null && (boolean) session.getAttribute("isLogged");
+        if (!loggedIn) {
+            res.sendRedirect(req.getContextPath() + "/user/login");
+            return;
+        }
         req.setAttribute("products", productService.getAllProducts());
         req.getRequestDispatcher("/WEB-INF/productList.jsp").forward(req, res);
     }
