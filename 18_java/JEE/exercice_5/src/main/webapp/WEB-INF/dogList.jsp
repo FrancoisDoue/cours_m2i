@@ -44,7 +44,7 @@
                         <td><%= dog.getAge() %> ans</td>
 
                         <td>
-                            <a href="${pageContext.request.contextPath}/dogs/details/<%= dog.getId() %>"
+                            <a href="${pageContext.request.contextPath}/dogs/details?id=<%= dog.getId() %>"
                                 class="btn btn-outline-primary px-4 m">
                                 <i class="bi bi-eye"></i>
                                 Détail
@@ -54,7 +54,7 @@
                                 <i class="bi bi-pencil-square"></i>
                                 Modifier
                             </a>
-                            <a href="${pageContext.request.contextPath}/dogs/<%= dog.getId() %>?mode=remove"
+                            <a href="${pageContext.request.contextPath}/dogs/delete?id=<%= dog.getId() %>"
                                class="btn btn-outline-danger px-4 m">
                                 Supprimer
                             </a>
