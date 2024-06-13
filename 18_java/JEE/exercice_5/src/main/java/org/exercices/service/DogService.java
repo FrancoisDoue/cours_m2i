@@ -5,7 +5,6 @@ import org.exercices.repository.impl.DogRepository;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
-import java.time.LocalDate;
 import java.util.List;
 
 public class DogService {

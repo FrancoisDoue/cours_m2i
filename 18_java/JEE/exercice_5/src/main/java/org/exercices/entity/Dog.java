@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+import java.time.temporal.ChronoUnit;
 
 @Entity
 public class Dog {
@@ -66,6 +67,6 @@ public class Dog {
     }
 
     public int getAge() {
-        return LocalDate.now().getYear() - birthDate.getYear();
+        return (int) ChronoUnit.YEARS.between(birthDate, LocalDate.now());
     }
 }
