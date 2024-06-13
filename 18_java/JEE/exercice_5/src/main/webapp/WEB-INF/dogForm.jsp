@@ -5,7 +5,6 @@
 
 <html>
 <head>
-<%--    <%@include file="bootstrap_import.html"%>--%>
     <jsp:include page="bootstrap_import.html" />
     <title>Title</title>
 </head>
@@ -18,7 +17,7 @@
 
     <main>
         <div class="container bg-dark mt-4 p-4 rounded">
-            <form method="post" action="${pageContext.request.contextPath}/dogs<%= currentDog.getId() != 0 ? "?mode=update&id="+currentDog.getId() : "" %>">
+            <form method="post" action="${pageContext.request.contextPath}/dogs<%= currentDog.getId() != 0 ? "?update="+currentDog.getId() : "" %>">
                 <label class="text-center" for="name">Nom</label>
                 <div class="input-group mb-3">
                     <input class="form-control" type="text" name="name" id="name"
@@ -31,9 +30,9 @@
                            value="<%= isReadonly || currentDog.getBreed() != null ? currentDog.getBreed() : ""%>"
                            required <%=isReadonly ? "readonly" : "" %>/>
                 </div>
-                <label class="text-center" for="birthday">Date de naissance </label>
+                <label class="text-center" for="birthdate">Date de naissance </label>
                 <div class="input-group mb-3">
-                    <input class="form-control" type="<%= isReadonly ? "text" : "date"%>" name="birthday" id="birthday"
+                    <input class="form-control" type="<%= isReadonly ? "text" : "date"%>" name="birthdate" id="birthdate"
                            value="<%= isReadonly ?
                            currentDog.getBirthDate().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) + " (" + currentDog.getAge() + " ans)"
                            : (currentDog.getBirthDate() != null ? currentDog.getBirthDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")) : "")

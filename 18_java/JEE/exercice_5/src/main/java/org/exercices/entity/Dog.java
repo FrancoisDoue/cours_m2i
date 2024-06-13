@@ -3,6 +3,7 @@ package org.exercices.entity;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 
 @Entity
 public class Dog {
@@ -19,6 +20,12 @@ public class Dog {
         this.name = name;
         this.breed = breed;
         this.birthDate = birthDate;
+    }
+
+    public Dog(String name, String breed, String birthDate) throws DateTimeParseException {
+        this.name = name;
+        this.breed = breed;
+        this.birthDate = LocalDate.parse(birthDate);
     }
 
     public Dog() {}
@@ -53,6 +60,9 @@ public class Dog {
 
     public void setBirthDate(LocalDate birthDate) {
         this.birthDate = birthDate;
+    }
+    public void setBirthDate(String birthDate) throws DateTimeParseException {
+        setBirthDate(LocalDate.parse(birthDate));
     }
 
     public int getAge() {

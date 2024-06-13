@@ -49,7 +49,7 @@
                                 <i class="bi bi-eye"></i>
                                 Détail
                             </a>
-                            <a href="${pageContext.request.contextPath}/dogs/update/<%= dog.getId() %>"
+                            <a href="${pageContext.request.contextPath}/dogs/update?id=<%= dog.getId() %>"
                                class="btn btn-outline-warning px-4 m">
                                 <i class="bi bi-pencil-square"></i>
                                 Modifier

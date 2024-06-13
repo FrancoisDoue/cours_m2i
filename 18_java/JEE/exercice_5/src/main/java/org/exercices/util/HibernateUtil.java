@@ -19,8 +19,6 @@ public final class HibernateUtil {
         return factory;
     }
 
-
-
     public static void close() {
         if (factory == null) return;
         factory.close();
