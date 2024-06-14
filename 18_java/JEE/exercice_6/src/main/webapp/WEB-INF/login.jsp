@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <jsp:include page="bootstrap_import.html" />
+    <jsp:include page="components/bootstrap_import.html" />
     <title>Inscription</title>
 </head>
 <body class="h-100 container-fluid text-light bg-dark bg-gradient text-light m-0 p-0">

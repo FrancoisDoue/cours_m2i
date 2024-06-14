@@ -11,12 +11,14 @@ import java.time.LocalDate;
 public class Product {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    private String brand;
     private String ref;
     private LocalDate buyDate;
     private double price;
     private int quantity;
 
-    public Product(String ref, LocalDate buyDate, double price, int quantity) {
+    public Product(String brand, String ref, LocalDate buyDate, double price, int quantity) {
+        this.brand = brand;
         this.ref = ref;
         this.buyDate = buyDate;
         this.price = price;
@@ -31,6 +33,14 @@ public class Product {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getBrand() {
+        return brand;
+    }
+
+    public void setBrand(String brand) {
+        this.brand = brand;
     }
 
     public String getRef() {

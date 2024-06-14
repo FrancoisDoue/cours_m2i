@@ -59,4 +59,38 @@ public class ProductService {
         }
     }
 
+    public Product update(Product product) {
+        session = sessionFactory.openSession();
+        productRepository = new ProductRepository(session);
+        session.beginTransaction();
+        try {
+            Product p = productRepository.update(product);
+            session.getTransaction().commit();
+            return p;
+        } catch (RuntimeException e) {
+            System.out.println("error: " + e.getMessage());
+            session.getTransaction().rollback();
+            return null;
+        } finally {
+            session.close();
+        }
+    }
+
+    public void deleteProduct(int i) {
+        session = sessionFactory.openSession();
+        productRepository = new ProductRepository(session);
+        session.beginTransaction();
+        try {
+            Product p = productRepository.find(i);
+            if (p == null)
+                throw new RuntimeException("product not found");
+            productRepository.delete(p);
+            session.getTransaction().commit();
+        } catch (RuntimeException e) {
+            System.out.println("error: " + e.getMessage());
+            session.getTransaction().rollback();
+        } finally {
+            session.close();
+        }
+    }
 }

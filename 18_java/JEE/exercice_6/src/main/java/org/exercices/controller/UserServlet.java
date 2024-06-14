@@ -6,6 +6,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import org.exercices.entity.User;
 import org.exercices.service.UserService;
 import org.exercices.util.HibernateUtil;
 
@@ -30,6 +31,11 @@ public class UserServlet extends HttpServlet {
         if (pathInfo.equals("/register")) {
             req.getRequestDispatcher("/WEB-INF/register.jsp").forward(req, resp);
         }
+        if (pathInfo.equals("/logout")) {
+            HttpSession session = req.getSession();
+            session.removeAttribute("isLogged");
+            resp.sendRedirect(req.getContextPath() + "/products");
+        }
     }
 
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -45,15 +51,21 @@ public class UserServlet extends HttpServlet {
                 HttpSession session = req.getSession();
                 session.setAttribute("isLogged", true);
                 resp.sendRedirect(req.getContextPath() + "/products");
+                return;
             }
+            resp.sendRedirect(req.getContextPath() + "/user/login");
         }
         if (pathInfo.equals("/register")) {
-            userService.register(
+            User user = userService.register(
                 req.getParameter("username"),
                 req.getParameter("email"),
                 req.getParameter("password")
             );
-            resp.sendRedirect(getServletContext().getContextPath()+"/user/login");
+            if (user != null) {
+                resp.sendRedirect(getServletContext().getContextPath()+"/user/login");
+            } else {
+                resp.sendRedirect(getServletContext().getContextPath()+"/user/register");
+            }
         }
     }
 }
