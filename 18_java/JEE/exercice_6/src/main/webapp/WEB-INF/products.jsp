@@ -1,5 +1,4 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%--<jsp:useBean id="products" scope="request" type="java.util.List" />--%>
 <jsp:useBean id="component" scope="request" type="java.lang.String" />
 <jsp:useBean id="isLogged" scope="request" type="java.lang.Boolean" />
 <html>

@@ -43,6 +43,10 @@ public class ProductsServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String productId = req.getParameter("id") != null ? req.getParameter("id") : "";
+        if (!loggedIn) {
+            resp.sendRedirect(req.getContextPath() + "/user/login");
+            return;
+        }
         Product product = new Product(
                 req.getParameter("brand"),
                 req.getParameter("ref"),
@@ -66,6 +70,10 @@ public class ProductsServlet extends HttpServlet {
     }
 
     protected void addProduct(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+        if (!loggedIn) {
+            res.sendRedirect(req.getContextPath() + "/user/login");
+            return;
+        }
         req.setAttribute("component", "formProduct");
         req.setAttribute("isEdit", false);
         req.setAttribute("currentProduct", new Product());
@@ -73,6 +81,10 @@ public class ProductsServlet extends HttpServlet {
     }
 
     protected void updateProduct(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+        if (!loggedIn) {
+            res.sendRedirect(req.getContextPath() + "/user/login");
+            return;
+        }
         String productId = req.getParameter("id") != null ? req.getParameter("id") : "";
         Product product = productService.getProduct(Integer.parseInt(productId));
         req.setAttribute("isEdit", true);
@@ -82,6 +94,10 @@ public class ProductsServlet extends HttpServlet {
     }
 
     protected void removeProduct(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+        if (!loggedIn) {
+            res.sendRedirect(req.getContextPath() + "/user/login");
+            return;
+        }
         String productId = req.getParameter("id") != null ? req.getParameter("id") : "";
         productService.deleteProduct(Integer.parseInt(productId));
         res.sendRedirect(req.getContextPath() + "/products");

@@ -42,35 +42,31 @@ public class ProductService {
         }
     }
 
-    public Product createProduct(Product product) {
+    public void createProduct(Product product) {
         session = sessionFactory.openSession();
         productRepository = new ProductRepository(session);
         session.beginTransaction();
         try {
             Product p = productRepository.create(product);
             session.getTransaction().commit();
-            return p;
         } catch (RuntimeException e) {
             System.out.println("error: " + e.getMessage());
             session.getTransaction().rollback();
-            return null;
         } finally {
             session.close();
         }
     }
 
-    public Product update(Product product) {
+    public void update(Product product) {
         session = sessionFactory.openSession();
         productRepository = new ProductRepository(session);
         session.beginTransaction();
         try {
             Product p = productRepository.update(product);
             session.getTransaction().commit();
-            return p;
         } catch (RuntimeException e) {
             System.out.println("error: " + e.getMessage());
             session.getTransaction().rollback();
-            return null;
         } finally {
             session.close();
         }
