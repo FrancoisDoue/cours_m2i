@@ -2,12 +2,12 @@
 <html>
 <head>
     <jsp:include page="components/bootstrap_import.html" />
-    <title>Inscription</title>
+    <title>Connexion</title>
 </head>
 <body class="h-100 container-fluid text-light bg-dark bg-gradient text-light m-0 p-0">
 <header class="header bg-dark p-4 border-bottom border-light">
     <div class="container">
-        <h3>Trouver-un-nom.com</h3>
+        <h3>Exo6.com</h3>
     </div>
 </header>
 <main class="w-100 d-flex align-center">

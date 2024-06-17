@@ -13,7 +13,7 @@ import org.exercices.util.HibernateUtil;
 
 import java.io.IOException;
 import java.time.LocalDate;
-import java.util.List;
+import java.util.ArrayList;
 
 @WebServlet(name = "products", value = {"/products", "/products/*"})
 public class ProductsServlet extends HttpServlet {
@@ -64,7 +64,7 @@ public class ProductsServlet extends HttpServlet {
     }
 
     protected void showProducts(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-        req.setAttribute("products", loggedIn ? productService.getAllProducts() : List.of());
+        req.setAttribute("products", loggedIn ? productService.getAllProducts() : new ArrayList<Product>());
         req.setAttribute("component", "showProducts");
         req.getRequestDispatcher("/WEB-INF/products.jsp").forward(req, res);
     }

@@ -4,7 +4,7 @@
     <div class="container">
         <div class="row" >
             <div class="col-10">
-                <h3>Trouver-un-nom.com</h3>
+                <h3>Exo6.com</h3>
             </div>
             <div class="col-2">
                 <% if (isLogged) { %>

@@ -1,7 +1,7 @@
 <%@ page import="org.exercices.entity.Product" %>
 <%@ page import="java.time.format.DateTimeFormatter" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<jsp:useBean id="products" scope="request" type="java.util.List" />
+<jsp:useBean id="products" scope="request" type="java.util.ArrayList<org.exercices.entity.Product>" />
 
 <h4 class="px-4 pb-4 border-bottom border-light text-bold">Liste des produits</h4>
 <% if (products == null || products.isEmpty()) { %>
@@ -20,9 +20,7 @@
             </tr>
         </thead>
         <tbody>
-            <% for (Object o : products) {
-                Product product = (Product) o;
-            %>
+            <% for (Product product : products) { %>
                 <tr >
                     <td><%= product.getId() %></td>
                     <td><%= product.getBrand() %></td>

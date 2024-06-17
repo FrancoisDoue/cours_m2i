@@ -62,7 +62,7 @@ public class ProductService {
         productRepository = new ProductRepository(session);
         session.beginTransaction();
         try {
-            Product p = productRepository.update(product);
+            productRepository.update(product);
             session.getTransaction().commit();
         } catch (RuntimeException e) {
             System.out.println("error: " + e.getMessage());
