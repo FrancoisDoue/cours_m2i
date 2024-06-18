@@ -1,4 +1,4 @@
-<%--
+<%@ page import="org.exo7.entity.Image" %><%--
   Created by IntelliJ IDEA.
   User: Administrateur
   Date: 18/06/2024
@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<jsp:useBean id="images" type="java.util.ArrayList<org.exo7.entity.Image>" scope="request" />
 <html>
 <head>
     <jsp:include page="elements/bootstrap_import.html"/>
@@ -27,8 +28,12 @@
             </div>
             <button class="btn btn-outline-light rounded rounded-pill w-100">Ajouter</button>
         </form>
-        <div class="">
-
+        <div class="w-75 p-4 d-flex align-content-start flex-wrap">
+            <% for (Image img : images) { %>
+                <div class="position-relative">
+                    <img src="<%= img.getFullPath() %>" height="150" class="rounded m-1 border border-light" alt="<%= img.getName() %>" />
+                </div>
+            <% } %>
         </div>
 
     </div>

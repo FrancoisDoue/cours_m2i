@@ -4,6 +4,8 @@ import org.exo7.entity.Image;
 import org.exo7.repository.impl.ImageRepository;
 import org.exo7.util.HibernateUtil;
 
+import java.util.List;
+
 public class ImageService {
 
     private final ImageRepository repository;
@@ -13,9 +15,13 @@ public class ImageService {
     }
 
 
-    public void create(String fullPath) {
+    public void create(String fullPath, String imageName) {
         repository.create(
-                new Image(fullPath)
+                new Image(fullPath, imageName)
         );
+    }
+
+    public List<Image> findAll() {
+        return repository.findAll();
     }
 }

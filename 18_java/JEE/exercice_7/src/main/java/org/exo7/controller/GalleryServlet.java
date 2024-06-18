@@ -18,21 +18,19 @@ import java.io.IOException;
 public class GalleryServlet extends HttpServlet {
 
     private ImageService imageService;
-    private String path;
-
+    private String absolutePath;
     @Override
     public void init(ServletConfig config) throws ServletException {
         imageService = new ImageService();
-        path = config.getServletContext().getRealPath("/")+"gallery";
-
+        absolutePath = config.getServletContext().getRealPath("/")+"images";
     }
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String pathInfo =  request.getPathInfo() == null ? "" : request.getPathInfo();
         switch (pathInfo) {
             case "/add" -> addImage(request, response);
-            case "/delete" -> {}
-            default -> request.getRequestDispatcher("/WEB-INF/gallery.jsp").forward(request, response);
+//            case "/delete" -> {}
+            default -> showGallery(request, response);
         }
     }
 
@@ -40,22 +38,28 @@ public class GalleryServlet extends HttpServlet {
         doGet(request, response);
     }
 
+    private void showGallery(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setAttribute("images", imageService.findAll());
+        request.getRequestDispatcher("/WEB-INF/gallery.jsp").forward(request, response);
+    }
+
     private void addImage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Part imgPart = request.getPart("img");
         System.out.println("on add image");
         if (imgPart != null) {
-            File file = new File(path);
+            File file = new File(absolutePath);
             if (!file.exists()) {
                 if (!file.mkdir()) throw new RuntimeException("Something went wrong while creating the directory...");
             }
             try {
-                String fullPath = path + File.separator+System.currentTimeMillis() + ".jpg";
-                imageService.create(fullPath);
-                imgPart.write(fullPath);
+                String imgName = System.currentTimeMillis() + "." + imgPart.getSubmittedFileName().split("\\.")[1];
+                String relativePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath() + "/images";
+                imageService.create(relativePath, imgName);
+                imgPart.write(absolutePath + File.separator + imgName);
             } catch (NullPointerException e) {
                 System.out.println("Error creating the image file... : " + e.getMessage());
             }
         }
-        response.setContentType(request.getContextPath() + "/gallery");
+        response.sendRedirect(request.getContextPath() + "/gallery");
     }
 }

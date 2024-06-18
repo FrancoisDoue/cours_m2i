@@ -8,12 +8,14 @@ public class Image {
     int id;
     @Column(nullable = false)
     String path;
-//    @Transient
+    @Column(nullable = false)
+    String name;
 
     public Image() {}
 
-    public Image(String path) {
+    public Image(String path, String name) {
         this.path = path;
+        this.name = name;
     }
 
     public int getId() {
@@ -30,5 +32,18 @@ public class Image {
 
     public void setPath(String path) {
         this.path = path;
+    }
+
+    public String getName() {
+
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getFullPath() {
+        return path + "/" + name;
     }
 }

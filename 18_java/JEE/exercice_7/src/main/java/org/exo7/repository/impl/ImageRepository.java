@@ -2,7 +2,6 @@ package org.exo7.repository.impl;
 
 import org.exo7.entity.Image;
 import org.exo7.repository.Repository;
-import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 import java.util.List;
@@ -14,11 +13,17 @@ public class ImageRepository extends Repository<Image> {
 
     @Override
     public Image find(int id) {
-        return session.get(Image.class, id);
+        session = sessionFactory.openSession();
+        Image img = session.get(Image.class, id);
+        session.close();
+        return img;
     }
 
     @Override
     public List<Image> findAll() {
-        return session.createQuery("from Image", Image.class).list();
+        session = sessionFactory.openSession();
+        List<Image> images = session.createQuery("from Image", Image.class).list();
+        session.close();
+        return images;
     }
 }
