@@ -1,9 +1,6 @@
 package org.exercices.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.time.LocalDate;
 
@@ -16,6 +13,9 @@ public class Product {
     private LocalDate buyDate;
     private double price;
     private int quantity;
+
+    @Column(name = "image_url")
+    private String imageUrl;
 
     public Product(String brand, String ref, LocalDate buyDate, double price, int quantity) {
         this.brand = brand;
@@ -73,5 +73,13 @@ public class Product {
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }

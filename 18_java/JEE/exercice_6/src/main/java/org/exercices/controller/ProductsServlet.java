@@ -2,28 +2,30 @@ package org.exercices.controller;
 
 import jakarta.servlet.ServletConfig;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
+import jakarta.servlet.http.*;
 import org.exercices.entity.Product;
 import org.exercices.service.ProductService;
 import org.exercices.util.HibernateUtil;
 
+import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
 @WebServlet(name = "products", value = "/products/*")
+@MultipartConfig(maxFileSize = 1024 * 1024 * 10)
 public class ProductsServlet extends HttpServlet {
 
     private ProductService productService;
     private boolean loggedIn = false;
+    String absImagePath;
 
     @Override
     public void init(ServletConfig config) {
         productService = new ProductService(HibernateUtil.getFactory());
+        absImagePath = config.getServletContext().getRealPath("/")+"images";
     }
 
     @Override
@@ -48,19 +50,33 @@ public class ProductsServlet extends HttpServlet {
             resp.sendRedirect(req.getContextPath() + "/user/login");
             return;
         }
-        Product product = new Product(
-                req.getParameter("brand"),
-                req.getParameter("ref"),
-                LocalDate.parse(req.getParameter("buyDate")),
-                Double.parseDouble(req.getParameter("price")),
-                Integer.parseInt(req.getParameter("quantity"))
-        );
+
+        Product product = (productId.isEmpty()) ? new Product() : productService.getProduct(Integer.parseInt(productId));
+
+        product.setBrand(req.getParameter("brand"));
+        product.setRef(req.getParameter("ref"));
+        product.setPrice(Double.parseDouble(req.getParameter("price")));
+        product.setQuantity(Integer.parseInt(req.getParameter("quantity")));
+        product.setBuyDate(LocalDate.parse(req.getParameter("buyDate")));
+
+        Part filePart = req.getPart("img");
+        if (filePart != null) {
+            String imgName = System.currentTimeMillis() + "." + filePart.getSubmittedFileName().split("\\.")[1];
+            String relPath = req.getScheme()+"://"+req.getServerName()+":"+req.getServerPort()+req.getContextPath()+"/images";
+            File file = new File(absImagePath);
+            if (!file.exists()) {
+                file.mkdir();
+            }
+            try {
+                filePart.write(absImagePath+File.separator+imgName);
+                product.setImageUrl(relPath+"/"+imgName);
+            } catch (IOException e) {
+                System.out.println("error = " + e);
+            }
+        }
         if (productId.isEmpty()) {
             productService.createProduct(product);
         } else {
-            System.out.println(req.getParameter("img"));
-            System.out.println("on update");
-            product.setId(Integer.parseInt(productId));
             productService.update(product);
         }
         resp.sendRedirect(req.getContextPath() + "/products");

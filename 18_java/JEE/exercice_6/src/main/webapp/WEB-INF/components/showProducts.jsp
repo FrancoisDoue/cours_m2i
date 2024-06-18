@@ -10,7 +10,7 @@
     <table class="table table-dark table-striped text-light text-center">
         <thead >
             <tr>
-                <th>#</th>
+                <th></th>
                 <th>Marque</th>
                 <th>Référence</th>
                 <th>Prix</th>
@@ -22,7 +22,11 @@
         <tbody>
             <% for (Product product : products) { %>
                 <tr >
-                    <td><%= product.getId() %></td>
+                    <td>
+                        <% if (product.getImageUrl() != null) { %>
+                            <img src="<%= product.getImageUrl() %>" width="75" class="img-thumbnail">
+                        <% } %>
+                    </td>
                     <td><%= product.getBrand() %></td>
                     <td><%= product.getRef() %></td>
                     <td><%= product.getPrice() %> €</td>

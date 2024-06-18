@@ -8,7 +8,7 @@
 
     <form method="post"
           id="main-form"
-    <%--      enctype="multipart/form-data"--%>
+          enctype="multipart/form-data"
           action="${pageContext.request.contextPath}/products<%= isEdit ? "?id=" + currentProduct.getId() : "" %>">
         <div class="d-flex flex-row mb-4">
             <div class="d-flex flex-column w-50">
@@ -66,24 +66,31 @@
                         value="<%= isEdit ? currentProduct.getBuyDate() : LocalDate.now() %>"/>
             </div>
         </div>
+            <div class="d-flex flex-column px-2 my-4">
+                <label class="text-center mb-2 fw-semibold" for="img">Image du produit : </label>
+                <div class="input-group mb-3">
+                    <input class="form-control bg-dark border border-light text-light" type="file" name="img" id="img" />
+                </div>
+            </div>
+        <div class="py-4 border-top border-light">
+            <button class="btn btn-light w-100" id="submit-form" >
+                <%= isEdit ? "Modifier" : "Ajouter" %>
+            </button>
+        </div>
     </form>
 </div>
-<div class="w-50 m-auto" >
-    <div class="d-flex flex-column px-2 my-4">
-        <label class="text-center mb-2 fw-semibold" for="img">Image du produit : </label>
-        <div class="input-group mb-3">
-            <form method="post" id="file-form" enctype="multipart/form-data" action="${pageContext.request.contextPath}/products<%= isEdit ? "?id=" + currentProduct.getId() : "" %>"
-                class="w-100">
-                <input class="form-control bg-dark border border-light text-light" type="file" name="img" id="img" />
-            </form>
-        </div>
-    </div>
-</div>
-<div class="py-4 border-top border-light">
-    <button class="btn btn-light w-100" id="submit-form" >
-        <%= isEdit ? "Modifier" : "Ajouter" %>
-    </button>
-</div>
+<%--<div class="w-50 m-auto" >--%>
+<%--    <div class="d-flex flex-column px-2 my-4">--%>
+<%--        <label class="text-center mb-2 fw-semibold" for="img">Image du produit : </label>--%>
+<%--        <div class="input-group mb-3">--%>
+<%--            <form method="post" id="file-form" enctype="multipart/form-data" action="${pageContext.request.contextPath}/products<%= isEdit ? "?id=" + currentProduct.getId() : "" %>"--%>
+<%--                class="w-100">--%>
+<%--                <input class="form-control bg-dark border border-light text-light" type="file" name="img" id="img" />--%>
+<%--            </form>--%>
+<%--        </div>--%>
+<%--    </div>--%>
+<%--</div>--%>
+
 <div class="container border-top border-light px-4 py-2 d-flex justify-content-end">
     <a class="d-block btn btn-outline-light px-4 me-4"
        href="${pageContext.request.contextPath}/products">
@@ -91,4 +98,4 @@
         Retour à la liste
     </a>
 </div>
-<script src="${pageContext.request.contextPath}/script/formProduct.js" type="module"></script>
+<%--<script src="${pageContext.request.contextPath}/script/formProduct.js" type="module"></script>--%>
