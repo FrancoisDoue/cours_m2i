@@ -15,7 +15,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-@WebServlet(name = "products", value = {"/products", "/products/*"})
+@WebServlet(name = "products", value = "/products/*")
 public class ProductsServlet extends HttpServlet {
 
     private ProductService productService;
@@ -29,7 +29,8 @@ public class ProductsServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
         HttpSession session = req.getSession();
-        loggedIn = session.getAttribute("isLogged") != null && (boolean) session.getAttribute("isLogged");
+//        loggedIn = session.getAttribute("isLogged") != null && (boolean) session.getAttribute("isLogged");
+        loggedIn = true;
         String pathInfo =  req.getPathInfo() == null ? "" : req.getPathInfo();
         req.setAttribute("isLogged", loggedIn);
         switch (pathInfo) {
@@ -57,10 +58,20 @@ public class ProductsServlet extends HttpServlet {
         if (productId.isEmpty()) {
             productService.createProduct(product);
         } else {
+            System.out.println(req.getParameter("img"));
+            System.out.println("on update");
             product.setId(Integer.parseInt(productId));
             productService.update(product);
         }
         resp.sendRedirect(req.getContextPath() + "/products");
+    }
+
+    private boolean checkIsNotLogged(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        if (!loggedIn) {
+            resp.sendRedirect(req.getContextPath() + "/user/login");
+            return true;
+        }
+        return false;
     }
 
     protected void showProducts(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
@@ -70,10 +81,7 @@ public class ProductsServlet extends HttpServlet {
     }
 
     protected void addProduct(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-        if (!loggedIn) {
-            res.sendRedirect(req.getContextPath() + "/user/login");
-            return;
-        }
+        if (checkIsNotLogged(req, res)) return;
         req.setAttribute("component", "formProduct");
         req.setAttribute("isEdit", false);
         req.setAttribute("currentProduct", new Product());
@@ -81,10 +89,7 @@ public class ProductsServlet extends HttpServlet {
     }
 
     protected void updateProduct(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-        if (!loggedIn) {
-            res.sendRedirect(req.getContextPath() + "/user/login");
-            return;
-        }
+        if (checkIsNotLogged(req, res)) return;
         String productId = req.getParameter("id") != null ? req.getParameter("id") : "";
         Product product = productService.getProduct(Integer.parseInt(productId));
         req.setAttribute("isEdit", true);
@@ -94,10 +99,7 @@ public class ProductsServlet extends HttpServlet {
     }
 
     protected void removeProduct(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-        if (!loggedIn) {
-            res.sendRedirect(req.getContextPath() + "/user/login");
-            return;
-        }
+        if (checkIsNotLogged(req, res)) return;
         String productId = req.getParameter("id") != null ? req.getParameter("id") : "";
         productService.deleteProduct(Integer.parseInt(productId));
         res.sendRedirect(req.getContextPath() + "/products");
