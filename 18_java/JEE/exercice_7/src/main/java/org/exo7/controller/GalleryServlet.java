@@ -29,9 +29,13 @@ public class GalleryServlet extends HttpServlet {
         String pathInfo =  request.getPathInfo() == null ? "" : request.getPathInfo();
         switch (pathInfo) {
             case "/add" -> addImage(request, response);
-//            case "/delete" -> {}
+            case "/delete" -> delete(request, response);
             default -> showGallery(request, response);
         }
+    }
+
+    private void delete(HttpServletRequest request, HttpServletResponse response) {
+
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

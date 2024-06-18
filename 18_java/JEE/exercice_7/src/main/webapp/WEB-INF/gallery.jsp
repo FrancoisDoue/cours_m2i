@@ -30,10 +30,17 @@
         </form>
         <div class="w-75 p-4 d-flex align-content-start flex-wrap">
             <% for (Image img : images) { %>
-                <div class="position-relative">
-                    <img src="<%= img.getFullPath() %>" height="150" class="rounded m-1 border border-light" alt="<%= img.getName() %>" />
+                <div class="position-relative m-2">
+                    <div class="p-1">
+                        <img src="<%= img.getFullPath() %>" height="150" class="rounded border border-light" alt="<%= img.getName() %>" />
+                    </div>
+                    <a href="${pageContext.request.contextPath}/gallery/delete?id=<%= img.getId() %>"
+                       class="d-block link-danger rounded rounded-pill position-absolute top-0 start-100 translate-middle" >
+                        <i class="bi bi-x-circle-fill"></i>
+                    </a>
                 </div>
             <% } %>
+
         </div>
 
     </div>
