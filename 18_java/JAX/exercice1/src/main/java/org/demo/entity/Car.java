@@ -1,17 +1,23 @@
 package org.demo.entity;
 
-import java.time.Year;
+//import java.time.Year;
 
 public class Car {
+    private static int cntCars = 0;
+
     private int id;
     private String brand;
-    private Year year;
+    private int year;
     private String color;
 
-    public Car(int id, String brand, int year, String color) {
-        this.id = id;
+    public Car() {
+        this.id = ++cntCars;
+    }
+
+    public Car(String brand, int year, String color) {
+        this.id = ++cntCars;
         this.brand = brand;
-        this.year = Year.of(year);
+        this.year = year;
         this.color = color;
     }
 
@@ -31,11 +37,11 @@ public class Car {
         this.brand = brand;
     }
 
-    public String getYear() {
-        return year.toString();
+    public int getYear() {
+        return year;
     }
 
-    public void setYear(Year year) {
+    public void setYear(int year) {
         this.year = year;
     }
 

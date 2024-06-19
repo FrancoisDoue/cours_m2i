@@ -9,21 +9,46 @@ import org.demo.service.CarService;
 import java.util.List;
 
 @Path("/cars")
+@Produces(MediaType.APPLICATION_JSON)
 public class CarResource {
 
-    private CarService carService = new CarService();
+    private final CarService carService;
+
+    @Inject
+    public CarResource(CarService carService) {
+        this.carService = carService;
+    }
 
     @GET
-    @Produces(MediaType.APPLICATION_JSON)
     public List<Car> getCars() {
         return carService.getCars();
     }
 
     @GET
     @Path("/{id}")
-    @Produces(MediaType.APPLICATION_JSON)
-    public Car getCar(@PathParam("id") String id) {
-        return carService.getCar(Integer.parseInt(id));
+    public Car getCar(@PathParam("id") int id) {
+        return carService.getCar(id);
     }
+
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Car createCar(Car car) {
+        carService.getCars().add(car);
+        return car;
+    }
+
+    @PUT
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Car updateCar(Car car) {
+        return carService.updateCar(car);
+    }
+
+    @DELETE
+    @Path("{id}")
+    public void deleteCar(@PathParam("id") int id) {
+        carService.deleteCar(id);
+    }
+
+
 
 }
