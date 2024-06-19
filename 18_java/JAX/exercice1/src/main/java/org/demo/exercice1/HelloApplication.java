@@ -1,4 +1,4 @@
-package org.demo.demo_rest;
+package org.demo.exercice1;
 
 import jakarta.ws.rs.ApplicationPath;
 import jakarta.ws.rs.core.Application;
