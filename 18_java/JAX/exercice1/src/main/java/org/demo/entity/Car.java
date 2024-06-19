@@ -2,20 +2,21 @@ package org.demo.entity;
 
 //import java.time.Year;
 
-public class Car {
-    private static int cntCars = 0;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 
+@Entity
+public class Car {
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String brand;
     private int year;
     private String color;
 
-    public Car() {
-        this.id = ++cntCars;
-    }
-
+    public Car() {}
     public Car(String brand, int year, String color) {
-        this.id = ++cntCars;
         this.brand = brand;
         this.year = year;
         this.color = color;

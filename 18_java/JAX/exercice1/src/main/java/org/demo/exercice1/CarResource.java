@@ -27,13 +27,13 @@ public class CarResource {
     @GET
     @Path("/{id}")
     public Car getCar(@PathParam("id") int id) {
-        return carService.getCar(id);
+        return carService.getCarById(id);
     }
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     public Car createCar(Car car) {
-        carService.getCars().add(car);
+        carService.createCar(car);
         return car;
     }
 
@@ -46,7 +46,7 @@ public class CarResource {
     @DELETE
     @Path("{id}")
     public void deleteCar(@PathParam("id") int id) {
-        carService.deleteCar(id);
+        carService.deleteCarById(id);
     }
 
 

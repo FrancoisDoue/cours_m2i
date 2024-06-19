@@ -2,39 +2,39 @@ package org.demo.service;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import org.demo.entity.Car;
+import org.demo.repository.impl.CarRepository;
+import org.demo.util.HibernateManager;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @ApplicationScoped
+
 public class CarService {
 
-    private static List<Car> cars = new ArrayList<>(List.of(
-            new Car("Opel", 1998, "Chartreuse"),
-            new Car("Tesla", 2022, "Rouge"),
-            new Car("Peugeot", 1985, "Grise")
-    ));
+    private final CarRepository carRepository;
+
+    public CarService() {
+        this.carRepository = new CarRepository(HibernateManager.getFactory());
+    }
 
     public List<Car> getCars() {
-        return cars;
+        return carRepository.findAll();
     }
 
-    public Car getCar(int id) {
-        return cars.stream().filter(car -> car.getId() == id).findFirst().orElse(null);
+    public Car getCarById(int id) {
+        return carRepository.find(id);
     }
 
-    public Car updateCar(Car newCar) {
-        Car car = getCar(newCar.getId());
-        if (car != null) {
-            if (newCar.getBrand() != null) car.setBrand(newCar.getBrand());
-            if (newCar.getYear() != 0) car.setId(newCar.getId());
-            if (newCar.getColor() != null) car.setColor(newCar.getColor());
-        }
-        return car;
+    public void deleteCarById(int id) {
+        carRepository.delete(carRepository.find(id));
     }
 
-    public void deleteCar(int id) {
-        cars.remove(getCar(id));
+    public Car createCar(Car car) {
+        return carRepository.create(car);
+    }
+
+    public Car updateCar(Car car) {
+        return carRepository.update(car);
     }
 
 }
