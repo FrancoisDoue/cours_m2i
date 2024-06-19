@@ -33,8 +33,12 @@ public class CarService {
         return carRepository.create(car);
     }
 
-    public Car updateCar(Car car) {
+    public Car updateCar(Car newCar) {
+        Car car = getCarById(newCar.getId());
+        if (car == null) return null;
+        if (newCar.getBrand() != null) car.setBrand(newCar.getBrand());
+        if (newCar.getYear() != 0) car.setId(newCar.getId());
+        if (newCar.getColor() != null) car.setColor(newCar.getColor());
         return carRepository.update(car);
     }
-
 }
