@@ -12,8 +12,8 @@ public class User {
     @Column(nullable=false)
     private String password;
 
-    public User() {
-    }
+    public User() {}
+
     public User(String name, String email, String password) {
         this.name = name;
         this.email = email;

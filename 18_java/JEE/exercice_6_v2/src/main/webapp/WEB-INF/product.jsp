@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%--<jsp:useBean id="component" scope="request" type="java.lang.String" />--%>
+<jsp:useBean id="importJsp" scope="request" type="java.lang.String" />
 <%--<jsp:useBean id="isLogged" scope="request" type="java.lang.Boolean" />--%>
 <html>
 <head>
@@ -12,11 +12,11 @@
     <div class="container bg-dark mt-4 p-4 pb-1 rounded border border-light">
 <%--        <% if (isLogged) { %>--%>
 
-<%--        <jsp:include page="components/${component}.jsp" />--%>
+        <jsp:include page="imports/productImport/${importJsp}.jsp" />
 
 <%--        <% } else { %>--%>
 
-        <h4 class="text-center text-bold pb-3">Vous devez être connecté pour accéder aux services</h4>
+<%--        <h4 class="text-center text-bold pb-3">Vous devez être connecté pour accéder aux services</h4>--%>
 
 <%--        <% } %>--%>
 

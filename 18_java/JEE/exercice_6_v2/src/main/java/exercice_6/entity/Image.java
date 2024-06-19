@@ -11,10 +11,13 @@ public class Image {
     private int id;
     private String path;
     private String fileName;
+
+    public Image() {}
     public Image(String path, String fileName) {
         this.path = path;
         this.fileName = fileName;
     }
+
 
     public int getId() {
         return id;
