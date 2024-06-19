@@ -19,13 +19,14 @@ public abstract class AbstractRepository<T> {
         try {
             session.persist(entity);
             session.getTransaction().commit();
+            return entity;
         } catch (RuntimeException e) {
             System.out.println("Exception occured: " + e);
             session.getTransaction().rollback();
+            return null;
         } finally {
             session.close();
         }
-        return entity;
     }
 
     public T update(T entity) {
@@ -34,13 +35,14 @@ public abstract class AbstractRepository<T> {
         try {
             session.merge(entity);
             session.getTransaction().commit();
+            return entity;
         } catch (RuntimeException e) {
             System.out.println("Exception occured: " + e);
             session.getTransaction().rollback();
+            return null;
         } finally {
             session.close();
         }
-        return entity;
     }
 
     public void delete(T entity) {

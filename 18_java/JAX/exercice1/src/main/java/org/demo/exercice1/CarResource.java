@@ -3,10 +3,8 @@ package org.demo.exercice1;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
-import jakarta.ws.rs.core.Response;
 import org.demo.entity.Car;
 import org.demo.service.CarService;
-import org.demo.service.CarServiceOld;
 
 import java.util.List;
 
@@ -31,28 +29,26 @@ public class CarResource {
     public Car getCar(@PathParam("id") int id) {
         return carService.getCarById(id);
     }
-//
-//    @POST
-//    @Consumes(MediaType.APPLICATION_JSON)
-//    public Car createCar(Car car) {
-//        carService.createCar(car);
-//        return car;
-//    }
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response newCar(Car car) {
-        car = carService.createCar(car);
-        if (car != null) {
-            return Response
-                    .status(Response.Status.CREATED)
-                    .entity(car)
-                    .build();
-        }
-        return Response
-                .status(Response.Status.BAD_REQUEST)
-                .build();
+    public Car createCar(Car car) {
+        carService.createCar(car);
+        return car;
     }
+
+//    @POST
+//    @Consumes(MediaType.APPLICATION_JSON)
+//    public Response newCar(Car car) {
+//        try {
+//            car = carService.createCar(car);
+//            if (car != null)
+//                throw new Exception("Nope.");
+//            return Response.status(Response.Status.CREATED).entity(car).build();
+//        } catch (Exception e) {
+//            return Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build();
+//        }
+//    }
 
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
