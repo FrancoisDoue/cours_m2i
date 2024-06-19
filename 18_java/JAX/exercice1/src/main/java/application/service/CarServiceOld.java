@@ -1,7 +1,7 @@
-package org.demo.service;
+package application.service;
 
 import jakarta.enterprise.context.ApplicationScoped;
-import org.demo.entity.Car;
+import application.entity.Car;
 
 import java.util.ArrayList;
 import java.util.List;

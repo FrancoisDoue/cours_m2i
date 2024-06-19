@@ -1,4 +1,4 @@
-package org.demo.repository;
+package application.repository;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;

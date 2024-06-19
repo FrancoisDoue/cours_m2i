@@ -1,4 +1,4 @@
-package org.demo.util;
+package application.util;
 
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.MetadataSources;

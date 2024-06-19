@@ -1,15 +1,16 @@
-package org.demo.exercice1;
+package application.controller;
 
+import application.entity.Car;
+import application.service.CarService;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
-import org.demo.entity.Car;
-import org.demo.service.CarService;
 
 import java.util.List;
 
 @Path("/cars")
 @Produces(MediaType.APPLICATION_JSON)
+@Consumes(MediaType.APPLICATION_JSON)
 public class CarResource {
 
     private final CarService carService;
@@ -31,10 +32,8 @@ public class CarResource {
     }
 
     @POST
-    @Consumes(MediaType.APPLICATION_JSON)
     public Car createCar(Car car) {
-        carService.createCar(car);
-        return car;
+        return carService.createCar(car);
     }
 
 //    @POST
@@ -51,9 +50,14 @@ public class CarResource {
 //    }
 
     @PUT
-    @Consumes(MediaType.APPLICATION_JSON)
     public Car updateCar(Car car) {
         return carService.updateCar(car);
+    }
+
+    @PATCH
+    @Path("/{id}")
+    public Car patchCar(@PathParam("id") int id, Car car) {
+        return carService.patchCar(carService.getCarById(id), car);
     }
 
     @DELETE
@@ -61,7 +65,6 @@ public class CarResource {
     public void deleteCar(@PathParam("id") int id) {
         carService.deleteCarById(id);
     }
-
 
 
 }

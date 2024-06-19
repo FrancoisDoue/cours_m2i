@@ -1,7 +1,7 @@
-package org.demo.repository.impl;
+package application.repository.impl;
 
-import org.demo.entity.Car;
-import org.demo.repository.AbstractRepository;
+import application.entity.Car;
+import application.repository.AbstractRepository;
 import org.hibernate.SessionFactory;
 
 import java.util.List;

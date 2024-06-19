@@ -1,4 +1,4 @@
-package org.demo.entity;
+package application.entity;
 
 //import java.time.Year;
 

@@ -1,9 +1,9 @@
-package org.demo.service;
+package application.service;
 
 import jakarta.enterprise.context.ApplicationScoped;
-import org.demo.entity.Car;
-import org.demo.repository.impl.CarRepository;
-import org.demo.util.HibernateManager;
+import application.entity.Car;
+import application.repository.impl.CarRepository;
+import application.util.HibernateManager;
 
 import java.util.List;
 
@@ -36,8 +36,16 @@ public class CarService {
     public Car updateCar(Car newCar) {
         Car car = getCarById(newCar.getId());
         if (car == null) return null;
+        car.setBrand(newCar.getBrand());
+        car.setYear(newCar.getYear());
+        car.setColor(newCar.getColor());
+        return carRepository.update(car);
+    }
+
+    public Car patchCar(Car car, Car newCar) {
+        if (car == null) return null;
         if (newCar.getBrand() != null) car.setBrand(newCar.getBrand());
-        if (newCar.getYear() != 0) car.setId(newCar.getId());
+        if (newCar.getYear() != 0) car.setYear(newCar.getYear());
         if (newCar.getColor() != null) car.setColor(newCar.getColor());
         return carRepository.update(car);
     }
