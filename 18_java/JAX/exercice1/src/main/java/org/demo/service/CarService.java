@@ -1,8 +1,10 @@
 package org.demo.service;
 
+import jakarta.inject.Inject;
 import org.demo.entity.Car;
 
 import java.util.List;
+
 
 public class CarService {
 
@@ -11,6 +13,9 @@ public class CarService {
             new Car(2, "Tesla", 2022, "Rouge"),
             new Car(3, "Peugeot", 1985, "Grise")
     );
+
+    @Inject
+    public CarService() {}
 
     public List<Car> getCars() {
         return cars;

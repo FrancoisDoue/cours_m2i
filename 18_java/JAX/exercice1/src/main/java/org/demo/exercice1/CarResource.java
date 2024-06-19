@@ -1,5 +1,6 @@
 package org.demo.exercice1;
 
+import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import org.demo.entity.Car;
@@ -10,11 +11,10 @@ import java.util.List;
 @Path("/cars")
 public class CarResource {
 
-    CarService carService = new CarService();
+    private CarService carService = new CarService();
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-
     public List<Car> getCars() {
         return carService.getCars();
     }
