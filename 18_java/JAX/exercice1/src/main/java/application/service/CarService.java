@@ -4,11 +4,13 @@ import jakarta.enterprise.context.ApplicationScoped;
 import application.entity.Car;
 import application.repository.impl.CarRepository;
 import application.util.HibernateManager;
+import jakarta.enterprise.context.RequestScoped;
 
 import java.util.List;
 
+//CDI (Context Dependency Injection)
 @ApplicationScoped
-
+//@RequestScoped
 public class CarService {
 
     private final CarRepository carRepository;
