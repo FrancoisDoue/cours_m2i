@@ -25,13 +25,15 @@ public class AuthServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String pathInfo = req.getPathInfo() == null ? "" : req.getPathInfo();
         HttpSession session = req.getSession();
-        if (session.getAttribute("isLoggedIn") != null && (boolean) session.getAttribute("isLoggedIn")) {
+        boolean isLoggedIn =session.getAttribute("isLoggedIn") != null && (boolean) session.getAttribute("isLoggedIn");
+        if (isLoggedIn && !pathInfo.equals("/logout")) {
             System.out.println("Login ok");
             resp.sendRedirect(req.getContextPath() + "/patient");
             return;
         }
         switch (pathInfo) {
             case "/connect" -> connect(req, resp);
+            case "/logout" -> logout(req, resp);
             default -> req.getRequestDispatcher("/WEB-INF/loginPage.jsp").forward(req, resp);
         }
     }
@@ -41,7 +43,7 @@ public class AuthServlet extends HttpServlet {
         doGet(req, resp);
     }
 
-    protected void connect(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    private void connect(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         if (authService.login(req.getParameter("login"), req.getParameter("password"))) {
             HttpSession session = req.getSession();
             System.out.println("On login success");
@@ -49,4 +51,11 @@ public class AuthServlet extends HttpServlet {
         }
         resp.sendRedirect(req.getContextPath()+"/auth/login");
     }
+
+    private void logout(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        HttpSession session = req.getSession();
+        session.removeAttribute("isLoggedIn");
+        resp.sendRedirect(req.getContextPath()+"/auth/login");
+    }
+
 }

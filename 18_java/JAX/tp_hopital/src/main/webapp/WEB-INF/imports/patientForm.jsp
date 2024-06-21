@@ -35,7 +35,7 @@
     <div class="d-flex flex-column px-2 my-4">
         <label class="text-center mb-2 fw-semibold" for="img">Photo du patient </label>
         <div class="input-group mb-3">
-            <input class="form-control border border-primary" type="file" name="img" id="img" />
+            <input class="form-control border border-primary" type="file" name="img" id="img" required />
         </div>
     </div>
     <div class="py-4 border-top border-light">

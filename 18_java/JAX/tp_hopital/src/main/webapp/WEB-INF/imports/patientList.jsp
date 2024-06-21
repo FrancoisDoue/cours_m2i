@@ -12,17 +12,22 @@
                 <th>Nom</th>
                 <th>Prénom</th>
                 <th>Date de naissance</th>
-                <th></th>
+                <th colspan="2">Actions</th>
             </tr>
         </thead>
         <tbody>
         <% for (Patient patient : patientList) { %>
             <tr>
-                <td><img src="${pageContext.request.contextPath}<%= patient.getPhotoUrl() %>" height="50" /></td>
+                <td><img src="${pageContext.request.contextPath}<%= patient.getPhotoUrl() %>" height="50"  alt="<%= patient.getFirstname() + " " + patient.getLastname()%>"/></td>
                 <td><%= patient.getLastname() %></td>
                 <td><%= patient.getFirstname() %></td>
                 <td><%= patient.getDateOfBirth().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) %></td>
-                <td></td>
+<%--                <td>--%>
+<%--                    <a class="btn btn-primary" >Consulter l'historique</a>--%>
+<%--                </td>--%>
+                <td>
+                    <a class="btn btn-primary" href="${pageContext.request.contextPath}/consultation/new?patient=<%= patient.getId() %>" >Ajouter une consultation</a>
+                </td>
             </tr>
         <% } %>
 

@@ -21,6 +21,10 @@ public class PatientService {
         return patientRepository.findAll();
     }
 
+    public Patient getPatientById(int id) {
+        return patientRepository.find(id);
+    }
+
     public Patient createPatient(String firstname, String lastname, String date, String imageUrl) {
         try {
             Patient patient = Patient.builder()

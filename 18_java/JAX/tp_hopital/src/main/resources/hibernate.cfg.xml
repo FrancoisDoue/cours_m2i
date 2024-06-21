@@ -4,10 +4,10 @@
         "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
     <session-factory>
-<!--        <mapping class="org.exo7.entity.Image" />-->
         <mapping class="tp_hopital.shared.entity.Account" />
         <mapping class="tp_hopital.shared.entity.Patient" />
         <mapping class="tp_hopital.shared.entity.Doctor" />
+        <mapping class="tp_hopital.shared.entity.Consultation" />
 
     </session-factory>
 </hibernate-configuration>
