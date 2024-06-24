@@ -1,0 +1,4 @@
+Spring Web
+Lombok
+Spring Boot DevTools
+Thymeleaf

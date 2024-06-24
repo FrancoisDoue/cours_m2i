@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Détails</title>
+</head>
+<body>
+    <h1>Détails</h1>
+    <p>User : <span th:text="${firstname}"></span> <span th:text="${lastname}"></span></p>
+    <div>
+        <p th:if="${persons.isEmpty()}"> La liste de personne est vide </p>
+        <ul th:unless="${persons.isEmpty()}">
+            <li th:each="p : ${persons}"><span th:text="${p}"></span></li>
+        </ul>
+    </div>
+</body>
+</html>

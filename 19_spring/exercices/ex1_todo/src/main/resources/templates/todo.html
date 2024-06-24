@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Todo</title>
+</head>
+<body>
+    <h1>Todo #<span th:text="${todoItem.getId()}"></span></h1>
+    <h2 th:text="${todoItem.getName()}"></h2>
+    <h3 th:text="${todoItem.getDescription()}"></h3>
+    <h3 th:if="${todoItem.isDone()}">Fini</h3>
+    <h3 th:unless="${todoItem.isDone()}">En cours</h3>
+
+
+</body>
+</html>
