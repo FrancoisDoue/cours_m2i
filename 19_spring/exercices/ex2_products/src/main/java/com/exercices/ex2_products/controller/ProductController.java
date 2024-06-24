@@ -1,5 +1,6 @@
 package com.exercices.ex2_products.controller;
 
+import com.exercices.ex2_products.model.Product;
 import com.exercices.ex2_products.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.List;
 import java.util.UUID;
 
 @Controller
@@ -39,14 +41,14 @@ public class ProductController {
             @RequestParam(value = "priceOver", required = false) Double priceOver,
             Model model
     ) {
-        model.addAttribute("productList", productService.getAllProducts());
+        List<Product> products = productService.getAllProducts();
         if (category != null) {
-            model.addAttribute("productList", productService.getProductsByCategory(category));
+            products = productService.getProductsByCategory(products, category);
         }
         if (priceOver != null) {
-            model.addAttribute("productList", productService.getProductsOverPrice(priceOver));
-            System.out.println("on price over " + priceOver);
+            products = productService.getProductsOverPrice(products, priceOver);
         }
+        model.addAttribute("productList", products);
         return "productList";
     }
 }

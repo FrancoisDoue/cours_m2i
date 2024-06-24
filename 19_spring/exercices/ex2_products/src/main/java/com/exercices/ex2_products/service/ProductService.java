@@ -28,11 +28,11 @@ public class ProductService {
         return products.stream().filter(product -> product.getId().equals(id)).findFirst().orElse(null);
     }
 
-    public List<Product> getProductsByCategory(String category) {
+    public List<Product> getProductsByCategory(List<Product> products, String category) {
         return products.stream().filter(p -> p.getCategory().equalsIgnoreCase(category)).toList();
     }
 
-    public List<Product> getProductsOverPrice(double price) {
+    public List<Product> getProductsOverPrice(List<Product> products, double price) {
         return products.stream().filter(p -> p.getPrice() >= price).toList();
     }
 
