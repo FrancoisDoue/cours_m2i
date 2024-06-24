@@ -21,6 +21,11 @@ public class TodoController {
         this.todoService = todoService;
     }
 
+    @RequestMapping("/")
+    public String home() {
+        return "home";
+    }
+
     @RequestMapping("/todos")
     @ResponseBody
     public List<Todo> getAllTodos() {
