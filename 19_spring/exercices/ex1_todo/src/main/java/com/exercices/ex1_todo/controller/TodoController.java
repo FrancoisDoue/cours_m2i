@@ -21,9 +21,7 @@ public class TodoController {
         this.todoService = todoService;
     }
 
-
-
-    @RequestMapping("/todos/all")
+    @RequestMapping("/todos")
     @ResponseBody
     public List<Todo> getAllTodos() {
         return todoService.getAll();
