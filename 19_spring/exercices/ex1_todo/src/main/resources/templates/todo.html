@@ -4,13 +4,11 @@
     <meta charset="UTF-8">
     <title>Todo</title>
 </head>
-<body style="color: chartreuse; background-color: #1f1f1f">
+<body style="color: chartreuse; background-color: #1f1f1f; font-family: Consolas,serif">
     <h1>Todo #<span th:text="${todoItem.getId()}"></span></h1>
     <h2 th:text="${todoItem.getName()}"></h2>
     <h3 th:text="${todoItem.getDescription()}"></h3>
     <h3 th:if="${todoItem.isDone()}">Fini</h3>
     <h3 th:unless="${todoItem.isDone()}">En cours</h3>
-
-
 </body>
 </html>

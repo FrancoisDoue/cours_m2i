@@ -9,7 +9,7 @@ import java.util.List;
 @Service
 public class TodoService {
     private static int cntTodo = 0;
-    private static List<Todo> todos = new ArrayList<>( List.of(
+    private final static List<Todo> todos = new ArrayList<>( List.of(
             new Todo(++cntTodo, "name "+cntTodo, "description "+cntTodo, false),
             new Todo(++cntTodo, "name "+cntTodo, "description "+cntTodo, true),
             new Todo(++cntTodo, "name "+cntTodo, "description "+cntTodo, false),
