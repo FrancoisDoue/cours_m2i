@@ -16,7 +16,7 @@ import java.util.UUID;
 @Controller
 public class ProductController {
 
-    private ProductService productService;
+    private final ProductService productService;
 
     @Autowired
     public ProductController(ProductService productService) {
@@ -35,7 +35,7 @@ public class ProductController {
         return "product";
     }
 
-    @RequestMapping("/search")
+    @GetMapping("/search")
     public String searchProducts(
             @RequestParam(value = "cat", required = false) String category,
             @RequestParam(value = "priceOver", required = false) Double priceOver,

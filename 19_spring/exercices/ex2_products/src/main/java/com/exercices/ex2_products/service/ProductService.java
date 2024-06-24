@@ -32,9 +32,17 @@ public class ProductService {
         return products.stream().filter(p -> p.getCategory().equalsIgnoreCase(category)).toList();
     }
 
+//    public List<Product> getProductsByCategory(String category) {
+//        return getProductsByCategory(products, category);
+//    }
+
     public List<Product> getProductsOverPrice(List<Product> products, double price) {
         return products.stream().filter(p -> p.getPrice() >= price).toList();
     }
+
+//    public List<Product> getProductsOverPrice(double price) {
+//        return getProductsOverPrice(products, price);
+//    }
 
 
 }
