@@ -1,6 +1,5 @@
 package tp_hopital.wep_application.service;
 
-import jakarta.servlet.http.Part;
 import tp_hopital.shared.entity.Patient;
 import tp_hopital.shared.repository.impl.PatientRepository;
 import tp_hopital.shared.util.HibernateManager;
