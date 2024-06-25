@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <span th:replace="~{home::bootstrap-import}"></span>
+    <title>Liste des étudiants</title>
+</head>
+<body>
+<span th:replace="~{home::header}"></span>
+
+<main class="container">
+    <a class="link text-dark d-block text-end" th:fragment="back" th:href="@{/}">Retour à l'accueil</a>
+    <div class="p-2">
+        <div class="bg-dark rounded my-1 py-2 px-4" th:each="s : ${list}" >
+            <a class="link text-light" th:href="@{/student/{id}(id=${s.getId()})}" th:text="${s.getFirstname() + ' ' + s.getLastname()}"></a>
+        </div>
+    </div>
+    <div class="d-flex justify-content-end">
+        <a th:href="@{/student-new}" class="btn btn-outline-dark px-4"> Nouvel étudiant </a>
+    </div>
+</main>
+
+</body>
+</html>
