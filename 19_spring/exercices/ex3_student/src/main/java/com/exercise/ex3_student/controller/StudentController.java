@@ -2,9 +2,11 @@ package com.exercise.ex3_student.controller;
 
 import com.exercise.ex3_student.model.Student;
 import com.exercise.ex3_student.service.StudentService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
@@ -52,7 +54,8 @@ public class StudentController {
     }
 
     @PostMapping("/student-new")
-    public String submitStudent(@ModelAttribute("student") Student student) {
+    public String submitStudent(@Valid @ModelAttribute("student") Student student, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) return "newStudent";
         if (student.getId() == 0) studentService.addStudent(student);
         else studentService.updateStudent(student);
         return "redirect:/student-list";

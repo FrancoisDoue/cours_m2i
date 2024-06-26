@@ -11,23 +11,39 @@
 <main class="container">
     <span th:replace="~{studentList::back}"></span>
     <form class="w-50 m-auto" th:action="@{student-new}" th:object="${student}" method="post">
-        <input th:if="${student.getId() != 0}" type="number" readonly name="id" th:field="*{id}" class="d-none" />
-        <div class="form-floating mb-3">
-            <input class="form-control border border-dark" type="text" name="firstname" id="firstname" th:field="*{firstname}">
-            <label for="firstname"> Prénom : </label>
+        <input th:if="${student.getId() != 0}" readonly name="id" th:field="*{id}" type="hidden" />
+        <div class="mb-3">
+            <span class="text-danger" th:if="${#fields.hasErrors()}" th:errors="*{firstname}" ></span>
+            <div class="form-floating">
+                <input class="form-control border border-dark" type="text" name="firstname" id="firstname" th:field="*{firstname}">
+                <label for="firstname">Prénom :</label>
+            </div>
         </div>
-        <div class="form-floating mb-3">
-            <input class="form-control border border-dark" type="text" name="lastname" id="lastname" th:field="*{lastname}">
-            <label for="lastname"> Nom : </label>
+
+        <div class="mb-3">
+            <span class="text-danger" th:if="${#fields.hasErrors()}" th:errors="*{lastname}" ></span>
+            <div class="form-floating">
+                <input class="form-control border border-dark" type="text" name="lastname" id="lastname" th:field="*{lastname}">
+                <label for="lastname"> Nom : </label>
+            </div>
         </div>
-        <div class="form-floating mb-3">
-            <input class="form-control border border-dark" type="number" name="age" id="age" min="16" style="appearance: textfield" th:field="*{age}">
-            <label for="age"> Age : </label>
+
+        <div class="mb-3">
+            <span class="text-danger" th:if="${#fields.hasErrors()}" th:errors="*{age}" ></span>
+            <div class="form-floating">
+                <input class="form-control border border-dark" type="number" name="age" id="age" style="appearance: textfield" th:field="*{age}">
+                <label for="age"> Age : </label>
+            </div>
         </div>
-        <div class="form-floating mb-3">
-            <input class="form-control border border-dark" type="email" name="email" id="email" th:field="*{email}">
-            <label for="email"> Adresse email : </label>
+
+        <div class="mb-3">
+            <span class="text-danger" th:if="${#fields.hasErrors()}" th:errors="*{email}" ></span>
+            <div class="form-floating">
+                <input class="form-control border border-dark" type="email" name="email" id="email" th:field="*{email}">
+                <label for="email"> Adresse email : </label>
+            </div>
         </div>
+
         <div>
             <button th:if="${student.getId() != 0}" class="w-100 btn btn-outline-dark">Modifier</button>
             <button th:if="${student.getId() == 0}" class="w-100 btn btn-outline-dark">S'inscrire</button>
