@@ -48,7 +48,6 @@ public class StudentController {
     public String newStudent(Model model) {
         model.addAttribute("title", "Inscription");
         model.addAttribute("student", new Student());
-        model.addAttribute("mode", "create");
         return "newStudent";
     }
 
@@ -70,7 +69,6 @@ public class StudentController {
         Student student = studentService.getStudentById(id);
         model.addAttribute("title", "Modification");
         model.addAttribute("student", student);
-        model.addAttribute("mode", "update");
         return "newStudent";
     }
 

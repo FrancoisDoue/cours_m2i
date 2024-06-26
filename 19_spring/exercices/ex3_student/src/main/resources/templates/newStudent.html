@@ -29,8 +29,8 @@
             <label for="email"> Adresse email : </label>
         </div>
         <div>
-            <button th:if="${mode == 'update'}" class="w-100 btn btn-outline-dark">Modifier</button>
-            <button th:if="${mode == 'create'}" class="w-100 btn btn-outline-dark">S'inscrire</button>
+            <button th:if="${student.getId() != 0}" class="w-100 btn btn-outline-dark">Modifier</button>
+            <button th:if="${student.getId() == 0}" class="w-100 btn btn-outline-dark">S'inscrire</button>
         </div>
     </form>
 </main>
