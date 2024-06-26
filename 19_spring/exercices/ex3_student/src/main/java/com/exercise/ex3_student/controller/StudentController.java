@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 public class StudentController {
 
-    private StudentService studentService;
+    private final StudentService studentService;
 
     @Autowired
     public StudentController(StudentService studentService) {
@@ -48,15 +48,30 @@ public class StudentController {
     public String newStudent(Model model) {
         model.addAttribute("title", "Inscription");
         model.addAttribute("student", new Student());
+        model.addAttribute("mode", "create");
         return "newStudent";
     }
 
     @PostMapping("/student-new")
     public String submitStudent(@ModelAttribute("student") Student student) {
-        studentService.addStudent(student);
+        if (student.getId() == 0) studentService.addStudent(student);
+        else studentService.updateStudent(student);
         return "redirect:/student-list";
     }
 
+    @GetMapping("/student-remove")
+    public String removeStudent(@RequestParam(value = "studentId") int id) {
+        studentService.deleteStudentById(id);
+        return "redirect:/student-list";
+    }
 
+    @GetMapping("/student-update")
+    public String updateStudent(@RequestParam(value = "studentId") int id, Model model) {
+        Student student = studentService.getStudentById(id);
+        model.addAttribute("title", "Modification");
+        model.addAttribute("student", student);
+        model.addAttribute("mode", "update");
+        return "newStudent";
+    }
 
 }

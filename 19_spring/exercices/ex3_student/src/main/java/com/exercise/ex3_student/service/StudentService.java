@@ -35,4 +35,15 @@ public class StudentService {
         return students.stream().filter(s -> s.getLastname().toLowerCase().contains(name.toLowerCase())).toList();
     }
 
+    public void deleteStudentById(int id) {
+        students.removeIf(student -> student.getId() == id);
+    }
+
+    public void updateStudent(Student student) {
+        students.set(
+                students.indexOf(getStudentById(student.getId())),
+                student
+        );
+    }
+
 }

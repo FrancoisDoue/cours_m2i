@@ -11,6 +11,7 @@
 <main class="container">
     <span th:replace="~{studentList::back}"></span>
     <form class="w-50 m-auto" th:action="@{student-new}" th:object="${student}" method="post">
+        <input th:if="${student.getId() != 0}" type="number" readonly name="id" th:field="*{id}" class="d-none" />
         <div class="form-floating mb-3">
             <input class="form-control border border-dark" type="text" name="firstname" id="firstname" th:field="*{firstname}">
             <label for="firstname"> Prénom : </label>
@@ -28,7 +29,8 @@
             <label for="email"> Adresse email : </label>
         </div>
         <div>
-            <button class="w-100 btn btn-outline-dark">S'inscrire</button>
+            <button th:if="${mode == 'update'}" class="w-100 btn btn-outline-dark">Modifier</button>
+            <button th:if="${mode == 'create'}" class="w-100 btn btn-outline-dark">S'inscrire</button>
         </div>
     </form>
 </main>
