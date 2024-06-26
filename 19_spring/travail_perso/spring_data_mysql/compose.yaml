@@ -1,5 +1,6 @@
 services:
   mysql:
+    container_name: 'spring_data_mysql'
     image: 'mysql:latest'
     environment:
       - 'MYSQL_DATABASE=test_spring_mysql'

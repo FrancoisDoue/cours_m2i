@@ -2,16 +2,19 @@ package com.example.spring_data_mysql.controller;
 
 import com.example.spring_data_mysql.model.Task;
 import com.example.spring_data_mysql.repository.TaskRepository;
+import org.hibernate.annotations.ParamDef;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
+@RequestMapping(path = "/tasks")
 public class MainController {
 
-    private TaskRepository taskRepository;
+    private final TaskRepository taskRepository;
 
     @Autowired
     public MainController(TaskRepository taskRepository) {
@@ -22,5 +25,11 @@ public class MainController {
     @ResponseBody
     public Task newTask(@RequestBody Task task) {
         return taskRepository.save(task);
+    }
+
+    @GetMapping(path = "/all")
+    @ResponseBody
+    public List<Task> getAllTasks() {
+        return (List<Task>) taskRepository.findAll();
     }
 }
