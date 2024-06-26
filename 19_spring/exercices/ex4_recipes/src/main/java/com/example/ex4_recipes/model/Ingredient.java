@@ -6,17 +6,15 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
-@Builder
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 
 @Entity
-public class Category {
+public class Ingredient {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @Column(nullable = false, unique = true)
     private String name;
-    private String description;
 }

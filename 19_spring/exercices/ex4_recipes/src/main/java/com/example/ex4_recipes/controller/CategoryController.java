@@ -1,5 +1,6 @@
 package com.example.ex4_recipes.controller;
 
+import com.example.ex4_recipes.model.Category;
 import com.example.ex4_recipes.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,6 +23,12 @@ public class CategoryController {
     public String categoryList(Model model) {
         model.addAttribute("categories", categoryService.getAllCategories());
         return "category-list";
+    }
+
+    @GetMapping("/add")
+    public String addCategory(Model model) {
+        model.addAttribute("category", new Category());
+        return "category-form";
     }
 
 }

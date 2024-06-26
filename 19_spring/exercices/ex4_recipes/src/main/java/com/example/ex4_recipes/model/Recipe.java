@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Builder
 @Data
 @NoArgsConstructor
@@ -18,7 +20,27 @@ public class Recipe {
     private String title;
     private String description;
 
+    @OneToMany(fetch = FetchType.EAGER)
+    @JoinColumn(name = "recipe_id")
+    private List<Ingredient> ingredients;
+
+    @OneToMany(fetch = FetchType.EAGER, orphanRemoval = true)
+    @JoinColumn(name = "recipe_id")
+    private List<Step> steps;
+
     @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "category_id")
     private Category category;
 
+    @Override
+    public String toString() {
+        return "Recipe{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", ingredients=" + ingredients +
+                ", steps=" + steps +
+                ", category=" + category +
+                '}';
+    }
 }
