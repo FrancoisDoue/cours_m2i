@@ -1,10 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" xmlns:th="http://www.thymeleaf.org">
     <title>Accueil</title>
 </head>
 <body>
     <h1>Accueil</h1>
+<ul>
+    <li><a th:href="@{/recipes}">Toutes les recettes</a></li>
+    <li><a th:href="@{/recipes/add}">Ajouter une recette</a></li>
+
+    <li><a th:href="@{/categories}">Afficher les catégories</a></li>
+    <li><a th:href="@{/categories/add}">Ajouter une catégorie</a></li>
+</ul>
 </body>
 </html>

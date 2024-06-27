@@ -7,7 +7,11 @@
 <body>
     <h1>Liste des catégories</h1>
     <ul th:each="c : ${categories}">
-        <li th:text="${c.getName() + ' - ' + c.getDescription()}"></li>
+        <li>
+            <a th:text="${c.getName() + ' - ' + c.getDescription()}"
+                th:href="@{/categories/{id}(id=${c.getId()})}"
+            ></a>
+        </li>
     </ul>
 </body>
 </html>
