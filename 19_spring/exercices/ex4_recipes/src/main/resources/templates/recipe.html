@@ -2,7 +2,8 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title th:text="~{home::bootstrap-import}"></title>
+    <span th:replace="~{home::bootstrap-import}"></span>
+    <title>Recette</title>
 </head>
 <body>
     <span th:replace="~{home::header}"></span>
@@ -18,6 +19,7 @@
 
     <h4>Etapes</h4>
     <p th:text="${recipe.steps}"></p>
+    <a th:href="@{/recipes/update/{id}(id=${recipe.id})}">Modifier la recette</a>
 
 </body>
 </html>

@@ -12,21 +12,33 @@
         <input type="text" th:field="*{title}" name="title" id="title">
         <input type="text" th:field="*{description}" name="description" id="description">
         <select th:field="*{category}">
-            <option th:each="c : ${categories}" th:value="${c.getId()}" th:text="${c.getName()}" ></option>
+            <option th:each="c : ${categories}"
+                    th:value="${c.getId()}"
+                    th:text="${c.getName()}"
+                    th:selected="${recipe.category != null && c.getId() == recipe.category.getId()}"
+            ></option>
         </select>
         <div>
-            <div id="ingredients-list">
-                <input type="text" name="ingredients" id="ingredients" th:field="*{ingredients[0].name}" />
+                <div id="ingredients-list">
+                <th:block th:if="${recipe.id != 0}">
+<!--                    <div class="test" th:each="i : ${recipe.getIngredients()}">-->
+<!--                        <input type="text" name="ingredients" th:field="*{ingredients[${recipe.getIngredients().indexOf(i)}].name}" required />-->
+<!--                    </div>-->
+                </th:block>
+                <th:block th:if="${recipe.id == 0}">
+                    <div class="test">
+                        <input type="text" name="ingredients" th:field="*{ingredients[0].name}" required />
+                    </div>
+                </th:block>
+                </div>
+                <a id="ingredients-btn">add</a>
             </div>
-            <a id="ingredients-btn">add</a>
-        </div>
-        <div>
-            <div id="steps-list">
-                <input type="text" name="steps" id="steps" th:field="*{steps[0].description}" />
+            <div>
+                <div id="steps-list">
+                    <input type="text" name="steps" id="steps" th:field="*{steps[0].description}" required />
+                </div>
+                <a id="steps-btn">add</a>
             </div>
-            <a id="steps-btn">add</a>
-        </div>
-<!--        <input type="text" name="steps" id="steps" th:field="*{steps}" />-->
         <button>Submit</button>
     </form>
 </main>
@@ -34,17 +46,22 @@
     const addInput = (id, fieldname) => {
         const element = document.getElementById(id)
         const childrenCnt = element.children.length
+        const bearer = document.createElement("div")
         const input = document.createElement("input")
+        const removeBtn = document.createElement("a")
+        removeBtn.className = "btn btn-outline-warning"
+        removeBtn.textContent = "remove"
+        removeBtn.addEventListener("click", ({target}) => target.parentElement.remove())
+        bearer.className = "test"
         input.type = "text"
         input.name = `${id.split("-")[0]}[${childrenCnt}].${fieldname}`
-        element.append(input)
+        bearer.appendChild(input)
+        bearer.appendChild(removeBtn)
+        element.appendChild(bearer)
     }
-    document.getElementById("ingredients-btn").addEventListener("click", (e) => {
-        addInput("ingredients-list", "name")
-    })
-    document.getElementById("steps-btn").addEventListener("click", (e) => {
-        addInput("steps-list", "description")
-    })
+    document.getElementById("ingredients-btn").addEventListener("click", () => addInput("ingredients-list", "name"))
+    document.getElementById("steps-btn").addEventListener("click", () => addInput("steps-list", "description"))
+
 </script>
 </body>
 </html>

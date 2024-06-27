@@ -53,11 +53,13 @@ public class RecipeController {
         String s = "";
         model.addAttribute("recipe", new Recipe());
         model.addAttribute("categories", categoryService.getAllCategories());
-//        model.addAttribute(
-//                "listIngredients",
-//                new ArrayList<String>()
-//        );
-
+        return "recipe-form";
+    }
+    @GetMapping("/update/{id}")
+    public String updateRecipe(@PathVariable int id, Model model) {
+        Recipe recipe = recipeService.getRecipeById(id);
+        model.addAttribute("recipe", recipe);
+        model.addAttribute("categories", categoryService.getAllCategories());
         return "recipe-form";
     }
 
