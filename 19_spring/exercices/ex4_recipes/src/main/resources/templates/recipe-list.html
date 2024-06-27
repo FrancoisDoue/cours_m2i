@@ -2,10 +2,12 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <span th:replace="~{home::bootstrap-import}"></span>
     <title>Liste des recettes</title>
 </head>
 <body>
-    <h1>Toutes les recettes</h1>
+    <span th:replace="~{home::header}"></span>
+
     <div th:each="r : ${recipeList}">
         <a th:href="@{/recipes/{id}(id=${r.id})}">
             <h3 th:text="${r.title}"></h3>

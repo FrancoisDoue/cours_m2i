@@ -2,9 +2,12 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <span th:replace="~{home::bootstrap-import}"></span>
     <title th:text="${category.getName()}"></title>
 </head>
 <body>
+<span th:replace="~{home::header}"></span>
+
 <h1 th:text="${category.getName()}"></h1>
 
 </body>

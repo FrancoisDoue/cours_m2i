@@ -2,8 +2,8 @@ package com.example.ex4_recipes.service;
 
 import com.example.ex4_recipes.model.Recipe;
 import com.example.ex4_recipes.repository.IngredientRepository;
-import com.example.ex4_recipes.repository.StepRepository;
 import com.example.ex4_recipes.repository.RecipeRepository;
+import com.example.ex4_recipes.repository.StepRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,11 +13,11 @@ import java.util.List;
 public class RecipeService {
 
     private final RecipeRepository recipeRepository;
-    private IngredientRepository ingredientRepository;
-    private StepRepository stepRepository;
+    private final IngredientRepository ingredientRepository;
+    private final StepRepository stepRepository;
 
     @Autowired
-    public RecipeService(RecipeRepository recipeRepository, IngredientRepository ingredientRepository, StepRepository stepRepository) {
+    public RecipeService(RecipeRepository recipeRepository, IngredientRepository ingredientRepository ,StepRepository stepRepository) {
         this.recipeRepository = recipeRepository;
         this.ingredientRepository = ingredientRepository;
         this.stepRepository = stepRepository;
@@ -31,6 +31,11 @@ public class RecipeService {
         return recipeRepository.findById(id).orElse(null);
     }
 
+    public Recipe createRecipe(Recipe recipe) {
+        ingredientRepository.saveAll(recipe.getIngredients());
+        stepRepository.saveAll(recipe.getSteps());
+        return recipeRepository.save(recipe);
+    }
 
 
 }

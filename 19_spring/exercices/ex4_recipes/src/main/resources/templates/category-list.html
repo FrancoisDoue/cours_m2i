@@ -2,10 +2,11 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <span th:replace="~{home::bootstrap-import}"></span>
     <title>Catégories</title>
 </head>
 <body>
-    <h1>Liste des catégories</h1>
+    <span th:replace="~{home::header}"></span>
     <ul th:each="c : ${categories}">
         <li>
             <a th:text="${c.getName() + ' - ' + c.getDescription()}"

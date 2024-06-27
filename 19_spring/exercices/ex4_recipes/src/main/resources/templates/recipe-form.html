@@ -1,19 +1,50 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8" xmlns:th="http://www.thymeleaf.org">
+    <meta charset="UTF-8" >
+    <span th:replace="~{home::bootstrap-import}"></span>
     <title>Title</title>
 </head>
 <body>
-<h1>Ajouter une recette</h1>
-<form th:action="@{/recipes}" th:object="${recipe}" method="post">
-    <input type="text" th:field="*{title}" name="title" id="title">
-    <input type="text" th:field="*{description}" name="description" id="description">
-    <h4>Ingrédients</h4>
-<!--    TODO ajouter du javascript -->
-<!--    <input type="text" name="" id="">-->
-    <button>Submit</button>
-</form>
-
+<span th:replace="~{home::header}"></span>
+<main class="container">
+    <form th:action="@{/recipes}" th:object="${recipe}" method="post">
+        <input type="text" th:field="*{title}" name="title" id="title">
+        <input type="text" th:field="*{description}" name="description" id="description">
+        <select th:field="*{category}">
+            <option th:each="c : ${categories}" th:value="${c.getId()}" th:text="${c.getName()}" ></option>
+        </select>
+        <div>
+            <div id="ingredients-list">
+                <input type="text" name="ingredients" id="ingredients" th:field="*{ingredients[0].name}" />
+            </div>
+            <a id="ingredients-btn">add</a>
+        </div>
+        <div>
+            <div id="steps-list">
+                <input type="text" name="steps" id="steps" th:field="*{steps[0].description}" />
+            </div>
+            <a id="steps-btn">add</a>
+        </div>
+<!--        <input type="text" name="steps" id="steps" th:field="*{steps}" />-->
+        <button>Submit</button>
+    </form>
+</main>
+<script>
+    const addInput = (id, fieldname) => {
+        const element = document.getElementById(id)
+        const childrenCnt = element.children.length
+        const input = document.createElement("input")
+        input.type = "text"
+        input.name = `${id.split("-")[0]}[${childrenCnt}].${fieldname}`
+        element.append(input)
+    }
+    document.getElementById("ingredients-btn").addEventListener("click", (e) => {
+        addInput("ingredients-list", "name")
+    })
+    document.getElementById("steps-btn").addEventListener("click", (e) => {
+        addInput("steps-list", "description")
+    })
+</script>
 </body>
 </html>

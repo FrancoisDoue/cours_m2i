@@ -2,15 +2,21 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <span th:replace="~{home::bootstrap-import}"></span>
+
     <title>Formulaire catégorie</title>
 </head>
 <body>
-  <h1>Formulaire catégorie</h1>
-  <form th:action="@{/categories}" th:object="${category}" method="post" >
-      <input type="text" th:field="*{name}" name="name" id="name">
-      <input type="text" th:field="*{description}" id="description" name="description">
-      <button>Submit</button>
-  </form>
+<span th:replace="~{home::header}"></span>
+<main class="container">
+    <h1>Formulaire catégorie</h1>
+    <form th:action="@{/categories}" th:object="${category}" method="post" >
+        <input type="text" th:field="*{name}" name="name" id="name">
+        <input type="text" th:field="*{description}" id="description" name="description">
+        <button>Submit</button>
+    </form>
+
+</main>
 
 </body>
 </html>

@@ -11,6 +11,7 @@ public class MainController {
 
     @GetMapping
     public String home(Model model) {
+        model.addAttribute("homePage", true);
         return "home";
     }
 }

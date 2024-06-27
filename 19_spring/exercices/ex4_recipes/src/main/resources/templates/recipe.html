@@ -2,18 +2,22 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title th:text="${recipe.title}"></title>
+    <title th:text="~{home::bootstrap-import}"></title>
 </head>
 <body>
+    <span th:replace="~{home::header}"></span>
+
+<!--<th:block th:object="${recipe}">-->
+<!--    <h3 th:text="*{title}"></h3>-->
+<!--    <p th:text="*{description}"></p>-->
+<!--</th:block>-->
     <h3 th:text="${recipe.title}"></h3>
     <p th:text="${recipe.description}"></p>
     <h4>Ingredients :</h4>
-    <ul>
-        <li th:each="i : ${recipe.getIngredients()}" th:text="${i.name}"></li>
-    </ul>
+    <p th:text="${recipe.ingredients}"></p>
+
     <h4>Etapes</h4>
-    <ol>
-        <li th:each="s : ${recipe.getSteps()}" th:text="${s.instruction}"></li>
-    </ol>
+    <p th:text="${recipe.steps}"></p>
+
 </body>
 </html>
