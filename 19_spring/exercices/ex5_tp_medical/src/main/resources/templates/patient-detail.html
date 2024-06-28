@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Détail</title>
+</head>
+<body>
+    <h1>détail</h1>
+    <h3 th:text="${patient.firstName} + ' ' + ${patient.lastName}"></h3>
+    <ul>
+        <li>Identifiant n° <span th:text="${patient.id}"></span></li>
+        <li>Né le <span th:text="${formatter.format(patient.birthDate)}"></span></li>
+
+    </ul>
+    <p>
+        <a th:href="@{/patients/update/{id}(id=${patient.id})}">Modifier les informations</a>
+    </p>
+    <hr>
+    <h3>Dossier médical</h3>
+
+    <table>
+        <thead>
+        <tr>
+            <th>N°</th>
+            <th>Date</th>
+            <th>Motif</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+    </table>
+
+</body>
+</html>

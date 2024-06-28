@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Formulaire</title>
+</head>
+<body>
+    <h1>Formulaire</h1>
+    <form th:object="${patient}" th:action="@{/patients}" method="post">
+        <input th:if="*{id != 0}" type="hidden" name="id" th:field="*{id}">
+        <div>
+            <label for="firstname">Prénom :</label>
+            <input type="text" name="firstname" id="firstname" th:field="*{firstName}">
+        </div>
+        <div>
+            <label for="lastname">Nom :</label>
+            <input type="text" name="lastname" id="lastname" th:field="*{lastName}">
+        </div>
+        <div>
+            <label for="birthDate">Date de naissance :</label>
+            <input type="date" name="birthDate" id="birthDate" th:date="*{birthDate}" th:value="${patient.birthDate != null ? formatter.format(patient.birthDate): ''}">
+        </div>
+        <button><span th:text="${patient.id == 0 ? 'Ajouter' : 'Modifier'}"></span></button>
+    </form>
+</body>
+</html>
