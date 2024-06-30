@@ -17,7 +17,7 @@
     </p>
     <hr>
     <h3>Dossier médical</h3>
-
+    <a th:href="@{/consultations/new/{id}(id=${patient.getId()})}">Ajouter une consultation</a>
     <table>
         <thead>
         <tr>
@@ -27,6 +27,11 @@
         </tr>
         </thead>
         <tbody>
+        <tr th:each="c : ${patient.getConsultations()}">
+            <td th:text="${c.id}"></td>
+            <td th:text="${c.consultationDate}"></td>
+            <td th:text="${c.reason}"></td>
+        </tr>
 
         </tbody>
     </table>

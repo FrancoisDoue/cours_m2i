@@ -14,10 +14,10 @@ import java.time.LocalDate;
 
 public class Consultation {
     private int id;
-    private LocalDate date;
+    private LocalDate consultationDate;
     private String reason;
-
-    private void setDate(String date) {
-        this.date = LocalDate.parse(date);
-    }
+//
+//    private void setConsultationDate(String date) {
+//        this.consultationDate = LocalDate.parse(date);
+//    }
 }

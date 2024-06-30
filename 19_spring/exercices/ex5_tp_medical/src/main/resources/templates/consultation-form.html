@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Consultation</title>
+</head>
+<body>
+<h1>Consultation - formulaire</h1>
+<form th:object="${consultation}" th:action="@{/consultations}" method="post">
+    <input type="hidden" name="patient" th:field="${patient.id}" />
+    <div>
+        <label for="reason">Motif</label>
+        <input type="text" name="reason" id="reason" th:field="*{reason}">
+    </div>
+    <div>
+        <label for="consultationDate">Date: </label>
+        <input type="date" name="consultationDate" id="consultationDate" th:value="''" th:date="*{consultationDate}" />
+    </div>
+    <button>Ajouter</button>
+</form>
+
+</body>
+</html>
