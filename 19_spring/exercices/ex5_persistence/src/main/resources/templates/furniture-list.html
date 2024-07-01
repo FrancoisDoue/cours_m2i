@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<h1>Liste des meubles</h1>
+
+<div>
+    <table th:if="${!furnitures.isEmpty()}">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Nom du produit</th>
+                <th>Prix</th>
+                <th>Stock disponible</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="f : ${furnitures}" th:object="${f}">
+                <td th:text="*{id}"></td>
+                <td th:text="*{name}"></td>
+                <td th:text="*{price}"></td>
+                <td th:text="*{stock}"></td>
+                <td>
+                    <a th:href="@{/furnitures/{id}(id=${f.id})}">Voir le détail</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <h3 th:if="${furnitures.isEmpty()}">Il n'y a pas de produit disponible</h3>
+</div>
+
+</body>
+</html>

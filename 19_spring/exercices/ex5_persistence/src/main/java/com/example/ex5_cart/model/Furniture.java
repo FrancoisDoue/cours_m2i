@@ -16,6 +16,7 @@ public class Furniture {
     private long id;
     private String name;
     private String description;
+    @Column(columnDefinition = "float(5,2)")
     private double price;
     private int stock;
 
