@@ -3,6 +3,7 @@ package com.example.ex5_tp_medical.model;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -23,7 +24,9 @@ public class Patient {
     @NotBlank(message = "Ce champ ne peut pas être vide")
     private String lastName;
 
-    @NotNull(message = "Vous devez renseigner la date de naissance du patient")
+//    @DateTimeFormat(pattern = "dd-MM-yyyy")
+//    @NotNull(message = "Vous devez renseigner la date de naissance du patient")
+    // TODO find solution
     private LocalDate birthDate;
 
     public void setBirthDate(String dateToString) {

@@ -2,9 +2,11 @@ package com.example.ex5_tp_medical.controller;
 
 import com.example.ex5_tp_medical.model.Patient;
 import com.example.ex5_tp_medical.service.impl.PatientService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.format.DateTimeFormatter;
@@ -30,7 +32,13 @@ public class PatientController {
     }
 
     @PostMapping
-    public String addPatient(Patient patient) {
+    public String addPatient(@Valid @ModelAttribute("patient") Patient patient, BindingResult bindingResult, Model model) {
+//        bindingResult.getAllErrors().forEach(error -> System.out.println(error.getCode()));
+        if (bindingResult.hasErrors()) {
+//            model.addAttribute("patient", patient);
+//            model.addAttribute("formatter", DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+            return "patient-form";
+        };
         if (patient.getId() == 0)
             patientService.savePatient(patient);
         else

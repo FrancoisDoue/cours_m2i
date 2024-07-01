@@ -10,15 +10,18 @@
         <input th:if="*{id != 0}" type="hidden" name="id" th:field="*{id}">
         <div>
             <label for="firstname">Prénom :</label>
-            <input type="text" name="firstname" id="firstname" th:field="*{firstName}">
+            <input type="text" name="firstName" id="firstName" th:field="*{firstName}">
+            <span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}" ></span>
         </div>
         <div>
-            <label for="lastname">Nom :</label>
-            <input type="text" name="lastname" id="lastname" th:field="*{lastName}">
+            <label for="lastName">Nom :</label>
+            <input type="text" name="lastName" id="lastName" th:field="*{lastName}">
+            <span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}" ></span>
         </div>
         <div>
             <label for="birthDate">Date de naissance :</label>
             <input type="date" name="birthDate" id="birthDate" th:date="*{birthDate}" th:value="${patient.birthDate != null ? formatter.format(patient.birthDate): ''}">
+            <span th:if="${#fields.hasErrors('birthDate')}" th:errors="*{birthDate}" ></span>
         </div>
         <button><span th:text="${patient.id == 0 ? 'Ajouter' : 'Modifier'}"></span></button>
     </form>
