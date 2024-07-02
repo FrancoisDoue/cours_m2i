@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Panier</title>
+</head>
+<body>
+<h1>Panier</h1>
+<h3 th:if="${items.isEmpty()}">Il n'y a pas de produit dans votre panier</h3>
+<table th:if="${!items.isEmpty()}">
+    <thead>
+    <tr>
+        <th>Nom du produit</th>
+        <th>Quantité</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="i : ${items}" th:object="${i}">
+        <td th:text="*{furniture.name}"></td>
+        <td th:text="*{quantity}"></td>
+        <td>
+            <a href="">Supprimer (WIP)</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

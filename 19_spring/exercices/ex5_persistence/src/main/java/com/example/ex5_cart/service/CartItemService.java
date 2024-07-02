@@ -1,6 +1,7 @@
 package com.example.ex5_cart.service;
 
 import com.example.ex5_cart.model.CartItem;
+import com.example.ex5_cart.model.Furniture;
 import com.example.ex5_cart.repository.CartItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,19 +18,23 @@ public class CartItemService {
         this.cartItemRepository = cartItemRepository;
     }
 
-    private List<CartItem> getAllCartItems() {
+    public List<CartItem> getAllCartItems() {
         return cartItemRepository.findAll();
     }
 
-    private void addToCart(CartItem item) {
-        cartItemRepository.save(item);
+    public void addToCart(Furniture furniture, int quantity) {
+        CartItem cartItem = CartItem.builder()
+                .furniture(furniture)
+                .quantity(quantity)
+                .build();
+        cartItemRepository.save(cartItem);
     }
 
-    private void removeFromCart(CartItem item) {
+    public void removeFromCart(CartItem item) {
         cartItemRepository.delete(item);
     }
 
-    private void clearCart() {
+    public void clearCart() {
         cartItemRepository.deleteAll();
     }
 

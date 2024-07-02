@@ -1,10 +1,26 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
-<body>
-
+<body th:object="${furniture}">
+    <h1 th:text="*{name}"></h1>
+    <div>
+        <p th:text="*{description}"></p>
+        <p><span th:text="*{price}"></span> €</p>
+        <p>Stock disponible : <span th:text="*{stock}"></span></p>
+    </div>
+    <div>
+        <p>
+            <a th:href="@{/furnitures/update/{id}(id=*{id})}">Modifier les informations du produit</a>
+        </p>
+        <form th:action="@{/cart}" method="post">
+            <input type="hidden" name="id" th:field="*{id}">
+            <label for="stock">Ajouter une quantité au panier: </label>
+            <input type="number" th:max="*{stock}" min="1" step="1" value="1" name="stock" id="stock" th:field="*{stock}">
+            <button>Ajouter</button>
+        </form>
+    </div>
 </body>
 </html>
