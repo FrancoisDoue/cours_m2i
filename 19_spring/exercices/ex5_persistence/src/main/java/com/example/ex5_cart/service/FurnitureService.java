@@ -1,6 +1,7 @@
 package com.example.ex5_cart.service;
 
 import com.example.ex5_cart.model.Furniture;
+import com.example.ex5_cart.repository.CartItemRepository;
 import com.example.ex5_cart.repository.FurnitureRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

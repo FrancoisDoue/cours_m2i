@@ -1,42 +1,47 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
+    <th:block th:replace="~{index::bootstrap-import}"></th:block>
     <meta charset="UTF-8">
     <title>Panier</title>
 </head>
-<body>
-<div>
-    <a th:href="@{/}">Retour à l'accueil</a>
-</div>
-<h1>Panier</h1>
-<h3 th:if="${items.isEmpty()}">Il n'y a pas de produit dans votre panier</h3>
-<th:block th:if="${!items.isEmpty()}">
-    <table>
-        <thead>
-        <tr>
-            <th>Nom du produit</th>
-            <th>Quantité</th>
-            <th>Actions</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="i : ${items}" th:object="${i}">
-            <td th:text="*{furniture.name}"></td>
-            <td th:text="*{quantity}"></td>
-            <td>
-                <a th:href="@{/cart/remove/{id}(id=*{id})}">Supprimer du panier</a>
-            </td>
-        </tr>
-        </tbody>
-    </table>
-    <div>
-        <a th:href="@{/cart/clear}">Vider les panier</a>
-    </div>
-</th:block>
+<body  class="min-vh-100 bg-dark bg-gradient text-light">
+<th:block th:replace="~{index::header}"></th:block>
+<main class="container p-2 mt-4">
+    <h2>Votre panier</h2>
+    <h3 th:if="${items.isEmpty()}">Il n'y a pas de produit dans votre panier</h3>
+    <th:block th:if="${!items.isEmpty()}">
+        <div class="p-4 bg-dark rounded">
+            <table class="table table-dark">
+                <thead>
+                <tr>
+                    <th>Nom du produit</th>
+                    <th>Quantité</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="i : ${items}" th:object="${i}">
+                    <td th:text="*{furniture.name}"></td>
+                    <td th:text="*{quantity}"></td>
+                    <td>
+                        <a class="link-danger" th:href="@{/cart/remove/{id}(id=*{id})}">Supprimer du panier</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <div class="d-flex justify-content-end">
+                <a class="btn btn-outline-danger px-4" th:href="@{/cart/clear}">Vider les panier</a>
+            </div>
 
-<div>
-    <a th:href="@{/furnitures}">Retour à la liste des meubles</a>
-</div>
+        </div>
+    </th:block>
+    <div class="d-flex justify-content-end mt-4">
+        <a class="d-block link-light" th:href="@{/furnitures}">Retour à la liste des meubles</a>
+    </div>
+
+</main>
+
 
 </body>
 </html>

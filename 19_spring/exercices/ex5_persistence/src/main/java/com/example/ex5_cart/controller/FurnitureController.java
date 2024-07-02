@@ -47,4 +47,10 @@ public class FurnitureController {
         return "furniture-form";
     }
 
+    @GetMapping("/remove/{id}")
+    public String removeFurniture(@PathVariable long id, Model model) {
+        furnitureService.deleteFurniture(id);
+        return "redirect:/furnitures";
+    }
+
 }
