@@ -5,6 +5,9 @@
     <title>Title</title>
 </head>
 <body>
+    <div>
+        <a th:href="@{/}">Retour à l'accueil</a>
+    </div>
     <h1 th:text="${furniture.id != 0} ? 'Modifier un produit' : 'Ajouter un produit'"></h1>
     <div>
         <form th:action="@{/furnitures}" th:object="${furniture}" method="post">

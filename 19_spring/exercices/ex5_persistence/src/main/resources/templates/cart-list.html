@@ -5,26 +5,38 @@
     <title>Panier</title>
 </head>
 <body>
+<div>
+    <a th:href="@{/}">Retour à l'accueil</a>
+</div>
 <h1>Panier</h1>
 <h3 th:if="${items.isEmpty()}">Il n'y a pas de produit dans votre panier</h3>
-<table th:if="${!items.isEmpty()}">
-    <thead>
-    <tr>
-        <th>Nom du produit</th>
-        <th>Quantité</th>
-        <th>Actions</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="i : ${items}" th:object="${i}">
-        <td th:text="*{furniture.name}"></td>
-        <td th:text="*{quantity}"></td>
-        <td>
-            <a href="">Supprimer (WIP)</a>
-        </td>
-    </tr>
-    </tbody>
-</table>
+<th:block th:if="${!items.isEmpty()}">
+    <table>
+        <thead>
+        <tr>
+            <th>Nom du produit</th>
+            <th>Quantité</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="i : ${items}" th:object="${i}">
+            <td th:text="*{furniture.name}"></td>
+            <td th:text="*{quantity}"></td>
+            <td>
+                <a th:href="@{/cart/remove/{id}(id=*{id})}">Supprimer du panier</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <div>
+        <a th:href="@{/cart/clear}">Vider les panier</a>
+    </div>
+</th:block>
+
+<div>
+    <a th:href="@{/furnitures}">Retour à la liste des meubles</a>
+</div>
 
 </body>
 </html>

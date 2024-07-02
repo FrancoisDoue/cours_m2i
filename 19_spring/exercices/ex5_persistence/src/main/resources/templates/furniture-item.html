@@ -5,6 +5,9 @@
     <title>Title</title>
 </head>
 <body th:object="${furniture}">
+    <div>
+        <a th:href="@{/}">Retour à l'accueil</a>
+    </div>
     <h1 th:text="*{name}"></h1>
     <div>
         <p th:text="*{description}"></p>
@@ -21,6 +24,9 @@
             <input type="number" th:max="*{stock}" min="1" step="1" value="1" name="stock" id="stock" th:field="*{stock}">
             <button>Ajouter</button>
         </form>
+    </div>
+    <div>
+        <a th:href="@{/furnitures}">Retour à la liste</a>
     </div>
 </body>
 </html>
