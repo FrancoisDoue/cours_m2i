@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:replace="~{index::bootstrap-import}"></th:block>
+    <meta charset="UTF-8">
+    <title>Inscription</title>
+</head>
+<body class="min-vh-100 bg-dark bg-gradient text-light">
+<th:block th:replace="~{index::header}"></th:block>
+<main class="container">
+    <h2 class="text-center fw-semibold">Inscription</h2>
+    <form class="w-50 m-auto p-4" th:action="@{/account/register}" th:object="${account}" method="post">
+        <div class="mb-3">
+            <div class="form-floating">
+                <input class="form-control text-light bg-dark border border-light" type="text" name="username" id="username" th:field="*{username}">
+                <label class="text-dark" for="username">Pseudo</label>
+            </div>
+        </div>
+        <div class="mb-3">
+            <div class="form-floating">
+                <input class="form-control text-light bg-dark border border-light" type="email" name="email" id="email" th:field="*{email}">
+                <label class="text-dark" for="email">Email</label>
+            </div>
+        </div>
+        <div class="mb-3">
+            <div class="form-floating">
+                <input class="form-control text-light bg-dark border border-light" type="password" name="password" id="password" th:field="*{password}">
+                <label class="text-dark" for="password">Mot de passe</label>
+            </div>
+        </div>
+        <div>
+            <button class="btn btn-outline-light w-100 fw-semibold" type="submit">Inscription</button>
+        </div>
+    </form>
+</main>
+
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:replace="~{index::bootstrap-import}"></th:block>
+    <meta charset="UTF-8">
+    <title>Répondre</title>
+</head>
+<body class="min-vh-100 bg-dark bg-gradient text-light">
+    <th:block th:replace="~{index::header}"></th:block>
+    <main class="container bg-dark p-4 border border-light rounded">
+        <form th:action="@{/topics/{id}/reply(id=${topic.id})}" th:object="${commentary}" method="post">
+            <h4>Réponse à <span th:text="${topic.author.username}"></span></h4>
+            <div class="mb-3">
+                <div class="form-floating">
+                    <textarea class="form-control text-light bg-dark border border-light" style="min-height: 300px" name="content" id="content" th:field="*{content}"></textarea>
+                    <label class="text-dark" for="content">Réponse:</label>
+                </div>
+            </div>
+            <div class="d-flex justify-content-end">
+                <button class="btn btn-outline-light px-5">Répondre</button>
+
+            </div>
+        </form>
+    </main>
+</body>
+</html>

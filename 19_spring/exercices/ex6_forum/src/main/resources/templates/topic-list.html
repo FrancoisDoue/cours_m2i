@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:replace="~{index::bootstrap-import}"></th:block>
+    <meta charset="UTF-8">
+    <title>Connexion</title>
+</head>
+<body class="min-vh-100 bg-dark bg-gradient text-light">
+    <th:block th:replace="~{index::header}"></th:block>
+        <main class="container bg-dark p-4 border border-light rounded">
+            <h3>Sujets</h3>
+            <hr>
+            <div class="d-flex">
+                <div th:if="${!topics.isEmpty()}" class="w-75 bg-light p-1 rounded-1">
+
+                    <div th:each="t : ${topics}" th:object="${t}" class="bg-dark rounded-1 mb-1">
+                        <div class="row">
+                            <div class="col-10">
+                                <h4 class="text-center p-2 mx-4" th:text="*{title}"></h4>
+                            </div>
+                            <div class="col-2">
+                                <a class="btn btn-outline-light btn-sm m-2" th:href="@{/topics/{id}(id=*{id})}"> Voir </a>
+                            </div>
+                        </div>
+                        <hr class="m-0">
+                        <div class="row">
+                            <div class="col-8">
+                                <p class="m-0 mx-3 mb-1">Par "<span class="" th:text="*{author.username}"></span>"</p>
+                            </div>
+                            <div class="col-4">
+                                <p class="m-0 mx-3 mb-1 fs-6">Posté le <span th:text="${formatter.format(t.createdAt)}"></span></p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </main>
+</body>
+</html>

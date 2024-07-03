@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Nouveau sujet</title>
+</head>
+<body>
+<h1>Sujet - formulaire</h1>
+<form th:action="@{/topics}" th:object="${topic}" method="post">
+  <div>
+    <label for="title">Titre du sujet :</label>
+    <div>
+      <input type="text" name="title" id="title" th:field="*{title}">
+    </div>
+  </div>
+
+  <div>
+    <label for="content">Contenu :</label>
+    <div>
+      <textarea name="content" id="content" th:field="*{content}" cols="30" rows="10"></textarea>
+    </div>
+  </div>
+  <div>
+    <button>Poster</button>
+  </div>
+
+</form>
+
+</body>
+</html>

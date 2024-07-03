@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:replace="~{index::bootstrap-import}"></th:block>
+    <meta charset="UTF-8">
+    <title>Connexion</title>
+</head>
+<body class="min-vh-100 bg-dark bg-gradient text-light">
+<th:block th:replace="~{index::header}"></th:block>
+
+    <main class="container bg-dark p-4 border border-light rounded rounded-1" th:object="${topic}">
+        <div class="border border-light-subtle rounded rounded-1">
+            <h3 th:text="*{title}" class="mx-5 p-2"></h3>
+            <hr class="m-0 p-0">
+            <div class="p-4">
+                <p th:text="*{content}">
+
+                </p>
+            </div>
+            <hr class="m-0 p-0">
+            <div class="d-flex justify-content-end px-4 py-1 pb-2">
+                <a class="btn btn-light" th:href="@{/topics/{id}/reply(id=*{id})}">Répondre</a>
+            </div>
+        </div>
+        <div class="mt-3 p-4 pe-0">
+            <th:block th:each="c : *{commentaries}">
+                <div th:if="${c.responses.isEmpty()}" class="my-1 border border-light rounded-1">
+                    <div class="row">
+                        <div class="col-1 p-3">
+                            <h6 class="text-center" th:text="${c.author.username}"></h6>
+                        </div>
+                        <div class="col-11 border-start border-light-subtle p-3">
+                            <p th:text="${c.content}"></p>
+                        </div>
+                    </div>
+                    <hr class="m-0">
+
+<!--                    <div th:if="${!c.responses.isEmpty()}" class="my-1 border border-light rounded-1">-->
+<!--                        <div class="row">-->
+<!--                            <div class="col-1 p-3">-->
+<!--                                <h6 class="text-center" th:text="${c.author.username}"></h6>-->
+<!--                            </div>-->
+<!--                            <div class="col-11 border-start border-light-subtle p-3">-->
+<!--                                <p th:text="${c.content}"></p>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <hr class="m-0">-->
+<!--                        <div class="d-flex justify-content-end">-->
+<!--                            <a class="btn btn-outline-light btn-sm m-2" th:href="@{/topics/{id}/reply/{commentId}(id=*{id}, commentId=${c.id})}">Réagir</a>-->
+<!--                        </div>-->
+<!--                    </div>-->
+
+                    <div class="d-flex justify-content-end">
+                        <a class="btn btn-outline-light btn-sm m-2" th:href="@{/topics/{id}/reply/{commentId}(id=*{id}, commentId=${c.id})}">Réagir</a>
+                    </div>
+                </div>
+            </th:block>
+
+
+        </div>
+    </main>
+</body>
+</html>
