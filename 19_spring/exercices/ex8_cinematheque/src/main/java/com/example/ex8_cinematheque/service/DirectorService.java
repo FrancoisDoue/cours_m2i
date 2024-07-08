@@ -25,17 +25,17 @@ public class DirectorService {
 
     public List<DirectorDTO> getAllDirectors() {
         List<Director> directors = (List<Director>) directorRepository.findAll();
-        return directors.stream().map(d -> new DirectorDTO().fromEntity(d)).toList();
+        return directors.stream().map(DirectorDTO::new).toList();
     }
 
     public Director createDirector(Director director) {
         return directorRepository.save(director);
     }
 
-    public Director updateDirector(int id, Director director) {
+    public DirectorDTO updateDirector(int id, Director director) {
         if (!directorRepository.existsById(id)) throw new NotFoundException("Director not found");
         director.setId(id);
-        return directorRepository.save(director);
+        return new DirectorDTO(directorRepository.save(director));
     }
 
     public void deleteDirector(int id) {

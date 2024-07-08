@@ -1,13 +1,12 @@
 package com.example.ex8_cinematheque.dto;
 
+import com.example.ex8_cinematheque.entity.Director;
 import com.example.ex8_cinematheque.entity.Movie;
-import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -16,36 +15,24 @@ import java.time.format.DateTimeFormatter;
 @NoArgsConstructor
 @Builder
 
-public class MovieDTO implements IDTO<Movie> {
+public class MovieDTO implements DTOInterface<Movie> {
 
-    private int id;
-    private String title;
-    private String releaseDate;
-    private String description;
-    private int duration;
-    private String genre;
-
+    private Movie movie;
 
     @Override
-    public Movie toEntity() {
-        Movie movie = new Movie();
-        movie.setId(id);
-        movie.setTitle(title);
-        movie.setReleaseDate(LocalDate.parse(releaseDate, DateTimeFormatter.ofPattern("dd-MM-yyyy")));
-        movie.setDescription(description);
-        movie.setDuration(duration);
-        movie.setGenre(genre);
-        return movie;
+    public Movie toDTO() {
+        return Movie.builder()
+                .id(this.movie.getId())
+                .title(this.movie.getTitle())
+                .genre(this.movie.getGenre())
+                .description(this.movie.getDescription())
+                .releaseDate(this.movie.getReleaseDate())
+                .director(new DirectorDTO(movie.getDirector()).toDTO())
+                .build();
     }
 
     @Override
-    public MovieDTO fromEntity(Movie entity) {
-        this.id = entity.getId();
-        this.title = entity.getTitle();
-        this.description = entity.getDescription();
-        this.duration = entity.getDuration();
-        this.genre = entity.getGenre();
-        this.releaseDate = DateTimeFormatter.ofPattern("dd-MM-yyyy").format(entity.getReleaseDate());
-        return this;
+    public Movie toEntity() {
+        return this.movie;
     }
 }

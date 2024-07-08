@@ -5,6 +5,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+import java.time.DateTimeException;
+
 @ControllerAdvice
 public class GeneralExceptionHandler {
 
@@ -16,6 +18,11 @@ public class GeneralExceptionHandler {
     @ExceptionHandler(UnsupportedOperationException.class)
     public ResponseEntity<String> handleUnsupportedOperationException(UnsupportedOperationException e) {
         return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_IMPLEMENTED);
+    }
+
+    @ExceptionHandler(DateTimeException.class)
+    public ResponseEntity<String> handleDateTimeException(DateTimeException e) {
+        return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
     }
 
 }
