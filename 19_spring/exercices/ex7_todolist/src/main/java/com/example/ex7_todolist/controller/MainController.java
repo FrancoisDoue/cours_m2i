@@ -48,4 +48,9 @@ public class MainController {
     public ResponseEntity<Task> updateTask(@PathVariable int id, @RequestBody TaskDTOPost taskDTO) {
         return ResponseEntity.ok().body(taskService.updateTask(id, taskDTO.toEntity()));
     }
+
+    @PutMapping("/toggle-status/{id}")
+    public ResponseEntity<Task> toggleStatus(@PathVariable int id) {
+        return ResponseEntity.ok().body(taskService.updateTaskStatus(id));
+    }
 }

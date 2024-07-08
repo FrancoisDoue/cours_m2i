@@ -39,6 +39,12 @@ public class TaskService {
         return taskRepository.save(task);
     }
 
+    public Task updateTaskStatus(int id) {
+        Task task = getTaskById(id);
+        task.setCompleted(!task.isCompleted());
+        return taskRepository.save(task);
+    }
+
     public void deleteTaskById(int id) {
         Task task = taskRepository.findById(id).orElse(null);
         if (task == null) throw new NotFoundException("Task not found");
