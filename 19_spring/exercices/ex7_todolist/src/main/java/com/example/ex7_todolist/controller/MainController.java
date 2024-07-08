@@ -51,6 +51,6 @@ public class MainController {
 
     @PutMapping("/toggle-status/{id}")
     public ResponseEntity<Task> toggleStatus(@PathVariable int id) {
-        return ResponseEntity.ok().body(taskService.updateTaskStatus(id));
+        return ResponseEntity.ok().body(taskService.toggleTaskStatus(id));
     }
 }

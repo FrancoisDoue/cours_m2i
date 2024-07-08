@@ -39,7 +39,7 @@ public class TaskService {
         return taskRepository.save(task);
     }
 
-    public Task updateTaskStatus(int id) {
+    public Task toggleTaskStatus(int id) {
         Task task = getTaskById(id);
         task.setCompleted(!task.isCompleted());
         return taskRepository.save(task);
