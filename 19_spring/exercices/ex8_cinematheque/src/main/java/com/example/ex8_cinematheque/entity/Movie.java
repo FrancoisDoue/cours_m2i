@@ -1,12 +1,10 @@
 package com.example.ex8_cinematheque.entity;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 @Getter @Setter
 @Builder
@@ -14,7 +12,6 @@ import java.time.format.DateTimeFormatter;
 @NoArgsConstructor
 
 @Entity
-@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Movie implements Serializable {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -25,7 +22,7 @@ public class Movie implements Serializable {
     private int duration;
     private String genre;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.DETACH)
     @JoinColumn(name = "director_id")
     private Director director;
 

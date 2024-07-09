@@ -1,11 +1,13 @@
 package com.example.ex8_cinematheque.dto;
 
 import com.example.ex8_cinematheque.entity.Director;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
 
 import java.time.format.DateTimeFormatter;
 
 @Data
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class DirectorDTOGet {
 
     private int id;

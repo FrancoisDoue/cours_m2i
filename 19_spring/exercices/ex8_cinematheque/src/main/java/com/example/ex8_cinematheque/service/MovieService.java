@@ -30,9 +30,9 @@ public class MovieService {
         return (List<Movie>) movieRepository.findByDirector(director);
     }
 
-    public List<MovieDTO> getAllMovies() {
-        List<Movie> movies = (List<Movie>) movieRepository.findAll();
-        return movies.stream().map(MovieDTO::new).toList();
+    public List<Movie> getAllMovies() {
+
+        return (List<Movie>) movieRepository.findAll();
     }
 
     public Movie createMovie(MovieDTOPost moviePost) {

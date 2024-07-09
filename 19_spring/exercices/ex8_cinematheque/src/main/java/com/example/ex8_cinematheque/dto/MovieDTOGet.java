@@ -1,11 +1,13 @@
 package com.example.ex8_cinematheque.dto;
 
 import com.example.ex8_cinematheque.entity.Movie;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
 
 import java.time.format.DateTimeFormatter;
 
 @Data
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class MovieDTOGet {
     private int id;
     private String title;
@@ -22,6 +24,7 @@ public class MovieDTOGet {
         this.releaseDate = DateTimeFormatter.ofPattern("dd-MM-yyyy").format(movie.getReleaseDate());
         this.duration = movie.getDuration();
         this.genre = movie.getGenre();
-        this.director = new DirectorDTOGet(movie.getDirector());
+        if (movie.getDirector() != null)
+            this.director = new DirectorDTOGet(movie.getDirector());
     }
 }
