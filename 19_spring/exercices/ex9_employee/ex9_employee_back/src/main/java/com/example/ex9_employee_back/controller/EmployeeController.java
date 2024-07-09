@@ -1,5 +1,6 @@
 package com.example.ex9_employee_back.controller;
 
+import com.example.ex9_employee_back.dto.absence.AbsencePostDTO;
 import com.example.ex9_employee_back.dto.employee.EmployeeGetDTO;
 import com.example.ex9_employee_back.dto.employee.EmployeePostDTO;
 import com.example.ex9_employee_back.entity.Employee;
@@ -49,6 +50,12 @@ public class EmployeeController {
     public ResponseEntity<Employee> deleteEmployee(@PathVariable int id) {
         employeeService.deleteEmployee(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @PostMapping("/{id}/absence")
+    public ResponseEntity<EmployeeGetDTO> absenceEmployee(@PathVariable int id, @RequestBody AbsencePostDTO absencePost) {
+        Employee employee = employeeService.addAbsenceToEmployee(id, absencePost);
+        return new ResponseEntity<>(new EmployeeGetDTO(employee), HttpStatus.CREATED);
     }
 
 }

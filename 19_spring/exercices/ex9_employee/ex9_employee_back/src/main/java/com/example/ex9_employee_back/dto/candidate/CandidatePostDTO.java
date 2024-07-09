@@ -35,9 +35,13 @@ public class CandidatePostDTO extends PersonPostDTO<Candidate> {
         candidate.setBirthDate(LocalDate.parse(this.birthDate, formatter));
         candidate.setObservation(this.observation);
         candidate.setSkill(this.skill);
-        candidate.setTechnicalArea(this.technicalArea);
-        candidate.setRating(rating);
-        candidate.setJobInterviewDate(LocalDateTime.parse(this.jobInterviewDate, formatter));
+        candidate.setRating(this.rating);
+        if (this.technicalArea != null && !this.technicalArea.isEmpty())
+            candidate.setTechnicalArea(this.technicalArea);
+
+        if (this.jobInterviewDate != null && !this.jobInterviewDate.isEmpty())
+            candidate.setJobInterviewDate(LocalDateTime.parse(this.jobInterviewDate, formatter));
+
         return candidate;
     }
 }

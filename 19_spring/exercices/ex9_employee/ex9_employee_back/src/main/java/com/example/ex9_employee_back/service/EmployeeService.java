@@ -2,9 +2,10 @@ package com.example.ex9_employee_back.service;
 
 import com.example.ex9_employee_back.dto.absence.AbsencePostDTO;
 import com.example.ex9_employee_back.dto.employee.EmployeePostDTO;
+import com.example.ex9_employee_back.entity.Absence;
+import com.example.ex9_employee_back.entity.Candidate;
 import com.example.ex9_employee_back.entity.Employee;
 import com.example.ex9_employee_back.exception.NotFoundException;
-import com.example.ex9_employee_back.repository.AbsenceRepository;
 import com.example.ex9_employee_back.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,12 +16,12 @@ import java.util.List;
 public class EmployeeService {
 
     private final EmployeeRepository employeeRepository;
-    private final AbsenceRepository absenceRepository;
+    private final CandidateService candidateService;
 
     @Autowired
-    public EmployeeService(EmployeeRepository employeeRepository, AbsenceRepository absenceRepository) {
+    public EmployeeService(EmployeeRepository employeeRepository, CandidateService candidateService) {
         this.employeeRepository = employeeRepository;
-        this.absenceRepository = absenceRepository;
+        this.candidateService = candidateService;
     }
 
     public List<Employee> getAllEmployees() {
@@ -48,7 +49,25 @@ public class EmployeeService {
     }
 
     public Employee addAbsenceToEmployee(int employeeId, AbsencePostDTO absencePost) {
-        throw new UnsupportedOperationException("Not supported yet.");
-//        Employee employee = getEmployeeById(employeeId);
+        Employee employee = getEmployeeById(employeeId);
+        Absence absence = absencePost.toEntity();
+        absence.setEmployee(employee);
+        employee.getAbsences().add(absence);
+        return employeeRepository.save(employee);
     }
+
+    public Employee switchCandidateToEmployee(int candidateId) {
+//        Candidate candidate = candidateService.getCandidateById(candidateId);
+//        Employee employee = Employee.builder()
+//                .firstname(candidate.getFirstname())
+//                .lastname(candidate.getLastname())
+//                .identificationNumber(candidate.getIdentificationNumber())
+//
+//                .email(candidate.getEmail())
+//                .phone(candidate.getPhone())
+//                .address(candidate.getAddress())
+//                .build();
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
 }

@@ -15,14 +15,15 @@ import java.time.format.DateTimeFormatter;
 public class AbsencePostDTO {
     private String absenceStart;
     private String absenceEnd;
-    @JsonAlias({"employee", "employeeId", "employee_id"})
-    private int employeeId;
+//    @JsonAlias({"employee", "employeeId", "employee_id"})
+//    private int employeeId;
 
     public Absence toEntity() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         Absence absence = new Absence();
         absence.setAbsenceStart(LocalDate.parse(absenceStart, formatter));
-        absence.setAbsenceEnd(LocalDate.parse(absenceEnd, formatter));
+        if (absenceEnd != null && !absenceEnd.isEmpty())
+            absence.setAbsenceEnd(LocalDate.parse(absenceEnd, formatter));
         return absence;
     }
 }
