@@ -30,8 +30,12 @@ public class MainController {
 
     @GetMapping("/films")
     public ResponseEntity<List<MovieDTOGet>> getMovies(@RequestParam(name = "director", required = false) Integer directorId) {
-        List<MovieDTOGet> movies = movieService.getAllMovies().stream().map(MovieDTOGet::new).toList();
-        return ResponseEntity.ok().body(movieService.getAllMovies().stream().map(MovieDTOGet::new).toList());
+        List<MovieDTOGet> movies = (
+                directorId != null ?
+                        movieService.findAllByDirectorId(directorId) :
+                        movieService.getAllMovies()
+        ).stream().map(MovieDTOGet::new).toList();
+        return ResponseEntity.ok().body(movies);
     }
 
     @PostMapping("/films")
