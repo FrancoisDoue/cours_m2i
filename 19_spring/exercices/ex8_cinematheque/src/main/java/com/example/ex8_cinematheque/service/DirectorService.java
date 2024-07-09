@@ -1,6 +1,6 @@
 package com.example.ex8_cinematheque.service;
 
-import com.example.ex8_cinematheque.dto.DirectorDTO;
+import com.example.ex8_cinematheque.dto.DirectorDTOPost;
 import com.example.ex8_cinematheque.entity.Director;
 import com.example.ex8_cinematheque.exception.NotFoundException;
 import com.example.ex8_cinematheque.repository.DirectorRepository;
@@ -23,19 +23,19 @@ public class DirectorService {
         return directorRepository.findById(id).orElseThrow(() -> new NotFoundException("Director not found"));
     }
 
-    public List<DirectorDTO> getAllDirectors() {
-        List<Director> directors = (List<Director>) directorRepository.findAll();
-        return directors.stream().map(DirectorDTO::new).toList();
+    public List<Director> getAllDirectors() {
+        return (List<Director>) directorRepository.findAll();
     }
 
-    public Director createDirector(Director director) {
-        return directorRepository.save(director);
+    public Director createDirector(DirectorDTOPost director) {
+        return directorRepository.save(director.toEntity());
     }
 
-    public DirectorDTO updateDirector(int id, Director director) {
+    public Director updateDirector(int id, DirectorDTOPost director) {
         if (!directorRepository.existsById(id)) throw new NotFoundException("Director not found");
-        director.setId(id);
-        return new DirectorDTO(directorRepository.save(director));
+        Director directorToUpdate = director.toEntity();
+        directorToUpdate.setId(id);
+        return directorRepository.save(directorToUpdate);
     }
 
     public void deleteDirector(int id) {

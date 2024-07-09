@@ -1,10 +1,9 @@
 package com.example.ex8_cinematheque.service;
 
-import com.example.ex8_cinematheque.dto.MovieDTO;
+import com.example.ex8_cinematheque.dto.MovieDTOPost;
 import com.example.ex8_cinematheque.entity.Director;
 import com.example.ex8_cinematheque.entity.Movie;
 import com.example.ex8_cinematheque.exception.NotFoundException;
-import com.example.ex8_cinematheque.repository.DirectorRepository;
 import com.example.ex8_cinematheque.repository.MovieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,9 +25,9 @@ public class MovieService {
         return movieRepository.findById(id).orElseThrow(() -> new NotFoundException("Movie not found"));
     }
 
-    public List<MovieDTO> findAllByDirectorId(int id) {
+    public List<Movie> findAllByDirectorId(int id) {
         Director director = directorService.getDirectorById(id);
-        return ((List<Movie>) movieRepository.findByDirector(director)).stream().map(MovieDTO::new).toList();
+        return (List<Movie>) movieRepository.findByDirector(director);
     }
 
     public List<MovieDTO> getAllMovies() {
@@ -36,9 +35,10 @@ public class MovieService {
         return movies.stream().map(MovieDTO::new).toList();
     }
 
-    public MovieDTO createMovie(Movie movie) {
-        movie.setDirector(directorService.getDirectorById(movie.getDirector().getId()));
-        return new MovieDTO(movieRepository.save(movie));
+    public Movie createMovie(MovieDTOPost moviePost) {
+        Movie movie = moviePost.toEntity();
+        movie.setDirector(directorService.getDirectorById(moviePost.getDirector()));
+        return movieRepository.save(movie);
     }
 
     public void deleteMovie(int id) {
@@ -46,9 +46,11 @@ public class MovieService {
         movieRepository.delete(movie);
     }
 
-    public MovieDTO updateMovie(int id, Movie movie) {
+    public Movie updateMovie(int id, MovieDTOPost moviePost) {
         if (!movieRepository.existsById(id)) throw new NotFoundException("Movie not found");
+        Movie movie = moviePost.toEntity();
+        movie.setDirector(directorService.getDirectorById(moviePost.getDirector()));
         movie.setId(id);
-        return new MovieDTO(movieRepository.save(movie));
+        return movieRepository.save(movie);
     }
 }

@@ -29,7 +29,4 @@ public class Movie implements Serializable {
     @JoinColumn(name = "director_id")
     private Director director;
 
-    public void setReleaseDate(String releaseDate) {
-        this.releaseDate = LocalDate.parse(releaseDate, DateTimeFormatter.ofPattern("dd-MM-yyyy"));
-    }
 }

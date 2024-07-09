@@ -27,7 +27,7 @@ public class Director implements Serializable {
     @OneToMany(mappedBy = "director", cascade = CascadeType.ALL)
     private List<Movie> movies;
 
-    public void setBirthdate(String birthdate) {
-        this.birthdate = LocalDate.parse(birthdate, DateTimeFormatter.ofPattern("dd-MM-yyyy"));
-    }
+//    public void setBirthdate(String birthdate) {
+//        this.birthdate = LocalDate.parse(birthdate, DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+//    }
 }
