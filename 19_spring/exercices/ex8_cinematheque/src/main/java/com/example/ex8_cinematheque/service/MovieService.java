@@ -31,7 +31,6 @@ public class MovieService {
     }
 
     public List<Movie> getAllMovies() {
-
         return (List<Movie>) movieRepository.findAll();
     }
 

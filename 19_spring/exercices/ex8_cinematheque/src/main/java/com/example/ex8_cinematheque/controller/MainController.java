@@ -11,6 +11,7 @@ import com.example.ex8_cinematheque.service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -39,7 +40,7 @@ public class MainController {
     }
 
     @PostMapping("/films")
-    public ResponseEntity<MovieDTOGet> postMovie(@RequestBody MovieDTOPost moviePost) {
+    public ResponseEntity<MovieDTOGet> postMovie(@Validated @RequestBody MovieDTOPost moviePost) {
         MovieDTOGet movie = new MovieDTOGet(movieService.createMovie(moviePost));
         return new ResponseEntity<>(movie, HttpStatus.CREATED);
     }
@@ -51,7 +52,7 @@ public class MainController {
     }
 
     @PutMapping("/films/{id}")
-    public ResponseEntity<MovieDTOGet> updateMovie(@PathVariable int id, @RequestBody MovieDTOPost moviePost) {
+    public ResponseEntity<MovieDTOGet> updateMovie(@PathVariable int id, @Validated @RequestBody MovieDTOPost moviePost) {
         MovieDTOGet movie = new MovieDTOGet(movieService.updateMovie(id, moviePost));
         return ResponseEntity.ok().body(movie);
     }
@@ -68,7 +69,7 @@ public class MainController {
     }
 
     @PostMapping("/realisateurs")
-    public ResponseEntity<DirectorDTOGet> postDirector(@RequestBody DirectorDTOPost directorPost) {
+    public ResponseEntity<DirectorDTOGet> postDirector(@Validated @RequestBody DirectorDTOPost directorPost) {
         DirectorDTOGet director = new DirectorDTOGet(directorService.createDirector(directorPost));
         return new ResponseEntity<>(director, HttpStatus.CREATED);
     }
@@ -79,7 +80,7 @@ public class MainController {
     }
 
     @PutMapping("/realisateurs/{id}")
-    public ResponseEntity<DirectorDTOGet> updateDirector(@RequestBody DirectorDTOPost directorPost, @PathVariable int id) {
+    public ResponseEntity<DirectorDTOGet> updateDirector(@Validated @RequestBody DirectorDTOPost directorPost, @PathVariable int id) {
         DirectorDTOGet director = new DirectorDTOGet(directorService.updateDirector(id, directorPost));
         return ResponseEntity.ok().body(director);
     }
