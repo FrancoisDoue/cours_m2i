@@ -16,7 +16,7 @@ public class MovieDTOPost {
     @NotNull @Size(min = 2, max = 100)
     private String title;
     private String description;
-    @NotBlank @Pattern(regexp = "\\d{2}-\\d{2}-\\d{4}")
+    @NotBlank @Pattern(regexp = "\\d{2}-\\d{2}-\\d{4}", message = "doit correspondre au format \"dd-MM-yyyy\"")
     private String releaseDate;
     private String genre;
     private int duration;

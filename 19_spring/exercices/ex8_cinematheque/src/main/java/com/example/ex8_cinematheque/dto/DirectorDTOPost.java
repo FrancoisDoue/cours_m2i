@@ -23,7 +23,7 @@ public class DirectorDTOPost {
     @NotNull
     @Size(min = 2, max = 20)
     private String lastname;
-    @Pattern(regexp = "\\d{2}-\\d{2}-\\d{4}")
+    @Pattern(regexp = "\\d{2}-\\d{2}-\\d{4}", message = "doit correspondre au format \"dd-MM-yyyy\"")
     private String birthdate;
     private String nationality;
 
