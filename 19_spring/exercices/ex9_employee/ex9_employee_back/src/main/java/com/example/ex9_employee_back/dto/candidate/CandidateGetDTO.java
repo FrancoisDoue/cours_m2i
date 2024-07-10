@@ -19,6 +19,7 @@ public class CandidateGetDTO extends PersonGetDTO<Candidate> {
         this.rating = entity.getRating();
         this.skill = entity.getSkill();
         this.technicalArea = entity.getTechnicalArea();
-        this.jobInterviewDate = entity.getJobInterviewDate().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm"));
+        if (entity.getJobInterviewDate() != null)
+            this.jobInterviewDate = entity.getJobInterviewDate().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm"));
     }
 }

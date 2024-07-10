@@ -2,9 +2,11 @@ package com.example.ex9_employee_back.service;
 
 import com.example.ex9_employee_back.dto.absence.AbsencePostDTO;
 import com.example.ex9_employee_back.dto.employee.EmployeePostDTO;
+import com.example.ex9_employee_back.dto.recruitment.RecruitmentPostDTO;
 import com.example.ex9_employee_back.entity.Absence;
 import com.example.ex9_employee_back.entity.Candidate;
 import com.example.ex9_employee_back.entity.Employee;
+import com.example.ex9_employee_back.exception.FailedConversionException;
 import com.example.ex9_employee_back.exception.NotFoundException;
 import com.example.ex9_employee_back.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,17 +58,30 @@ public class EmployeeService {
         return employeeRepository.save(employee);
     }
 
-    public Employee switchCandidateToEmployee(int candidateId) {
+    public Employee recruitCandidate(int candidateId, RecruitmentPostDTO recruitmentPost) {
 //        Candidate candidate = candidateService.getCandidateById(candidateId);
-//        Employee employee = Employee.builder()
-//                .firstname(candidate.getFirstname())
-//                .lastname(candidate.getLastname())
-//                .identificationNumber(candidate.getIdentificationNumber())
-//
-//                .email(candidate.getEmail())
-//                .phone(candidate.getPhone())
-//                .address(candidate.getAddress())
-//                .build();
+//        try {
+//            Employee employee = Employee.builder()
+//                    .firstname(candidate.getFirstname())
+//                    .lastname(candidate.getLastname())
+//                    .identificationNumber(candidate.getIdentificationNumber())
+//                    .phone(candidate.getPhone())
+//                    .address(candidate.getAddress())
+//                    .email(candidate.getEmail())
+//                    .birthDate(candidate.getBirthDate())
+//                    .observation(candidate.getObservation())
+//                    .contractStart(recruitmentPost.getContractStart())
+//                    .contractEnd(recruitmentPost.getContractEnd())
+//                    .password(recruitmentPost.getPassword())
+//                    .observation(recruitmentPost.getOccupation())
+//                    .salary(recruitmentPost.getSalary())
+//                    .build();
+//            employeeRepository.save(employee);
+//            candidateService.deleteCandidateById(candidateId);
+//            return employee;
+//        } catch (Exception e) {
+//            throw new FailedConversionException("Error occurred while conversion");
+//        }
         throw new UnsupportedOperationException("Not supported yet.");
     }
 

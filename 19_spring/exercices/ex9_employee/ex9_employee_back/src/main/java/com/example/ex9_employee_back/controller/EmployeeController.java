@@ -3,6 +3,7 @@ package com.example.ex9_employee_back.controller;
 import com.example.ex9_employee_back.dto.absence.AbsencePostDTO;
 import com.example.ex9_employee_back.dto.employee.EmployeeGetDTO;
 import com.example.ex9_employee_back.dto.employee.EmployeePostDTO;
+import com.example.ex9_employee_back.dto.recruitment.RecruitmentPostDTO;
 import com.example.ex9_employee_back.entity.Employee;
 import com.example.ex9_employee_back.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,6 +56,12 @@ public class EmployeeController {
     @PostMapping("/{id}/absence")
     public ResponseEntity<EmployeeGetDTO> absenceEmployee(@PathVariable int id, @RequestBody AbsencePostDTO absencePost) {
         Employee employee = employeeService.addAbsenceToEmployee(id, absencePost);
+        return new ResponseEntity<>(new EmployeeGetDTO(employee), HttpStatus.CREATED);
+    }
+
+    @PostMapping("/recruit/{candidateId}")
+    public ResponseEntity<EmployeeGetDTO> recruitEmployee(@PathVariable int candidateId, @RequestBody RecruitmentPostDTO recruitmentPostDTO) {
+        Employee employee = employeeService.recruitCandidate(candidateId, recruitmentPostDTO);
         return new ResponseEntity<>(new EmployeeGetDTO(employee), HttpStatus.CREATED);
     }
 

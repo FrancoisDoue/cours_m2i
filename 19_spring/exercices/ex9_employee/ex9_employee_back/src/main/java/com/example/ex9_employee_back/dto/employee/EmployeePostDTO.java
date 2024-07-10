@@ -8,7 +8,6 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
@@ -24,7 +23,7 @@ public class EmployeePostDTO extends PersonPostDTO<Employee> {
 
     @Override
     public Employee toEntity() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         Employee employee = new Employee();
         employee.setFirstname(this.firstname);
         employee.setLastname(this.lastname);
@@ -32,14 +31,14 @@ public class EmployeePostDTO extends PersonPostDTO<Employee> {
         employee.setAddress(this.address);
         employee.setPhone(this.phone);
         employee.setEmail(this.email);
-        employee.setBirthDate(LocalDate.parse(this.birthDate, formatter));
+        employee.setBirthDate(LocalDate.parse(this.birthDate, FORMATTER));
         employee.setObservation(this.observation);
         employee.setOccupation(this.occupation);
         employee.setPassword(this.password);
         employee.setAdmin(this.admin);
         employee.setSalary(this.salary);
-        employee.setContractStart(LocalDate.parse(this.contractStart, formatter));
-        employee.setContractEnd(LocalDate.parse(this.contractEnd, formatter));
+        employee.setContractStart(LocalDate.parse(this.contractStart, FORMATTER));
+        employee.setContractEnd(LocalDate.parse(this.contractEnd, FORMATTER));
         return employee;
     }
 

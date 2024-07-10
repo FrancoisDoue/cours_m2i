@@ -1,7 +1,7 @@
 package com.example.ex9_employee_back.dto.absence;
 
+import com.example.ex9_employee_back.dto.PersonPostDTO;
 import com.example.ex9_employee_back.entity.Absence;
-import com.fasterxml.jackson.annotation.JsonAlias;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,7 +19,7 @@ public class AbsencePostDTO {
 //    private int employeeId;
 
     public Absence toEntity() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        DateTimeFormatter formatter = PersonPostDTO.FORMATTER;
         Absence absence = new Absence();
         absence.setAbsenceStart(LocalDate.parse(absenceStart, formatter));
         if (absenceEnd != null && !absenceEnd.isEmpty())

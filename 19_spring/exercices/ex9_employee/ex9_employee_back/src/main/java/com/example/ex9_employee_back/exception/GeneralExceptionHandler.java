@@ -33,7 +33,7 @@ public class GeneralExceptionHandler {
         return getHashMapResponseEntity(e, HttpStatus.NOT_IMPLEMENTED);
     }
 
-    @ExceptionHandler(DateTimeException.class)
+    @ExceptionHandler({DateTimeException.class, FailedConversionException.class})
     public ResponseEntity<HashMap<String, String>> handleDateTimeException(DateTimeException e) {
         return getHashMapResponseEntity(e, HttpStatus.BAD_REQUEST);
     }
