@@ -12,11 +12,15 @@ import java.time.format.DateTimeFormatter;
 public class AbsenceGetDTO {
     private String absenceStart;
     private String absenceEnd;
+    private boolean isHoliday;
 
     public AbsenceGetDTO(Absence absence) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         this.absenceStart = formatter.format(absence.getAbsenceStart());
-        if (absence.getAbsenceEnd() != null)
+        if (absence.getAbsenceEnd() != null) {
             this.absenceEnd = formatter.format(absence.getAbsenceEnd());
+            if (!absenceStart.equals(absenceEnd)) this.isHoliday = true;
+        }
+
     }
 }

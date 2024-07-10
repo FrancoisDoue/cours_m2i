@@ -59,30 +59,31 @@ public class EmployeeService {
     }
 
     public Employee recruitCandidate(int candidateId, RecruitmentPostDTO recruitmentPost) {
-//        Candidate candidate = candidateService.getCandidateById(candidateId);
-//        try {
-//            Employee employee = Employee.builder()
-//                    .firstname(candidate.getFirstname())
-//                    .lastname(candidate.getLastname())
-//                    .identificationNumber(candidate.getIdentificationNumber())
-//                    .phone(candidate.getPhone())
-//                    .address(candidate.getAddress())
-//                    .email(candidate.getEmail())
-//                    .birthDate(candidate.getBirthDate())
-//                    .observation(candidate.getObservation())
-//                    .contractStart(recruitmentPost.getContractStart())
-//                    .contractEnd(recruitmentPost.getContractEnd())
-//                    .password(recruitmentPost.getPassword())
-//                    .observation(recruitmentPost.getOccupation())
-//                    .salary(recruitmentPost.getSalary())
-//                    .build();
-//            employeeRepository.save(employee);
-//            candidateService.deleteCandidateById(candidateId);
-//            return employee;
-//        } catch (Exception e) {
-//            throw new FailedConversionException("Error occurred while conversion");
-//        }
-        throw new UnsupportedOperationException("Not supported yet.");
+        Candidate candidate = candidateService.getCandidateById(candidateId);
+        try {
+            Employee employee = Employee.builder()
+                    .firstname(candidate.getFirstname())
+                    .lastname(candidate.getLastname())
+                    .identificationNumber(candidate.getIdentificationNumber())
+                    .phone(candidate.getPhone())
+                    .address(candidate.getAddress())
+                    .email(candidate.getEmail())
+                    .birthDate(candidate.getBirthDate())
+                    .observation(candidate.getObservation())
+                    .contractStart(recruitmentPost.getContractStart())
+                    .contractEnd(recruitmentPost.getContractEnd())
+                    .password(recruitmentPost.getPassword())
+                    .observation(recruitmentPost.getOccupation())
+                    .occupation(recruitmentPost.getOccupation())
+                    .salary(recruitmentPost.getSalary())
+                    .build();
+            employeeRepository.save(employee);
+            candidateService.deleteCandidateById(candidateId);
+            return employee;
+        } catch (Exception e) {
+            throw new FailedConversionException("Error occurred while conversion");
+        }
+//        throw new UnsupportedOperationException("Not supported yet.");
     }
 
 }

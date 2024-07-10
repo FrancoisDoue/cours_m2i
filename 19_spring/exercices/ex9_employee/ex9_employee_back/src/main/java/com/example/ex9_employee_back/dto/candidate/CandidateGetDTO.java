@@ -2,12 +2,14 @@ package com.example.ex9_employee_back.dto.candidate;
 
 import com.example.ex9_employee_back.dto.PersonGetDTO;
 import com.example.ex9_employee_back.entity.Candidate;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
 
 import java.time.format.DateTimeFormatter;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class CandidateGetDTO extends PersonGetDTO<Candidate> {
     private int rating;
     private String skill;

@@ -1,8 +1,9 @@
 package com.example.ex9_employee_back.dto.employee;
 
 import com.example.ex9_employee_back.dto.PersonGetDTO;
-import com.example.ex9_employee_back.entity.Absence;
+import com.example.ex9_employee_back.dto.absence.AbsenceGetDTO;
 import com.example.ex9_employee_back.entity.Employee;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -11,6 +12,7 @@ import java.util.List;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class EmployeeGetDTO extends PersonGetDTO<Employee> {
     private String contractStart;
     private String contractEnd;
@@ -18,7 +20,7 @@ public class EmployeeGetDTO extends PersonGetDTO<Employee> {
     private boolean admin;
     private double salary;
 
-    private List<Absence> absences;
+    private List<AbsenceGetDTO> absences;
 
     public EmployeeGetDTO(Employee entity) {
         super(entity);
@@ -27,6 +29,7 @@ public class EmployeeGetDTO extends PersonGetDTO<Employee> {
         this.occupation = entity.getOccupation();
         this.admin = entity.isAdmin();
         this.salary = entity.getSalary();
-        this.absences = entity.getAbsences();
+        if (entity.getAbsences() != null)
+            this.absences = entity.getAbsences().stream().map(AbsenceGetDTO::new).toList();
     }
 }
