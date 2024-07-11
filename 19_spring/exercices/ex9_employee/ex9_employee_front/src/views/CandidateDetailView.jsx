@@ -3,30 +3,15 @@ import { useSelector } from 'react-redux'
 import { Link, useParams } from 'react-router-dom'
 import CandidateEvaluationForm from '../components/form/CandidateEvaluationForm'
 import { Input } from '../components/form/Input'
+import CandidateInterviewCardForm from '../components/form/CandidateInterviewCardForm'
 
 const CandidateDetailView = () => {
-
-  const schemaRef = {
-    
-  }
-
   const { id } = useParams()
   const {candidateList } = useSelector(state => state.candidate)
   const [candidate, setCandidate] = useState(candidateList.find(c => c.id == id))
   const [isEditNotation, setEditNotation] = useState(false)
-  const [isEditInterview, setEditInterview] = useState(false)
 
   const toggleNotation = () => setEditNotation(!isEditNotation)
-  const toggleInterview = () => setEditInterview(!isEditInterview)
-
-  const handleSubmitInterview = (e) => {
-    e.preventDefault()
-    if (isEditInterview) {
-      
-    }
-    setEditInterview(false)
-  }
-
 
   useEffect(() => {
     console.log(candidate)
@@ -91,23 +76,7 @@ const CandidateDetailView = () => {
           </div>
         </div>
         <div className="col-5 p-2-md mt-2">
-          <div className='card shadow-sm'>
-            <div className='card-header'>
-              <h4 className='card-title'>Entretien le</h4>
-            </div>
-            <form className='card-body'>
-              {(!candidate.jobInterviewDate && !isEditInterview) && <h5 className='card-title'>Aucun entretien proposé</h5> }
-              <Input type='datetime-local' value={candidate.jobInterviewDate} readonly={!isEditInterview}/>
-              {isEditInterview && <button className='btn btn-primary' onClick={handleSubmitInterview}>Valider</button>}
-            </form>
-            {!isEditInterview &&
-              <div className='card-footer d-flex justify-content-end'>
-              <button className='btn btn-outline-primary' onClick={toggleInterview}>{candidate.jobInterviewDate ? "Modifier" : "Programmer"}</button>
-            </div>
-            }
-            
-           
-          </div>
+          <CandidateInterviewCardForm candidate={candidate} />
           {isEditNotation ?
             <CandidateEvaluationForm candidate={candidate} action={{toggleNotation}} />
             :
@@ -140,7 +109,7 @@ const CandidateDetailView = () => {
       </div>
       }
       <div className='mt-4 p-2 card shadow-sm'>
-        <button className='btn btn-outline-primary w-25 ms-auto' >Accepter la candidature</button>
+        <Link to={"/recruit/"+candidate.id} className='btn btn-outline-primary w-25 ms-auto'>Accepter la candidature</Link>
       </div>
       </>
   )

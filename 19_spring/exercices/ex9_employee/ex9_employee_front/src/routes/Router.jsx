@@ -7,6 +7,7 @@ import EmployeeDetailView from "../views/EmployeeDetailView";
 import CandidateListView from "../views/CandidateListView";
 import CandidateFormView from "../views/CandidateFormView";
 import CandidateDetailView from "../views/CandidateDetailView";
+import CandidateToEmployeeView from "../views/CandidateToEmployeeView";
 
 export default createBrowserRouter([
     {path: '/', element: <Layout />, children: [
@@ -16,6 +17,7 @@ export default createBrowserRouter([
         {path: '/employees/:id', element: <EmployeeDetailView />},
         {path: '/candidates', element: <CandidateListView />},
         {path: '/new-candidate', element: <CandidateFormView />},
-        {path: '/candidates/:id', element: <CandidateDetailView />}
+        {path: '/candidates/:id', element: <CandidateDetailView />},
+        {path: '/recruit/:id', element: <CandidateToEmployeeView />},
     ]}
 ])

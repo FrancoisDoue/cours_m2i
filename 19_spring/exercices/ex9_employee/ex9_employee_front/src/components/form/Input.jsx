@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 
 export const Input = ({type = "text", name, givenRef, label, isRequired = false, value, readonly}) => {
-    console.log(value)
     const [inputValue, setInputValue] = useState(value || "")
     const handleInputChange = ({target}) => setInputValue(target.value)
 
