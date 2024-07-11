@@ -6,6 +6,10 @@ import { Input } from '../components/form/Input'
 
 const CandidateDetailView = () => {
 
+  const schemaRef = {
+    
+  }
+
   const { id } = useParams()
   const {candidateList } = useSelector(state => state.candidate)
   const [candidate, setCandidate] = useState(candidateList.find(c => c.id == id))
