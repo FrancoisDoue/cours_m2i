@@ -4,10 +4,8 @@ import com.example.ex9_employee_back.dto.PersonPostDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 @Data
 @AllArgsConstructor

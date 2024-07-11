@@ -6,7 +6,7 @@ const EmployeeFormView = () => {
   return (
     <>
     <div>
-      <Link to={"/employees"}><i class="bi bi-caret-left"></i> Retour à la liste</Link>
+      <Link to={"/employees"}><i className="bi bi-caret-left"></i> Retour à la liste</Link>
     </div>
     <EmployeeForm />
     </>

@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { employeeApi } from "./api.backend";
-import { setCurrentEmployee, setEmployeeList } from "../storage/employeeSlice";
+import { setEmployeeList } from "../storage/employeeSlice";
 
 export const getAllEmployees = createAsyncThunk(
     'employee/getAllEmployees',
@@ -18,7 +18,8 @@ export const postEmployee = createAsyncThunk(
     'employee/postEmployee',
     async({body}, {rejectWithValue, dispatch}) => {
         try {
-            const resultEmployee = await employeeApi.post("", body)
+            await employeeApi.post("", body)
+            dispatch(getAllEmployees())
         } catch (err) {
             rejectWithValue(err)
         }
@@ -30,8 +31,7 @@ export const deleteEmployee = createAsyncThunk(
     async(id, {rejectWithValue, dispatch}) => {
         try {
             await employeeApi.delete("/"+id)
-            const employeeList = await employeeApi.get()
-            dispatch(setEmployeeList(employeeList))
+            dispatch(getAllEmployees())
         } catch (err) {
             rejectWithValue(err)
         }

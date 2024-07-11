@@ -1,6 +1,5 @@
 package com.example.ex9_employee_back.dto.absence;
 
-import com.example.ex9_employee_back.dto.employee.EmployeeGetDTO;
 import com.example.ex9_employee_back.entity.Absence;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;

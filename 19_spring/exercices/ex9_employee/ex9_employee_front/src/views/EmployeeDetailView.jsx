@@ -18,7 +18,7 @@ const EmployeeDetailView = () => {
   return (
   <>
     <div>
-      <Link to={"/employees"}><i class="bi bi-caret-left"></i> Retour à la liste</Link>
+      <Link to={"/employees"}><i className="bi bi-caret-left"></i> Retour à la liste</Link>
     </div>
     <div className='row'>
       <div className="col-lg-6 p-2-md mt-2">
@@ -85,14 +85,14 @@ const EmployeeDetailView = () => {
       </div>
       <div className="col-lg-6 p-2-md mt-2">
           <div className='card'>
-            {employee.absences ? 
+            {(employee && employee.absences) ? 
             <> 
             <div className='card-header'>
               <h4>Absences et congés</h4>
             </div> 
             <ul className='list-group list-group-flush'>
-              {employee.absences.map(e => 
-                <li className="list-group-item d-flex justify-content-between">
+              {employee.absences.map((e, i)=> 
+                <li key={i} className="list-group-item d-flex justify-content-between">
                   <span className={`${ e.holiday ? "text-success" : "text-warning"}`}>{e.holiday? "Vacances" : "Absence"}</span>
                   <span className='fw-semibold'>{e.holiday? `du ${e.absenceStart} au ${e.absenceEnd}` : e.absenceStart}</span>
                 </li>

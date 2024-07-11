@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
@@ -23,7 +24,7 @@ public class CandidatePostDTO extends PersonPostDTO<Candidate> {
 
     @Override
     public Candidate toEntity() {
-//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
         Candidate candidate = new Candidate();
         candidate.setFirstname(this.firstname);
         candidate.setLastname(this.lastname);
@@ -39,8 +40,7 @@ public class CandidatePostDTO extends PersonPostDTO<Candidate> {
             candidate.setTechnicalArea(this.technicalArea);
 
         if (this.jobInterviewDate != null && !this.jobInterviewDate.isEmpty())
-            candidate.setJobInterviewDate(LocalDateTime.parse(this.jobInterviewDate, FORMATTER));
-
+            candidate.setJobInterviewDate(LocalDateTime.parse(this.jobInterviewDate, formatter));
         return candidate;
     }
 }

@@ -1,19 +1,25 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const SLICE_NAME = 'employee'
+const SLICE_NAME = 'candidate'
 
-const employeeSlice = createSlice({
+const candidateSlice = createSlice({
     name: SLICE_NAME,
     initialState: {
-        employeeList: [],
+        candidateList: [],
         isLoading: false,
         error: null
     },
     reducers: {
-        setEmployeeList : (state, {payload}) => {
-            console.log("on setEmployeeList")
-            state.employeeList = payload
+        setCandidateList: (state, {payload}) => {
+            console.log("on setCandidateList")
+            console.log(payload)
+            state.candidateList = payload
         },
+        replaceCandidate: (state, {payload}) => {
+            console.log("on replaceCandidate")
+            console.log(payload)
+            state.candidateList = state.candidateList.map(e => (e.id == payload.id) ? payload : e)
+        }
     },
     extraReducers: ({addMatcher}) => {
         addMatcher(({type}) => (type.endsWith('/fulfilled') && type.startsWith(SLICE_NAME)), (state) => {
@@ -31,7 +37,8 @@ const employeeSlice = createSlice({
 })
 
 export const {
-    setEmployeeList,
-} = employeeSlice.actions
+    setCandidateList,
+    replaceCandidate,
+} = candidateSlice.actions
 
-export default employeeSlice.reducer
+export default candidateSlice.reducer

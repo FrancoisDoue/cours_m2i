@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin()
+@CrossOrigin
 @RestController
 @RequestMapping("/api/candidates")
 public class CandidateController {
@@ -46,6 +46,7 @@ public class CandidateController {
         return ResponseEntity.ok(new CandidateGetDTO(candidateService.updateCandidate(id, candidatePost)));
     }
 
+    @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteCandidate(@PathVariable int id) {
         candidateService.deleteCandidateById(id);
         return ResponseEntity.noContent().build();
