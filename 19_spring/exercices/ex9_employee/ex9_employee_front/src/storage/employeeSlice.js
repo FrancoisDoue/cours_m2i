@@ -15,10 +15,10 @@ const employeeSlice = createSlice({
             console.log("on setEmployeeList")
             state.employeeList = payload
         },
-        setCurrentEmployee: (state, {payload}) => {
-            console.log("on setCurrentEmployee")
-            state.currentEmployee = payload
-        },
+        // setCurrentEmployee: (state, {payload}) => {
+        //     console.log("on setCurrentEmployee")
+        //     state.currentEmployee = payload
+        // },
     },
     extraReducers: ({addMatcher}) => {
         addMatcher(({type}) => (type.endsWith('/fulfilled') && type.startsWith(SLICE_NAME)), (state) => {

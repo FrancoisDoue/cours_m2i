@@ -39,14 +39,14 @@ export const deleteEmployee = createAsyncThunk(
     }
 )
 
-export const getEmployeeById = createAsyncThunk(
-    'employee/getEmployeeById',
-    async (id, {rejectWithValue, dispatch}) => {
-        try {
-            const employee = await employeeApi.get("/"+id)
-            dispatch(setCurrentEmployee(employee))
-        } catch (error) {
-            rejectWithValue(error)
-        }
-    }
-)
+// export const getEmployeeById = createAsyncThunk(
+//     'employee/getEmployeeById',
+//     async (id, {rejectWithValue, dispatch}) => {
+//         try {
+//             const employee = await employeeApi.get("/"+id)
+//             dispatch(setCurrentEmployee(employee))
+//         } catch (error) {
+//             rejectWithValue(error)
+//         }
+//     }
+// )

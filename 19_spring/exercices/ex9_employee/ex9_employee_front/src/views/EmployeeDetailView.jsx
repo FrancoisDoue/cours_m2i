@@ -2,7 +2,10 @@ import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { Link, useParams } from 'react-router-dom'
 
+
+
 const EmployeeDetailView = () => {
+
   const {id} = useParams()
   const {employeeList} = useSelector(state => state.employee)
   const [employee, setEmployee] = useState(employeeList.find(e => e.id == id))
@@ -13,8 +16,12 @@ const EmployeeDetailView = () => {
   }, [employeeList])
 
   return (
+  <>
+    <div>
+      <Link to={"/employees"}><i class="bi bi-caret-left"></i> Retour à la liste</Link>
+    </div>
     <div className='row'>
-      <div className="col-lg-6 p-2-md">
+      <div className="col-lg-6 p-2-md mt-2">
 
         <div className='card shadow-sm'>
           {employee && <>
@@ -22,7 +29,6 @@ const EmployeeDetailView = () => {
               <h4 className='card-title text-center'> {employee.firstname + " " + employee.lastname} </h4>
             </div>
             <ul className='list-group list-group-flush'>
-
               <li className="list-group-item d-flex justify-content-between bg-light">
                 <span className='w-50 fw-light'>Poste occupé:</span>
                 <span className='w-50 fw-semibold'>{employee.occupation}</span>
@@ -77,19 +83,34 @@ const EmployeeDetailView = () => {
         </div>
 
       </div>
-      <div className="col-lg-6 p-2-md">
+      <div className="col-lg-6 p-2-md mt-2">
           <div className='card'>
-            {employee.absences ? <div className='text-header'>
-
-            </div> :
-            <div>
-              <h4>Aucune absences notifiées</h4>
+            {employee.absences ? 
+            <> 
+            <div className='card-header'>
+              <h4>Absences et congés</h4>
+            </div> 
+            <ul className='list-group list-group-flush'>
+              {employee.absences.map(e => 
+                <li className="list-group-item d-flex justify-content-between">
+                  <span className={`${ e.holiday ? "text-success" : "text-warning"}`}>{e.holiday? "Vacances" : "Absence"}</span>
+                  <span className='fw-semibold'>{e.holiday? `du ${e.absenceStart} au ${e.absenceEnd}` : e.absenceStart}</span>
+                </li>
+              )}
+            </ul>
+            </> :
+            <div className='card-body'>
+              <h4 className='card-title'>Aucune absence notifiée</h4>
             </div>
             }
+            <div className='card-footer d-flex justify-content-end'>
+              <a className='btn btn-outline-primary btn-sm'>Notifier une absence</a>
+            </div>
 
           </div>
       </div>
     </div>
+  </>
   )
 }
 

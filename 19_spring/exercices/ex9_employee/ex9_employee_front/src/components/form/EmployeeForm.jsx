@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react'
 import { Input } from "./Input"
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { postEmployee } from '../../service/employee.service'
 import dateStringConverter from '../../util/dateStringConverter'
@@ -9,8 +9,8 @@ const EmployeeForm = () => {
 
     const navigate = useNavigate()
     const dispatch = useDispatch()
-    const {currentEmployee, error} = useSelector(state => state.employee)
-    
+    // const {employeeList} = useSelector(state => state.employee)
+
     const schemaRef = {
         firstname: useRef(),
         lastname: useRef(),
