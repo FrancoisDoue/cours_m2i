@@ -23,6 +23,7 @@ public class RecruitmentPostDTO {
     }
 
     public LocalDate getContractEnd() {
+        if (contractEnd == null || contractEnd.isEmpty()) return null;
         return LocalDate.parse(contractEnd, PersonPostDTO.FORMATTER);
     }
 }

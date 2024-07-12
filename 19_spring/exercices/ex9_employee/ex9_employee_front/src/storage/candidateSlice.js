@@ -11,13 +11,9 @@ const candidateSlice = createSlice({
     },
     reducers: {
         setCandidateList: (state, {payload}) => {
-            console.log("on setCandidateList")
-            console.log(payload)
             state.candidateList = payload
         },
         replaceCandidate: (state, {payload}) => {
-            console.log("on replaceCandidate")
-            console.log(payload)
             state.candidateList = state.candidateList.map(e => (e.id == payload.id) ? payload : e)
         }
     },

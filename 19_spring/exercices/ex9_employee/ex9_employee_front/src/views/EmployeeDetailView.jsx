@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { Link, useParams } from 'react-router-dom'
+import AbsenceForm from '../components/form/AbsenceForm'
 
 
 
@@ -9,9 +10,10 @@ const EmployeeDetailView = () => {
   const {id} = useParams()
   const {employeeList} = useSelector(state => state.employee)
   const [employee, setEmployee] = useState(employeeList.find(e => e.id == id))
+  const [isAbsenceForm, setAbsenceForm] = useState(false)
+  const toggleAbsenceForm = () => setAbsenceForm(!isAbsenceForm)
 
   useEffect(() => {
-    console.log(employee)
     setEmployee(employeeList.find(e => e.id == id))
   }, [employeeList])
 
@@ -103,11 +105,14 @@ const EmployeeDetailView = () => {
               <h4 className='card-title'>Aucune absence notifiée</h4>
             </div>
             }
-            <div className='card-footer d-flex justify-content-end'>
-              <a className='btn btn-outline-primary btn-sm'>Notifier une absence</a>
+            {!isAbsenceForm && <div className='card-footer d-flex justify-content-end'>
+              <a className='btn btn-outline-primary btn-sm' onClick={toggleAbsenceForm}>Notifier une absence</a>
             </div>
+            }
+            {isAbsenceForm && <AbsenceForm employee={employee} action={{toggleAbsenceForm}} /> }
 
           </div>
+
       </div>
     </div>
   </>

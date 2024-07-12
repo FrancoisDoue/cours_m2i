@@ -11,8 +11,10 @@ const employeeSlice = createSlice({
     },
     reducers: {
         setEmployeeList : (state, {payload}) => {
-            console.log("on setEmployeeList")
             state.employeeList = payload
+        },
+        replaceEmployee: (state, {payload}) => {
+            state.employeeList = state.employeeList.map(e => (e.id == payload.id) ? payload : e)
         },
     },
     extraReducers: ({addMatcher}) => {
@@ -32,6 +34,7 @@ const employeeSlice = createSlice({
 
 export const {
     setEmployeeList,
+    replaceEmployee,
 } = employeeSlice.actions
 
 export default employeeSlice.reducer

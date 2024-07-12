@@ -23,6 +23,11 @@ public class GeneralExceptionHandler {
         return new ResponseEntity<>(error, status);
     }
 
+    @ExceptionHandler(AuthenticationFailedException.class)
+    public ResponseEntity<HashMap<String, String>> handleAuthenticationFailedException(AuthenticationFailedException ex) {
+        return getHashMapResponseEntity(ex, HttpStatus.UNAUTHORIZED);
+    }
+
     @ExceptionHandler(NotFoundException.class)
     public ResponseEntity<HashMap<String, String>> handleNotFoundException(NotFoundException e) {
         return getHashMapResponseEntity(e, HttpStatus.NOT_FOUND);

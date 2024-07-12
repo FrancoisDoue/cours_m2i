@@ -1,6 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { employeeApi } from "./api.backend";
-import { setEmployeeList } from "../storage/employeeSlice";
+import { replaceEmployee, setEmployeeList } from "../storage/employeeSlice";
+import { getAllCandidates } from "./candidates.service";
 
 export const getAllEmployees = createAsyncThunk(
     'employee/getAllEmployees',
@@ -16,11 +17,38 @@ export const getAllEmployees = createAsyncThunk(
 
 export const postEmployee = createAsyncThunk(
     'employee/postEmployee',
-    async({body}, {rejectWithValue, dispatch}) => {
+    async ({body}, {rejectWithValue, dispatch}) => {
         try {
             await employeeApi.post("", body)
             dispatch(getAllEmployees())
         } catch (err) {
+            rejectWithValue(err)
+        }
+    }
+)
+
+export const postEmployeeFromCandidate = createAsyncThunk(
+    'employee/postEmployeeFromCandidate',
+    async ({id, body}, {rejectWithValue, dispatch}) => {
+        try {
+            await employeeApi.post("/recruit/"+id, body)
+            dispatch(getAllEmployees())
+            dispatch(getAllCandidates())
+        } catch (err) {
+            console.log(err)
+            rejectWithValue(err)
+        }
+    }
+)
+
+export const postAbsence = createAsyncThunk(
+    'employee/postAbsence',
+    async ({id, body}, {rejectWithValue, dispatch}) => {
+        try {
+            const employee = await employeeApi.post(`/${id}/absence`, body)
+            dispatch(replaceEmployee(employee))
+        } catch (err) {
+            console.log(err)
             rejectWithValue(err)
         }
     }
@@ -35,18 +63,5 @@ export const deleteEmployee = createAsyncThunk(
         } catch (err) {
             rejectWithValue(err)
         }
-
     }
 )
-
-// export const getEmployeeById = createAsyncThunk(
-//     'employee/getEmployeeById',
-//     async (id, {rejectWithValue, dispatch}) => {
-//         try {
-//             const employee = await employeeApi.get("/"+id)
-//             dispatch(setCurrentEmployee(employee))
-//         } catch (error) {
-//             rejectWithValue(error)
-//         }
-//     }
-// )

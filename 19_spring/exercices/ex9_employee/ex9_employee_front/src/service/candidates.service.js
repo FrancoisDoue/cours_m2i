@@ -36,7 +36,6 @@ export const updateCandidate = createAsyncThunk(
             rejectWithValue(err)
         }
     }
-
 )
 
 export const deleteCandidate = createAsyncThunk(

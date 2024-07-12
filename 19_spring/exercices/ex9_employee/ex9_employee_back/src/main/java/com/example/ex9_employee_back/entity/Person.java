@@ -22,6 +22,7 @@ public abstract class Person {
     protected String identificationNumber;
     protected String address;
     protected String phone;
+    @Column(unique = true, nullable = false)
     protected String email;
     protected LocalDate birthDate;
     protected String observation;

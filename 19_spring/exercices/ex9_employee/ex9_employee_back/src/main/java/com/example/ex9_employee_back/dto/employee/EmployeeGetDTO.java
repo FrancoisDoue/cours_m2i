@@ -25,7 +25,9 @@ public class EmployeeGetDTO extends PersonGetDTO<Employee> {
     public EmployeeGetDTO(Employee entity) {
         super(entity);
         this.contractStart = entity.getContractStart().format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
-        this.contractEnd = entity.getContractEnd().format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+        if (entity.getContractEnd() != null) {
+            this.contractEnd = entity.getContractEnd().format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+        }
         this.occupation = entity.getOccupation();
         this.admin = entity.isAdmin();
         this.salary = entity.getSalary();

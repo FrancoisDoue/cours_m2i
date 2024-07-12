@@ -73,7 +73,6 @@ public class EmployeeService {
                     .contractStart(recruitmentPost.getContractStart())
                     .contractEnd(recruitmentPost.getContractEnd())
                     .password(recruitmentPost.getPassword())
-                    .observation(recruitmentPost.getOccupation())
                     .occupation(recruitmentPost.getOccupation())
                     .salary(recruitmentPost.getSalary())
                     .build();

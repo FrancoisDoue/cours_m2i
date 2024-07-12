@@ -38,7 +38,11 @@ public class EmployeePostDTO extends PersonPostDTO<Employee> {
         employee.setAdmin(this.admin);
         employee.setSalary(this.salary);
         employee.setContractStart(LocalDate.parse(this.contractStart, FORMATTER));
-        employee.setContractEnd(LocalDate.parse(this.contractEnd, FORMATTER));
+        employee.setContractEnd(
+                (this.contractEnd == null || this.contractEnd.isEmpty())
+                        ? null
+                        : LocalDate.parse(this.contractEnd, FORMATTER)
+        );
         return employee;
     }
 
