@@ -1,5 +1,4 @@
 import { createBrowserRouter } from "react-router-dom";
-import { HomeView } from "../views/HomeView";
 import Layout from "../components/shared/Layout";
 import EmployeeListView from "../views/EmployeeListView";
 import EmployeeFormView from "../views/EmployeeFormView";
@@ -8,16 +7,18 @@ import CandidateListView from "../views/CandidateListView";
 import CandidateFormView from "../views/CandidateFormView";
 import CandidateDetailView from "../views/CandidateDetailView";
 import CandidateToEmployeeView from "../views/CandidateToEmployeeView";
+import LoginView from "../views/LoginView";
+import ProtectedRoute from "./ProtectedRoute";
 
 export default createBrowserRouter([
     {path: '/', element: <Layout />, children: [
-        {path: '/', element: <HomeView/>},
-        {path: '/new-employee', element: <EmployeeFormView />},
-        {path: '/employees', element: <EmployeeListView />},
-        {path: '/employees/:id', element: <EmployeeDetailView />},
-        {path: '/candidates', element: <CandidateListView />},
-        {path: '/new-candidate', element: <CandidateFormView />},
-        {path: '/candidates/:id', element: <CandidateDetailView />},
-        {path: '/recruit/:id', element: <CandidateToEmployeeView />},
+        {path: '/', element: <LoginView/>},
+        {path: '/new-employee', element: <ProtectedRoute><EmployeeFormView /></ProtectedRoute>},
+        {path: '/employees', element: <ProtectedRoute><EmployeeListView /></ProtectedRoute>},
+        {path: '/employees/:id', element: <ProtectedRoute><EmployeeDetailView /></ProtectedRoute>},
+        {path: '/candidates', element: <ProtectedRoute><CandidateListView /></ProtectedRoute>},
+        {path: '/new-candidate', element: <ProtectedRoute><CandidateFormView /></ProtectedRoute>},
+        {path: '/candidates/:id', element: <ProtectedRoute><CandidateDetailView /></ProtectedRoute>},
+        {path: '/recruit/:id', element: <ProtectedRoute><CandidateToEmployeeView /></ProtectedRoute>},
     ]}
 ])

@@ -16,6 +16,8 @@ employeeApi.interceptors.response.use(...defaultInterceptor)
 export const candidateApi = axios.create({baseURL: "http://localhost:8080/api/candidates"})
 candidateApi.interceptors.response.use(...defaultInterceptor)
 
+export const authApi = axios.create({baseURL: "http://localhost:8080/api/auth"})
+authApi.interceptors.response.use(...defaultInterceptor)
 // export default {
 //     employeeApi,
 //     candidateApi
