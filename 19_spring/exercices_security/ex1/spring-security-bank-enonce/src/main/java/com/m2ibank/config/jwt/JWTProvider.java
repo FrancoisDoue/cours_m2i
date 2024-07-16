@@ -1,5 +1,6 @@
 package com.m2ibank.config.jwt;
 
+import com.m2ibank.model.Customer;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
@@ -25,14 +26,14 @@ public class JWTProvider {
         return Keys.hmacShaKeyFor(keyBytes);
     }
 
-    public String generateToken(Authentication authentication, int id) {
+    public String generateToken(Authentication authentication) {
         String username = authentication.getName();
         Date currentDate = new Date();
         Date expirationDate = new Date(currentDate.getTime() + 1000 * 60 * 30); // valide pour 30 min
         String roles = authentication.getAuthorities().stream()
                 .map(GrantedAuthority::getAuthority)
                 .collect(Collectors.joining(","));
-
+        int id = ((Customer) authentication.getPrincipal()).getId();
         return Jwts.builder()
                 .setSubject(username)
                 .claim("roles", roles)

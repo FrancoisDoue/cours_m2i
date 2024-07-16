@@ -63,7 +63,7 @@ public class UserService implements UserDetailsService {
         SecurityContextHolder.getContext().setAuthentication(authentication);
         Customer customer = customerRepository.findByEmail(email).orElse(null);
         int id = customer != null ? customer.getId() : 0;
-        return jwtProvider.generateToken(authentication, id);
+        return jwtProvider.generateToken(authentication);
     }
 
 

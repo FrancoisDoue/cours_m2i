@@ -10,6 +10,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
@@ -23,7 +24,7 @@ public class JWTRequestFilter extends OncePerRequestFilter {
     @Autowired
     private JWTAuthenticationEntryPoint authenticationEntryPoint;
     @Autowired
-    private UserService userService;
+    private UserDetailsService userService;
 
     private String getJWT(HttpServletRequest request) {
         String token = request.getHeader("Authorization");
@@ -39,7 +40,6 @@ public class JWTRequestFilter extends OncePerRequestFilter {
             String jwt = getJWT(request);
             if (jwt != null && tokenProvider.validateToken(jwt)) {
                 String username = tokenProvider.getUsername(jwt);
-                System.out.println(tokenProvider.getUserId(jwt));
                 UserDetails userDetails = userService.loadUserByUsername(username);
                 UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
                 SecurityContextHolder.getContext().setAuthentication(authentication);
