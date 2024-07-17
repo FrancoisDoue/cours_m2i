@@ -11,7 +11,7 @@ const authSlice = createSlice({
     },
     reducers: {
         initializeLogin: (action, {payload}) => {
-            
+            console.log(payload)
         },
 
     },
