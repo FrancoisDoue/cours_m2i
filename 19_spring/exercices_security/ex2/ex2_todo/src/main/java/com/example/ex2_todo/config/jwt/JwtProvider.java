@@ -32,21 +32,18 @@ public class JwtProvider {
         Date now = new Date();
         Date expiration = new Date(now.getTime() + 1000 * 60 * 60 * 24);
 
-        try {
-            String roles = new ObjectMapper().writeValueAsString(authentication.getAuthorities().stream()
-                    .map(GrantedAuthority::getAuthority).collect(Collectors.toList()));
+        String roles = authentication.getAuthorities().stream()
+                    .map(GrantedAuthority::getAuthority).collect(Collectors.joining(","));
 
-            return Jwts.builder()
-                    .setSubject(username)
-                    .claim("roles", roles)
-                    .claim("id", ((User) authentication.getPrincipal()).getId())
-                    .setIssuedAt(now)
-                    .setExpiration(expiration)
-                    .signWith(getSigningKey())
-                    .compact();
-        } catch (Exception e ) {
-            throw new AuthenticationCredentialsNotFoundException(username);
-        }
+        return Jwts.builder()
+                .setSubject(username)
+                .claim("roles", roles)
+                .claim("id", ((User) authentication.getPrincipal()).getId())
+                .setIssuedAt(now)
+                .setExpiration(expiration)
+                .signWith(getSigningKey())
+                .compact();
+
     }
 
     public boolean validateToken(String token) {
