@@ -41,6 +41,7 @@ public class ProductController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteProduct(@PathVariable Long id) {
+        System.out.println("on deleteProduct");
         productService.deleteProduct(id);
         return ResponseEntity.ok().build();
     }

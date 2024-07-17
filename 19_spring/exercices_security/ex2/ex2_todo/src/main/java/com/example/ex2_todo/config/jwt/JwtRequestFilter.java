@@ -1,6 +1,5 @@
-package com.example.springsecurityjwt.config.jwt;
+package com.example.ex2_todo.config.jwt;
 
-import com.example.springsecurityjwt.service.UserService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -10,6 +9,8 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
@@ -19,16 +20,19 @@ import java.io.IOException;
 public class JwtRequestFilter extends OncePerRequestFilter {
 
     @Autowired
-    private JwtTokenProvider tokenProvider;
+    private JwtProvider jwtProvider;
+
     @Autowired
-    private UserService userService;
+    private AuthenticationEntryPoint authenticationEntryPoint;
+
     @Autowired
-    private JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
+    private UserDetailsService userDetailsService;
 
     private String getJwtToken(HttpServletRequest request) {
-        String bearerToken = request.getHeader("Authorization");
-        if (bearerToken != null && bearerToken.startsWith("Bearer "))
-            return request.getHeader("Authorization").substring(7);
+        String authHeader = request.getHeader("Authorization");
+        if (authHeader != null && authHeader.startsWith("Bearer ")) {
+            return authHeader.substring(7);
+        }
         return null;
     }
 
@@ -36,16 +40,15 @@ public class JwtRequestFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         try {
             String jwtToken = getJwtToken(request);
-            if (jwtToken != null && tokenProvider.validateToken(jwtToken)) {
-                String userName = tokenProvider.getUsernameFromToken(jwtToken);
-                UserDetails userDetails = userService.loadUserByUsername(userName);
-                UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
-                SecurityContextHolder.getContext().setAuthentication(authentication);
-//                System.out.println("JWT Token: " + jwtToken);
+            if (jwtToken != null && jwtProvider.validateToken(jwtToken)) {
+                String username = jwtProvider.getUsername(jwtToken);
+                UserDetails userDetails = userDetailsService.loadUserByUsername(username);
+                UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
+                SecurityContextHolder.getContext().setAuthentication(authenticationToken);
             }
             filterChain.doFilter(request, response);
         } catch (AuthenticationException e) {
-            jwtAuthenticationEntryPoint.commence(request, response, e);
+            authenticationEntryPoint.commence(request, response, e);
         }
     }
 

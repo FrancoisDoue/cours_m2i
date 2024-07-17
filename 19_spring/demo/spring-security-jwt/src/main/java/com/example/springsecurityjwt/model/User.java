@@ -14,40 +14,25 @@ import java.util.List;
 @Table(name = "users")
 public class User implements UserDetails {
 
+    @Setter
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    @Setter
     private String name;
 
+    @Setter
     @Column(unique = true, nullable = false)
     private String email;
 
+    @Setter
     @Column(nullable = false)
     private String password;
 
     private String roles;
 
+    @Setter
     private boolean enabled = true;
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public void setEnabled(boolean enabled) {
-        this.enabled = enabled;
-    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
