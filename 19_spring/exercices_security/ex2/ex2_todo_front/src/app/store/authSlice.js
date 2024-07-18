@@ -24,8 +24,9 @@ const authSlice = createSlice({
             state.isLoading = true
         })
         addMatcher(({type}) => (type.endsWith('/rejected') && type.startsWith("auth")), (state, action) => {
+            console.error(action.payload)
             state.isLoading = false
-            state.error = action.error
+            state.error = action.payload
         })
     }
 })

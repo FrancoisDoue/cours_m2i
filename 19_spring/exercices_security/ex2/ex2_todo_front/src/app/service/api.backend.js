@@ -2,12 +2,15 @@ import axios from "axios";
 
 const defaultInterceptor = [
     (response) => response.data,
-    (error) => Promise.reject({
-        code: error.code,
-        status: error.response.status,
-        url: error.response.config.url,
-        message: error.message,
-    })
+    (error) => {
+        // console.log(error)
+        return Promise.reject({
+            code: error.code,
+            status: error.response.status,
+            url: error.response.config.url,
+            message: error.message,
+        })
+    }
 ]
 
 export const authApi = axios.create({baseURL: "http://localhost:8080/api/auth"})

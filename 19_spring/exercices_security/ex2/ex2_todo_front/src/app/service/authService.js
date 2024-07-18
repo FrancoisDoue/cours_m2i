@@ -9,18 +9,19 @@ export const login = createAsyncThunk(
             const response = await authApi.post("/login", body)
             dispatch(initializeLogin(response.token))
         } catch (error) {
-            rejectWithValue(error)
+            return rejectWithValue(error)
         }
     }
 )
 
 export const register = createAsyncThunk(
     "auth/register",
-    async ({body}, {rejectWithValue, dispatch}) => {
+    async ({body}, {rejectWithValue}) => {
         try {
+            console.log(body)
             await authApi.post("/register", body)
         } catch (error) {
-            rejectWithValue(error)
+            return rejectWithValue(error)
         }
     }
 )
