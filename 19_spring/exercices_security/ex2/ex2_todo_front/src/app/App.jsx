@@ -1,8 +1,9 @@
-import { useEffect, useLayoutEffect, useState } from 'react'
+import { useLayoutEffect } from 'react'
 import { RouterProvider } from 'react-router-dom'
 import router from './router'
 import { useDispatch } from 'react-redux'
 import { initializeLogin } from './store/authSlice'
+// import ToastContainer from './shared/ToastContainer'
 
 function App() {
   const dispatch = useDispatch()
@@ -16,6 +17,7 @@ function App() {
   return (
     <>
       <RouterProvider router={router} />
+      {/* <ToastContainer /> */}
     </>
   )
 }

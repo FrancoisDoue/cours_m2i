@@ -1,7 +1,0 @@
-sqp_d464633a79cf9daddaca7625b2180e66986fd6f8
-
-mvn clean verify sonar:sonar \
-  -Dsonar.projectKey=nom \
-  -Dsonar.projectName='nom' \
-  -Dsonar.host.url=http://localhost:9000 \
-  -Dsonar.token=sqp_ae99f93e42fad6cf7e90467cedc8e4eb609b2ccb

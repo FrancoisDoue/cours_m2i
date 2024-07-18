@@ -17,7 +17,6 @@ const setConfig = (getState) => {
 export const getAllTasks = createAsyncThunk(
     "task/getAllTasks",
     async (_arg, {rejectWithValue, dispatch, getState}) => {
-        console.log(setConfig(getState))
         try {
             const taskList = await tasksApi.get("", setConfig(getState))
             dispatch(setTaskList(taskList))
@@ -31,7 +30,6 @@ export const postTask = createAsyncThunk(
     "task/postTask",
     async ({body}, {rejectWithValue, dispatch, getState}) => {
         try {
-            
             const newTask = await tasksApi.post("", body, setConfig(getState))
             dispatch(addTask(newTask))
         } catch (error) {
