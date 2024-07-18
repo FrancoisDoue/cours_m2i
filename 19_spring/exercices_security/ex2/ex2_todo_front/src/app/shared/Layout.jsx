@@ -1,7 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link, Outlet } from 'react-router-dom';
+import { logout } from '../store/authSlice';
 
 const Layout = () => {
+
+    const dispatch = useDispatch()
+    // const {isLogged} = useSelector(state => state.auth.isLogged)
+    const isLogged = useSelector(state => state.auth.isLogged)
+
     return (
         <div
             style={{ maxWidth: '100dvw', minHeight: '100dvh' }}
@@ -19,7 +26,10 @@ const Layout = () => {
                         </ul>
 
                         <div className="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
-                            <Link className='btn btn-outline-light text-primary' to={"/login"}> Connexion </Link>
+                            {isLogged
+                                ? <a className='btn btn-outline-dark rounded-1' onClick={() => dispatch(logout())} > Déconnexion </a>
+                                : <Link className='btn btn-outline-light text-primary' to={"/login"}> Connexion </Link>
+                            }
                         </div>
                     </div>
                 </div>

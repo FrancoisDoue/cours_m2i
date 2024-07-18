@@ -26,8 +26,4 @@ public class Task {
     @JoinColumn(name = "user_id")
     private User author;
 
-    public Task(String title, String description) {
-        this.title = title;
-        this.description = description;
-    }
 }

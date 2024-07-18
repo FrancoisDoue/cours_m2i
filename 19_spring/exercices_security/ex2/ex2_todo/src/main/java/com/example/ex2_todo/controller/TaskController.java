@@ -22,8 +22,9 @@ public class TaskController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Task>> getAllTasks() {
-        List<Task> tasks = taskService.getAllTasks();
+    public ResponseEntity<List<Task>> getAllTasks(@RequestParam(value = "id", required = false) Integer userId) {
+        System.out.println("param: " + userId);
+        List<Task> tasks = (userId != null && userId != 0) ? taskService.getTasksByUserId(userId) : taskService.getAllTasks();
         return ResponseEntity.ok(tasks);
     }
 

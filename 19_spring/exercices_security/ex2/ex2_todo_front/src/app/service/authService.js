@@ -18,7 +18,7 @@ export const register = createAsyncThunk(
     "auth/register",
     async ({body}, {rejectWithValue}) => {
         try {
-            console.log(body)
+            // console.log(body)
             await authApi.post("/register", body)
         } catch (error) {
             return rejectWithValue(error)

@@ -1,18 +1,43 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { jwtDecode } from "jwt-decode";
 
 const authSlice = createSlice({
     name: "auth",
     initialState: {
-        user: null,
+        token: null,
+        id: 0,
+        exp: 0,
+        sub: null,
         isLogged: false,
         roles: [],
         isLoading: false,
         error: null,
     },
     reducers: {
-        initializeLogin: (action, {payload}) => {
-            console.log(payload)
+        initializeLogin: (state, {payload}) => {
+            if (!!payload) {
+                const decodedToken = jwtDecode(payload)
+                state.token = payload
+                localStorage.setItem("user_token", payload)
+                state.id = decodedToken?.id
+                state.exp = decodedToken?.exp
+                state.sub = decodedToken?.sub
+                state.isLogged = decodedToken.exp > new Date().getTime() / 1000
+                state.roles = decodedToken?.roles.split(",")
+            }
         },
+        logout: (state) => {
+            console.log("on logout")
+            localStorage.removeItem("user_token")
+            state.token = null
+            state.id = 0
+            state.exp = 0
+            state.sub = null
+            state.isLogged = false
+        },
+        unsetError: ({error}) => {
+            error = null
+        }
 
     },
     extraReducers: ({addMatcher}) => {
@@ -31,9 +56,18 @@ const authSlice = createSlice({
     }
 })
 
+export const selectors = {
+    isLogged: (state) => {
+        return !!state.auth.token && (state.auth?.exp > new Date().getTime() / 1000)
+    },
+    email: (state) => state.auth.sub
+}
+
 
 export const {
-    initializeLogin
+    initializeLogin,
+    logout,
+    unsetError,
 } = authSlice.actions
 
 export default authSlice.reducer

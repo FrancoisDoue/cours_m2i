@@ -14,6 +14,7 @@ import lombok.Setter;
 @NoArgsConstructor
 
 public class TaskPostDTO {
+    private int id;
     private String title;
     private String description;
     private boolean isDone;
@@ -22,6 +23,7 @@ public class TaskPostDTO {
 
     public Task toEntity() {
         Task task = new Task();
+        task.setId(id);
         task.setTitle(title);
         task.setDescription(description);
         task.setDone(isDone);
