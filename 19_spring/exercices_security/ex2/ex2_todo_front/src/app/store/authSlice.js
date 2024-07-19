@@ -2,17 +2,6 @@ import { createSlice } from "@reduxjs/toolkit";
 import { jwtDecode } from "jwt-decode";
 
 
-// const defaultState = {
-//     token: null,
-//     id: 0,
-//     exp: 0,
-//     sub: null,
-//     isLogged: false,
-//     roles: [],
-//     isLoading: false,
-//     error: null,
-// }
-
 const authSlice = createSlice({
     name: "auth",
     initialState: {
@@ -67,14 +56,6 @@ const authSlice = createSlice({
         })
     }
 })
-
-export const selectors = {
-    isLogged: (state) => {
-        return !!state.auth.token && (state.auth?.exp > new Date().getTime() / 1000)
-    },
-    email: (state) => state.auth.sub
-}
-
 
 export const {
     initializeLogin,

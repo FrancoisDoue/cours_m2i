@@ -6,7 +6,6 @@ import { logout } from '../store/authSlice';
 const Layout = () => {
 
     const dispatch = useDispatch()
-    // const {isLogged} = useSelector(state => state.auth.isLogged)
     const isLogged = useSelector(state => state.auth.isLogged)
 
     return (

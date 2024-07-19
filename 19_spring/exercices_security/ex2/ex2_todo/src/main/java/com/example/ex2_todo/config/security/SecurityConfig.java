@@ -1,6 +1,8 @@
 package com.example.ex2_todo.config.security;
 
 import com.example.ex2_todo.config.jwt.JwtRequestFilter;
+import com.example.ex2_todo.filter.IPFilter;
+import com.example.ex2_todo.filter.LatencyLoggerFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -38,6 +40,7 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.PUT).hasRole("ADMIN")
                         .requestMatchers(HttpMethod.DELETE).hasRole("ADMIN")
                 )
+                .addFilterBefore(ipFilter(), UsernamePasswordAuthenticationFilter.class)
                 .addFilterBefore(jwtRequestFilter(), UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
@@ -45,7 +48,7 @@ public class SecurityConfig {
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOriginPatterns(Collections.singletonList("http://localhost:5173"));
+        configuration.setAllowedOriginPatterns(Collections.singletonList("*"));
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE"));
         configuration.setAllowedHeaders(List.of("*"));
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
@@ -66,6 +69,11 @@ public class SecurityConfig {
     @Bean
     public JwtRequestFilter jwtRequestFilter() {
         return new JwtRequestFilter();
+    }
+
+    @Bean
+    public IPFilter ipFilter() {
+        return new IPFilter();
     }
 
 }
