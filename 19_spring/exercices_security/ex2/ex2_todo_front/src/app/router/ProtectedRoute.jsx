@@ -10,7 +10,7 @@ const ProtectedRoute = () => {
         if (!isLogged) navigate("/login")
     }, [isLogged])
 
-    return (<Outlet />);
+    return (<>{isLogged && <Outlet />}</>);
 };
 
 export default ProtectedRoute;

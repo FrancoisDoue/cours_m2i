@@ -15,7 +15,7 @@ const TaskForm = ({actions, isEditContext, task}) => {
     const handleTaskSubmit = (e) => {
         e.preventDefault()
         const formResult = {
-            ...isEditContext && {id: task?.id},
+            ...isEditContext && {id: task.id, done: task.done},
             title: schemaRef.title.current.value,
             description: schemaRef.description.current.value,
             authorId: id,
@@ -37,7 +37,7 @@ const TaskForm = ({actions, isEditContext, task}) => {
                 <Input name={"title"} givenRef={schemaRef.title} label={"Titre"} value={task?.title || ""} isRequired />
                 <Input name={"description"} givenRef={schemaRef.description} label={"Description"} value={task?.description || ""} isRequired />
                 {!isEditContext
-                    ?<button className='btn btn-outline-primary w-100'> Ajouter</button>
+                    ? <button className='btn btn-outline-primary w-100'> Ajouter</button>
                     : <div className='d-flex justify-content-between'>
                         <a onClick={() => actions.toggleEditContext()} className='btn btn-outline-danger btn-sm'>Annuler</a>
                         <button className='btn btn-outline-primary btn-sm'>Modifier</button>

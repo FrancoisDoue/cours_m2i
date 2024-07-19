@@ -3,11 +3,10 @@ import { RouterProvider } from 'react-router-dom'
 import router from './router'
 import { useDispatch } from 'react-redux'
 import { initializeLogin } from './store/authSlice'
-// import ToastContainer from './shared/ToastContainer'
 
 function App() {
   const dispatch = useDispatch()
-  const {isLogged} = useDispatch(state => state.auth) 
+  const { isLogged } = useDispatch(state => state.auth)
 
   useLayoutEffect(() => {
     console.log("on layout effect")
@@ -15,10 +14,7 @@ function App() {
   }, [isLogged])
 
   return (
-    <>
-      <RouterProvider router={router} />
-      {/* <ToastContainer /> */}
-    </>
+    <RouterProvider router={router} />
   )
 }
 

@@ -11,5 +11,6 @@ public interface ITaskService {
     void deleteTaskById(int id);
     Task saveTask(Task task);
     Task updateTask(Task task);
+    List<Task> getTasksByUserId(int id);
 
 }

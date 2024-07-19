@@ -2,19 +2,19 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getAllTasks } from '../service/taskService'
 import TaskCard from '../component/TaskCard'
-import { useBeforeUnload } from 'react-router-dom'
 import TaskForm from '../component/TaskForm'
 
 const TaskListView = () => {
 
     const dispatch = useDispatch()
     const {taskList} = useSelector(state => state.task)
-    const {id, roles} = useSelector(state => state.auth)
+    const {id, roles, isLogged} = useSelector(state => state.auth)
     const [isAddMode, setAddMode] = useState(false)
     const toggleAddMode = () => setAddMode(!isAddMode)
 
     useEffect(() => {
-        dispatch(getAllTasks())
+        console.log('on use effect')
+        if (isLogged) dispatch(getAllTasks())
     }, [id])
 
     return (

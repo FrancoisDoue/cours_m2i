@@ -13,14 +13,12 @@ import java.util.List;
 public class TaskService implements ITaskService {
 
     private final TaskRepository taskRepository;
-    private final UserRepository userRepository;
     private final UserService userService;
 
 
     @Autowired
-    public TaskService(TaskRepository taskRepository, UserRepository userRepository, UserService userService) {
+    public TaskService(TaskRepository taskRepository, UserService userService) {
         this.taskRepository = taskRepository;
-        this.userRepository = userRepository;
         this.userService = userService;
     }
 
@@ -28,7 +26,7 @@ public class TaskService implements ITaskService {
     public Task getTaskById(int id) {
         return taskRepository.findById(id).orElseThrow(() -> new NotFoundException("Task not found"));
     }
-
+    @Override
     public List<Task> getTasksByUserId(int userId) {
         return taskRepository.findByAuthor(userService.getUserById(userId));
     }

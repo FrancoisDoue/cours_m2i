@@ -3,7 +3,9 @@ import React from 'react';
 const HomeView = () => {
     return (
         <div>
-            Home
+            <p>
+                Une page d'accueil comme une autre.
+            </p>
         </div>
     );
 };
