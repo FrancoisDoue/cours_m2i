@@ -28,8 +28,6 @@ public class User implements UserDetails {
     @JoinTable(name = "account_role")
     private List<Role> roles;
 
-
-
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return roles;

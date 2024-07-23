@@ -32,6 +32,7 @@ public class AuthenticationController {
 
     @PostMapping("/login")
     public ResponseEntity<Map<String, String>> login(@RequestBody User user) {
+        userService.verifyUser(user.getUsername(), user.getPassword());
         HashMap<String, String> response = new HashMap<>();
         response.put("token", userService.generateToken(user.getEmail(), user.getPassword()));
         return ResponseEntity.ok().body(response);

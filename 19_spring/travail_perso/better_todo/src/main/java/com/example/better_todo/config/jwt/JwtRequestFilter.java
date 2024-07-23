@@ -42,11 +42,15 @@ public class JwtRequestFilter extends OncePerRequestFilter {
                 SecurityContextHolder.getContext().setAuthentication(
                         new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities())
                 );
-                filterChain.doFilter(request, response);
             }
+            filterChain.doFilter(request, response);
         } catch (AuthenticationException e) {
             authenticationEntryPoint.commence(request, response, e);
         }
     }
 
+//    @Override
+//    protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
+//        return request.getRequestURI().startsWith("/api/auth");
+//    }
 }

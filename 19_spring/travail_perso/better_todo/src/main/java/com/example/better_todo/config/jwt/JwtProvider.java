@@ -1,5 +1,6 @@
 package com.example.better_todo.config.jwt;
 
+import com.example.better_todo.entity.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -34,6 +35,7 @@ public class JwtProvider {
                 .map(GrantedAuthority::getAuthority).collect(Collectors.joining(","));
         return Jwts.builder()
                 .setSubject(username)
+                .claim("id", ((User) authentication.getPrincipal()).getId())
                 .claim("roles", roles)
                 .setIssuedAt(now)
                 .setExpiration(expiryDate)
