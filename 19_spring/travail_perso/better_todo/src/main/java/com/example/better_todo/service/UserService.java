@@ -43,23 +43,19 @@ public class UserService implements UserDetailsService {
         return userRepository.findById(id).orElseThrow(() -> new UsernameNotFoundException(""+id));
     }
 
-    public boolean verifyUser(User user) {
-        return userRepository.findByEmail(user.getEmail()).map(u -> passwordEncoder.matches(user.getPassword(), u.getPassword()))
-                .orElseThrow(() -> new BadCredentialsException("Invalid email or password"));
-    }
-
     public User createUser(User user) {
         user.setRoles(List.of(new Role("ROLE_USER")));
+        System.out.println(user.getRoles());
         return addUser(user);
     }
 
-    public User createEnterprise(User user) {
-        user.setRoles(List.of(new Role("ROLE_USER"), new Role("ROLE_ENTERPRISE")));
-        return addUser(user);
-    }
+//    public User createEnterprise(User user) {
+//        user.setRoles(List.of(new Role("ROLE_USER"), new Role("ROLE_ENTERPRISE")));
+//        return addUser(user);
+//    }
 
     public User createAdmin(User user) {
-        user.setRoles(List.of(new Role("ROLE_USER"), new Role("ROlE_ENTERPRISE"), new Role("ROLE_ADMIN")));
+        user.setRoles(List.of(new Role("ROLE_USER"), new Role("ROLE_ADMIN")));
         return addUser(user);
     }
 
@@ -76,9 +72,15 @@ public class UserService implements UserDetailsService {
         }
     }
 
-    public String generateToken(String email, String password) {
+//    private boolean verifyUser(User user) {
+//        return userRepository.findByEmail(user.getEmail()).map(u -> passwordEncoder.matches(user.getPassword(), u.getPassword()))
+//                .orElseThrow(() -> new BadCredentialsException("Invalid email or password"));
+//    }
+
+    public String generateToken(User user) {
+//        if (! verifyUser(user)) throw new BadCredentialsException("Invalid email or password");
         Authentication auth = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(email, password)
+                new UsernamePasswordAuthenticationToken(user.getEmail(), user.getPassword())
         );
         SecurityContextHolder.getContext().setAuthentication(auth);
         return jwtProvider.generateToken(auth);

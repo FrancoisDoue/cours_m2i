@@ -26,16 +26,17 @@ public class AuthController {
         UserDTO registeredUser = UserDTO.fromEntity(
                 userService.createUser(userDTO.toEntity())
         );
+        System.out.println(registeredUser);
         return new ResponseEntity<>(registeredUser, HttpStatus.CREATED);
     }
 
-    @PostMapping("/enterprise/register")
-    public ResponseEntity<UserDTO> registerEnterpriseUser(@RequestBody UserDTO userDTO) {
-        UserDTO registeredUser = UserDTO.fromEntity(
-                userService.createEnterprise(userDTO.toEntity())
-        );
-        return new ResponseEntity<>(registeredUser, HttpStatus.CREATED);
-    }
+//    @PostMapping("/enterprise/register")
+//    public ResponseEntity<UserDTO> registerEnterpriseUser(@RequestBody UserDTO userDTO) {
+//        UserDTO registeredUser = UserDTO.fromEntity(
+//                userService.createEnterprise(userDTO.toEntity())
+//        );
+//        return new ResponseEntity<>(registeredUser, HttpStatus.CREATED);
+//    }
 
     @PostMapping("/admin/register")
     public ResponseEntity<UserDTO> registerAdminUser(@RequestBody UserDTO userDTO) {
@@ -49,8 +50,7 @@ public class AuthController {
     public ResponseEntity<Map<String, String>> loginUser(@RequestBody UserDTO userDTO) {
         Map<String, String> response = new HashMap<>();
         User user = userDTO.toEntity();
-        userService.verifyUser(user);
-        String token = userService.generateToken(user.getEmail(), user.getPassword());
+        String token = userService.generateToken(user);
         response.put("token", token);
         return ResponseEntity.ok(response);
     }
