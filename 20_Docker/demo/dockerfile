@@ -1,0 +1,15 @@
+# image de base
+FROM alpine
+
+LABEL version="0.0.1"
+
+WORKDIR /root
+
+COPY . .
+
+RUN apk update && apk add nano
+CMD ["cat", "my_file.txt"]
+
+#Construire l'image à partir de ce docker file:
+    # docker build -t my-alpine .
+    # docker run my-alpine

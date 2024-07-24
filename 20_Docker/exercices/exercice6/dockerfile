@@ -1,0 +1,9 @@
+FROM nginx
+
+LABEL version="0.1a" author="François Doué"
+
+WORKDIR /usr/share/nginx/html
+
+COPY . .
+
+
