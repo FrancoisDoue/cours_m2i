@@ -8,3 +8,5 @@ COPY . .
 
 EXPOSE 80
 
+# docker build -t nginx-paradigm .
+# docker run --name paradigm -dp 8080:80 nginx-paradigm
