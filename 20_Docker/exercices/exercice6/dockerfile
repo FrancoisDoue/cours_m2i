@@ -10,3 +10,6 @@ EXPOSE 80
 
 # docker build -t nginx-paradigm .
 # docker run --name paradigm -dp 8080:80 nginx-paradigm
+
+# docker tag nginx-paradigm francoisdoue/paradigm
+# docker push francoisdoue/paradigm
