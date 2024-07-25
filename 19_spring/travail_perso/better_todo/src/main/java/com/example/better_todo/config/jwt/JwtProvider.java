@@ -5,15 +5,16 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.AuthenticationCredentialsNotFoundException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Component;
 
 import javax.crypto.SecretKey;
-import java.util.Base64;
-import java.util.Date;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Component
@@ -25,6 +26,14 @@ public class JwtProvider {
     private SecretKey getSecretKey() {
         byte[] keyBytes = Base64.getDecoder().decode(apiSecret);
         return Keys.hmacShaKeyFor(keyBytes);
+    }
+
+    public String extractToken(HttpHeaders headers) {
+        return Optional.of((Objects.requireNonNull(headers.get("Authorization")).stream().findAny().orElseThrow(
+                    () -> new AuthenticationCredentialsNotFoundException("Authorization header not found")
+                ))
+                .split(" ")[1])
+                .orElseThrow(() -> new AuthenticationCredentialsNotFoundException("Invalid JWT token"));
     }
 
     public String generateToken(Authentication authentication) {
