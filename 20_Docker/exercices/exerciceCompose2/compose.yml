@@ -28,9 +28,9 @@ services:
       - mysql
     restart: always
     container_name: spring_app
-    build: 
-      context: ./back_employee
-      dockerfile: dockerfile
+    build: ./back_employee 
+      # context: ./back_employee
+      # dockerfile: dockerfile
     ports:
       - 8080:8080
     command: --spring.datasource.url=jdbc:mysql://db_employee/employee
@@ -42,9 +42,9 @@ services:
       - back_spring
     container_name: react_app
     restart: always
-    build: 
-      context: ./front_employee
-      dockerfile: dockerfile
+    build: ./front_employee
+      # context: ./front_employee
+      # dockerfile: dockerfile
     ports:
       - 80:80
     networks:
