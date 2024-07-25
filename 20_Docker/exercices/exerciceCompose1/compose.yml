@@ -1,0 +1,61 @@
+services:
+  mysql:
+    container_name: db_exo_1
+    image: mysql:latest
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_USER=user
+      - MYSQL_PASSWORD=user
+    ports:
+      - 3305:3306
+    volumes:
+      - local_exo1_db:/var/lib/mysql
+
+  phpmyadmin:
+    depends_on:
+      - mysql
+    container_name: admin_exo_1
+    image: phpmyadmin:latest
+    ports:
+      - 8080:80
+    environment:
+      - PMA_HOST=db_exo_1
+      # - PMA_ARBITRARY=1
+    # volumes:
+    #   - local_exo1_admin:/etc/phpmyadmin/config.usr.inc.php
+
+volumes:
+  local_exo1_db:
+  # local_exo1_admin:
+# services:
+#   db:
+#     image: mysql
+#     container_name: local_mysql
+#     #restart: always
+#     environment:
+#       - MYSQL_ROOT_PASSWORD=root
+#       - MYSQL_PASSWORD=root
+#       # - MYSQL_USER=root
+#     ports:
+#       - 3307:3306
+#     volumes:
+#       - local_mysqldata:/var/lib/mysql
+
+#   phpmyadmin:
+#     image: phpmyadmin
+#     container_name: phpmyadmin_container  
+#     #restart: always
+#     ports:
+#       - 8033:80
+#     # links:
+#     #   - db
+#     environment:      
+#       - PMA_HOST=local_mysql
+#       #PMA_PORT: 3306
+#       - PMA_ARBITRARY=1
+#     volumes:
+#       - phpmyadmin_data:/etc/phpmyadmin/config.usr.inc.php
+
+# volumes:
+#   local_mysqldata:
+#   phpmyadmin_data:
