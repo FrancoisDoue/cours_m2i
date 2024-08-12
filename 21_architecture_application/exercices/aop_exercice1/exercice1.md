@@ -8,3 +8,7 @@ Votre objectif est d'améliorer la maintenance et la surveillance de l'applicati
 
 - Créer un aspect LoggingAspect pour logger l'entrée et la sortie de chaque méthode de LibraryService, incluant les arguments de méthode et les valeurs de retour (Un Logger en stdout).
 - Créer un aspect PerformanceAspect pour mesurer le temps d'exécution de chaque méthode de LibraryService. Utiliser System.currentTimeMillis() pour calculer le temps d'exécution.
+
+# Partie 2
+
+- Implémenter les aspect de la partie 1 à l'aide d'annotations (Log et Performance)
