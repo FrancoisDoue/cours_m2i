@@ -1,0 +1,24 @@
+services:
+  db:
+    container_name: drp_postgresql
+    image: postgres:11
+    restart: always
+    environment:
+      - POSTGRES_DB=drupal
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=root
+      - PGDATA=/var/lib/postgresql/data/pgdata
+    volumes:
+      - ./pg_volume:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+    networks:
+      - drupal_network
+
+
+
+
+# volumes:
+#   pg_volume:
+networks:
+  drupal_network:
