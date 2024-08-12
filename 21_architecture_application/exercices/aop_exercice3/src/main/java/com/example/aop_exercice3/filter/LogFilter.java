@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 
 @Component
 public class LogFilter extends OncePerRequestFilter {
@@ -15,10 +16,13 @@ public class LogFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         String requestURI = request.getRequestURI();
         String method = request.getMethod();
-        long timeStamp = System.currentTimeMillis();
+        LocalDateTime dateTime = LocalDateTime.now();
         String ipAddress = request.getRemoteAddr();
 
-        System.out.println("[ " + method + " - " + requestURI + " ] at " +  timeStamp + " - [ ip: " + ipAddress + " ]");
+        System.out.println(
+                "[ " + method + " - " + requestURI + " ] at " +  dateTime+
+                " - [ ip: " + ipAddress + " ]"
+        );
         doFilter(request, response, filterChain);
     }
 }
