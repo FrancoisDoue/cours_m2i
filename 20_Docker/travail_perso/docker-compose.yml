@@ -1,8 +1,9 @@
 services:
   db:
     container_name: drp_postgresql
-    image: postgres:11
+    image: postgres:16
     restart: always
+    shm_size: 128mb
     environment:
       - POSTGRES_DB=drupal
       - POSTGRES_USER=root
@@ -14,7 +15,18 @@ services:
       - 5432:5432
     networks:
       - drupal_network
-
+  
+  drupal:
+    image: drupal:10-apache
+    container_name: drp_drupal
+    links: 
+      - db
+    ports: 
+      - 8080:80
+    volumes: 
+      - /var/www/html/modules
+      - /var/www/html/profiles
+      - /var/www/html/themes
 
 volumes:
   pg_volume:
