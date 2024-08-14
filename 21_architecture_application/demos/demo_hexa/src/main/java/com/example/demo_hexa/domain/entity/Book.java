@@ -1,4 +1,4 @@
-package com.example.demo_hexa.entity;
+package com.example.demo_hexa.domain.entity;
 
 public class Book {
     private int id;

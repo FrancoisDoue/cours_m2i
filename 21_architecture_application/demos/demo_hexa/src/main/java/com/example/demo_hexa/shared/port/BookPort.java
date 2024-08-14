@@ -1,11 +1,12 @@
-package com.example.demo_hexa.port;
+package com.example.demo_hexa.shared.port;
 
-import com.example.demo_hexa.entity.Book;
+import com.example.demo_hexa.domain.entity.Book;
+import com.example.demo_hexa.shared.dto.BookDTO;
 
 import java.util.List;
 
 public interface BookPort {
-    Book save(Book book);
-    List<Book> findAll();
-    Book findById(int id);
+    BookDTO save(BookDTO book);
+    List<BookDTO> findAll();
+    BookDTO findById(int id);
 }
