@@ -8,4 +8,4 @@
 INSERT INTO client (name, email, phone)
 VALUES ('Georges', 'georges@mail.fr', '0601020304'),
        ('Dylan', 'dylan@mail.fr', '0610203040'),
-       ('Bob', 'dylan@mail.fr', '0612345678')
+       ('Bob', 'dylan@mail.fr', '0612345678');
