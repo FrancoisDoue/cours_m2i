@@ -17,12 +17,12 @@ public class ProductResource {
 
 
     @GET
-    public Response getClients() {
+    public Response getAllProducts() {
         return Response.ok(productService.getProducts()).build();
     }
 
     @POST
-    public Response createClient(Product product) {
+    public Response createProducts(Product product) {
         return Response.status(Response.Status.CREATED)
                 .entity(productService.createProduct(product))
                 .build();
@@ -30,7 +30,7 @@ public class ProductResource {
 
     @GET
     @Path("/{id}")
-    public Response getClient(@PathParam("id") Long id) {
+    public Response getProduct(@PathParam("id") Long id) {
         return productService.getProductsById(id)
                 .map(c -> Response.ok(c).build())
                 .orElse(Response.status(Response.Status.NOT_FOUND).build());
@@ -38,13 +38,13 @@ public class ProductResource {
 
     @PUT
     @Path("/{id}")
-    public Response updateClient(@PathParam("id") Long id, Product product) {
+    public Response updateProduct(@PathParam("id") Long id, Product product) {
         return Response.ok(productService.updateProduct(id, product)).build();
     }
 
     @DELETE
     @Path("/{id}")
-    public Response deleteClient(@PathParam("id") Long id) {
+    public Response deleteProduct(@PathParam("id") Long id) {
         productService.deleteProduct(id);
         return Response.noContent().build();
     }
