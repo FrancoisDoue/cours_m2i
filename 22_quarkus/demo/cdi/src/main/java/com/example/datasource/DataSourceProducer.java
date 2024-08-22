@@ -43,8 +43,8 @@ public class DataSourceProducer {
     @ApplicationScoped
     public DataSource getPostgresDataSource() {
         BasicDataSource dataSource = new BasicDataSource();
-        dataSource.setDriverClassName("com.postgresql.Driver");
-        dataSource.setUrl("jdbc:postgresql://localhost:5432/mydb_postges");
+        dataSource.setDriverClassName("org.postgresql.Driver");
+        dataSource.setUrl("jdbc:postgresql://localhost:5432/mydb_postgres");
         dataSource.setUsername("postgresuser");
         dataSource.setPassword("postgrespass");
 

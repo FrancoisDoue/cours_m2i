@@ -11,7 +11,6 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.List;
 
 @ApplicationScoped
 public class ProductService {
@@ -38,6 +37,25 @@ public class ProductService {
                 logger.info(
                         resultSet.getString("id") + " " +
                         resultSet.getString("name") + " " +
+                        resultSet.getString("price")
+                );
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void printPostgresProducts() {
+        String query = "select id, name, price from products";
+        try {
+            Connection connection = postgresDataSource.getConnection();
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(query);
+            logger.info("Postgres product list:");
+            while (resultSet.next()) {
+                logger.info(
+                        resultSet.getString("id") + " | " +
+                        resultSet.getString("name") + " | " +
                         resultSet.getString("price")
                 );
             }
