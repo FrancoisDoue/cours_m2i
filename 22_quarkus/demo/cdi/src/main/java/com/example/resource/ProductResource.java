@@ -1,4 +1,4 @@
-package com.example.scoped;
+package com.example.resource;
 
 public class ProductResource {
 

@@ -27,6 +27,8 @@ services:
       - /var/www/html/modules
       - /var/www/html/profiles
       - /var/www/html/themes
+    networks:
+      - drupal_network
 
 volumes:
   pg_volume:
