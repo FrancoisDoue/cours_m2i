@@ -7,10 +7,13 @@ import com.example.entity.Borrow;
 import com.example.repository.BorrowRepository;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
+import jakarta.transaction.Transactional;
 import jakarta.ws.rs.WebApplicationException;
+import jakarta.ws.rs.core.Response;
 import org.eclipse.microprofile.rest.client.inject.RestClient;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.List;
 
 @ApplicationScoped
@@ -47,10 +50,26 @@ public class BorrowService {
         return borrowRepository.findByBookId(bookId).stream().map(this::hydrateBorrow).toList();
     }
 
+    public List<Borrow> getNotReturnedBorrows() {
+        return borrowRepository.findByReturnDateIsNull().stream().map(this::hydrateBorrow).toList();
+    }
+
+    public List<Borrow> getBorrowsBetweenDate(String fromToString, String toToString) {
+        try {
+            LocalDate from = LocalDate.parse(fromToString);
+            LocalDate to = LocalDate.parse(toToString);
+            return borrowRepository.findByBorrowDateBetween(from, to).stream()
+                    .map(this::hydrateBorrow).toList();
+        } catch (DateTimeParseException e) {
+            throw new WebApplicationException("Fail to parse date", Response.Status.BAD_REQUEST);
+        }
+    }
+
     public Borrow getBorrowById(Long id) {
         return borrowRepository.findById(id);
     }
 
+    @Transactional
     public Borrow createBorrow(Borrow borrow) {
         hydrateBorrow(borrow);
         BookDTO book = borrow.getBook();
@@ -62,11 +81,12 @@ public class BorrowService {
         return borrow;
     }
 
+    @Transactional
     public Borrow closeBorrow(Long id) {
         Borrow borrow = borrowRepository.findById(id);
         if (borrow == null)
             throw new WebApplicationException("Not found", 404);
-        if (borrow.getReturnDate() == null)
+        if (borrow.getReturnDate() != null)
             throw new WebApplicationException("Already closed", 403);
         hydrateBorrow(borrow);
         BookDTO book = borrow.getBook();
@@ -77,6 +97,7 @@ public class BorrowService {
         return borrow;
     }
 
+    @Transactional
     public void deleteBorrow(Long id) {
         borrowRepository.deleteById(id);
     }

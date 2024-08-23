@@ -10,6 +10,7 @@
         <module name="user-service" />
         <module name="book-service" />
         <module name="author-service" />
+        <module name="review-service" />
         <module name="borrow-service" />
       </profile>
     </annotationProcessing>
@@ -19,6 +20,7 @@
       <module name="author-service" options="-parameters" />
       <module name="book-service" options="-parameters" />
       <module name="borrow-service" options="-parameters" />
+      <module name="review-service" options="-parameters" />
       <module name="user-service" options="-parameters" />
     </option>
   </component>

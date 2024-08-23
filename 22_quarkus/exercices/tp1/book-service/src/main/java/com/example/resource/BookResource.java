@@ -34,12 +34,11 @@ public class BookResource {
         return Response.ok(bookService.getBooksByAuthorId(authorId)).build();
     }
 
-//    @POST
-//    @Path("/borrow/{id}")
-//    public Response borrowBook(@PathParam("id") Long id) {
-//        return Response.ok()
-//    }
-
+    @GET
+    @Path("/isbn/{isbn}")
+    public Response getBookByIsbn(@PathParam("isbn") String isbn) {
+        return Response.ok(bookService.getBooksByIsbn(isbn)).build();
+    }
 
     @POST
     public Response createBook(Book book) {

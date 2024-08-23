@@ -13,4 +13,9 @@ public class BookRepository implements PanacheRepository<Book> {
     public List<Book> findByAuthorId(Long authorId) {
         return list("authorId", authorId);
     };
+
+    public List<Book> findByIsbn(String isbn) {
+        return list("isbn", isbn);
+    }
+
 }

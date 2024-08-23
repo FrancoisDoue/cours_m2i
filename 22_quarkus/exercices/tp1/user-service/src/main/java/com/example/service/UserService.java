@@ -4,6 +4,7 @@ import com.example.entity.User;
 import com.example.repository.UserRepository;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
+import jakarta.transaction.Transactional;
 
 import java.util.List;
 
@@ -21,11 +22,13 @@ public class UserService {
         return userRepository.findById(id);
     }
 
+    @Transactional
     public User createUser(User user) {
         userRepository.persist(user);
         return user;
     }
 
+    @Transactional
     public User updateUser(Long id, User user) {
         User updatedUser = userRepository.findById(id);
         updatedUser.setName(user.getName());
@@ -35,6 +38,7 @@ public class UserService {
         return updatedUser;
     }
 
+    @Transactional
     public void deleteUser(Long id) {
         userRepository.deleteById(id);
     }

@@ -40,6 +40,10 @@ public class BookService {
         return bookRepository.findById(id);
     }
 
+    public List<Book> getBooksByIsbn(String isbn) {
+        return bookRepository.findByIsbn(isbn);
+    }
+
     @Transactional
     public Book createBook(Book book) {
         if (book.getAuthorId() != null) {
@@ -64,13 +68,6 @@ public class BookService {
         bookRepository.persist(updatedBook);
         return updatedBook;
     }
-
-//    @Transactional
-//    public Book setBookQuantity(Long id, Integer quantity) {
-//        Book book = bookRepository.findById(id);
-//        book.setQuantity(quantity);
-//        return updateBook(id, book);
-//    }
 
     @Transactional
     public void deleteBook(Long id) {
