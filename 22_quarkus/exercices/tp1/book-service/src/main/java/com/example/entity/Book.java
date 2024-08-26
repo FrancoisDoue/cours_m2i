@@ -1,7 +1,9 @@
 package com.example.entity;
 
 import com.example.dto.AuthorDTO;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -20,6 +22,7 @@ public class Book {
     private int quantity;
 
     @Column(name = "author_id")
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Long authorId;
 
     @Transient

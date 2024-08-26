@@ -22,6 +22,10 @@ public class UserService {
         return userRepository.findById(id);
     }
 
+    public User getUserByUsername(String username) {
+        return userRepository.findByUsername(username);
+    }
+
     @Transactional
     public User createUser(User user) {
         userRepository.persist(user);

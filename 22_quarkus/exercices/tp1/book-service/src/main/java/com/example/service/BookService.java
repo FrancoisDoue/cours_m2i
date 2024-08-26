@@ -37,7 +37,7 @@ public class BookService {
     }
 
     public Book getBookById(Long id) {
-        return bookRepository.findById(id);
+        return hydrateBook(bookRepository.findById(id));
     }
 
     public List<Book> getBooksByIsbn(String isbn) {

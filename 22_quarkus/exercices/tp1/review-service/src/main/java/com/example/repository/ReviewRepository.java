@@ -16,4 +16,8 @@ public class ReviewRepository implements PanacheRepository<Review> {
     public List<Review> findReviewsByNotationLowerThan(Integer notation) {
         return list("notation =< ?1", notation);
     }
+
+    public List<Review> findReviewsByUserId(Long userId) {
+        return list("userId = ?1", userId);
+    }
 }

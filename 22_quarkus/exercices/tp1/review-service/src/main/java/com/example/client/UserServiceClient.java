@@ -14,4 +14,7 @@ public interface UserServiceClient {
     @Path("/{id}")
     UserDTO getUser(@PathParam("id") Long id);
 
+    @GET
+    @Path("/username/{username}")
+    UserDTO getUserByUsername(@PathParam("username") String username);
 }

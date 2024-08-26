@@ -41,9 +41,8 @@ public class ReviewService {
     }
 
     public List<Review> getReviewsByUserName(String username) {
-        return getReviews().stream()
-                .filter(r -> r.getUser().getUsername().equals(username))
-                .toList();
+        return reviewRepository.findReviewsByUserId(userServiceClient.getUserByUsername(username).getId())
+                .stream().map(this::hydrateReview).toList();
     }
 
     public Review getReview(Long id) {
