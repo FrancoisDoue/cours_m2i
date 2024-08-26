@@ -1,0 +1,27 @@
+networks:
+  parc_net: # nom du réseau
+    driver: bridge # https://docs.docker.com/network/#network-drivers
+    ipam: # IP address management
+      config:
+        - subnet: 10.12.0.0/16 # masque de sous réseau
+          gateway: 10.12.0.1 # adresse du routeur
+
+services:
+  ansible:
+    image: lab/ansible:${ANSIBLE_VERSION}
+    container_name: ansible
+    hostname: ansible
+    privileged: true
+    build: # construction de l'image
+      context: ./images/ansible
+      args:
+        - ANSIBLE_VERSION=${ANSIBLE_VERSION}
+    volumes:
+      # copie les fichiers de ./ansible/etc vers le conteneur /etc/ansible
+      - ./ansible/etc:/etc/ansible:ro # ro pour Read Only. Evite la modification du fichier depuis le conteneur
+      - ./exemples:/exemples
+      # pour lancer les conteneurs
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - parc_net
+

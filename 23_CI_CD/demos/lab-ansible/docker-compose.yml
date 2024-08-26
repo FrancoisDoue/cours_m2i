@@ -1,0 +1,70 @@
+networks:
+  default:
+    external: true
+    name: parc_net
+
+services:
+  node1:
+    image: lab/ubuntu:ssh
+    build: # construction de l'image
+      context: ./images/ubuntu
+    container_name: node1
+    hostname: node1
+    networks:
+      parc_net:
+        ipv4_address: 10.12.0.11
+    ports:
+      - 8001:80
+      - 4431:443
+
+  node2:
+    image: lab/ubuntu:ssh
+    build: # construction de l'image
+      context: ./images/ubuntu
+    container_name: node2
+    hostname: node2
+    networks:
+      parc_net:
+        ipv4_address: 10.12.0.12
+    ports:
+      - 8002:80
+      - 4432:443
+
+  node3:
+    image: lab/ubuntu:ssh
+    build: # construction de l'image
+      context: ./images/ubuntu
+    container_name: node3
+    hostname: node3
+    networks:
+      parc_net:
+        ipv4_address: 10.12.0.13
+    ports:
+      - 8003:80
+      - 4433:443
+
+  node4:
+    image: lab/ubuntu:ssh
+    build: # construction de l'image
+      context: ./images/ubuntu
+    container_name: node4
+    hostname: node4
+    networks:
+      parc_net:
+        ipv4_address: 10.12.0.14
+    ports:
+      - 8004:80
+      - 4434:443
+
+  node5:
+    image: lab/ubuntu:ssh
+    build: # construction de l'image
+      context: ./images/ubuntu
+    container_name: node5
+    hostname: node5
+    networks:
+      parc_net:
+        ipv4_address: 10.12.0.15
+    ports:
+      - 8005:80
+      - 4435:443
