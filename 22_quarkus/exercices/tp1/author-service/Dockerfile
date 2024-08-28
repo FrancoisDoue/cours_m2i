@@ -1,14 +1,12 @@
-FROM quay.io/quarkus/ubi-quarkus-mandrel-builder-image:jdk-21 AS builder
+FROM quay.io/quarkus/ubi-quarkus-mandrel-builder-image:jdk-17 AS builder
 
 COPY --chown=quarkus:quarkus mvnw /code/mvnw
 COPY --chown=quarkus:quarkus .mvn /code/.mvn
 COPY --chown=quarkus:quarkus pom.xml /code/
 USER quarkus
 WORKDIR /code
-COPY src/* code/src
-
+COPY src/* /code/src
 RUN ./mvnw -B org.apache.maven.plugins:maven-dependency-plugin:3.1.2:go-offline
-
 
 RUN ./mvnw package -Dnative
 
