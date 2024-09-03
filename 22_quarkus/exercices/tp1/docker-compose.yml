@@ -1,0 +1,48 @@
+services:
+  mysql:
+    container_name: db_ms_library
+    image: mysql:8.0.39
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+    ports:
+      - 6033:3306
+    volumes:
+      - library_volume:/var/lib/mysql
+      - ./_database/script.sql:/docker-entrypoint-initdb.d/script.sql
+    networks:
+      - ms_library_network
+
+
+  pma:
+    container_name: admin_ms_library
+    image: phpmyadmin:latest
+    depends_on:
+      - mysql
+    ports:
+      - 3030:80
+    environment:
+      - PMA_HOST=db_ms_library
+    networks:
+      - ms_library_network
+
+  ms_quarkus_author:
+    container_name: author-service
+    build: ./author-service
+    restart: always
+    links:
+      - mysql
+    environment:
+      - QUARKUS_DATASOURCE_JDBC_URL=jdbc:mysql://db_ms_library/ms_library_author
+      - QUARKUS_HTTP_PORT=8082
+      - BOOK_SERVICE_MP_REST_URL=http://book-service
+      - QUARKUS_HIBERNATE_ORM_DATABASE_GENERATION=validate
+    ports:
+      - 8081:8080
+    networks:
+      - ms_library_network
+
+volumes:
+  library_volume:
+networks:
+  ms_library_network:

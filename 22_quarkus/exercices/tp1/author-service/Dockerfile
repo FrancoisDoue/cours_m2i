@@ -5,10 +5,10 @@ COPY --chown=quarkus:quarkus .mvn /code/.mvn
 COPY --chown=quarkus:quarkus pom.xml /code/
 USER quarkus
 WORKDIR /code
-COPY src/* /code/src
+COPY src /code/src
 RUN ./mvnw -B org.apache.maven.plugins:maven-dependency-plugin:3.1.2:go-offline
 
-RUN ./mvnw package -Dnative
+RUN ./mvnw package -Dnative -Dmaven.test.skip=true
 
 FROM quay.io/quarkus/quarkus-micro-image:2.0
 
@@ -24,4 +24,4 @@ RUN chmod 775 /work /work/application \
 EXPOSE 8080
 USER 1001
 
-ENTRYPOINT ["./application", "-Dquarkus.http.host=0.0.0.0"]
+CMD ["./application", "-Dquarkus.http.host=0.0.0.0"]
