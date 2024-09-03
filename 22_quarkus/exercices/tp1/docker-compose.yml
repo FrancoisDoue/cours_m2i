@@ -12,13 +12,17 @@ services:
       - ./_database/script.sql:/docker-entrypoint-initdb.d/script.sql
     networks:
       - ms_library_network
-
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      timeout: 5s
+      retries: 10
 
   pma:
     container_name: admin_ms_library
     image: phpmyadmin:latest
     depends_on:
-      - mysql
+      mysql:
+        condition: service_healthy
     ports:
       - 3030:80
     environment:
@@ -32,11 +36,16 @@ services:
     restart: always
     links:
       - mysql
+    depends_on:
+      mysql:
+        condition: service_healthy
     environment:
       - QUARKUS_DATASOURCE_JDBC_URL=jdbc:mysql://db_ms_library/ms_library_author
-      - QUARKUS_HTTP_PORT=8082
+      - QUARKUS_HTTP_PORT=8080
       - BOOK_SERVICE_MP_REST_URL=http://book-service
       - QUARKUS_HIBERNATE_ORM_DATABASE_GENERATION=validate
+#    command:
+#      - --quarkus.http.port=8080
     ports:
       - 8081:8080
     networks:

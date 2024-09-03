@@ -6,7 +6,7 @@ CREATE DATABASE IF NOT EXISTS `ms_library_user` ;
 
 USE `ms_library_author`;
 CREATE TABLE IF NOT EXISTS `author` (
-      id INT PRIMARY KEY AUTO_INCREMENT,
+      id BIGINT PRIMARY KEY AUTO_INCREMENT,
       firstname VARCHAR(255) DEFAULT NULL,
       lastname VARCHAR(255) DEFAULT NULL,
       birthDate DATE DEFAULT NULL
