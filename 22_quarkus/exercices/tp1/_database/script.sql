@@ -16,8 +16,30 @@ INSERT INTO author (firstname, lastname, birthDate)
 VALUES ('Victor', 'Hugo', '1802-02-26'),
        ('George', 'Orwell', '1903-06-25');
 
--- CREATE DATABASE `ms_library_book` IF NOT EXISTS;
--- CREATE DATABASE `ms_library_borrow` IF NOT EXISTS;
--- CREATE DATABASE `ms_library_review` IF NOT EXISTS;
---
--- CREATE DATABASE `ms_library_user` IF NOT EXISTS;
+USE `ms_library_book`;
+CREATE TABLE IF NOT EXISTS `book` (
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    title VARCHAR(255),
+    author_id BIGINT,
+    quantity INT,
+    isbn VARCHAR(255)
+);
+
+INSERT INTO book (title, quantity, isbn, author_id)
+VALUES ('Les misérables', 2, 'guylmyif', 1),
+       ('Notre-Dame', 3, 'azertyuio', 1),
+       ('1984', 1, 'qsdfghjk', 2);
+
+USE `ms_library_user`;
+
+CREATE TABLE IF NOT EXISTS `account` (
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(255),
+    username VARCHAR(255) UNIQUE NOT NULL,
+    password VARCHAR(255)
+);
+
+INSERT INTO account (name, username, password)
+VALUES ('Georges Abitbol', 'gabitbol', '123456'),
+       ('Bernard', 'nanard', '123456'),
+       ('Jean-eude', 'eeeuh', '123456');
