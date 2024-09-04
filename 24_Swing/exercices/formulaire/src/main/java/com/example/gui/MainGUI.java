@@ -13,25 +13,29 @@ public class MainGUI {
         mainPanel = new JPanel();
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
         createForm();
+        createTablePanel();
         mainPanel.add(form);
-        mainPanel.add(new JTable());
+
+        mainPanel.add(tableResult);
 //        tableResult = new JTable();
     }
 
     private void createForm() {
         form = new JPanel();
         form.setLayout(new BoxLayout(form, BoxLayout.Y_AXIS));
-        JPanel textInputName = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        textInputName.add(new JLabel("Nom : ", JLabel.RIGHT));
+        JPanel textInputName = new JPanel(new FlowLayout(FlowLayout.LEFT, 5, 10));
+        textInputName.add(new JLabel("Nom : ", JLabel.LEFT));
         textInputName.add(new JTextField("", 25));
         form.add(textInputName);
 
-        JPanel textInputEmail = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        textInputEmail.add(new JLabel("Email : ", JLabel.RIGHT));
+        JPanel textInputEmail = new JPanel(new FlowLayout(FlowLayout.LEFT, 5, 10));
+        textInputEmail.add(new JLabel("Email : ", JLabel.LEFT));
         textInputEmail.add(new JTextField("", 25));
         form.add(textInputEmail);
 
-        JPanel textInputGenders = new JPanel(new FlowLayout());
+        JPanel textInputGenders = new JPanel(new FlowLayout(FlowLayout.LEFT, 5, 10));
+        textInputGenders.add(new JLabel("Email : ", JLabel.LEFT));
+
         ButtonGroup group = new ButtonGroup();
         JRadioButton male = new JRadioButton("Male");
         JRadioButton female = new JRadioButton("Female");
@@ -41,6 +45,12 @@ public class MainGUI {
         textInputGenders.add(female);
 
         form.add(textInputGenders);
+    }
+
+    public void createTablePanel() {
+        tableResult = new JTable();
+        tableResult.setLayout(new BoxLayout(tableResult, BoxLayout.Y_AXIS));
+        tableResult.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
     }
 
     public JPanel getPanel() {
