@@ -65,9 +65,6 @@ services:
       - QUARKUS_DATASOURCE_JDBC_URL=jdbc:mysql://db_ms_library/ms_library_book
       - AUTHOR_SERVICE_MP_REST_URL=http://author-service:8082
       - QUARKUS_HIBERNATE_ORM_DATABASE_GENERATION=validate
-#      - QUARKUS_HTTP_CORS=false
-#      - QUARKUS_HTTP_CORS_ORIGINS=/.*/
-#      - QUARKUS_HTTP_CORS_METHODS=GET,POST,PUT,DELETE
     ports:
       - 8081:8081
     networks:
@@ -89,6 +86,57 @@ services:
       - 8083:8083
     networks:
       - ms_library_network
+
+  ms_quarkus_borrow:
+    container_name: borrow-service
+    build: ./borrow-service
+    restart: always
+    links:
+      - mysql
+    depends_on:
+      mysql:
+        condition: service_healthy
+      ms_quarkus_book:
+        condition: service_started
+      ms_quarkus_user:
+        condition: service_started
+    environment:
+      QUARKUS_DATASOURCE_JDBC_URL: jdbc:mysql://db_ms_library/ms_library_borrow
+      QUARKUS_HIBERNATE_ORM_DATABASE_GENERATION: validate
+      BOOK_SERVICE_MP_REST_URL: http://book-service:8081
+      USER_SERVICE_MP_REST_URL: http://user-service:8083
+    ports:
+      - 8080:8080
+    networks:
+      - ms_library_network
+
+  ms_quarkus_review:
+    container_name: review-service
+    build: ./review-service
+    restart: always
+    links:
+      - mysql
+    depends_on:
+      mysql:
+        condition: service_healthy
+      ms_quarkus_book:
+        condition: service_started
+      ms_quarkus_author:
+        condition: service_started
+      ms_quarkus_user:
+        condition: service_started
+    environment:
+      QUARKUS_DATASOURCE_JDBC_URL: jdbc:mysql://db_ms_library/ms_library_review
+      QUARKUS_HIBERNATE_ORM_DATABASE_GENERATION: validate
+      BOOK_SERVICE_MP_REST_URL: http://book-service:8081
+      USER_SERVICE_MP_REST_URL: http://user-service:8083
+    ports:
+      - 8084:8084
+    networks:
+      - ms_library_network
+
+
+
 
 volumes:
   library_volume:
