@@ -1,5 +1,7 @@
 FROM quay.io/quarkus/ubi-quarkus-mandrel-builder-image:jdk-17 AS builder
 
+
+
 COPY --chown=quarkus:quarkus mvnw /code/mvnw
 COPY --chown=quarkus:quarkus .mvn /code/.mvn
 COPY --chown=quarkus:quarkus pom.xml /code/
