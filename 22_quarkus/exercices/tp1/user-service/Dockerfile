@@ -1,15 +1,13 @@
 FROM quay.io/quarkus/ubi-quarkus-mandrel-builder-image:jdk-17 AS builder
 
-USER root
-#RUN rpm - dos2unix dos2unix-7.5.2-2.fc41.aarch64.rpm
-RUN yum install dos2unix
 COPY --chown=quarkus:quarkus mvnw /code/mvnw
-RUN dos2unix /code/mvnw
 COPY --chown=quarkus:quarkus .mvn /code/.mvn
 COPY --chown=quarkus:quarkus pom.xml /code/
+
 USER quarkus
 WORKDIR /code
 COPY src /code/src
+
 RUN ./mvnw -B org.apache.maven.plugins:maven-dependency-plugin:3.1.2:go-offline
 
 RUN ./mvnw package -Dnative -Dmaven.test.skip=true
