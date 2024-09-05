@@ -10,7 +10,7 @@ CREATE TABLE IF NOT EXISTS `author` (
     firstname   VARCHAR(255) DEFAULT NULL,
     lastname    VARCHAR(255) DEFAULT NULL,
     birthDate   DATE DEFAULT NULL
-);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 INSERT INTO author (firstname, lastname, birthDate)
 VALUES ('Victor', 'Hugo', '1802-02-26'),
@@ -23,7 +23,7 @@ CREATE TABLE IF NOT EXISTS `book` (
     author_id   BIGINT,
     quantity    INT,
     isbn        VARCHAR(255)
-);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 INSERT INTO book (title, quantity, isbn, author_id)
 VALUES ('Les misérables', 2, 'guylmyif', 1),
@@ -37,7 +37,7 @@ CREATE TABLE IF NOT EXISTS `account` (
     name        VARCHAR(255),
     username    VARCHAR(255) UNIQUE NOT NULL,
     password    VARCHAR(255)
-);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 INSERT INTO account (name, username, password)
 VALUES ('Georges Abitbol', 'gabitbol', '123456'),
@@ -52,7 +52,7 @@ CREATE TABLE IF NOT EXISTS `borrow` (
     return_date DATE DEFAULT NULL,
     book_id     BIGINT DEFAULT NULL,
     user_id     BIGINT DEFAULT NULL
-);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 INSERT INTO borrow (user_id, book_id, borrow_date, return_date)
 VALUES (1,1, '2024-08-15', NULL),
@@ -66,7 +66,7 @@ CREATE TABLE IF NOT EXISTS `review` (
     book_id     BIGINT DEFAULT NULL,
     notation    INT DEFAULT 0,
     content     VARCHAR(255) DEFAULT NULL
-);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 INSERT INTO review (user_id, book_id, notation, content)
 VALUES (1, 1, 7, 'Plutôt pas mal'),

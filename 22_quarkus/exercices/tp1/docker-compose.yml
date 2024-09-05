@@ -1,12 +1,14 @@
+version: "3.8"
+
 services:
   mysql:
     container_name: db_ms_library
     image: mysql:8.0.39
     restart: always
     environment:
-      - MYSQL_ROOT_PASSWORD=root
+      MYSQL_ROOT_PASSWORD: root
     ports:
-      - 6033:3306
+      - "6033:3306"
     volumes:
       - library_volume:/var/lib/mysql
       - ./_database/script.sql:/docker-entrypoint-initdb.d/script.sql
@@ -24,9 +26,9 @@ services:
       mysql:
         condition: service_healthy
     ports:
-      - 3030:80
+      - "3030:80"
     environment:
-      - PMA_HOST=db_ms_library
+      PMA_HOST: db_ms_library
     networks:
       - ms_library_network
 
@@ -40,15 +42,15 @@ services:
       mysql:
         condition: service_healthy
     environment:
-      - QUARKUS_DATASOURCE_JDBC_URL=jdbc:mysql://db_ms_library/ms_library_author
+      QUARKUS_DATASOURCE_JDBC_URL: jdbc:mysql://db_ms_library/ms_library_author
+      BOOK_SERVICE_MP_REST_URL: http://book-service:8081
+      QUARKUS_HIBERNATE_ORM_DATABASE_GENERATION: validate
 #      - QUARKUS_HTTP_PORT=8080
-      - BOOK_SERVICE_MP_REST_URL=http://book-service:8081
-      - QUARKUS_HIBERNATE_ORM_DATABASE_GENERATION=validate
 #      - QUARKUS_HTTP_CORS=false
 #      - QUARKUS_HTTP_CORS_ORIGINS=/.*/
 #      - QUARKUS_HTTP_CORS_METHODS=GET,POST,PUT,DELETE
     ports:
-      - 8082:8082
+      - "8082:8082"
     networks:
       - ms_library_network
 
@@ -62,11 +64,11 @@ services:
       mysql:
         condition: service_healthy
     environment:
-      - QUARKUS_DATASOURCE_JDBC_URL=jdbc:mysql://db_ms_library/ms_library_book
-      - AUTHOR_SERVICE_MP_REST_URL=http://author-service:8082
-      - QUARKUS_HIBERNATE_ORM_DATABASE_GENERATION=validate
+      QUARKUS_DATASOURCE_JDBC_URL: jdbc:mysql://db_ms_library/ms_library_book
+      AUTHOR_SERVICE_MP_REST_URL: http://author-service:8082
+      QUARKUS_HIBERNATE_ORM_DATABASE_GENERATION: validate
     ports:
-      - 8081:8081
+      - "8081:8081"
     networks:
       - ms_library_network
 
@@ -80,10 +82,10 @@ services:
       mysql:
         condition: service_healthy
     environment:
-      - QUARKUS_DATASOURCE_JDBC_URL=jdbc:mysql://db_ms_library/ms_library_user
-      - QUARKUS_HIBERNATE_ORM_DATABASE_GENERATION=validate
+      QUARKUS_DATASOURCE_JDBC_URL: jdbc:mysql://db_ms_library/ms_library_user
+      QUARKUS_HIBERNATE_ORM_DATABASE_GENERATION: validate
     ports:
-      - 8083:8083
+      - "8083:8083"
     networks:
       - ms_library_network
 
@@ -106,7 +108,7 @@ services:
       BOOK_SERVICE_MP_REST_URL: http://book-service:8081
       USER_SERVICE_MP_REST_URL: http://user-service:8083
     ports:
-      - 8080:8080
+      - "8080:8080"
     networks:
       - ms_library_network
 
@@ -131,12 +133,9 @@ services:
       BOOK_SERVICE_MP_REST_URL: http://book-service:8081
       USER_SERVICE_MP_REST_URL: http://user-service:8083
     ports:
-      - 8084:8084
+      - "8084:8084"
     networks:
       - ms_library_network
-
-
-
 
 volumes:
   library_volume:
