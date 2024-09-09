@@ -37,7 +37,6 @@ public class DepartmentForm extends JPanel {
         JDialog dialog = new DefaultDialog(form);
         form.getCancelButton().addActionListener(e -> dialog.dispose());
         form.getAddButton().addActionListener(e -> {
-            System.out.println("on add button clicked");
             departmentRepository.save(Department.builder().name(nameField.getText()).build());
             dialog.dispose();
         });

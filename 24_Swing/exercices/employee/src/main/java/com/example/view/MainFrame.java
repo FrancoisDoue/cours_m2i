@@ -1,13 +1,21 @@
 package com.example.view;
 
+import com.example.repository.EmployeeRepository;
+
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.sql.Array;
 
 public class MainFrame extends JFrame {
-    private JPanel contentPanel;
+    private final JPanel contentPanel;
+    private final ActionPanel actionPanel;
+    private JComponent displayPanel;
+    private final EmployeeRepository employeeRepository;
 
     public MainFrame() {
+        employeeRepository = new EmployeeRepository();
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setPreferredSize(new Dimension(1200, 600));
         pack();
@@ -15,32 +23,41 @@ public class MainFrame extends JFrame {
         contentPanel.setLayout(new BorderLayout());
         contentPanel.setBackground(Color.WHITE);
         contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
+        actionPanel = new ActionPanel(contentPanel);
+        buildAndShowDisplay();
+        actionPanel.getSwitchButton().addActionListener(e -> {
+            buildAndShowDisplay();
+        });
         setContentPane(contentPanel);
-//        contentPanel.setLayout(null);
-        contentPanel.add(new ActionPanel(), BorderLayout.SOUTH);
-
+        contentPanel.add(actionPanel, BorderLayout.SOUTH);
     }
 
-//    public JPanel createActionPanel() {
-//        JPanel panel = new JPanel(new FlowLayout());
-//        EmptyBorder emptyBorder = new EmptyBorder(5, 5, 5, 5);
-//        panel.setBackground(Color.LIGHT_GRAY);
-//        panel.setBorder(emptyBorder);
-//        JButton addButton = new JButton("Add");
-////        addButton.setBorder(emptyBorder);
-//        JButton editButton = new JButton("Edit");
-////        editButton.setBorder(emptyBorder);
-//        JButton deleteButton = new JButton("Delete");
-////        deleteButton.setBorder(emptyBorder);
-//        JButton departmentButton = new JButton("Department");
-////        departmentButton.setBorder(emptyBorder);
-//
-//        panel.add(addButton);
-//        addButton.addActionListener(e -> new DefaultDialog());
-//        panel.add(editButton);
-//        panel.add(deleteButton);
-////        panel.add(departmentButton);
-//
-//        return panel;
-//    }
+    public void buildAndShowDisplay() {
+        if (displayPanel != null) {
+            contentPanel.remove(displayPanel);
+            displayPanel = null;
+        }
+        if (actionPanel.isMode()) {
+            System.out.println("On employee table");
+            System.out.println("test");
+            DefaultTableModel tableModel = new DefaultTableModel(
+                    new String[]{"ID", "Firstname", "Lastname", "Role", "Department"},0
+            );
+            displayPanel = new JTable(tableModel);
+            employeeRepository.getAll().forEach(e ->
+                    tableModel.addRow(new Object[]{
+                        e.getId(), e.getFirstname(), e.getLastname(), e.getRole(), (e.getDepartment() == null ? "" : e.getDepartment())
+                    })
+            );
+        } else {
+            System.out.println("On Department table");
+
+            displayPanel = new JPanel();
+            displayPanel.add(new JLabel("test"));
+        }
+        contentPanel.add(new JScrollPane(displayPanel), BorderLayout.CENTER);
+        contentPanel.revalidate();
+        contentPanel.repaint();
+    }
+
 }

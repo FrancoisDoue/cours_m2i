@@ -9,14 +9,14 @@ import java.awt.*;
 @Getter
 public class ActionPanel extends JPanel {
 
-    private JButton addButton;
-    private JButton editButton;
-    private JButton deleteButton;
+    private final JButton addButton;
+    private final JButton editButton;
+    private final JButton deleteButton;
     private final JButton switchButton;
 
     private boolean mode;
 
-    public ActionPanel() {
+    public ActionPanel(Container parent) {
         setLayout(new FlowLayout());
         EmptyBorder emptyBorder = new EmptyBorder(5, 5, 5, 5);
         setBackground(Color.LIGHT_GRAY);
@@ -40,7 +40,7 @@ public class ActionPanel extends JPanel {
         switchButton.addActionListener(e -> {
             if (mode) {
                 switchButton.setText( "Department" );
-                JOptionPane.showMessageDialog(getParent(), "test 2 : On mode " + mode);
+//                JOptionPane.showMessageDialog(getParent(), "test 2 : On mode " + mode);
             } else {
                 switchButton.setText( "Employee" );
                 addButton.addActionListener(event -> {
