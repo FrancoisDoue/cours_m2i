@@ -12,6 +12,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/account")
+@CrossOrigin(origins = "*")
 public class AccountResource {
 
     private final AccountService accountService;

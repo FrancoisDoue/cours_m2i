@@ -12,8 +12,8 @@ public class PaymentKafkaProducer {
     @Channel("check-balance")
     Emitter<String> checkBalanceEmitter;
 
-    public void sendCheckBalanceEvent(int idClient, boolean check) {
-        String message = idClient + " " + (check ? "1" : "0");
+    public void sendCheckBalanceEvent(long orderId, boolean check) {
+        String message = orderId + " " + (check ? "1" : "0");
         checkBalanceEmitter.send(message);
     }
 }

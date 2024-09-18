@@ -13,5 +13,5 @@ public interface AccountServiceClient {
 
     @GET
     @Path("/balance-check/{idClient}/{amount}")
-    CheckBalanceDto checkBalance(@PathParam("idClient") long idClient, @PathParam("amount") float amount);
+    CheckBalanceDto checkBalance(@PathParam("idClient") long idClient, @PathParam("amount") double amount);
 }

@@ -1,5 +1,7 @@
 package org.example.resource;
 
+import io.smallrye.mutiny.Uni;
+import io.smallrye.mutiny.infrastructure.Infrastructure;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.*;
@@ -29,9 +31,18 @@ public class OrderResource {
     public Order getOrderById(@PathParam("id") Long id) {
         return orderService.getOrderById(id);
     }
+//
+//    @POST
+//    public Uni<Order> createOrder(Order order) {
+//
+////        orderService.createOrder(order);
+//        return Uni.createFrom().item(() -> orderService.createOrder(order)).runSubscriptionOn(Infrastructure.getDefaultExecutor());
+//    }
 
     @POST
     public Order createOrder(Order order) {
+
+//        orderService.createOrder(order);
         return orderService.createOrder(order);
     }
 

@@ -10,20 +10,22 @@ services:
       - "2181:2181"  # Mappage du port 2181 de l'hôte au port 2181 du conteneur pour permettre l'accès à Zookeeper
 
   kafka:
-    image: confluentinc/cp-kafka:7.0.1 # Image Docker pour Kafka version 7.0.1, utilisée pour le courtage de messages
+    container_name: kafka
+    image: confluentinc/cp-kafka:7.0.1
     ports:
-      - "9092:9092" # Mappage du port 9092 de l'hôte au port 9092 du conteneur pour permettre l'accès à Kafka
+      - "9092:9092"
     expose:
       - "29092"
     environment:
-      KAFKA_BROKER_ID: 1  # Identifiant unique pour ce broker Kafka, utilisé pour différencier plusieurs brokers dans un cluster
-      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181  # Adresse de connexion à Zookeeper, utilisée par Kafka pour la coordination
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092 # Adresse sur laquelle Kafka annonce ses services aux clients, ici en mode PLAINTEXT
-      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1  # Facteur de réplication pour le topic des offsets, important pour la tolérance aux pannes
-      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1  # Facteur de réplication pour les journaux d'état des transactions, utilisé pour les transactions Kafka
-      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1 # Nombre minimal de réplicas dans le groupe ISR (In-Sync Replica) pour le journal d'état des transactions
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:29092,PLAINTEXT_HOST://localhost:9092
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
     depends_on:
-      - zookeeper  # Spécifie que le service Kafka doit démarrer après que le service Zookeeper soit en cours d'exécution
+      - zookeeper
     healthcheck:
       test: nc -z localhost 9092 || exit -1
       start_period: 15s
@@ -31,16 +33,20 @@ services:
       timeout: 10s
       retries: 10
 
+  # Flemme de faire du CLI
   init-kafka:
     image: confluentinc/cp-kafka:7.0.1
     depends_on:
       kafka:
         condition: service_healthy
     entrypoint: ["/bin/sh", "-c"]
-    command: |
-      "echo -e 'Creating kafka topics'
-      kafka-topics --bootstrap-server kafka:29092 --create --if-not-exists --topic stock-increase --bootstrap-server localhost:9092 --partitions 1 --replication-factor 1
-      kafka-topics --bootstrap-server kafka:29092 --create --if-not-exists --topic available --bootstrap-server localhost:9092 --partitions 1 --replication-factor 1
-      kafka-topics --bootstrap-server kafka:29092 --create --if-not-exists --topic check-balance --bootstrap-server localhost:9092 --partitions 1 --replication-factor 1
-      kafka-topics --bootstrap-server kafka:29092 --create --if-not-exists --topic change-order-status --bootstrap-server localhost:9092 --partitions 1 --replication-factor 1
+    command: | 
       "
+      echo -e '- - - - - - - - - Creating kafka topics: - - - - - - - - -' 
+      kafka-topics --bootstrap-server kafka:29092 --create --if-not-exists --topic stock-increase --partitions 1 --replication-factor 1
+      kafka-topics --bootstrap-server kafka:29092 --create --if-not-exists --topic check-balance --partitions 1 --replication-factor 1
+      kafka-topics --bootstrap-server kafka:29092 --create --if-not-exists --topic created-order-event --partitions 1 --replication-factor 1
+      echo -e '- - - - Successfully created the following topics: - - - -'
+      kafka-topics --bootstrap-server kafka:29092 --list
+      "
+

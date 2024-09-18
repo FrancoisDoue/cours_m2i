@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.example.util.constant.PaymentStatus;
 
 @Getter @Setter
 @AllArgsConstructor
@@ -16,6 +17,7 @@ import lombok.Setter;
 public class Payment {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    private int idOrder;
+    private long idOrder;
     private float amount;
+    private PaymentStatus status;
 }

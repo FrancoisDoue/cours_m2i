@@ -11,11 +11,13 @@ import org.example.client.ProductServiceClient;
 import org.example.dto.ClientDto;
 import org.example.dto.ProductDto;
 import org.example.entity.Order;
+import org.example.kafka.OrderKafkaProducer;
 import org.example.repository.OrderRepository;
 
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
 
 @ApplicationScoped
@@ -32,6 +34,9 @@ public class OrderService {
     @RestClient
     ClientServiceClient clientServiceClient;
 
+    @Inject
+    OrderKafkaProducer orderKafkaProducer;
+
 
     public List<Order> getAllOrders() {
         List<Order> orders = orderRepository.listAll();
@@ -41,6 +46,7 @@ public class OrderService {
     }
 
     public Order getOrderById(Long id) {
+        System.out.println("hello");
         return Optional.ofNullable(orderRepository.findById(id))
                 .map(this::enrichOrderWithDetails)
                 .orElseThrow(() -> new WebApplicationException("Order not found", 404));
@@ -50,8 +56,16 @@ public class OrderService {
     public Order createOrder(Order order) {
         validateOrder(order);
         order.setOrderDate(LocalDateTime.now());
-        orderRepository.isPersistent(order);
-        return enrichOrderWithDetails(order);
+        orderRepository.persist(order);
+        System.out.println(order.getId());
+        enrichOrderWithDetails(order);
+        System.out.println(order);
+        orderKafkaProducer.emitCreatedOrderEvent(
+                order.getId(),
+                order.getClientId(),
+                (order.getProductDto().getPrice() * order.getQuantity())
+        );
+        return order;
     }
 
     @Transactional
@@ -94,6 +108,7 @@ public class OrderService {
     private Order enrichOrderWithDetails(Order order) {
         if (order != null) {
             ClientDto client = clientServiceClient.getClientById(order.getClientId());
+            System.out.println(client);
             ProductDto product = productServiceClient.getProductById(order.getProductId());
 
             if (client == null) {
