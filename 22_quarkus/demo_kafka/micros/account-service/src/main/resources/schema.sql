@@ -1,0 +1,4 @@
+CREATE TABLE IF NOT EXISTS `account` (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    balance DOUBLE
+);
