@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.security.auth.login.AccountNotFoundException;
+import java.math.BigDecimal;
 import java.util.List;
 
 @Service
@@ -27,6 +28,11 @@ public class AccountService {
 
     public Account getAccountById(Long id) {
         return accountRepository.findById(id).orElseThrow(() -> new RuntimeException("Not found account with id " + id));
+    }
+
+    public boolean haveEnoughBalance(long accountId, float balance) {
+        Account account = getAccountById(accountId);
+        return account.getBalance() >= balance;
     }
 
     public Account deacreaseBalance(Long id, Double amount) {

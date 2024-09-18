@@ -6,7 +6,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/account")
@@ -31,5 +33,10 @@ public class AccountResource {
     @GetMapping("/{id}")
     public ResponseEntity<Account> getAccountById(@PathVariable long id) {
         return new ResponseEntity<>(accountService.getAccountById(id), HttpStatus.OK);
+    }
+
+    @GetMapping("/balance-check/{id}/{amount}")
+    public ResponseEntity<Map<String, Boolean>> checkAccountBalance(@PathVariable long id, @PathVariable float amount) {
+        return new ResponseEntity<>(new HashMap<>(Map.of("check", accountService.haveEnoughBalance(id, amount))), HttpStatus.OK);
     }
 }

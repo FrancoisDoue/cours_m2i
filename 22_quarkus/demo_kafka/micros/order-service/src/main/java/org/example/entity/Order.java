@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.example.dto.ClientDto;
 import org.example.dto.ProductDto;
+import org.example.util.constant.OrderStatus;
 
 import java.time.LocalDateTime;
 
@@ -27,6 +28,8 @@ public class Order {
     private Long productId;
     @Column(name= "client_id")
     private Long clientId;
+    @Column(name = "order_status")
+    private OrderStatus orderStatus = OrderStatus.PENDING;
 
     @Transient
     public ProductDto productDto;
