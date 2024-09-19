@@ -6,6 +6,7 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.WebApplicationException;
+import jakarta.ws.rs.core.Response;
 
 import java.util.List;
 
@@ -19,9 +20,17 @@ public class EmployeeService {
         return employeeRepository.listAll();
     }
 
+    public List<Employee> getEmployeesByDepartmentId(Long departmentId) {
+        return employeeRepository.findByDepartmentId(departmentId);
+    }
+
+    public List<Employee> getEmployeesByOrganizationId(Long organizationId) {
+        return employeeRepository.findByOrganizationId(organizationId);
+    }
+
     public Employee getEmployeeById(Long id) {
         return employeeRepository.findByIdOptional(id)
-                .orElseThrow(() -> new WebApplicationException("Employee not found with id " + id, 404));
+                .orElseThrow(() -> new WebApplicationException("Employee not found with id " + id, Response.Status.NOT_FOUND));
     }
 
     @Transactional
@@ -45,6 +54,5 @@ public class EmployeeService {
     public void deleteEmployee(Long id) {
         employeeRepository.delete(getEmployeeById(id));
     }
-
 
 }

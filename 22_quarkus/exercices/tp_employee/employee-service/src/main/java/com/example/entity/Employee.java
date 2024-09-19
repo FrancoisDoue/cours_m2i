@@ -15,8 +15,11 @@ public class Employee {
     private Long id;
     private String name;
     private String position;
+    @Column(name = "department_id")
     private Long departmentId;
+    @Column(name = "organization_id")
     private Long organizationId;
+    
     @Transient
     private boolean isOrganizationLess = (organizationId == null || organizationId.equals(0L));
     @Transient

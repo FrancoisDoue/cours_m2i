@@ -42,4 +42,16 @@ public class EmployeeResource {
         return Response.noContent().build();
     }
 
+    @GET
+    @Path("/department/{departmentId}")
+    public Response getEmployeeByDepartmentId(@PathParam("departmentId") Long departmentId) {
+        return Response.ok(employeeService.getEmployeesByDepartmentId(departmentId)).build();
+    }
+
+    @GET
+    @Path("/organization/{organizationId}")
+    public Response getEmployeeByOrganizationId(@PathParam("organizationId") Long organizationId) {
+        return Response.ok(employeeService.getEmployeesByOrganizationId(organizationId)).build();
+    }
+
 }
