@@ -1,13 +1,14 @@
 package org.example.resource;
 
-import io.smallrye.mutiny.Uni;
-import io.smallrye.mutiny.infrastructure.Infrastructure;
+import io.quarkus.security.Authenticated;
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
+import org.eclipse.microprofile.jwt.JsonWebToken;
 import org.example.entity.Order;
 import org.example.service.OrderService;
 
@@ -16,12 +17,17 @@ import java.util.List;
 @Path("/orders")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
+@Authenticated
 public class OrderResource {
+
+    @Inject
+    JsonWebToken jwt;
 
     @Inject
     OrderService orderService;
 
     @GET
+    @RolesAllowed("manager")
     public List<Order> getAllOrders() {
         return orderService.getAllOrders();
     }

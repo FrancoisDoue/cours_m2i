@@ -83,6 +83,15 @@
             <artifactId>rest-assured</artifactId>
             <scope>test</scope>
         </dependency>
+<!--   Keycloak dependencies -->
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-oidc</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-oidc-token-propagation-reactive</artifactId>
+        </dependency>
     </dependencies>
 
     <build>

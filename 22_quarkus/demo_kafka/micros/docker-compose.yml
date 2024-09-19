@@ -43,10 +43,14 @@ services:
     command: | 
       "
       echo -e '- - - - - - - - - Creating kafka topics: - - - - - - - - -' 
-      kafka-topics --bootstrap-server kafka:29092 --create --if-not-exists --topic stock-increase --partitions 1 --replication-factor 1
-      kafka-topics --bootstrap-server kafka:29092 --create --if-not-exists --topic check-balance --partitions 1 --replication-factor 1
-      kafka-topics --bootstrap-server kafka:29092 --create --if-not-exists --topic created-order-event --partitions 1 --replication-factor 1
+      kafka-topics --bootstrap-server kafka:29092 --create --if-not-exists --topic stock-increase         --partitions 1 --replication-factor 1
+      kafka-topics --bootstrap-server kafka:29092 --create --if-not-exists --topic check-balance          --partitions 1 --replication-factor 1
+      kafka-topics --bootstrap-server kafka:29092 --create --if-not-exists --topic created-order-event    --partitions 1 --replication-factor 1
       echo -e '- - - - Successfully created the following topics: - - - -'
       kafka-topics --bootstrap-server kafka:29092 --list
       "
 
+#keycloak simple container
+#docker run --name keycloak -e KEYCLOAK_ADMIN=admin -e KEYCLOAK_ADMIN_PASSWORD=admin -p 8180:8080 quay.io/keycloak/keycloak:17.0.0 start-dev
+
+# https://github.com/vbhayden/keycloak-federation-examples/blob/master/keycloak/keycloak-config/realms/example-realm.json

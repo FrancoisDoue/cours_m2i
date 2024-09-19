@@ -19,9 +19,11 @@ public class OrderKafkaConsumer {
     @Transactional
     public void onCheckBalance(String message) {
         System.out.println("event ok");
+        System.out.println(message);
         String[] explodedMessage = message.split(" ");
         long orderId = Long.parseLong(explodedMessage[0]);
         boolean check = explodedMessage[1].equals("1");
+        System.out.println(check);
         Order order = orderService.getOrderById(orderId);
         order.setOrderStatus(check ? OrderStatus.CONFIRMED : OrderStatus.REJECTED);
         orderService.updateOrder(orderId, order);

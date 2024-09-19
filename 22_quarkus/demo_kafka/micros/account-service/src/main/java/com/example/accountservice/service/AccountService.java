@@ -32,6 +32,9 @@ public class AccountService {
 
     public boolean haveEnoughBalance(long accountId, float balance) {
         Account account = getAccountById(accountId);
+        System.out.println(account.getBalance());
+        System.out.println(balance);
+        System.out.println(account.getBalance() >= balance);
         return account.getBalance() >= balance;
     }
 

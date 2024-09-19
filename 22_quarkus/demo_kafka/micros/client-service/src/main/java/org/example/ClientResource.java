@@ -2,20 +2,29 @@ package org.example;
 
 
 
+import io.quarkus.security.Authenticated;
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
+import org.eclipse.microprofile.jwt.JsonWebToken;
+
 import java.util.List;
 
 @Path("/clients")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
+@Authenticated
 public class ClientResource {
+
+    @Inject
+    JsonWebToken jwt;
 
     @Inject
     ClientService clientService;
 
     @GET
+    @RolesAllowed("client")
     public List<Client> getAllClients() {
         return clientService.getAllClients();
     }

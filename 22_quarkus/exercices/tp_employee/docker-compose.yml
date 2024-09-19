@@ -1,0 +1,49 @@
+services:
+  zookeeper:
+    image: confluentinc/cp-zookeeper:7.0.1  # Image Docker pour Zookeeper version 7.0.1, utilisée pour la coordination entre les nœuds Kafka
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181  # Port sur lequel Zookeeper écoute les connexions des clients
+      ZOOKEEPER_TICK_TIME: 2000  # Intervalle de temps utilisé par Zookeeper pour ses propres opérations internes, exprimé en millisecondes
+    ports:
+      - "2181:2181"
+
+
+  kafka:
+    container_name: kafka
+    image: confluentinc/cp-kafka:7.0.1
+    ports:
+      - "9092:9092"
+    expose:
+      - "29092"
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:29092,PLAINTEXT_HOST://localhost:9092
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
+    depends_on:
+      - zookeeper
+    healthcheck:
+      test: nc -z localhost 9092 || exit -1
+      start_period: 15s
+      interval: 5s
+      timeout: 10s
+      retries: 10
+
+
+  init-kafka:
+    image: confluentinc/cp-kafka:7.0.1
+    depends_on:
+      kafka:
+        condition: service_healthy
+    entrypoint: [ "/bin/sh", "-c" ]
+    command: |
+      "
+      echo -e '- - - - - - - - - Creating kafka topics: - - - - - - - - -' 
+      kafka-topics --bootstrap-server kafka:29092 --create --if-not-exists --topic stock-increase         --partitions 1 --replication-factor 1
+      kafka-topics --bootstrap-server kafka:29092 --create --if-not-exists --topic check-balance          --partitions 1 --replication-factor 1
+      kafka-topics --bootstrap-server kafka:29092 --create --if-not-exists --topic created-order-event    --partitions 1 --replication-factor 1
+      echo -e '- - - - Successfully created the following topics: - - - -'
+      kafka-topics --bootstrap-server kafka:29092 --list
