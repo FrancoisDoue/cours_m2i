@@ -1,5 +1,7 @@
 package com.example.service;
 
+import com.example.client.DepartmentServiceClient;
+import com.example.client.OrganizationServiceClient;
 import com.example.entity.Employee;
 import com.example.repository.EmployeeRepository;
 import jakarta.enterprise.context.ApplicationScoped;
@@ -7,6 +9,7 @@ import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.WebApplicationException;
 import jakarta.ws.rs.core.Response;
+import org.eclipse.microprofile.rest.client.inject.RestClient;
 
 import java.util.List;
 
@@ -15,6 +18,12 @@ public class EmployeeService {
 
     @Inject
     EmployeeRepository employeeRepository;
+
+    @Inject @RestClient
+    DepartmentServiceClient departmentService;
+
+    @Inject @RestClient
+    OrganizationServiceClient organizationService;
 
     public List<Employee> getAllEmployees() {
         return employeeRepository.listAll();
@@ -31,6 +40,14 @@ public class EmployeeService {
     public Employee getEmployeeById(Long id) {
         return employeeRepository.findByIdOptional(id)
                 .orElseThrow(() -> new WebApplicationException("Employee not found with id " + id, Response.Status.NOT_FOUND));
+    }
+
+    public Employee getDetailedEmployeeById(Long id) {
+        return hydrate(getEmployeeById(id));
+    }
+
+    public Long countEmployeesByOrganizationId(Long organizationId) {
+        return employeeRepository.countByOrganizationId(organizationId);
     }
 
     @Transactional
@@ -53,6 +70,12 @@ public class EmployeeService {
     @Transactional
     public void deleteEmployee(Long id) {
         employeeRepository.delete(getEmployeeById(id));
+    }
+
+    public Employee hydrate(Employee employee) {
+        employee.setDepartment(departmentService.getDepartmentById(employee.getDepartmentId()));
+        employee.setOrganization(organizationService.getOrganizationById(employee.getOrganizationId()));
+        return employee;
     }
 
 }

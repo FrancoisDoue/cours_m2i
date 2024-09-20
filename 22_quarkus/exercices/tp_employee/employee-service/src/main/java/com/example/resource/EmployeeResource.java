@@ -25,7 +25,10 @@ public class EmployeeResource {
 
     @GET
     @Path("/{id}")
-    public Response getEmployee(@PathParam("id") Long id) {
+    public Response getEmployee(@PathParam("id") Long id, @QueryParam("detail") Boolean detail) {
+        if (detail != null && detail) {
+            return Response.ok(employeeService.getDetailedEmployeeById(id)).build();
+        }
         return Response.ok(employeeService.getEmployeeById(id)).build();
     }
 
@@ -53,5 +56,24 @@ public class EmployeeResource {
     public Response getEmployeeByOrganizationId(@PathParam("organizationId") Long organizationId) {
         return Response.ok(employeeService.getEmployeesByOrganizationId(organizationId)).build();
     }
+
+    @GET
+    @Path("/organization/{organizationId}/count")
+    public Response getCountByOrganizationId(@PathParam("organizationId") Long organizationId) {
+        return Response.ok(employeeService.countEmployeesByOrganizationId(organizationId)).build();
+    }
+
+    @GET
+    @Path("/departmentless")
+    public Response getEmployeesIsDepartmentless() {
+        return Response.ok(employeeService.getEmployeesByDepartmentId(null)).build();
+    }
+
+    @GET
+    @Path("/organizationless")
+    public Response getEmployeesIsOrganizationless() {
+        return Response.ok(employeeService.getEmployeesByOrganizationId(null)).build();
+    }
+
 
 }

@@ -32,7 +32,10 @@ public class OrganizationResource {
 
     @GET
     @Path("/{id}")
-    public Response getOrganization(@PathParam("id") Long id) {
+    public Response getOrganization(@PathParam("id") Long id, @QueryParam("detail") Boolean detail) {
+        if (detail != null && detail) {
+            return Response.ok(organizationService.getDetailedOrganizationById(id)).build();
+        }
         return Response.ok(organizationService.getOrganizationById(id)).build();
     }
 

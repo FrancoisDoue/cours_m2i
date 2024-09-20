@@ -42,8 +42,8 @@ services:
     command: |
       "
       echo -e '- - - - - - - - - Creating kafka topics: - - - - - - - - -' 
-      kafka-topics --bootstrap-server kafka:29092 --create --if-not-exists --topic stock-increase         --partitions 1 --replication-factor 1
-      kafka-topics --bootstrap-server kafka:29092 --create --if-not-exists --topic check-balance          --partitions 1 --replication-factor 1
-      kafka-topics --bootstrap-server kafka:29092 --create --if-not-exists --topic created-order-event    --partitions 1 --replication-factor 1
+      kafka-topics --bootstrap-server kafka:29092 --create --if-not-exists --topic delete-organization-event --partitions 1 --replication-factor 1
+      kafka-topics --bootstrap-server kafka:29092 --create --if-not-exists --topic delete-department-event --partitions 1 --replication-factor 1
       echo -e '- - - - Successfully created the following topics: - - - -'
       kafka-topics --bootstrap-server kafka:29092 --list
+      "

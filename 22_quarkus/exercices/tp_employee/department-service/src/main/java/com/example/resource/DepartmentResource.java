@@ -32,7 +32,10 @@ public class DepartmentResource {
 
     @GET
     @Path("/{id}")
-    public Response getById(@PathParam("id") Long id) {
+    public Response getById(@PathParam("id") Long id, @QueryParam("detail") Boolean detail) {
+        if (detail != null && detail) {
+            return Response.ok(departmentService.getDetailedDepartmentById(id)).build();
+        }
         return Response.ok(departmentService.getDepartment(id)).build();
     }
 

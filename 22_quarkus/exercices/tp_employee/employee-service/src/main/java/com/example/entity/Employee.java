@@ -1,5 +1,9 @@
 package com.example.entity;
 
+import com.example.dto.DepartmentDTO;
+import com.example.dto.OrganizationDTO;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
@@ -10,19 +14,33 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Employee {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private String position;
     @Column(name = "department_id")
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Long departmentId;
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @Column(name = "organization_id")
     private Long organizationId;
-    
+
     @Transient
-    private boolean isOrganizationLess = (organizationId == null || organizationId.equals(0L));
+    private DepartmentDTO department;
+
     @Transient
-    private boolean isDepartmentLess = (departmentId == null || departmentId.equals(0L));
+    private OrganizationDTO organization;
+
+    public boolean isDepartmentLess() {
+        return departmentId == null;
+    }
+
+    public boolean isOrganizationLess() {
+        return organizationId == null;
+    }
+
+
 
 }

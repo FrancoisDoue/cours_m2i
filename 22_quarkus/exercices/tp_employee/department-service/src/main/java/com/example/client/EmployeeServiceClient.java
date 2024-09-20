@@ -13,11 +13,6 @@ import java.util.List;
 public interface EmployeeServiceClient {
 
     @GET
-    @Path("/organization/{organizationId}")
-    List<EmployeeDTO> getEmployeesByOrganizationId(@PathParam("organizationId") Long organizationId);
-
-    @GET
-    @Path("/organization/{organizationId}/count")
-    Long countEmployeesByOrganizationId(@PathParam("organizationId") Long organizationId);
-
+    @Path("/department/{id}")
+    List<EmployeeDTO> getEmployeesByDepartmentId(@PathParam("id") Long id);
 }
