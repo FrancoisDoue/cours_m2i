@@ -3,6 +3,7 @@ package com.example.service;
 import com.example.client.DepartmentServiceClient;
 import com.example.client.OrganizationServiceClient;
 import com.example.entity.Employee;
+import com.example.kafka.EmployeeKafkaProducer;
 import com.example.repository.EmployeeRepository;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
@@ -12,6 +13,7 @@ import jakarta.ws.rs.core.Response;
 import org.eclipse.microprofile.rest.client.inject.RestClient;
 
 import java.util.List;
+import java.util.Objects;
 
 @ApplicationScoped
 public class EmployeeService {
@@ -24,6 +26,9 @@ public class EmployeeService {
 
     @Inject @RestClient
     OrganizationServiceClient organizationService;
+
+    @Inject
+    EmployeeKafkaProducer kafkaProducer;
 
     public List<Employee> getAllEmployees() {
         return employeeRepository.listAll();
@@ -53,12 +58,19 @@ public class EmployeeService {
     @Transactional
     public Employee createEmployee(Employee employee) {
         employeeRepository.persist(employee);
+        if (employee.getOrganizationId() != null) {
+            kafkaProducer.emitChangeEmployeeEvent(employee.getOrganizationId());
+        }
         return employee;
     }
 
     @Transactional
     public Employee updateEmployee(Long id, Employee employee) {
         Employee employeeToUpdate = getEmployeeById(id);
+        if (!Objects.equals(employeeToUpdate.getOrganizationId(), employee.getOrganizationId())) {
+            kafkaProducer.emitChangeEmployeeEvent(employee.getOrganizationId());
+            kafkaProducer.emitChangeEmployeeEvent(employeeToUpdate.getDepartmentId());
+        }
         employeeToUpdate.setName(employee.getName());
         employeeToUpdate.setPosition(employee.getPosition());
         employeeToUpdate.setDepartmentId(employee.getDepartmentId());
@@ -69,7 +81,11 @@ public class EmployeeService {
 
     @Transactional
     public void deleteEmployee(Long id) {
-        employeeRepository.delete(getEmployeeById(id));
+        Employee employee = employeeRepository.findById(id);
+        if (employee != null) {
+            kafkaProducer.emitChangeEmployeeEvent(employee.getOrganizationId());
+            employeeRepository.delete(employee);
+        }
     }
 
     public Employee hydrate(Employee employee) {
