@@ -5,6 +5,7 @@ import com.example.dto.EmployeeDTO;
 import com.example.entity.Organization;
 import com.example.kafka.OrganizationKafkaProducer;
 import com.example.repository.OrganizationRepository;
+import io.smallrye.reactive.messaging.annotations.Blocking;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;

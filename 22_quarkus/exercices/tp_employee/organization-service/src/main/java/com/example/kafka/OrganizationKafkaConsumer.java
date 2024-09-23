@@ -2,6 +2,7 @@ package com.example.kafka;
 
 import com.example.entity.Organization;
 import com.example.service.OrganizationService;
+import io.smallrye.reactive.messaging.annotations.Blocking;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
@@ -18,6 +19,7 @@ public class OrganizationKafkaConsumer {
 
     @Incoming("change-employee-event")
     @Transactional
+    @Blocking
     public void onChangeEmployeeEvent(String message) {
         try {
             Long id = Long.parseLong(message);
@@ -25,7 +27,7 @@ public class OrganizationKafkaConsumer {
             organization.setLastEmployeeUpdate(LocalDate.now());
             organizationService.updateOrganization(organization.getId(), organization);
             System.out.println("Organization "+ organization.getId() +" updated , last employee updated at " + organization.getLastEmployeeUpdate());
-        } catch (WebApplicationException e) {
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
     }

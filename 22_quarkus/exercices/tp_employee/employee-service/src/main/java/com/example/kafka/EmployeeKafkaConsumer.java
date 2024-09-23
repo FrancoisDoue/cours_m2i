@@ -21,7 +21,7 @@ public class EmployeeKafkaConsumer {
         Long organizationId = Long.parseLong(message);
         List<Employee> employees = employeeService.getEmployeesByOrganizationId(organizationId);
         employees.forEach(employee -> {
-            employee.setDepartmentId(null);
+            employee.setOrganizationId(null);
             employeeService.updateEmployee(employee.getId(), employee);
             System.out.println("Employee " + employee.getId() + " updated, organizationId set to null");
         });
