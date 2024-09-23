@@ -128,32 +128,13 @@ services:
       POSTGRES_DB: kong
       POSTGRES_PASSWORD: kong
     networks:
-      - kong-net
+      - app-network
     healthcheck:
       test: [ "CMD", "pg_isready", "-U", "kong" ]
       interval: 10s
       timeout: 5s
       retries: 5
     restart: always
-
-  kong-migrations:
-    image: kong:latest
-    restart: on-failure
-    command: "kong migrations bootstrap"
-    container_name: kong-migrations
-    networks:
-      - kong-net
-    depends_on:
-      kong-database:
-        condition: service_healthy
-      kong:
-        condition: service_started
-    environment:
-      KONG_DATABASE: postgres
-      KONG_PG_HOST: kong-database
-      KONG_PG_DATABASE: kong
-      KONG_PG_USER: kong
-      KONG_PG_PASSWORD: kong
 
   kong:
     image: kong:latest
@@ -162,6 +143,8 @@ services:
     depends_on:
       kong-database:
         condition: service_healthy
+      kong-migrations:
+        condition: service_started
     environment:
       KONG_DATABASE: postgres
       KONG_PG_HOST: kong-database
@@ -179,13 +162,43 @@ services:
       - "8001:8001"
       - "8444:8444"
     networks:
-      - kong-net
       - app-network
+    healthcheck:
+      test: [ "CMD", "kong", "health" ]
+      interval: 10s
+      timeout: 10s
+      retries: 10
 
-#  init-kong:
-#    image: alpine/curl
-#    container_name: init-kong
-#    restart: on-failure
-#    depends_on:
-#      - kong
-#
+  kong-migrations:
+    image: kong:latest
+    restart: on-failure
+    command: "kong migrations bootstrap"
+    container_name: kong-migrations
+    networks:
+      - app-network
+    depends_on:
+      kong-database:
+        condition: service_healthy
+    environment:
+      KONG_DATABASE: postgres
+      KONG_PG_HOST: kong-database
+      KONG_PG_DATABASE: kong
+      KONG_PG_USER: kong
+      KONG_PG_PASSWORD: kong
+
+  init-kong:
+    image: alpine/curl:latest
+    container_name: init-kong
+    restart: on-failure
+    depends_on:
+      kong:
+        condition: service_healthy
+    command:
+      - /bin/sh
+      - -c
+      - |
+        curl -i -X POST http://kong:8001/services --data name=organization-service --data url=http://organizations-service:8080/api/departments
+        curl -i -X POST http://kong:8001/services --data name=department-service --data url=http://department-service:8080/api/departments
+        curl -i -X POST http://kong:8001/services --data name=employee-service --data url=http://employee-service:8080/api/employees
+    networks:
+      - app-network
